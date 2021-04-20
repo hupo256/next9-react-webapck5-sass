@@ -18,16 +18,14 @@ yarn-error.log
 /coverage
 .idea
 yarn.lock
+package-lock.json
 *bak
-jsconfig.json
 .vscode
 
 # visual studio code
 .history
 *.log
-/.VSCodeCounter
-
-functions/mock
+functions/*
 .temp/**
 
 # umi
@@ -36,3 +34,7 @@ functions/mock
 
 # screenshot
 screenshot
+.firebase
+.eslintcache
+
+build

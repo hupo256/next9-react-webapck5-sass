@@ -1,7 +1,18 @@
 export default [
   {
     path: '/',
-    component: './Welcome',
+    routes: [
+      {
+        path: '/',
+        routes: [
+          {
+            name: 'Home Page',
+            path: '/',
+            component: './Home',
+          },
+        ],
+      },
+    ],
   },
   {
     component: './404',
