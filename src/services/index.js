@@ -18,3 +18,10 @@ export async function getCompanyInfoOnFooter(params) {
     body: params,
   });
 }
+
+export async function queryCaseListForWeb(params) {
+  return request(baseUrl + '/api/v1/wechat/case/queryCaseListForWeb', {
+    method: 'POST',
+    body: params,
+  });
+}

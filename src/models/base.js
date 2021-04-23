@@ -1,7 +1,4 @@
-/**
- * 团队项目 建议使用分页开发模式，避免开发过程中互相覆盖或者错误修改
- */
-import { getCompanyInfoOnFooter } from '../services';
+import { getCompanyInfoOnFooter, queryCaseListForWeb } from '../services';
 
 export default {
   namespace: 'base',
@@ -12,15 +9,13 @@ export default {
   },
 
   effects: {
-    // *getCompanyInfoOnFooter(_, { call, put }) {
-    //   const data = yield call(getCompanyInfoOnFooter);
-    //   yield put({
-    //     type: 'saveNotices',
-    //     payload: data,
-    //   });
-    // },
     *getCompanyInfoOnFooter({ payload }, { call, put }) {
       const response = yield call(getCompanyInfoOnFooter, { ...payload });
+      return response;
+    },
+
+    *queryCaseListForWeb({ payload }, { call, put }) {
+      const response = yield call(queryCaseListForWeb, { ...payload });
       return response;
     },
   },
