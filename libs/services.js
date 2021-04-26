@@ -1,8 +1,21 @@
-export const dummyDomain = 'http://localhost:3000' //todo... store it in .env later
-export const dummyDevDomain = 'http://devgw.ingongdi.com' //todo... store it in .env later
+import axios from 'axios'
+
+let apiDomain = ''
+let headers = {}
+
+if (process.env.NODE_ENV === 'development') {
+  apiDomain = process.env.CUSTOM_DOMAIN
+  headers = { origin: apiDomain }
+}
 
 export const Services = {
-  findAllChannels: dummyDomain + '/api/getAllChannels',
-  findAllFooters: dummyDomain + '/api/getFooterInfo',
-  findAllData: dummyDevDomain + '/wechatapi/api/v1/wechat/homePage/pc/getHomePagePublishedData',
+  findAllChannels: () => axios.get(apiDomain + '/api/v1/wechat/menu/preview/list', { headers }),
+  findAllFooters: () =>
+    axios.get(apiDomain + '/api/v1/wechat/website/companyinfo/pc/view', { headers }),
+  findAllData: params =>
+    axios.post(
+      apiDomain + '/wechatapi/api/v1/wechat/homePage/pc/getHomePagePublishedData',
+      params,
+      { headers },
+    ),
 }
