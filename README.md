@@ -1,34 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+最近更新：
+2020-4-26 ximing
 
-## Getting Started
+## 项目技术
 
-First, run the development server:
+- lodash - 某些函数优于 es6 原生。
+- yarn - 不要用 npm
+- css module - 暂时不用 less/sass， 使用模块化 css，避免全局污染。
+- git
+- react.js 16+ - 使用 Hooks+Context, 禁止使用 class
+- webpack 4 - @5 还不够完善，不推荐
+- prettier - 保存后自动格式化
+- ant design - 主要 UI 库
+
+## 运行
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 目录功能简介
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+> `/components` 保存所有通用组件，业务组件，可自定文件夹层级。
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+> `/libs/constant.js` 常量
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+> `/libs/context.js` 所有 React Context
 
-## Learn More
+> `/libs/services.js` 所有 后端接口路径
 
-To learn more about Next.js, take a look at the following resources:
+> `/pages` 新建一个文件夹，大写开头，即可生成一个路由。此文件夹存储所有页面。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> `/pages/api` （本项目）约定为前端假数据 api 文件夹，具体方法参考内部现有文件。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> `/styles` 所有 css module 文件
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> `/.env` 可配置变量
