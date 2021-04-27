@@ -20,7 +20,7 @@ const getServerSideProps = async () => {
 }
 
 export default function Home() {
-  const contextValue = useAppContext() // 获取全局 state 的方法
+  const { authed, setAuthed } = useAppContext() // 获取全局 state 的方法
 
   const [menu, setMenu] = useState({})
   const [footerData, setFooterData] = useState({})
@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>PC PREVIEW 2.0</title>
+        <title>PC PREVIEW 2.0 ({authed ? 'Admin' : 'Public'})</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
@@ -54,7 +54,7 @@ export default function Home() {
         </div>
       </div>
       <main className={styles.main}></main>
-      <Button />
+      <Button onClick={() => setAuthed(!authed)}>Toggle Authed (DEMO)</Button>
 
       <footer className={styles.footer}>
         <p>{JSON.stringify(footerData, null, 4)}</p>
