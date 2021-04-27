@@ -1,21 +1,30 @@
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import _ from 'lodash'
 
-const dummyDomain = 'http://localhost:3000' //for demo
-
-export const getServerSideProps = async context => {
-  const { data } = await axios.get(dummyDomain + '/api/getCommonList?object=case') //todo... 使用 index.js 相似的获取接口数据的方法
-
+const getServerSideProps = async context => {
+  const { data } = await axios.get('/api/getCommonList?object=case')
   return {
-    props: { data }, // will be passed to the page component as props
+    props: { data },
   }
 }
 
-const CaseComp = ({ data }) => {
+const RenameItPlease = () => {
+  const [value, setValue] = useState({})
+
+  useEffect(() => {
+    ;(async () => {
+      const {
+        props: { data },
+      } = await getServerSideProps()
+      setValue(data)
+    })()
+  }, [])
+
   return (
     <>
-      {_.map(data, (item, index) => (
+      {_.map(value, (item, index) => (
         <p key={index}>
           <Link href={`/cases/${item.name}`}>
             <a>{item.name}</a>
@@ -26,4 +35,4 @@ const CaseComp = ({ data }) => {
   )
 }
 
-export default CaseComp
+export default RenameItPlease
