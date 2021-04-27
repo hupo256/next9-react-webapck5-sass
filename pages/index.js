@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import _ from 'lodash'
@@ -6,17 +7,9 @@ import { Services } from '../libs/services'
 
 import { Button } from 'antd'
 
-export const getServerSideProps = async () => {
+const getServerSideProps = async () => {
   const resMenu = await Services.findAllChannels()
   const resFooter = await Services.findAllFooters()
-
-  // const resAll = await Services.findAllData([
-  //   {
-  //     key: 'case',
-  //     pageNum: 1,
-  //     pageSize: 10,
-  //   },
-  // ])
 
   return {
     props: {
@@ -26,8 +19,22 @@ export const getServerSideProps = async () => {
   }
 }
 
-export default function Home({ menu, footerData }) {
+export default function Home() {
   const contextValue = useAppContext() // 获取全局 state 的方法
+
+  const [menu, setMenu] = useState({})
+  const [footerData, setFooterData] = useState({})
+
+  useEffect(() => {
+    ;(async () => {
+      const {
+        props: { menu, footerData },
+      } = await getServerSideProps()
+
+      setMenu(menu)
+      setFooterData(footerData)
+    })()
+  }, [])
 
   return (
     <div className={styles.container}>

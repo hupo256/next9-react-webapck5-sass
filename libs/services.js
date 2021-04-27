@@ -4,7 +4,7 @@ let apiDomain = ''
 let headers = {}
 
 if (process.env.NODE_ENV === 'development') {
-  apiDomain = process.env.CUSTOM_DOMAIN
+  apiDomain = process.env.NEXT_PUBLIC_CUSTOM_DOMAIN
   headers = { origin: apiDomain }
 }
 
