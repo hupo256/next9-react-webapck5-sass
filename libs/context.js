@@ -5,7 +5,7 @@ const AppContext = createContext(null)
 export function AppWrapper({ children }) {
   const [authed, setAuthed] = useState(false)
 
-  let sharedState = {
+  const sharedState = {
     authed,
     setAuthed,
   }
