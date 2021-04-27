@@ -2,24 +2,14 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import _ from 'lodash'
-
-const getServerSideProps = async context => {
-  const { data } = await axios.get('/api/getCommonList?object=case')
-  return {
-    props: { data },
-  }
-}
+import { sampleList } from '../../libs/utils'
 
 const RenameItPlease = () => {
   const [value, setValue] = useState({})
 
   useEffect(() => {
-    ;(async () => {
-      const {
-        props: { data },
-      } = await getServerSideProps()
-      setValue(data)
-    })()
+    // 假代码，async 在这里call
+    setValue(sampleList('cases'))
   }, [])
 
   return (

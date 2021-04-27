@@ -9,12 +9,14 @@
     "export": "next build && next export",
     "serve:out": "yarn export && serve -p 3000 out"
   },
+  "devDependencies":{
+    "serve": "^11.3.2"
+  },
   "dependencies": {
     "antd": "^4.15.3",
     "axios": "^0.21.1",
     "next": "10.1.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "serve": "^11.3.2"
+    "react-dom": "17.0.2"
   }
 }
