@@ -1,4 +1,4 @@
-.container {
+/* .container {
   min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
@@ -119,4 +119,115 @@
     width: 100%;
     flex-direction: column;
   }
+} */
+
+.banner {
+  height: 450px;
+  background-color: antiquewhite;
+  text-align: center;
+  padding-top: 66px;
+}
+.banner .firstLine {
+  font-size: 24px;
+  font-weight: 500;
+  color: #ff7300;
+  line-height: 33px;
+}
+.banner .secondLine {
+  border-radius: 4px;
+  color: #ff7300;
+  font-size: 79px;
+}
+.banner .thirdLine {
+  font-size: 20px;
+  font-weight: 400;
+  color: #707070;
+  line-height: 28px;
+  letter-spacing: 4px;
+}
+
+.featurePoints {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.featurePoint {
+  width: 264px;
+  height: 228px;
+  background: #ffffff;
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.07);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mainWrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.innerMain {
+  width: 1280px;
+}
+.chapterSection {
+  text-align: center;
+  margin: 50px 0;
+}
+.chapterSection .title {
+  font-size: 30px;
+  font-weight: 600;
+  color: #333330;
+  line-height: 42px;
+}
+.chapterSection .description {
+  font-size: 18px;
+  font-weight: 400;
+  color: #999999;
+  line-height: 25px;
+}
+.headerWrapper {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerLeft {
+  width: 25%;
+}
+.headerRight {
+  max-width: 75%;
+}
+.menuRoot {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 46px;
+}
+.menuRoot a {
+  line-height: 64px;
+}
+.menuWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.companyHeaderStyle {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 12px;
+}
+.companyHeaderStyle .avatar {
+  background-color: '#FF7300';
+  vertical-align: 'middle';
+}
+
+.companyHeaderStyle h1 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3e3e3e;
+  line-height: 22px;
 }
