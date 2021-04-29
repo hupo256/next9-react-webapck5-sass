@@ -22,7 +22,7 @@ export function HomeWrapper({ children }) {
   // 设置 authed 依赖，当全局 登陆 状态变更的时候，刷新其 子 Context。
   useEffect(async () => {
     const { data } = await Services.findAllChannels()
-    setMenuList(_.get(data, 'data.list', []))
+    setMenuList(_.get(data, 'list', []))
   }, [authed])
 
   const sharedState = {

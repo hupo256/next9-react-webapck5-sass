@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+import allData from '../data/response_1619664888803.json'
+import allMenus from '../data/getAllMenus.json'
+import footer from '../data/footer.json'
+
 let apiDomain = ''
 
 if (process.env.NODE_ENV === 'development') {
@@ -9,8 +13,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const Services = {
-  findAllChannels: () => axios.get(apiDomain + '/api/v1/wechat/menu/preview/list'),
-  findAllFooters: () => axios.get(apiDomain + '/api/v1/wechat/website/companyinfo/pc/view'),
-  findAllData: params =>
-    axios.post(apiDomain + '/wechatapi/api/v1/wechat/homePage/pc/getHomePagePublishedData', params),
+  // findAllChannels: () => axios.get(apiDomain + '/api/v1/wechat/menu/preview/list'),
+  findAllChannels: () => allMenus,
+  // findAllFooters: () => axios.get(apiDomain + '/api/v1/wechat/website/companyinfo/pc/view'),
+  findAllFooters: () => footer,
+  // findAllData: params => axios.post(apiDomain + '/wechatapi/api/v1/wechat/homePage/pc/getHomePagePublishedData', params),
+  findAllData: () => allData,
 }

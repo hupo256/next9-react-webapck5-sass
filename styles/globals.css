@@ -2,7 +2,9 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: PingFangSC-Semibold, PingFang SC;
+  font-family: PingFangSC-Regular, PingFang SC;
+
+  min-width: 1280px;
 }
 
 a {
@@ -22,4 +24,9 @@ h5,
 h6 {
   padding: 0;
   margin: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
