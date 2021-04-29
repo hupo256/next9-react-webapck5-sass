@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { Pagination } from 'antd'
 import Link from 'next/link'
 import _ from 'lodash'
 import { caseTags } from './tools/data'
+import { Services } from '../../libs/services'
 import caseApi from '../../service/caseApi'
 import styles from './case.module.scss'
 
 import queryCaseOptionsForWeb from './tools/queryCaseOptionsForWeb.json'
 import queryCaseListForWeb from './tools/queryCaseListForWeb.json'
+
+const caseLen = 3 // 众多图片中需要显示前几张
 
 const RenameItPlease = () => {
   const [searchTags, setsearchTags] = useState([])
@@ -18,15 +22,18 @@ const RenameItPlease = () => {
   }, [])
 
   function touchCaseTags() {
-    // const { data } = queryCaseOptionsForWeb
-    // Object.keys(data).forEach(key => {
-    //   const arr = data[key]
-    //   arr?.unshift({ name: '全部', code: '' })
-    //   arr?.push({ name: '其他', code: '99' })
-    // })
-    // setsearchPara(data)
-    // setcaseList(queryCaseListForWeb.data.list)
-    // return
+    const { data } = queryCaseOptionsForWeb
+    Object.keys(data).forEach(key => {
+      const arr = data[key]
+      arr?.unshift({ name: '全部', code: '' })
+      arr?.push({ name: '其他', code: '99' })
+    })
+    setsearchTags(data)
+
+    setcaseList(queryCaseListForWeb.data.list)
+    return
+
+    // testApi()
     caseApi.queryCaseOptionsForWeb().then(res => {
       console.log(res)
       if (!res?.data) return
@@ -38,32 +45,50 @@ const RenameItPlease = () => {
       })
       console.log(data)
       setsearchTags(data)
-
       touchCaseList()
     })
   }
 
   function touchCaseList(config = {}) {
     const param = {
-      acreages: 0,
-      bedRooms: 0,
-      styles: '',
+      // acreages: 0,
+      // bedRooms: 0,
+      // styles: '',
+      ...searchPara,
       pageNum: 1,
       pageSize: 10,
     }
     caseApi.queryCaseListForWeb({ ...param, ...config }).then(res => {
+      console.log(res)
+      if (!res?.data) return
+      setcaseList(res.data?.list)
+    })
+  }
+
+  function touchDetails() {
+    caseApi.getCaseByUidForWeb({ uid: '8027af336e8f449c9f91dfd2fbe5cdeb' }).then(res => {
       console.log(res)
     })
   }
 
   function tagClick(key, code) {
     searchPara[key] = code
-    touchCaseList(searchPara)
+    touchCaseList({ [key]: code })
     setsearchPara(searchPara)
   }
 
   function pageChange(num, size) {
     console.log(num, size)
+    touchCaseList({ pageNum: num, pageSize: size })
+  }
+
+  function testApi() {
+    Services.findAllChannels().then(res => {
+      console.log(res)
+    })
+    Services.findAllFooters().then(res => {
+      console.log(res)
+    })
   }
 
   return (
@@ -86,11 +111,7 @@ const RenameItPlease = () => {
                   {tagArr?.map(tag => {
                     const { name, code } = tag
                     return (
-                      <span
-                        className={`${searchPara?.[tagKey] === code ? styles.on : ''}`}
-                        onClick={() => tagClick(tagKey, code)}
-                        key={name}
-                      >
+                      <span className={`${searchPara?.[tagKey] === code ? styles.on : ''}`} onClick={() => tagClick(tagKey, code)} key={name}>
                         {name}
                       </span>
                     )
@@ -103,28 +124,18 @@ const RenameItPlease = () => {
 
         <ul className={styles.listBox}>
           {caseList?.map(item => {
-            const {
-              coverPicUrl,
-              liveroom,
-              bedroom,
-              title,
-              uid,
-              acreage,
-              styleDic = {},
-              casePics = [],
-            } = item
+            const { coverPicUrl, liveroom, bedroom, title, uid, acreage, styleDic = {}, casePics = [] } = item
+            const showPics = casePics?.slice(0, caseLen)
             return (
               <li key={uid}>
                 <div className={styles.minImgBox}>
                   <img src={coverPicUrl} alt="" />
                 </div>
-                <div className="casePicBox">
+                <div className={styles.casePicBox}>
                   <h3>{title}</h3>
-                  <p>{` ${acreage}m² | ${bedroom ? bedroom : 1}室${liveroom ? liveroom : 1}厅 ${
-                    styleDic?.name ? '| ' + styleDic?.name : ''
-                  } `}</p>
+                  <p>{` ${acreage}m² | ${bedroom ? bedroom : 1}室${liveroom ? liveroom : 1}厅 ${styleDic?.name ? '| ' + styleDic?.name : ''} `}</p>
                   <ul>
-                    {casePics?.map(pic => {
+                    {showPics?.map(pic => {
                       const { url, spaceDic = {} } = pic
                       return (
                         <li className={styles.minImgBox}>
@@ -139,6 +150,10 @@ const RenameItPlease = () => {
             )
           })}
         </ul>
+
+        <div className={styles.pageBox}>
+          <Pagination onChange={pageChange} defaultCurrent={1} total={50} />
+        </div>
       </div>
     </div>
   )

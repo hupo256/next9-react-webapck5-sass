@@ -1,4 +1,3 @@
-// import creatFech from './fetch'
 import ajaxinstance from './index'
 
 const caseCreate = () => {
