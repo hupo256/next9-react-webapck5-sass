@@ -8,12 +8,10 @@ import { useAppContext, useHomePageContext } from '../libs/context'
 import EditMenu from '../components/EditMenu'
 import { Services } from '../libs/services'
 import cx from 'classnames'
+import { CaseProjects, MenuList, KeyPoints, HeaderLayout } from '../components/home'
 
 import { Button, Layout, Avatar } from 'antd'
 const { Header, Content, Footer, Icon } = Layout
-// const { PhoneOutlined } = Icon
-
-const FAKE_ACTIVE_INDEX = 4
 
 const DEMO_FEATURES = [
   {
@@ -48,113 +46,28 @@ const DEMO_FEATURES = [
   },
 ]
 
-const MAX_CHAR_MENU = 30 //todo... remove it
-const MenuListComp = ({ menuList }) => {
-  const [menuChunkList, setMenuChunkList] = useState([])
-  const [chunkIndex, setChunkIndex] = useState(0)
-  const [extraCharCount, setExtraCharCount] = useState([])
-
-  const hasPrevious = () => {
-    return !Boolean(chunkIndex - 1 < 0)
-  }
-
-  const hasNext = () => {
-    return Boolean(chunkIndex + 1 < menuChunkList.length)
-  }
-
-  useEffect(() => {
-    if (_.isEmpty(menuList)) return
-
-    const menuListClone = menuList.slice() //clone state
-    const chunkRes = []
-    const extraCharCount = []
-    while (menuListClone.length) {
-      let charCount = 0
-      let index = 0
-      let oneChunk = []
-
-      while (charCount <= 40 && !_.isNil(menuListClone[index])) {
-        oneChunk.push(menuListClone[index])
-        charCount += menuListClone[index]['websiteName'].length
-        index++
-      }
-
-      menuListClone.splice(0, index)
-      chunkRes.push(oneChunk)
-      extraCharCount.push(charCount)
-    }
-
-    setMenuChunkList(chunkRes)
-    setExtraCharCount(extraCharCount)
-  }, [menuList])
-
-  return (
-    <div className={styles.menuWrapper}>
-      <div
-        className={styles.menuRoot}
-        style={
-          extraCharCount[chunkIndex] > 20
-            ? { justifyContent: 'space-between' }
-            : { justifyContent: 'flex-end', gap: '40px' }
-        }
-      >
-        {_.map(menuChunkList[chunkIndex], (item, index) => {
-          return (
-            <div className={styles.menuItemWrapper} key={`menuItemWrapper-${index}`}>
-              {index === 0 && hasPrevious() && (
-                <div
-                  className={styles.arrowWrapperPrev}
-                  onClick={() => setChunkIndex(() => chunkIndex - 1)}
-                >
-                  <a className={styles.prevArrow}></a>
-                </div>
-              )}
-              <a
-                href={item.linkUrl}
-                key={index}
-                className={index === FAKE_ACTIVE_INDEX && styles.active}
-              >
-                {item.websiteName}
-              </a>
-              {index + 1 === menuChunkList[chunkIndex].length && hasNext() && (
-                <div
-                  className={styles.arrowWrapperNext}
-                  onClick={() => setChunkIndex(chunkIndex + 1)}
-                >
-                  <a className={styles.nextArrow}></a>
-                </div>
-              )}
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-const KeyFeatures = ({ pointsList }) => {
-  return (
-    <div className={styles.featurePoints}>
-      {_.map(pointsList, (feature, index) => (
-        <div key={index} className={styles.featurePoint}>
-          <Image src={feature.imgUrl} layout="fixed" width={64} height={64} />
-          <p className={styles.pointTitle}>{feature.title}</p>
-          <p className={styles.pointSubTitle}>{feature.description}</p>
-        </div>
-      ))}
-    </div>
-  )
-  // ))
-}
-
-const ChapterSection = ({ title, description }) => {
-  return (
-    <div className={styles.chapterSection}>
-      <h2 className={styles.title}>{title}</h2>
-      <p className={styles.description}>{description}</p>
-    </div>
-  )
-}
+const DEMO_CASES = [
+  {
+    url: '/cases/1',
+    imgUrl: '/img/home_cases/img_1.png',
+  },
+  {
+    url: '/cases/2',
+    imgUrl: '/img/home_cases/img_2.png',
+  },
+  {
+    url: '/cases/3',
+    imgUrl: '/img/home_cases/img_3.png',
+  },
+  {
+    url: '/cases/4',
+    imgUrl: '/img/home_cases/img_4.png',
+  },
+  {
+    url: '/cases/5',
+    imgUrl: '/img/home_cases/img_5.png',
+  },
+]
 
 const CompanyHeader = () => {
   return (
@@ -176,6 +89,16 @@ const Banner = () => {
   return <div className={styles.banner}></div>
 }
 
+const ChapterLayout = ({ children, title, description }) => (
+  <div className={styles.chapterWrapper}>
+    <div className={styles.chapterSection}>
+      <h2 className={styles.title}>{title}</h2>
+      <p className={styles.description}>{description}</p>
+    </div>
+    {children}
+  </div>
+)
+
 const Home = () => {
   const { authed, setAuthed } = useAppContext() // 获取全局 state 的方法
   const { menuList } = useHomePageContext() // 获取全局 state 的方法
@@ -187,35 +110,66 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout className={styles.mainLayout}>
-        <Header className={styles.headerWrapper}>
-          <span className={styles.headerLeft}>
-            <CompanyHeader />
-          </span>
-          <span className={styles.headerRight}>
-            <MenuListComp menuList={menuList} />
-          </span>
-          <span className={styles.contactHeader}>
-            <Image
-              className={styles.phoneIcon}
-              src={'/img/ic_phone_slices/ic_phone.png'}
-              width={14}
-              height={17}
-              layout="fixed"
-            />
-            <span className={styles.phone}>800-123-1234</span>
-          </span>
-        </Header>
+        <HeaderLayout
+          left={<CompanyHeader />}
+          middle={<MenuList menuList={menuList} />}
+          right={
+            <>
+              <Image
+                className={styles.phoneIcon}
+                src={'/img/ic_phone_slices/ic_phone.png'}
+                width={14}
+                height={17}
+                layout="fixed"
+              />
+              <span className={styles.phone}>800-123-1234</span>
+            </>
+          }
+        />
 
         <Banner />
 
         <Content className={styles.mainWrapper}>
           <div className={styles.innerMain}>
-            <ChapterSection title={'产品特点'} description={'颠覆传统家装企业'} />
-            <KeyFeatures pointsList={DEMO_FEATURES} />
-            <ChapterSection title={'装修案例'} description={'提前遇见未来的家'} />
-            <KeyFeatures pointsList={_.slice(DEMO_FEATURES, 0, 3)} />
-            <ChapterSection title={'首席设计师'} description={'定制全套装修方案'} />
-            <KeyFeatures pointsList={_.slice(DEMO_FEATURES, 0, 3)} />
+            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+              <KeyPoints pointsList={DEMO_FEATURES} />
+            </ChapterLayout>
+
+            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 5)} />
+            </ChapterLayout>
+            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 4)} />
+            </ChapterLayout>
+            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 3)} />
+            </ChapterLayout>
+            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 2)} />
+            </ChapterLayout>
+            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 1)} />
+            </ChapterLayout>
+
+            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+              <CaseProjects data={_.slice(DEMO_CASES, 0, 1)} />
+            </ChapterLayout>
+
+            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+              <CaseProjects data={_.slice(DEMO_CASES, 0, 2)} />
+            </ChapterLayout>
+
+            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+              <CaseProjects data={_.slice(DEMO_CASES, 0, 3)} />
+            </ChapterLayout>
+
+            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+              <CaseProjects data={_.slice(DEMO_CASES, 0, 4)} />
+            </ChapterLayout>
+
+            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+              <CaseProjects data={_.slice(DEMO_CASES, 0, 5)} />
+            </ChapterLayout>
           </div>
         </Content>
 

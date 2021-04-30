@@ -5,6 +5,7 @@ body {
   font-family: PingFangSC-Regular, PingFang SC;
 
   min-width: 1280px;
+  --themeColor: #ff7300;
 }
 
 a {
