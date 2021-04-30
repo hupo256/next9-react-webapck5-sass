@@ -1,4 +1,4 @@
-export const caseLabels = [
+export const siteLabels = [
   {
     label: '户型',
     tagKey: 'bedRooms',
@@ -8,7 +8,7 @@ export const caseLabels = [
     tagKey: 'acreages',
   },
   {
-    label: '风格',
-    tagKey: 'styles',
+    label: '造价',
+    tagKey: 'renovationCosts',
   },
 ]

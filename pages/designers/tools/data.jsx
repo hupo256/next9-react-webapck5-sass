@@ -8,7 +8,7 @@ export const caseLabels = [
     tagKey: 'acreages',
   },
   {
-    label: '风格',
-    tagKey: 'styles',
+    label: '造价',
+    tagKey: 'renovationCosts',
   },
 ]
