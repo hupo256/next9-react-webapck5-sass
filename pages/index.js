@@ -50,22 +50,27 @@ const DEMO_CASES = [
   {
     url: '/cases/1',
     imgUrl: '/img/home_cases/img_1.png',
+    text: '兰亭盛会| 100 | 三室一厅 | 25.6万',
   },
   {
     url: '/cases/2',
     imgUrl: '/img/home_cases/img_2.png',
+    text: '兰亭盛会| 200 | 三室一厅 | 25.6万',
   },
   {
     url: '/cases/3',
     imgUrl: '/img/home_cases/img_3.png',
+    text: '兰亭盛会| 300 | 三室一厅 | 25.6万',
   },
   {
     url: '/cases/4',
     imgUrl: '/img/home_cases/img_4.png',
+    text: '兰亭盛会| 400 | 三室一厅 | 25.6万',
   },
   {
     url: '/cases/5',
     imgUrl: '/img/home_cases/img_5.png',
+    text: '兰亭盛会| 500 | 三室一厅 | 25.6万',
   },
 ]
 

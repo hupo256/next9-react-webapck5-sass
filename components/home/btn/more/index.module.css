@@ -15,3 +15,21 @@
   color: var(--themeColor);
   line-height: 42px;
 }
+
+.moreBtnSolid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.moreBtnSolid a {
+  width: 92px;
+  text-align: center;
+  height: 42px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background-color: var(--themeColor);
+  line-height: 42px;
+}

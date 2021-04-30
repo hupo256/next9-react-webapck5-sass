@@ -1,5 +1,6 @@
 import { BtnMore } from '../btn'
 import _ from 'lodash'
+import styles from './index.module.css'
 
 const CaseProjects = ({ data }) => {
   // 初版
@@ -27,8 +28,12 @@ const CaseProjects = ({ data }) => {
     return (
       <>
         <div style={caseStyle.projectCasesWrapper}>
-          <div style={caseStyle.caseItem}>
-            <div style={caseStyle.image0}></div>
+          <div style={caseStyle.caseItem} className={styles.clickableImg}>
+            <div className={styles.bgText}>
+              <p>{data[0].text}</p>
+              <BtnMore text={'查看详情'} solid />
+            </div>
+            <div style={caseStyle.image0} className={styles.bgBlur}></div>
           </div>
         </div>
         <BtnMore />
@@ -44,17 +49,24 @@ const CaseProjects = ({ data }) => {
     caseStyle.caseItem = {
       flex: 1,
       height: '400px',
-      background: 'pink',
     }
 
     return (
       <>
         <div style={caseStyle.projectCasesWrapper}>
-          <div style={caseStyle.caseItem}>
-            <div style={caseStyle.image0}></div>
+          <div style={caseStyle.caseItem} className={styles.clickableImg}>
+            <div className={styles.bgText}>
+              <p>{data[0].text}</p>
+              <BtnMore text={'查看详情'} solid />
+            </div>
+            <div style={caseStyle.image0} className={styles.bgBlur}></div>
           </div>
-          <div style={caseStyle.caseItem}>
-            <div style={caseStyle.image1}></div>
+          <div style={caseStyle.caseItem} className={styles.clickableImg}>
+            <div className={styles.bgText}>
+              <p>{data[1].text}</p>
+              <BtnMore text={'查看详情'} solid />
+            </div>
+            <div style={caseStyle.image1} className={styles.bgBlur}></div>
           </div>
         </div>
         <BtnMore />
@@ -70,7 +82,6 @@ const CaseProjects = ({ data }) => {
       height: '620px',
     }
     caseStyle.left = {
-      background: 'pink',
       flex: 1,
     }
 
@@ -83,21 +94,32 @@ const CaseProjects = ({ data }) => {
 
     caseStyle.caseItem = {
       flex: 1,
-      background: 'pink',
     }
 
     return (
       <>
         <div style={caseStyle.projectCasesWrapper}>
-          <div style={caseStyle.left}>
-            <div style={caseStyle.image0}></div>
+          <div style={caseStyle.left} className={styles.clickableImg}>
+            <div className={styles.bgText}>
+              <p>{data[1].text}</p>
+              <BtnMore text={'查看详情'} solid />
+            </div>
+            <div style={caseStyle.image0} className={styles.bgBlur}></div>
           </div>
           <div style={caseStyle.right}>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image1}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[1].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image1} className={styles.bgBlur}></div>
             </div>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image2}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[2].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image2} className={styles.bgBlur}></div>
             </div>
           </div>
         </div>
@@ -119,26 +141,41 @@ const CaseProjects = ({ data }) => {
     }
     caseStyle.caseItem = {
       flex: 1,
-      background: 'pink',
     }
 
     return (
       <>
         <div style={caseStyle.projectCasesWrapper}>
           <div style={caseStyle.caseWrapper}>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image0}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[0].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image0} className={styles.bgBlur}></div>
             </div>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image1}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[1].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image1} className={styles.bgBlur}></div>
             </div>
           </div>
           <div style={caseStyle.caseWrapper}>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image2}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[2].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image2} className={styles.bgBlur}></div>
             </div>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image3}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[3].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image3} className={styles.bgBlur}></div>
             </div>
           </div>
         </div>
@@ -155,7 +192,6 @@ const CaseProjects = ({ data }) => {
       height: '620px',
     }
     caseStyle.left = {
-      background: 'pink',
       flex: 1,
     }
 
@@ -168,29 +204,48 @@ const CaseProjects = ({ data }) => {
 
     caseStyle.caseItem = {
       flex: 1,
-      background: 'pink',
     }
 
     return (
       <>
         <div style={caseStyle.projectCasesWrapper}>
-          <div style={caseStyle.left}>
-            <div style={caseStyle.image0}></div>
+          <div style={caseStyle.left} className={styles.clickableImg}>
+            <div className={styles.bgText}>
+              <p>{data[0].text}</p>
+              <BtnMore text={'查看详情'} solid />
+            </div>
+            <div style={caseStyle.image0} className={styles.bgBlur}></div>
           </div>
           <div style={caseStyle.right}>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image1}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[1].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image1} className={styles.bgBlur}></div>
             </div>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image2}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[2].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image2} className={styles.bgBlur}></div>
             </div>
           </div>
           <div style={caseStyle.right}>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image3}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[3].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image3} className={styles.bgBlur}></div>
             </div>
-            <div style={caseStyle.caseItem}>
-              <div style={caseStyle.image4}></div>
+            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+              <div className={styles.bgText}>
+                <p>{data[4].text}</p>
+                <BtnMore text={'查看详情'} solid />
+              </div>
+              <div style={caseStyle.image4} className={styles.bgBlur}></div>
             </div>
           </div>
         </div>
