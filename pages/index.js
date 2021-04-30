@@ -8,7 +8,13 @@ import { useAppContext, useHomePageContext } from '../libs/context'
 import EditMenu from '../components/EditMenu'
 import { Services } from '../libs/services'
 import cx from 'classnames'
-import { CaseProjects, MenuList, KeyPoints, HeaderLayout } from '../components/home'
+import {
+  CaseProjects,
+  MenuList,
+  KeyPoints,
+  HeaderLayout,
+  DesignerContent,
+} from '../components/home'
 
 import { Button, Layout, Avatar } from 'antd'
 const { Header, Content, Footer, Icon } = Layout
@@ -139,7 +145,6 @@ const Home = () => {
             <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
               <KeyPoints pointsList={DEMO_FEATURES} />
             </ChapterLayout>
-
             <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
               <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 5)} />
             </ChapterLayout>
@@ -155,25 +160,23 @@ const Home = () => {
             <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
               <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 1)} />
             </ChapterLayout>
-
             <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
               <CaseProjects data={_.slice(DEMO_CASES, 0, 1)} />
             </ChapterLayout>
-
             <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
               <CaseProjects data={_.slice(DEMO_CASES, 0, 2)} />
             </ChapterLayout>
-
             <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
               <CaseProjects data={_.slice(DEMO_CASES, 0, 3)} />
             </ChapterLayout>
-
             <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
               <CaseProjects data={_.slice(DEMO_CASES, 0, 4)} />
             </ChapterLayout>
-
             <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
               <CaseProjects data={_.slice(DEMO_CASES, 0, 5)} />
+            </ChapterLayout>
+            <ChapterLayout title={'首席设计师'} description={'定制全套装修方案'}>
+              <DesignerContent data={_.slice(DEMO_CASES, 0, 5)} />
             </ChapterLayout>
           </div>
         </Content>
