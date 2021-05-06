@@ -8,13 +8,7 @@ import { useAppContext, useHomePageContext } from '../libs/context'
 import EditMenu from '../components/EditMenu'
 import { Services } from '../libs/services'
 import cx from 'classnames'
-import {
-  CaseProjects,
-  MenuList,
-  KeyPoints,
-  HeaderLayout,
-  DesignerContent,
-} from '../components/home'
+import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent } from '../components/home'
 
 import { Button, Layout, Avatar } from 'antd'
 const { Header, Content, Footer, Icon } = Layout

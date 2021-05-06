@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import caseApi from '../../service/caseApi'
-import { useAppContext } from '@store/index'
+import { useCaseContext } from '@store/cases'
 import styles from './searchBar.module.scss'
 
 export const caseLabels = [
@@ -34,7 +33,7 @@ export const siteLabels = [
 ]
 
 export default function Footer(props) {
-  const { searchPara, setsearchPara, searchTags, touchSearchTags, touchCaseData } = useAppContext()
+  const { searchPara, setsearchPara, searchTags, touchSearchTags, touchCaseData } = useCaseContext()
 
   useEffect(() => {
     touchSearchTags()

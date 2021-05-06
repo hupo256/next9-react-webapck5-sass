@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import Router from 'next/router'
 import { Pagination } from 'antd'
-import { useAppContext } from '../../store'
+import { useCaseContext } from '@store/cases'
 import styles from './conListBar.module.scss'
 
 const caseLen = 3 // 众多图片中需要显示前几张
 
 export default function Footer(props) {
-  const { touchCaseData, caseData } = useAppContext()
+  const { touchCaseData, caseData } = useCaseContext()
 
   useEffect(() => {
     touchCaseData()
@@ -26,7 +26,8 @@ export default function Footer(props) {
             const { coverPicUrl, liveroom, bedroom, title, uid, acreage, styleDic = {}, casePics = [] } = item
             const showPics = casePics?.slice(0, caseLen)
             return (
-              <li key={uid} onClick={() => Router.push(`/cases/${uid}`)}>
+              <li key={uid} onClick={() => Router.push(`/cases/detail?uid=${uid}`)}>
+                {/* <li key={uid} onClick={() => Router.push(`/cases/${uid}`)}> */}
                 <div className={styles.minImgBox}>
                   <img src={coverPicUrl} alt="" />
                 </div>

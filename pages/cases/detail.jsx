@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import tools from '../../libs/utils'
 import { useAppContext } from '@store/index'
 import caseApi from '@service/caseApi'
+import BreadBar from '@components/breadBar'
 import Footer from '@components/footer'
 import styles from './case.module.scss'
 
-// import queryCaseListForWeb from './tools/getCaseByUidForWeb.json'
+const { urlParamHash } = tools
+
+import queryCaseListForWeb from './tools/getCaseByUidForWeb.json'
 
 export default function CaseDetail(props) {
-  const { query } = useRouter()
   const { companyData } = useAppContext()
   const [details, setdetails] = useState({})
   const {
@@ -32,11 +34,9 @@ export default function CaseDetail(props) {
     // console.log(queryCaseListForWeb.data)
     // setdetails(queryCaseListForWeb.data)
     // return
-
-    caseApi.getCaseByUidForWeb({ uid: query?.slug }).then(res => {
-      console.log(res)
+    const { uid = '' } = urlParamHash()
+    caseApi.getCaseByUidForWeb({ uid }).then(res => {
       if (!res?.data) return
-      console.log(res.data)
       setdetails(res.data)
     })
   }
@@ -46,9 +46,7 @@ export default function CaseDetail(props) {
       <div className={styles.grayBg}>
         <div className={styles.conBox}>
           {/* breadBar */}
-          <div className={styles.breadBox}>
-            当前位置: <a href="">首页</a> &gt; <a href="">看案例</a>
-          </div>
+          <BreadBar curTit={buildingName} />
 
           {/* detail */}
           <div className={styles.detailOut}>

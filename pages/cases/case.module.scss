@@ -13,10 +13,6 @@ $borderColor: #eee;
   }
 }
 
-.breadBox {
-  padding: 1em 0;
-}
-
 .caseBox {
 }
 
@@ -31,7 +27,6 @@ $borderColor: #eee;
       margin-bottom: 1em;
       padding: 20px;
       border-radius: $borderRadius;
-      // box-shadow: 0 0 3px #ccc;
       background: #fff;
     }
     .detSub {
@@ -65,15 +60,17 @@ $borderColor: #eee;
     }
 
     .detDec {
-      > b {
-        display: block;
-        padding: 1em 0 0.5em;
-      }
-      > img {
-        display: block;
-        padding-bottom: 0.5em;
-        max-width: 100%;
-        width: 100%;
+      > div {
+        b {
+          display: block;
+          padding: 1em 0 0.5em;
+        }
+        img {
+          display: block;
+          padding-bottom: 0.5em;
+          max-width: 100%;
+          width: 100%;
+        }
       }
     }
   }

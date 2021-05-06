@@ -16,4 +16,14 @@ tools.getStorage = key => {
   return data && data !== 'undefined' ? JSON.parse(data) : ''
 }
 
+tools.urlParamHash = (url = location.href) => {
+  let params = {}
+  let hash = url.slice(url.indexOf('?') + 1).split('&')
+  for (let i = 0; i < hash.length; i++) {
+    const h = hash[i].split('=') //
+    params[h[0]] = h[1]
+  }
+  return params
+}
+
 export default tools

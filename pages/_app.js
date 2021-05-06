@@ -2,7 +2,7 @@ import 'antd/dist/antd.css'
 import '../styles/globals.css'
 
 // import { AppWrapper } from '../libs/context'
-import { AppWrapper } from '../store'
+import { AppWrapper } from '@store/index'
 
 function MyApp({ Component, pageProps }) {
   return (
