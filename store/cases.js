@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import caseApi from '@service/caseApi'
+import companyApi from '@service/companyApi'
 
 // import queryCaseOptionsForWeb from './mock/queryCaseOptionsForWeb.json'
 // import queryCaseListForWeb from './mock/queryCaseListForWeb.json'
