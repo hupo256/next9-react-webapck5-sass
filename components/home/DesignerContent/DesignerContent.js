@@ -1,93 +1,56 @@
-import React, { Component } from 'react'
+import React, { useState, useRef } from 'react'
 import ReactCardCarousel from 'react-card-carousel'
 import _ from 'lodash'
+import styles from './DesignerContent.module.css'
+import { BtnMore } from '../btn'
 
-const listData = [
-  { text: 'Bob', imgUrl: '/img/home_cases/img_1.png' },
-  { text: 'Bob2', imgUrl: '/img/home_cases/img_2.png' },
-  { text: 'Bob3', imgUrl: '/img/home_cases/img_3.png' },
-  { text: 'Bob4', imgUrl: '/img/home_cases/img_4.png' },
-  { text: 'Bob5', imgUrl: '/img/home_cases/img_5.png' },
-]
+const DesignerContent = ({ data }) => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const Carousel = useRef()
 
-class MyCarousel extends Component {
-  constructor(props) {
-    super(props)
-    this.Carousel = React.createRef()
-    this.state = { currentIndex: 0 }
-  }
-  static get CONTAINER_STYLE() {
-    return {
-      position: 'relative',
-      width: '100%',
-      display: 'flex',
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'middle',
-      height: '400px',
-    }
-  }
-
-  static get CARD_STYLE() {
-    return {
-      height: '400px',
-      width: '733px',
-      paddingTop: '80px',
-      textAlign: 'center',
-      background: '#52C0F5',
-      color: '#FFF',
-      fontFamily: 'sans-serif',
-      fontSize: '12px',
-      textTransform: 'uppercase',
-      borderRadius: '10px',
-      boxSizing: 'border-box',
-    }
-  }
-
-  static get DESIGNER() {
-    return {
-      height: '221px',
-      width: '358px',
-      position: 'absolute',
-      backgroundColor: '#fff',
-      right: '-94px',
-      bottom: '42px',
-      color: '#000',
-      borderRadius: '8px',
-    }
-  }
-
-  refreshIndex() {
-    const currentIndex = this.Carousel.current.getCurrentIndex()
-    this.setState({ currentIndex })
-  }
-
-  render() {
-    return (
-      <div style={MyCarousel.CONTAINER_STYLE}>
-        <ReactCardCarousel
-          autoplay={false}
-          autoplay_speed={10000}
-          ref={this.Carousel}
-          afterChange={() => this.refreshIndex()}
-        >
-          {_.map(listData, (value, index) => (
+  return (
+    <div className={styles.carouselContainer}>
+      <ReactCardCarousel
+        autoplay={false}
+        autoplay_speed={10000}
+        ref={Carousel}
+        afterChange={() => setCurrentIndex(Carousel.current.getCurrentIndex())}
+      >
+        {_.map(data, (value, index) => (
+          <div className={index === currentIndex ? '' : styles.inactive} key={index}>
             <div
               style={{
-                ...MyCarousel.CARD_STYLE,
                 background: `url(${value.imgUrl}) no-repeat center center`,
               }}
-              key={index}
+              className={styles.container}
             >
-              {index === this.state.currentIndex && (
-                <div style={MyCarousel.DESIGNER}>{value.text}</div>
+              {index === currentIndex && (
+                <div className={styles.designerWrapper}>
+                  <div className={styles.topSection}>
+                    <div className={styles.userImageWrapper}>
+                      <img src={value.imgUserUrl} className={styles.userImage}></img>
+                    </div>
+                    <div className={styles.right}>
+                      <h3 className={styles.titleWrap}>
+                        <p className={styles.name}>{value.designer.name}</p>
+                        <div className={styles.jobTitle}>{value.designer.title}</div>
+                      </h3>
+                      <p className={styles.content}>{value.designer.content}</p>
+                    </div>
+                  </div>
+                  <BtnMore
+                    text={'查看详情'}
+                    solid
+                    style={{ justifyContent: 'flex-end', marginTop: '15px' }}
+                  />
+                </div>
               )}
             </div>
-          ))}
-        </ReactCardCarousel>
-      </div>
-    )
-  }
+          </div>
+        ))}
+      </ReactCardCarousel>
+    </div>
+  )
 }
 
-export default MyCarousel
+export default DesignerContent
