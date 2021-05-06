@@ -4,14 +4,12 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import _ from 'lodash'
 import { HomeWrapper, useHomePageContext } from '@store/home'
-// import { useAppContext, useHomePageContext } from '../libs/context'
-import EditMenu from '../components/EditMenu'
-import { Services } from '../libs/services'
-import cx from 'classnames'
 import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent } from '../components/home'
+import FooterComp from '@components/FooterComp/FooterComp.js'
 
-import { Button, Layout, Avatar } from 'antd'
-const { Header, Content, Footer, Icon } = Layout
+import { Layout, Avatar } from 'antd'
+
+const { Content } = Layout
 
 const DEMO_FEATURES = [
   {
@@ -135,8 +133,7 @@ const ChapterLayout = ({ children, title, description }) => (
 )
 
 const Home = () => {
-  // const { authed, setAuthed } = useAppContext() // 获取全局 state 的方法
-  const { menuList } = useHomePageContext() // 获取全局 state 的方法
+  const { menuList, footerData } = useHomePageContext() // 获取全局 state 的方法
 
   return (
     <div className={styles.container}>
@@ -206,7 +203,7 @@ const Home = () => {
           </div>
         </Content>
 
-        <Footer>FOOTER</Footer>
+        <FooterComp data={footerData} />
       </Layout>
     </div>
   )

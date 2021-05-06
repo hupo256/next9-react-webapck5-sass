@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import styles from './footer.module.scss'
+import styles from './FooterComp.module.scss'
 
-export default function Footer(props) {
+export default function FooterComp({ data }) {
+  if (!data) return null
+
   const {
     copyright,
     icp,
@@ -12,7 +14,7 @@ export default function Footer(props) {
     wechatName,
     wechatNumber,
     wechatQrCode,
-  } = props
+  } = data
 
   return (
     <>
