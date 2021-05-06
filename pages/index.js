@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import _ from 'lodash'
-import { HomeWrapper } from '../libs/context'
-import { useAppContext, useHomePageContext } from '../libs/context'
+import { HomeWrapper, useHomePageContext } from '@store/home'
+// import { useAppContext, useHomePageContext } from '../libs/context'
 import EditMenu from '../components/EditMenu'
 import { Services } from '../libs/services'
 import cx from 'classnames'
@@ -135,13 +135,14 @@ const ChapterLayout = ({ children, title, description }) => (
 )
 
 const Home = () => {
-  const { authed, setAuthed } = useAppContext() // 获取全局 state 的方法
+  // const { authed, setAuthed } = useAppContext() // 获取全局 state 的方法
   const { menuList } = useHomePageContext() // 获取全局 state 的方法
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>{authed ? 'Admin' : 'Public'}</title>
+        <title>home</title>
+        {/* <title>{authed ? 'Admin' : 'Public'}</title> */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout className={styles.mainLayout}>
