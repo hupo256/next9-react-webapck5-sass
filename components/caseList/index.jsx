@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Router from 'next/router'
 import { Pagination } from 'antd'
 import { useAppContext } from '../../store'
 import styles from './conListBar.module.scss'
@@ -25,7 +26,7 @@ export default function Footer(props) {
             const { coverPicUrl, liveroom, bedroom, title, uid, acreage, styleDic = {}, casePics = [] } = item
             const showPics = casePics?.slice(0, caseLen)
             return (
-              <li key={uid}>
+              <li key={uid} onClick={() => Router.push(`/cases/${uid}`)}>
                 <div className={styles.minImgBox}>
                   <img src={coverPicUrl} alt="" />
                 </div>

@@ -1,20 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useAppContext } from '@store/index'
-import caseApi from '@service/caseApi'
 
 import SearchBar from '@components/searchBar'
 import CaseList from '@components/caseList'
 import styles from './case.module.scss'
 
 export default function Cases(props) {
-  const { searchTags, caseData } = useAppContext()
-
-  function touchDetails() {
-    caseApi.getCaseByUidForWeb({ uid: '8027af336e8f449c9f91dfd2fbe5cdeb' }).then(res => {
-      console.log(res)
-    })
-  }
-
   return (
     <div className={styles.conBox}>
       {/* breadBar */}
