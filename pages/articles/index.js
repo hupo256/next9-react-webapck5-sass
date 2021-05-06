@@ -1,55 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import { Pagination } from 'antd'
-import { caseLabels } from './tools/data'
-import designerApi from '../../service/designerApi'
-import SearchBar from '../../components/searchBar'
+import articleApi from '../../service/articleApi'
 import Footer from '../../components/footer'
-import styles from './designers.module.scss'
+import styles from './articles.module.scss'
 
 import view from './tools/view.json'
 
-const caseLen = 3 // 众多图片中需要显示前几张
-
 export default function Site(props) {
-  const [dataList, setdataList] = useState([])
+  const [searchTags, setsearchTags] = useState([])
+  const [searchPara, setsearchPara] = useState({})
+  const [caseList, setcaseList] = useState([])
   const [recordTotal, setrecordTotal] = useState(0)
+  const [companyData, setcompanyData] = useState(null)
 
   useEffect(() => {
     touchList()
-    touchDetails()
-    // mockData()
   }, [])
-
-  function mockData() {
-    const { data } = queryCaseOptionsForWeb
-    Object.keys(data).forEach(key => {
-      const arr = data[key]
-      arr?.unshift({ name: '全部', code: '' })
-      arr?.push({ name: '其他', code: '99' })
-    })
-    setsearchTags(data)
-
-    setcaseList(queryCaseListForWeb.data.list)
-  }
 
   function touchList(config = {}) {
     const param = {
-      // ...searchPara,
+      ...searchPara,
+      articleDicCode: '',
+      articleStatus: 0,
+      searchText: '',
       pageNum: 1,
       pageSize: 10,
-      // status: '1',
     }
-    designerApi.queryDesignerListForWeb({ ...param, ...config }).then(res => {
+    articleApi.articlePageList({ ...param, ...config }).then(res => {
       console.log(res)
       if (!res?.data) return
       const { data } = res
-      // setcaseList(data?.list)
-      // setrecordTotal(data?.recordTotal)
+      setcaseList(data?.list)
+      setrecordTotal(data?.recordTotal)
     })
   }
 
   function touchDetails() {
-    designerApi.queryDesignerForWebByUid({ uid: '5bea59b572da40989cebd7908076a1d4' }).then(res => {
+    articleApi.articleGet({ uid: '8027af336e8f449c9f91dfd2fbe5cdeb' }).then(res => {
       console.log(res)
     })
   }
@@ -70,20 +57,18 @@ export default function Site(props) {
       <div className={styles.conBox}>
         {/* breadBar */}
         <div className={styles.breadBox}>
-          当前位置: <a href="">首页</a> &gt; <a href="">看案例</a>
+          当前位置: <a href="">首页</a> &gt; <a href="">装修攻略</a>
         </div>
 
         {/* case */}
         <div className={styles.caseBox}>
-          <ul className={styles.listBox}></ul>
-
           <div className={styles.pageBox}>
             <Pagination hideOnSinglePage={true} onChange={pageChange} defaultCurrent={1} total={recordTotal} />
           </div>
         </div>
       </div>
 
-      {/* {companyData && <Footer {...companyData} />} */}
+      {companyData && <Footer {...companyData} />}
     </>
   )
 }
