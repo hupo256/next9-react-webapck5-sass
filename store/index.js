@@ -1,10 +1,10 @@
 import { createContext, useContext, useState } from 'react'
-import caseApi from '../service/caseApi'
-import companyApi from '../service/companyApi'
+import caseApi from '@service/caseApi'
+import companyApi from '@service/companyApi'
 
-import queryCaseOptionsForWeb from './mock/queryCaseOptionsForWeb.json'
-import queryCaseListForWeb from './mock/queryCaseListForWeb.json'
-import view from './mock/view.json'
+// import queryCaseOptionsForWeb from './mock/queryCaseOptionsForWeb.json'
+// import queryCaseListForWeb from './mock/queryCaseListForWeb.json'
+// import view from './mock/view.json'
 
 const AppContext = createContext(null)
 export function AppWrapper({ children }) {
@@ -58,6 +58,7 @@ export function AppWrapper({ children }) {
     setcompanyData,
     searchPara,
     setsearchPara,
+    touchCompanyInfor,
   }
 
   return <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
