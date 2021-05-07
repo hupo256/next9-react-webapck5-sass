@@ -4,7 +4,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import _ from 'lodash'
 import { HomeWrapper, useHomePageContext } from '@store/home'
-import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent } from '../components/home'
+import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent, Articles } from '@components/home'
 import FooterComp from '@components/FooterComp/FooterComp.js'
 
 import { Layout, Avatar } from 'antd'
@@ -202,6 +202,10 @@ const Home = () => {
               <DesignerContent data={_.slice(DEMO_DESIGNER, 0, 3)} />
             </ChapterLayout>
           </div>
+
+          <ChapterLayout title={'装修攻略'} description={'一分钟了解家装'}>
+            <Articles />
+          </ChapterLayout>
         </Content>
 
         <FooterComp data={footerData} />
