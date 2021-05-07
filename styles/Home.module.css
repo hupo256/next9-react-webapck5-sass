@@ -102,4 +102,13 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  background-size: cover;
+}
+
+.liveShowSectionWiderBackground {
+  background: url(/img/liveshow/bg_tv.png) center center no-repeat;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-size: cover;
 }

@@ -5,5 +5,6 @@ import KeyPoints from './keyPoints'
 import HeaderLayout from './headerLayout'
 import DesignerContent from './DesignerContent/DesignerContent.js'
 import Articles from './Articles/Articles.jsx'
+import LiveShow from './LiveShow/LiveShow.jsx'
 
-export { CaseProjects, KeyPoints, MenuList, HeaderLayout, BtnMore, DesignerContent, Articles }
+export { CaseProjects, KeyPoints, MenuList, HeaderLayout, BtnMore, DesignerContent, Articles, LiveShow }

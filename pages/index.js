@@ -4,7 +4,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import _ from 'lodash'
 import { HomeWrapper, useHomePageContext } from '@store/home'
-import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent, Articles } from '@components/home'
+import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent, Articles, LiveShow } from '@components/home'
 import FooterComp from '@components/FooterComp/FooterComp.js'
 
 import { Layout, Avatar } from 'antd'
@@ -69,6 +69,24 @@ const DEMO_CASES = [
     url: '/cases/5',
     imgUrl: '/img/home_cases/img_5.png',
     text: '兰亭盛会| 500 | 三室一厅 | 25.6万',
+  },
+]
+
+const DEMO_SHOWS = [
+  {
+    url: '/cases/1',
+    imgUrl: '/img/liveshow/直播1.png',
+    text: '兰亭盛会| 100 | 三室一厅 | 25.6万',
+  },
+  {
+    url: '/cases/2',
+    imgUrl: '/img/liveshow/直播2.png',
+    text: '兰亭盛会| 200 | 三室一厅 | 25.6万',
+  },
+  {
+    url: '/cases/3',
+    imgUrl: '/img/liveshow/直播3.png',
+    text: '兰亭盛会| 300 | 三室一厅 | 25.6万',
   },
 ]
 
@@ -206,6 +224,22 @@ const Home = () => {
           <ChapterLayout title={'装修攻略'} description={'一分钟了解家装'}>
             <Articles />
           </ChapterLayout>
+
+          <div className={styles.designerSectionWiderBackground}>
+            <ChapterLayout title={'工地直播'} description={'全程透明 追踪可查'}>
+              <LiveShow data={_.slice(DEMO_SHOWS, 0, 3)} />
+            </ChapterLayout>
+          </div>
+          <div className={styles.designerSectionWiderBackground}>
+            <ChapterLayout title={'工地直播'} description={'全程透明 追踪可查'}>
+              <LiveShow data={_.slice(DEMO_SHOWS, 0, 2)} />
+            </ChapterLayout>
+          </div>
+          <div className={styles.designerSectionWiderBackground}>
+            <ChapterLayout title={'工地直播'} description={'全程透明 追踪可查'}>
+              <LiveShow data={_.slice(DEMO_SHOWS, 0, 1)} />
+            </ChapterLayout>
+          </div>
         </Content>
 
         <FooterComp data={footerData} />
