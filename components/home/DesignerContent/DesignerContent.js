@@ -3,6 +3,7 @@ import ReactCardCarousel from 'react-card-carousel'
 import _ from 'lodash'
 import styles from './DesignerContent.module.css'
 import { BtnMore } from '../btn'
+import cx from 'classnames'
 
 const DesignerContent = ({ data }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -38,17 +39,22 @@ const DesignerContent = ({ data }) => {
                       <p className={styles.content}>{value.designer.content}</p>
                     </div>
                   </div>
-                  <BtnMore
-                    text={'查看详情'}
-                    solid
-                    style={{ justifyContent: 'flex-end', marginTop: '15px' }}
-                  />
+                  <BtnMore text={'查看详情'} solid style={{ justifyContent: 'flex-end', marginTop: '15px' }} />
                 </div>
               )}
             </div>
           </div>
         ))}
       </ReactCardCarousel>
+      <div className={styles.carouselDotsWrapper}>
+        {_.map(data, (value, index) => (
+          <div
+            key={index}
+            className={cx(styles.carouselDot, { [styles.current]: index === currentIndex })}
+            onClick={() => Carousel.current.goTo(index)}
+          ></div>
+        ))}
+      </div>
     </div>
   )
 }

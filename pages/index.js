@@ -196,6 +196,7 @@ const Home = () => {
           <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
             <CaseProjects data={_.slice(DEMO_CASES, 0, 5)} />
           </ChapterLayout>
+
           <div className={styles.designerSectionWiderBackground}>
             <ChapterLayout title={'首席设计师'} description={'定制全套装修方案'}>
               <DesignerContent data={_.slice(DEMO_DESIGNER, 0, 3)} />
