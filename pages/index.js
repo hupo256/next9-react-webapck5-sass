@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
 import _ from 'lodash'
-import { HomeWrapper, useHomePageContext } from '@store/home'
+import { useAppContext, useHomePageContext, HomeWrapper } from '@libs/context'
 import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent, Articles, LiveShow } from '@components/home'
 import FooterComp from '@components/FooterComp/FooterComp.js'
 
-import { Layout, Avatar } from 'antd'
+import { Layout, Avatar, Button, Drawer } from 'antd'
 
 const { Content } = Layout
 
@@ -151,43 +151,51 @@ const ChapterLayout = ({ children, title, description }) => (
 )
 
 const Home = () => {
+  const { authed, setAuthed } = useAppContext()
   const { menuList, footerData } = useHomePageContext() // 获取全局 state 的方法
+  const [showHeaderDrawer, setShowHeaderDrawer] = useState(false)
+  const [showFooterDrawer, setShowFooterDrawer] = useState(false)
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>home</title>
-        {/* <title>{authed ? 'Admin' : 'Public'}</title> */}
+        <title>{authed ? 'Inner User' : 'Public User'}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout className={styles.mainLayout}>
-        <HeaderLayout
-          left={<CompanyHeader />}
-          middle={<MenuList menuList={menuList} />}
-          right={
-            <>
-              <Image
-                className={styles.phoneIcon}
-                src={'/img/ic_phone_slices/ic_phone.png'}
-                width={14}
-                height={17}
-                layout="fixed"
-              />
-              <span className={styles.phone}>800-123-1234</span>
-            </>
-          }
-        />
-
+        <div className={styles.editableWrapper}>
+          <div className={styles.editHeader}>
+            <Button className={styles.editBtn} type="primary" onClick={() => setShowHeaderDrawer(true)}>
+              编辑
+            </Button>
+          </div>
+          <HeaderLayout
+            left={<CompanyHeader />}
+            middle={<MenuList menuList={menuList} />}
+            right={
+              <>
+                <Image
+                  className={styles.phoneIcon}
+                  src={'/img/ic_phone_slices/ic_phone.png'}
+                  width={14}
+                  height={17}
+                  layout="fixed"
+                />
+                <span className={styles.phone}>800-123-1234</span>
+              </>
+            }
+          />
+        </div>
         <Banner />
 
         <Content className={styles.mainWrapper}>
           <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
             <KeyPoints pointsList={DEMO_FEATURES} />
           </ChapterLayout>
-          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+          {/* <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
             <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 5)} />
-          </ChapterLayout>
-          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+          </ChapterLayout> */}
+          {/* <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
             <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 4)} />
           </ChapterLayout>
           <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
@@ -198,8 +206,8 @@ const Home = () => {
           </ChapterLayout>
           <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
             <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 1)} />
-          </ChapterLayout>
-          <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+          </ChapterLayout> */}
+          {/* <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
             <CaseProjects data={_.slice(DEMO_CASES, 0, 1)} />
           </ChapterLayout>
           <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
@@ -210,7 +218,7 @@ const Home = () => {
           </ChapterLayout>
           <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
             <CaseProjects data={_.slice(DEMO_CASES, 0, 4)} />
-          </ChapterLayout>
+          </ChapterLayout> */}
           <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
             <CaseProjects data={_.slice(DEMO_CASES, 0, 5)} />
           </ChapterLayout>
@@ -230,7 +238,7 @@ const Home = () => {
               <LiveShow data={_.slice(DEMO_SHOWS, 0, 3)} />
             </ChapterLayout>
           </div>
-          <div className={styles.designerSectionWiderBackground}>
+          {/* <div className={styles.designerSectionWiderBackground}>
             <ChapterLayout title={'工地直播'} description={'全程透明 追踪可查'}>
               <LiveShow data={_.slice(DEMO_SHOWS, 0, 2)} />
             </ChapterLayout>
@@ -239,11 +247,42 @@ const Home = () => {
             <ChapterLayout title={'工地直播'} description={'全程透明 追踪可查'}>
               <LiveShow data={_.slice(DEMO_SHOWS, 0, 1)} />
             </ChapterLayout>
-          </div>
+          </div> */}
         </Content>
 
-        <FooterComp data={footerData} />
+        <div className={styles.editableWrapper}>
+          <div className={styles.editHeader}>
+            <Button className={styles.editBtn} type="primary" onClick={() => setShowFooterDrawer(true)}>
+              编辑
+            </Button>
+          </div>
+          <FooterComp data={footerData} />
+        </div>
       </Layout>
+
+      <Drawer
+        title="编辑频道"
+        placement="right"
+        closable={true}
+        onClose={() => setShowHeaderDrawer(false)}
+        visible={showHeaderDrawer}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
+
+      <Drawer
+        title="编辑公司信息"
+        placement="right"
+        closable={true}
+        onClose={() => setShowFooterDrawer(false)}
+        visible={showFooterDrawer}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
     </div>
   )
 }
