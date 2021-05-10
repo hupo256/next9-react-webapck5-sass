@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import styles from '../styles/Home.module.scss'
+import styles from './Home.module.scss'
 import _ from 'lodash'
 import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent, Articles, LiveShow } from '@components/Home'
 import FooterComp from '@components/FooterComp/FooterComp.js'
