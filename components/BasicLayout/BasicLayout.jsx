@@ -4,7 +4,7 @@ import Image from 'next/image'
 import styles from './BasicLayout.module.scss'
 import _ from 'lodash'
 import { HomeWrapper, useHomePageContext } from '@store/home'
-import { MenuList, HeaderLayout } from '@components/home'
+import { MenuList, HeaderLayout } from '@components/Home'
 import FooterComp from '@components/FooterComp/FooterComp.js'
 
 import { Layout, Avatar } from 'antd'

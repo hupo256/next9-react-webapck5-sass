@@ -1,6 +1,6 @@
 import { BtnMore } from '../btn'
 import _ from 'lodash'
-import styles from './index.module.css'
+import styles from './Case.module.scss'
 
 const CaseProjects = ({ data }) => {
   // 初版

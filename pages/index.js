@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
 import _ from 'lodash'
 import { useAppContext, useHomePageContext, HomeWrapper } from '@libs/context'
-import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent, Articles, LiveShow } from '@components/home'
+import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent, Articles, LiveShow } from '@components/Home'
 import FooterComp from '@components/FooterComp/FooterComp.js'
 
 import { Layout, Avatar, Button, Drawer } from 'antd'
@@ -174,14 +173,8 @@ const Home = () => {
             middle={<MenuList menuList={menuList} />}
             right={
               <>
-                <Image
-                  className={styles.phoneIcon}
-                  src={'/img/ic_phone_slices/ic_phone.png'}
-                  width={14}
-                  height={17}
-                  layout="fixed"
-                />
-                <span className={styles.phone}>800-123-1234</span>
+                <img className={styles.phoneIcon} src={'/img/ic_phone_slices/ic_phone.png'}></img>
+                <span className={styles.phone}>{'800-123-1234'}</span>
               </>
             }
           />
@@ -192,10 +185,10 @@ const Home = () => {
           <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
             <KeyPoints pointsList={DEMO_FEATURES} />
           </ChapterLayout>
-          {/* <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
             <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 5)} />
-          </ChapterLayout> */}
-          {/* <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+          </ChapterLayout>
+          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
             <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 4)} />
           </ChapterLayout>
           <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
@@ -206,8 +199,8 @@ const Home = () => {
           </ChapterLayout>
           <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
             <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 1)} />
-          </ChapterLayout> */}
-          {/* <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+          </ChapterLayout>
+          <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
             <CaseProjects data={_.slice(DEMO_CASES, 0, 1)} />
           </ChapterLayout>
           <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
@@ -218,7 +211,7 @@ const Home = () => {
           </ChapterLayout>
           <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
             <CaseProjects data={_.slice(DEMO_CASES, 0, 4)} />
-          </ChapterLayout> */}
+          </ChapterLayout>
           <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
             <CaseProjects data={_.slice(DEMO_CASES, 0, 5)} />
           </ChapterLayout>
@@ -238,7 +231,7 @@ const Home = () => {
               <LiveShow data={_.slice(DEMO_SHOWS, 0, 3)} />
             </ChapterLayout>
           </div>
-          {/* <div className={styles.designerSectionWiderBackground}>
+          <div className={styles.designerSectionWiderBackground}>
             <ChapterLayout title={'工地直播'} description={'全程透明 追踪可查'}>
               <LiveShow data={_.slice(DEMO_SHOWS, 0, 2)} />
             </ChapterLayout>
@@ -247,7 +240,7 @@ const Home = () => {
             <ChapterLayout title={'工地直播'} description={'全程透明 追踪可查'}>
               <LiveShow data={_.slice(DEMO_SHOWS, 0, 1)} />
             </ChapterLayout>
-          </div> */}
+          </div>
         </Content>
 
         <div className={styles.editableWrapper}>
@@ -278,10 +271,15 @@ const Home = () => {
         closable={true}
         onClose={() => setShowFooterDrawer(false)}
         visible={showFooterDrawer}
+        width={600}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <iframe
+          src="http://dev-wechat.ingongdi.com/#/portal/contentmanagement/websetting"
+          // style="height:100%;width:600px"
+          height="100%"
+          width="600px"
+          frameborder="0"
+        />
       </Drawer>
     </div>
   )
