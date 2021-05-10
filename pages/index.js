@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import _ from 'lodash'
-import { useAppContext, useHomePageContext, HomeWrapper } from '@libs/context'
 import { CaseProjects, MenuList, KeyPoints, HeaderLayout, DesignerContent, Articles, LiveShow } from '@components/Home'
 import FooterComp from '@components/FooterComp/FooterComp.js'
+
+import allData from '../data/response_1619664888803.json'
+import allMenusJson from '../data/getAllMenus.json'
+import footerDataJson from '../data/footer.json'
 
 import { Layout, Avatar, Button, Drawer } from 'antd'
 
@@ -150,15 +153,25 @@ const ChapterLayout = ({ children, title, description }) => (
 )
 
 const Home = () => {
-  const { authed, setAuthed } = useAppContext()
-  const { menuList, footerData } = useHomePageContext() // 获取全局 state 的方法
+  const [menuList, setMenuList] = useState([])
+  const [footerData, setFooterData] = useState([])
+
   const [showHeaderDrawer, setShowHeaderDrawer] = useState(false)
   const [showFooterDrawer, setShowFooterDrawer] = useState(false)
+
+  useEffect(async () => {
+    // todo
+    // const { data } = await Services.findAllChannels()
+    // const footer = await Services.findAllFooters()
+
+    setMenuList(_.get(allMenusJson, 'data.list', []))
+    setFooterData(footerDataJson.data)
+  })
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>{authed ? 'Inner User' : 'Public User'}</title>
+        <title>PC 首页</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout className={styles.mainLayout}>
@@ -285,10 +298,6 @@ const Home = () => {
   )
 }
 
-const HomePage = () => (
-  <HomeWrapper>
-    <Home />
-  </HomeWrapper>
-)
+const HomePage = () => <Home />
 
 export default HomePage
