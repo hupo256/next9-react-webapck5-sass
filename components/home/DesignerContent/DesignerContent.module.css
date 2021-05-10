@@ -4,8 +4,9 @@
   display: flex;
   flex: 1;
   justify-content: center;
-  align-items: middle;
-  height: 400px;
+  align-items: center;
+  flex-direction: column;
+  height: 500px;
 }
 
 .designerWrapper {
@@ -121,4 +122,20 @@
   height: 20px;
   background: url(/img/designer/ic_next.png) no-repeat center center;
   top: calc(50% - 10px);
+}
+
+/* carousel dots */
+.carouselDotsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 17px;
+}
+.carouselDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: #d8d8d8;
+}
+.carouselDot.current {
+  background: #ff7300;
 }

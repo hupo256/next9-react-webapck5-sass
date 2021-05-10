@@ -1,5 +1,5 @@
 import { Layout } from 'antd'
-import styles from './index.module.css'
+import styles from './HeaderLayout.module.scss'
 
 const HeaderLayout = ({ left, middle, right }) => (
   <Layout.Header className={styles.headerWrapper}>
