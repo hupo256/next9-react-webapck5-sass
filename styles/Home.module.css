@@ -33,11 +33,10 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
-.innerMain {
-  /* 限制内容的最大宽度 */
-  width: 1280px;
-}
+
 .chapterSection {
   text-align: center;
   background: url(/img/points/bg_title.png) no-repeat top center;
@@ -77,6 +76,7 @@
 .chapterWrapper {
   padding-top: 48px;
   padding-bottom: 38px;
+  width: 1280px;
 }
 
 .moreBtn {
@@ -95,4 +95,11 @@
   font-weight: 400;
   color: --themeColor;
   line-height: 42px;
+}
+
+.designerSectionWiderBackground {
+  background: url(/img/designer/bg_design.png) center center no-repeat;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

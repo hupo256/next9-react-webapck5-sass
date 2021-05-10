@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import _ from 'lodash'
-import { HomeWrapper } from '../libs/context'
-import { useAppContext, useHomePageContext } from '../libs/context'
+import { HomeWrapper, useHomePageContext } from '@store/home'
+// import { useAppContext, useHomePageContext } from '../libs/context'
 import EditMenu from '../components/EditMenu'
 import { Services } from '../libs/services'
 import cx from 'classnames'
@@ -74,6 +74,36 @@ const DEMO_CASES = [
   },
 ]
 
+const DEMO_DESIGNER = [
+  {
+    designer: {
+      name: '刘小姐',
+      title: '总设计师',
+      content: '用心打造高品质专属空间，从事设计8年以来力争用设计改变每一个用户的生活环境。',
+    },
+    imgUrl: '/img/designer/案例1.png',
+    imgUserUrl: '/img/designer/设计师1.png',
+  },
+  {
+    designer: {
+      name: '王先生',
+      title: '总设计师',
+      content: '用心打造高品质专属空间，从事设计8年以来力争用设计改变每一个用户的生活环境。',
+    },
+    imgUrl: '/img/designer/案例2.png',
+    imgUserUrl: '/img/designer/设计师2.png',
+  },
+  {
+    designer: {
+      name: '陈先生',
+      title: '总设计师',
+      content: '用心打造高品质专属空间，从事设计8年以来力争用设计改变每一个用户的生活环境。',
+    },
+    imgUrl: '/img/designer/案例3.png',
+    imgUserUrl: '/img/designer/设计师3.png',
+  },
+]
+
 const CompanyHeader = () => {
   return (
     <div className={styles.companyHeaderStyle}>
@@ -105,13 +135,14 @@ const ChapterLayout = ({ children, title, description }) => (
 )
 
 const Home = () => {
-  const { authed, setAuthed } = useAppContext() // 获取全局 state 的方法
+  // const { authed, setAuthed } = useAppContext() // 获取全局 state 的方法
   const { menuList } = useHomePageContext() // 获取全局 state 的方法
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>{authed ? 'Admin' : 'Public'}</title>
+        <title>home</title>
+        {/* <title>{authed ? 'Admin' : 'Public'}</title> */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout className={styles.mainLayout}>
@@ -135,49 +166,48 @@ const Home = () => {
         <Banner />
 
         <Content className={styles.mainWrapper}>
-          <div className={styles.innerMain}>
-            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
-              <KeyPoints pointsList={DEMO_FEATURES} />
-            </ChapterLayout>
-            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
-              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 5)} />
-            </ChapterLayout>
-            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
-              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 4)} />
-            </ChapterLayout>
-            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
-              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 3)} />
-            </ChapterLayout>
-            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
-              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 2)} />
-            </ChapterLayout>
-            <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
-              <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 1)} />
-            </ChapterLayout>
-            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
-              <CaseProjects data={_.slice(DEMO_CASES, 0, 1)} />
-            </ChapterLayout>
-            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
-              <CaseProjects data={_.slice(DEMO_CASES, 0, 2)} />
-            </ChapterLayout>
-            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
-              <CaseProjects data={_.slice(DEMO_CASES, 0, 3)} />
-            </ChapterLayout>
-            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
-              <CaseProjects data={_.slice(DEMO_CASES, 0, 4)} />
-            </ChapterLayout>
-            <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
-              <CaseProjects data={_.slice(DEMO_CASES, 0, 5)} />
-            </ChapterLayout>
+          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+            <KeyPoints pointsList={DEMO_FEATURES} />
+          </ChapterLayout>
+          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+            <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 5)} />
+          </ChapterLayout>
+          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+            <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 4)} />
+          </ChapterLayout>
+          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+            <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 3)} />
+          </ChapterLayout>
+          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+            <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 2)} />
+          </ChapterLayout>
+          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
+            <KeyPoints pointsList={_.slice(DEMO_FEATURES, 0, 1)} />
+          </ChapterLayout>
+          <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+            <CaseProjects data={_.slice(DEMO_CASES, 0, 1)} />
+          </ChapterLayout>
+          <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+            <CaseProjects data={_.slice(DEMO_CASES, 0, 2)} />
+          </ChapterLayout>
+          <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+            <CaseProjects data={_.slice(DEMO_CASES, 0, 3)} />
+          </ChapterLayout>
+          <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+            <CaseProjects data={_.slice(DEMO_CASES, 0, 4)} />
+          </ChapterLayout>
+          <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
+            <CaseProjects data={_.slice(DEMO_CASES, 0, 5)} />
+          </ChapterLayout>
+          <div className={styles.designerSectionWiderBackground}>
             <ChapterLayout title={'首席设计师'} description={'定制全套装修方案'}>
-              <DesignerContent data={_.slice(DEMO_CASES, 0, 5)} />
+              <DesignerContent data={_.slice(DEMO_DESIGNER, 0, 3)} />
             </ChapterLayout>
           </div>
         </Content>
 
         <Footer>FOOTER</Footer>
       </Layout>
-      {/* <EditMenu /> */}
     </div>
   )
 }

@@ -1,14 +1,30 @@
-export const siteLabels = [
+export const stageList = [
   {
-    label: '户型',
-    tagKey: 'bedRooms',
+    gongdiStage: 'D210312000010',
+    gongdiStageName: '开工大吉',
   },
   {
-    label: '面积',
-    tagKey: 'acreages',
+    gongdiStage: 'D210312000011',
+    gongdiStageName: '拆改阶段',
   },
   {
-    label: '造价',
-    tagKey: 'renovationCosts',
+    gongdiStage: 'D210312000012',
+    gongdiStageName: '水电改造',
+  },
+  {
+    gongdiStage: 'D210312000013',
+    gongdiStageName: '泥木工程',
+  },
+  {
+    gongdiStage: 'D210312000014',
+    gongdiStageName: '油漆工程',
+  },
+  {
+    gongdiStage: 'D210312000015',
+    gongdiStageName: '成品安装',
+  },
+  {
+    gongdiStage: 'D210312000016',
+    gongdiStageName: '交付工程',
   },
 ]

@@ -32,7 +32,14 @@ p {
 }
 ul {
   padding-left: 0;
+  margin-bottom: 0;
 }
 li {
   list-style: none;
+}
+
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after,
+.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot,
+.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
+  background-color: #ff7300;
 }

@@ -18,6 +18,16 @@ const siteCreate = () => {
     return ajaxinstance.post('api/v1/wechat/site/www/get', params)
   }
 
+  // 动态列表（www网站）
+  site.siteDiaryList = params => {
+    return ajaxinstance.post('api/v1/wechat/site/diary/www/pageList', params)
+  }
+
+  // 动态树（www网站）
+  site.sitePageTree = params => {
+    return ajaxinstance.post('api/v1/wechat/site/diary/www/pageTree', params)
+  }
+
   return site
 }
 

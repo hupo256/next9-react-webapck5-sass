@@ -8,8 +8,6 @@ import styles from './case.module.scss'
 
 const { urlParamHash } = tools
 
-import queryCaseListForWeb from './tools/getCaseByUidForWeb.json'
-
 export default function CaseDetail(props) {
   const { companyData } = useAppContext()
   const [details, setdetails] = useState({})
@@ -23,6 +21,7 @@ export default function CaseDetail(props) {
     designerName,
     casePics = [],
     styleDics = [],
+    headPicUrl,
     workingTime,
   } = details
 
@@ -31,9 +30,6 @@ export default function CaseDetail(props) {
   }, [])
 
   function touchDetails() {
-    // console.log(queryCaseListForWeb.data)
-    // setdetails(queryCaseListForWeb.data)
-    // return
     const { uid = '' } = urlParamHash()
     caseApi.getCaseByUidForWeb({ uid }).then(res => {
       if (!res?.data) return
@@ -97,7 +93,7 @@ export default function CaseDetail(props) {
 
             <div className={styles.designTag}>
               <div className={styles.nameBox}>
-                <img src="" alt="" />
+                <img src={headPicUrl} alt="" />
                 <div className={styles.tit}>
                   <h4>{designerName}</h4>
                   <span>首席设计师</span>

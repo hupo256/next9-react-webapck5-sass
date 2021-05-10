@@ -1,33 +1,44 @@
 import React, { useEffect } from 'react'
 import Router from 'next/router'
+import tools from '@libs/utils'
 import { Pagination } from 'antd'
 import { useCaseContext } from '@store/cases'
-import styles from './conListBar.module.scss'
+import styles from './caseList.module.scss'
 
+const { urlParamHash } = tools
 const caseLen = 3 // 众多图片中需要显示前几张
 
-export default function Footer(props) {
-  const { touchCaseData, caseData } = useCaseContext()
+export default function CaseList(props) {
+  const { liData } = props
+  const { touchDataList, dataList } = useCaseContext()
+  const theData = liData || dataList
 
   useEffect(() => {
-    touchCaseData()
+    !liData && touchDataList()
   }, [])
 
   function pageChange(num, size) {
     console.log(num, size)
-    touchCaseData({ pageNum: num, pageSize: size })
+    const { uid = '' } = urlParamHash()
+    const desPara = {
+      casePageNum: num,
+      casePageSize: size,
+      uid,
+    }
+    const para = { pageNum: num, pageSize: size }
+    const param = liData ? desPara : para
+    touchDataList(param)
   }
 
   return (
     <>
-      {caseData?.list?.length > 0 ? (
+      {theData?.list?.length > 0 ? (
         <ul className={styles.listBox}>
-          {caseData?.list?.map(item => {
+          {theData.list.map(item => {
             const { coverPicUrl, liveroom, bedroom, title, uid, acreage, styleDic = {}, casePics = [] } = item
             const showPics = casePics?.slice(0, caseLen)
             return (
               <li key={uid} onClick={() => Router.push(`/cases/detail?uid=${uid}`)}>
-                {/* <li key={uid} onClick={() => Router.push(`/cases/${uid}`)}> */}
                 <div className={styles.minImgBox}>
                   <img src={coverPicUrl} alt="" />
                 </div>
@@ -63,7 +74,7 @@ export default function Footer(props) {
           hideOnSinglePage={true}
           onChange={pageChange}
           defaultCurrent={1}
-          total={caseData?.recordTotal}
+          total={theData?.recordTotal || theData?.total}
           defaultCurrent={1}
         />
       </div>

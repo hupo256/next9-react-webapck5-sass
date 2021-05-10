@@ -1,9 +1,15 @@
+$hightColor: #ff7300;
+$grayColor: #b5b5b5;
 .breadBox {
-  padding: 1em 0;
-  color: rgba(181, 181, 181, 1);
+  padding: 1.5em 0;
+  color: $grayColor;
 
   span,
   a {
-    color: rgba(181, 181, 181, 1);
+    color: $grayColor;
+    font-size: 12px;
+  }
+  a:hover {
+    color: $hightColor;
   }
 }

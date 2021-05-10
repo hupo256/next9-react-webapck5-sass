@@ -1,34 +1,34 @@
 $borderRadius: 3px;
-$borderColor: #eee;
+$borderColor: rgba(229, 229, 229, 1);
 
 .searchBox {
-  border: 1px solid $borderColor;
-  border-radius: $borderRadius;
   background: #fff;
-  margin-bottom: 0;
+  margin-bottom: 40px;
+  padding: 0.5em 2em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
   li {
-    border-bottom: 1px solid $borderColor;
+    border-bottom: 1px dashed $borderColor;
     line-height: 2.8;
     display: flex;
+    padding: 0.3em 0;
 
     b {
-      background: #f9f9f9;
-      width: 7.6em;
-      text-align: center;
-      font-weight: 400;
+      width: 4em;
+      font-weight: 500;
+      color: rgba(51, 51, 48, 1);
     }
     .tags {
-      // padding-left: 1em;
       span {
         display: inline-block;
         padding: 0 0.8em;
         margin: 0 0.2em;
         cursor: pointer;
         line-height: 1.5;
+        color: rgba(102, 102, 102, 1);
 
         &.on {
-          background: #16a;
+          background: rgba(255, 115, 0, 1);
           color: #fff;
           border-radius: $borderRadius;
         }

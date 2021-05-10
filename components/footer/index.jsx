@@ -2,7 +2,17 @@ import React, { useEffect, useState } from 'react'
 import styles from './footer.module.scss'
 
 export default function Footer(props) {
-  const { copyright, icp, customerService, email, storeAddress, storeCover, wechatName, wechatNumber, wechatQrCode } = props
+  const {
+    copyright,
+    icp,
+    customerService,
+    email,
+    storeAddress,
+    storeCover,
+    wechatName,
+    wechatNumber,
+    wechatQrCode,
+  } = props
 
   return (
     <>
@@ -11,7 +21,7 @@ export default function Footer(props) {
           <div>
             <b>公众号</b>
             <img className={styles.qrCodeImg} src={wechatQrCode} alt="" />
-            <p>微信公众号：{wechatNumber}</p>
+            <p>微信公众号：{wechatName}</p>
           </div>
           <div className={styles.contactUs}>
             <b>联系我们</b>

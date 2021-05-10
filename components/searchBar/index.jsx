@@ -20,11 +20,11 @@ export const caseLabels = [
 export const siteLabels = [
   {
     label: '户型',
-    tagKey: 'bedRooms',
+    tagKey: 'bedroom',
   },
   {
     label: '面积',
-    tagKey: 'acreages',
+    tagKey: 'buildingArea',
   },
   {
     label: '造价',
@@ -33,10 +33,13 @@ export const siteLabels = [
 ]
 
 export default function Footer(props) {
-  const { searchPara, setsearchPara, searchTags, touchSearchTags, touchCaseData } = useCaseContext()
+  const { from } = props
+  const { searchPara, setsearchPara, searchTags, touchSearchTags, touchDataList } = useCaseContext()
+  const isSite = from === 'sites'
+  const labels = isSite ? siteLabels : caseLabels
 
   useEffect(() => {
-    touchSearchTags()
+    touchSearchTags(from)
   }, [])
 
   function tagClick(e, key, code) {
@@ -51,12 +54,12 @@ export default function Footer(props) {
     }
 
     setsearchPara(searchPara)
-    touchCaseData({ [key]: curCode })
+    touchDataList({ [key]: curCode, from })
   }
 
   return (
     <ul className={styles.searchBox}>
-      {caseLabels?.map(item => {
+      {labels?.map(item => {
         const { label, tagKey } = item
         const tagArr = searchTags?.[tagKey]
         return (
@@ -64,11 +67,12 @@ export default function Footer(props) {
             <b>{label}</b>
             <div className={styles.tags}>
               {tagArr?.map(tag => {
-                const { name, code } = tag
+                const { name, code, value } = tag
+                const val = isSite ? value : code
                 return (
                   <span
-                    className={`${searchPara?.[tagKey] === code ? styles.on : ''}`}
-                    onClick={e => tagClick(e, tagKey, code)}
+                    className={`${searchPara?.[tagKey] === val ? styles.on : ''}`}
+                    onClick={e => tagClick(e, tagKey, val)}
                     key={name}
                   >
                     {name}

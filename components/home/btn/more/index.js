@@ -1,15 +1,15 @@
 import styles from './index.module.css'
 
-const BtnMore = ({ text = '更多案例', url = '/', solid = false }) => {
+const BtnMore = ({ text = '更多案例', url = '/', solid = false, style }) => {
   if (solid) {
     return (
-      <div className={styles.moreBtnSolid}>
+      <div className={styles.moreBtnSolid} style={style}>
         <a href={url}>{text}</a>
       </div>
     )
   }
   return (
-    <div className={styles.moreBtn}>
+    <div className={styles.moreBtn} style={style}>
       <a href={url}>{text}</a>
     </div>
   )

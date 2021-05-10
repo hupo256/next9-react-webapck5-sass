@@ -1,19 +1,23 @@
 import { createContext, useContext, useState } from 'react'
 import caseApi from '@service/caseApi'
-
-// import queryCaseOptionsForWeb from './mock/queryCaseOptionsForWeb.json'
-// import queryCaseListForWeb from './mock/queryCaseListForWeb.json'
-// import view from './mock/view.json'
+import siteApi from '@service/siteApi'
 
 const ctx = createContext(null)
 export function CaseWrapper({ children }) {
-  const [authed, setAuthed] = useState('jack')
-  const [searchTags, setsearchTags] = useState([])
-  const [caseData, setcaseData] = useState(null)
-  const [searchPara, setsearchPara] = useState({})
+  const [searchTags, setsearchTags] = useState([]) // 筛选项们
+  const [dataList, setdataList] = useState(null) // 所要展示的数据集
+  const [searchPara, setsearchPara] = useState({
+    bedRooms: '',
+    acreages: '',
+    styles: '',
+    bedroom: '',
+    buildingArea: '',
+    renovationCosts: '',
+  }) // 选中的筛选参数
 
-  function touchSearchTags() {
-    caseApi.queryCaseOptionsForWeb().then(res => {
+  function touchSearchTags(fromTag) {
+    const apiTool = fromTag === 'sites' ? siteApi.siteParams : caseApi.queryCaseOptionsForWeb
+    apiTool().then(res => {
       console.log(res)
       if (!res?.data) return
       const { data } = res
@@ -21,28 +25,26 @@ export function CaseWrapper({ children }) {
     })
   }
 
-  function touchCaseData(config = {}) {
+  function touchDataList(config = {}) {
+    const apiTool = config?.from === 'sites' ? siteApi.sitePageList : caseApi.queryCaseListForWeb
     const param = {
       ...searchPara,
       pageNum: 1,
       pageSize: 10,
     }
-    caseApi.queryCaseListForWeb({ ...param, ...config }).then(res => {
+    delete config.from
+    apiTool({ ...param, ...config }).then(res => {
       console.log(res)
       if (!res?.data) return
       const { data } = res
-      setcaseData(data)
+      setdataList(data)
     })
   }
 
   const sharedState = {
-    authed,
-    setAuthed,
-    caseData,
-    setcaseData,
-    touchCaseData,
+    dataList,
+    touchDataList,
     searchTags,
-    setsearchTags,
     touchSearchTags,
     searchPara,
     setsearchPara,
