@@ -3,16 +3,14 @@ import { stageList } from '../tools/data'
 import styles from './siteList.module.scss'
 
 export default function Steps(props) {
-  let { stage } = props
+  const { stage } = props
   const [curInd, setcurInd] = useState(0)
-  stage = 'D210312000014'
 
   useEffect(() => {
     touchCurInd()
   }, [])
 
   function touchCurInd() {
-    const arr = []
     stageList.forEach((item, ind) => {
       if (item.gongdiStage === stage) setcurInd(ind)
     })
@@ -21,7 +19,7 @@ export default function Steps(props) {
   return (
     <div className={styles.setpBox}>
       <div className={styles.stepBg}>
-        <div className={styles.stepHight} style={{ width: `${((curInd + 1) * 100) / 7}%` }}></div>
+        <div className={styles.stepHight} style={{ width: `${((curInd + 1) * 100) / stageList.length}%` }}></div>
       </div>
       <div className={styles.stepList}>
         {stageList.map((item, ind) => {

@@ -7,12 +7,6 @@ import SiteList from './siteList'
 import styles from './site.module.scss'
 
 function Sites(props) {
-  useEffect(() => {
-    // touchCompanyInfor()
-    // touchDiaryList()
-    // touchPageTree()
-  }, [])
-
   return (
     <BasicLayout title="工地直播">
       <div className="conBox">

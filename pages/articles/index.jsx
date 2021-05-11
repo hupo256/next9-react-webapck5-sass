@@ -11,7 +11,7 @@ import styles from './articles.module.scss'
 const { urlParamHash } = tools
 
 export default function Site(props) {
-  const [curId, setcurId] = useState('D210317000004')
+  const [curId, setcurId] = useState('')
   const [tabs, settabs] = useState([])
   const [artsData, setartsData] = useState(null)
 
@@ -28,7 +28,7 @@ export default function Site(props) {
       const theUid = urlParamHash().uid || uid
       settabs(data)
       setcurId(theUid)
-      touchList({ uid })
+      touchList({ articleDicUid: uid })
     })
   }
 
@@ -53,7 +53,7 @@ export default function Site(props) {
   function codeChange(id) {
     console.log(id)
     setcurId(id)
-    touchList({ uid: id })
+    touchList({ articleDicUid: id })
   }
 
   return (

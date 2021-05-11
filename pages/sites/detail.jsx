@@ -33,9 +33,7 @@ export default function CaseDetail(props) {
           <BreadBar curTit={details?.gongdiTitle} />
 
           {/* detail */}
-          <div className={styles.detailCard}>
-            <SiteCell list={[details]} />
-          </div>
+          <div className={styles.detailCard}>{details?.gongdiStage && <SiteCell list={[details]} />}</div>
 
           <DiaryList />
         </div>

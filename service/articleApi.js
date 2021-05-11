@@ -13,7 +13,7 @@ const articleCreate = () => {
     return ajaxinstance.post('api/v1/wechat/article/www/get', params)
   }
 
-  // 文章列表
+  // 文章栏目名
   article.queryArticleDic = params => {
     return ajaxinstance.get('api/v1/wechat/dic/queryArticleDic', { params })
   }
