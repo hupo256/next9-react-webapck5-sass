@@ -4,32 +4,12 @@ $grayFont: #666666;
 $grayColor: #b5b5b5;
 $borderRadius: 2px;
 
-.grayBg {
-  background: #f6f6f6;
-}
-.conBox {
-  width: 1110px;
-  margin: 1em auto;
-  color: $fontColor;
-
-  p {
-    margin: 0;
-  }
-}
-
-.breadBox {
-  padding: 1em 0;
-}
-
 .listBox {
-  padding-top: 1em;
-
   li {
     margin-bottom: 20px;
-    padding: 20px 28px;
+    padding: 28px;
     background: #fff;
     border-radius: $borderRadius;
-    // display: flex;
 
     > div {
       display: inline-block;
@@ -86,7 +66,7 @@ $borderRadius: 2px;
 
     div:nth-child(1) {
       position: relative;
-      padding-right: 2em;
+      margin-right: 2em;
       img {
         width: 120px;
         height: 120px;
@@ -97,7 +77,7 @@ $borderRadius: 2px;
         color: #fff;
         font-size: 12px;
         position: absolute;
-        bottom: 0;
+        bottom: -5px;
         left: 50%;
         transform: translateX(-50%);
         padding: 1px 4px;
@@ -119,6 +99,21 @@ $borderRadius: 2px;
         white-space: nowrap;
       }
     }
+
+    h3 {
+      > b {
+        font-size: 22px;
+        padding-right: 10px;
+        background: url(https://img.inbase.in-deco.com/crm-saas/img/home-preview/ic_mark.png) no-repeat 0 100%;
+      }
+      > span {
+        color: #a27b44;
+        background: #f9f6f1;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 14px;
+      }
+    }
   }
   > p {
     color: $grayColor;
@@ -134,7 +129,7 @@ $borderRadius: 2px;
   .desInfo {
     width: 100%;
     background: #fff;
-    padding: 20px;
+    padding: 28px;
     margin: 0;
     border-radius: $borderRadius;
 
@@ -145,20 +140,12 @@ $borderRadius: 2px;
       border-top: 1px dashed $grayColor;
     }
   }
+
   .desCases {
     background: #fff;
     padding: 20px;
     margin-top: 20px;
     border-radius: $borderRadius;
-
-    .desCases {
-      .listBox {
-        .minImgBox {
-          width: 398px;
-          height: 253px;
-        }
-      }
-    }
   }
 }
 

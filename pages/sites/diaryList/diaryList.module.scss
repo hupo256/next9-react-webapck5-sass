@@ -60,7 +60,7 @@ $borderRadius: 2px;
 
     > ul {
       background: #fff;
-      padding: 30px 18px 18px;
+      padding: 30px 18px 10px;
       border-radius: $borderRadius;
       margin-top: 0.75em;
 
@@ -103,4 +103,6 @@ $borderRadius: 2px;
 
 .pageBox {
   text-align: center;
+  background: #fff;
+  padding-bottom: 1.5em;
 }

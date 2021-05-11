@@ -1,6 +1,4 @@
 .listBox {
-  padding-top: 35px;
-
   .minImgBox {
     width: 407px;
     height: 257px;
@@ -18,11 +16,13 @@
   li {
     margin-bottom: 46px;
     display: flex;
-    align-items: flex-end;
     cursor: pointer;
 
     .casePicBox {
-      width: 65%;
+      // width: 65%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       h3 {
         font-size: 22px;
@@ -56,7 +56,7 @@
         li {
           border: none;
           position: relative;
-          margin: 0 15px 0 0;
+          margin: 0 25px 0 0;
 
           > span {
             position: absolute;
@@ -68,6 +68,10 @@
             text-align: center;
             color: #fff;
             font-size: 14px;
+          }
+
+          &:last-child {
+            margin: 0;
           }
         }
       }

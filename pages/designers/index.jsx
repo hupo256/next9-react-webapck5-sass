@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import BasicLayout from '@components/Home/HomePageLayout'
 import { Pagination } from 'antd'
 import Router from 'next/router'
-import { useAppContext } from '@store/index'
 import designerApi from '@service/designerApi'
 import BreadBar from '@components/breadBar'
-import Footer from '@components/footer'
 import desStyles from './designers.module.scss'
 
 export default function Site(props) {
-  const { companyData, touchCompanyInfor } = useAppContext()
   const [desData, setdesData] = useState(null)
 
   useEffect(() => {
-    touchCompanyInfor()
+    // touchCompanyInfor()
     touchList()
     // touchDetails()
   }, [])
@@ -37,9 +35,9 @@ export default function Site(props) {
   }
 
   return (
-    <>
-      <div className={desStyles.grayBg}>
-        <div className={desStyles.conBox}>
+    <BasicLayout title="设计师">
+      <div className="grayBg">
+        <div className="conBox">
           {/* breadBar */}
           <BreadBar />
 
@@ -71,8 +69,7 @@ export default function Site(props) {
                       const { url, acreage, buildingName, liveroom, bedroom, styleDic = {} } = cs
                       return (
                         <div key={ind} className={desStyles.minImgBox}>
-                          <img src={headPicUrl} alt="" />
-                          {/* <img src={url} alt="" /> */}
+                          <img src={url} alt="" />
                           <div className={desStyles.imgCove}>
                             <p>
                               {buildingName && <span>{`${buildingName} | `}</span>}
@@ -91,17 +88,17 @@ export default function Site(props) {
           </ul>
 
           <div className={desStyles.pageBox}>
-            <Pagination
-              hideOnSinglePage={true}
-              onChange={pageChange}
-              defaultCurrent={1}
-              total={desData?.recordTotal}
-              defaultCurrent={1}
-            />
+            {desData?.recordTotal && (
+              <Pagination
+                hideOnSinglePage={true}
+                onChange={pageChange}
+                defaultCurrent={1}
+                total={desData.recordTotal}
+              />
+            )}
           </div>
         </div>
       </div>
-      <Footer {...companyData} />
-    </>
+    </BasicLayout>
   )
 }

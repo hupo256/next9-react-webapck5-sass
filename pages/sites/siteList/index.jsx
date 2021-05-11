@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import Router from 'next/router'
 import { Pagination } from 'antd'
 import { useCaseContext } from '@store/cases'
+import NoData from '@components/noData'
 import SiteCell from './siteCell'
 import styles from './siteList.module.scss'
 
@@ -19,16 +19,18 @@ export default function CaseList(props) {
 
   return (
     <>
-      {dataList?.list?.length > 0 ? <SiteCell list={dataList.list} /> : <div className={styles.listBox}>暂无数据</div>}
+      {dataList?.list?.length > 0 ? <SiteCell list={dataList.list} /> : <NoData tips="工地" />}
 
       <div className={styles.pageBox}>
-        <Pagination
-          hideOnSinglePage={true}
-          onChange={pageChange}
-          defaultCurrent={1}
-          total={dataList?.recordTotal}
-          defaultCurrent={1}
-        />
+        {dataList?.recordTotal && (
+          <Pagination
+            hideOnSinglePage={true}
+            onChange={pageChange}
+            defaultCurrent={1}
+            total={dataList.recordTotal}
+            defaultCurrent={1}
+          />
+        )}
       </div>
     </>
   )

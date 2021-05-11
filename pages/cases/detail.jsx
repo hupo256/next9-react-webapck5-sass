@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import BasicLayout from '@components/Home/HomePageLayout'
 import tools from '../../libs/utils'
 import { useAppContext } from '@store/index'
 import caseApi from '@service/caseApi'
 import BreadBar from '@components/breadBar'
-import Footer from '@components/footer'
 import styles from './case.module.scss'
 
 const { urlParamHash } = tools
@@ -38,9 +38,9 @@ export default function CaseDetail(props) {
   }
 
   return (
-    <>
-      <div className={styles.grayBg}>
-        <div className={styles.conBox}>
+    <BasicLayout title={buildingName}>
+      <div className="grayBg">
+        <div className="conBox">
           {/* breadBar */}
           <BreadBar curTit={buildingName} />
 
@@ -113,8 +113,6 @@ export default function CaseDetail(props) {
           </div>
         </div>
       </div>
-
-      <Footer {...companyData} />
-    </>
+    </BasicLayout>
   )
 }

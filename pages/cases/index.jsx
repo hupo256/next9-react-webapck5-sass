@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
+import BasicLayout from '@components/Home/HomePageLayout'
 import { useAppContext } from '@store/index'
 import { CaseWrapper } from '@store/cases'
 import SearchBar from '@components/searchBar'
 import CaseList from '@components/caseList'
 import BreadBar from '@components/breadBar'
-import Footer from '@components/footer'
 import styles from './case.module.scss'
 
 function Cases(props) {
@@ -15,8 +15,8 @@ function Cases(props) {
   }, [])
 
   return (
-    <>
-      <div className={styles.conBox}>
+    <BasicLayout title="案例">
+      <div className="conBox">
         {/* breadBar */}
         <BreadBar />
 
@@ -26,8 +26,7 @@ function Cases(props) {
           <CaseList />
         </div>
       </div>
-      <Footer {...companyData} />
-    </>
+    </BasicLayout>
   )
 }
 

@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useAppContext } from '@store/index'
+import BasicLayout from '@components/Home/HomePageLayout'
 import { CaseWrapper } from '@store/cases'
 import SearchBar from '@components/searchBar'
 import BreadBar from '@components/breadBar'
-import Footer from '@components/footer'
 import SiteList from './siteList'
 import styles from './site.module.scss'
 
 function Sites(props) {
-  const { companyData, touchCompanyInfor } = useAppContext()
-
   useEffect(() => {
-    touchCompanyInfor()
+    // touchCompanyInfor()
     // touchDiaryList()
     // touchPageTree()
   }, [])
 
   return (
-    <>
-      <div className={styles.conBox}>
+    <BasicLayout title="工地直播">
+      <div className="conBox">
         {/* breadBar */}
         <BreadBar />
 
@@ -28,8 +25,7 @@ function Sites(props) {
           <SiteList from="sites" />
         </div>
       </div>
-      <Footer {...companyData} />
-    </>
+    </BasicLayout>
   )
 }
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import BasicLayout from '@components/Home/HomePageLayout'
 import tools from '@libs/utils'
 import { useAppContext } from '@store/index'
 import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
-import Footer from '@components/footer'
 import styles from './articles.module.scss'
 
 const { urlParamHash } = tools
@@ -27,10 +27,10 @@ export default function CaseDetail(props) {
   }
 
   return (
-    <>
+    <BasicLayout title={details?.articleTitle}>
       <div className={styles.conBox}>
         {/* breadBar */}
-        <BreadBar curTit={details?.gongdiTitle} />
+        <BreadBar curTit={details?.articleTitle} />
 
         {/* detail */}
         <div className={styles.detailBox}>
@@ -43,8 +43,6 @@ export default function CaseDetail(props) {
           <div dangerouslySetInnerHTML={{ __html: articleContent }} />
         </div>
       </div>
-
-      <Footer {...companyData} />
-    </>
+    </BasicLayout>
   )
 }

@@ -38,8 +38,25 @@ li {
   list-style: none;
 }
 
-.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after,
-.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot,
-.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
-  background-color: #ff7300;
+.grayBg {
+  background: #f6f6f6;
+  width: 100%;
+  flex: auto;
+}
+.conBox {
+  width: 1110px;
+  margin: 0 auto;
+  padding-bottom: 2em;
+}
+.ant-pagination-item-active,
+.ant-pagination-item:focus-visible,
+.ant-pagination-item:hover {
+  border-color: #ff7300;
+}
+.ant-pagination-item-active a,
+.ant-pagination-item:focus-visible a,
+.ant-pagination-item:hover a {
+  color: #fff;
+  background: #ff7300;
+  font-weight: 400;
 }

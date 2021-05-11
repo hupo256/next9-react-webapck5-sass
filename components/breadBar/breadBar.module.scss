@@ -12,4 +12,13 @@ $grayColor: #b5b5b5;
   a:hover {
     color: $hightColor;
   }
+
+  span:nth-child(4) {
+    display: inline-block;
+    width: 30em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
 }

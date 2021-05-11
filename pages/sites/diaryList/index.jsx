@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Pagination } from 'antd'
-import tools from '../../../libs/utils'
+import tools from '@libs/utils'
 import siteApi from '@service/siteApi'
+import NoData from '@components/noData'
+import Viewer from 'react-viewer'
 import styles from './diaryList.module.scss'
 
 const { urlParamHash } = tools
 
-export default function CaseDetail(props) {
+export default function DiaryList(props) {
   const [diarys, setdiarys] = useState([])
+  const imgView = useRef()
 
   useEffect(() => {
     touchDiarys()
@@ -23,9 +26,9 @@ export default function CaseDetail(props) {
   }
 
   function touchDiaryList() {
+    const { gongdiUid = '' } = urlParamHash()
     const param = {
-      gongdiStage: 'D210312000011',
-      gongdiUid: 'ff8e72d565604c68a43686b2291473b6',
+      gongdiUid,
       pageNum: 1,
       pageSize: 10,
     }
@@ -34,9 +37,20 @@ export default function CaseDetail(props) {
     })
   }
 
-  function pageChange(num, size) {
+  function pageChange(num, size, gdStage) {
     console.log(num, size)
-    // touchDataList({ pageNum: num, pageSize: size })
+    touchDiaryList({ pageNum: num, pageSize: size, gongdiStage: gdStage })
+  }
+
+  function diaryImgClick(imgInd, item) {
+    item.viewShow = true
+    item.viewInd = imgInd
+    setdiarys(diarys.slice())
+  }
+
+  function viewMaskClick(item) {
+    item.viewShow = false
+    setdiarys(diarys.slice())
   }
 
   return (
@@ -49,21 +63,28 @@ export default function CaseDetail(props) {
             return (
               <div key={dicCode} className={styles.cellDiary}>
                 <b className={`${ind === 0 ? styles.cur : ''}`}>{dicName}</b>
-                <ul>
-                  {list?.map(page => {
-                    const { diaryUid, diaryDate, diaryContent, fileList } = page
+                <ul ref={imgView}>
+                  {list?.map(stage => {
+                    const { diaryUid, diaryDate, diaryContent, fileList, viewShow = false, viewInd = 0 } = stage
                     return (
                       <li key={diaryUid}>
                         <p>{diaryDate}</p>
                         <p>{diaryContent}</p>
-                        {fileList?.map(file => {
+                        {fileList?.map((file, imgInd) => {
                           const { fileUid, fileUrl } = file
                           return (
-                            <div className={styles.minImgBox}>
-                              <img key={fileUid} src={fileUrl} />
+                            <div key={fileUid} className={styles.minImgBox}>
+                              <img src={fileUrl} onClick={() => diaryImgClick(imgInd, stage)} />
                             </div>
                           )
                         })}
+                        <Viewer
+                          visible={viewShow}
+                          onClose={() => viewMaskClick(stage)}
+                          onMaskClick={() => viewMaskClick(stage)}
+                          images={fileList?.map(file => ({ src: file.fileUrl, alt: file.fileUid }))}
+                          activeIndex={viewInd}
+                        />
                       </li>
                     )
                   })}
@@ -71,10 +92,10 @@ export default function CaseDetail(props) {
                 <div className={styles.pageBox}>
                   <Pagination
                     hideOnSinglePage={true}
-                    onChange={pageChange}
+                    onChange={(num, size) => pageChange(num, size, list?.gongdiStage)}
                     defaultCurrent={1}
                     total={recordTotal}
-                    defaultCurrent={1}
+                    size="small"
                   />
                 </div>
               </div>
@@ -82,7 +103,7 @@ export default function CaseDetail(props) {
           })}
         </div>
       ) : (
-        <span>暂无数据</span>
+        <NoData tips="进度" />
       )}
     </>
   )

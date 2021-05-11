@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import BasicLayout from '@components/Home/HomePageLayout'
 import { Pagination } from 'antd'
 import Router from 'next/router'
-import tools from '@libs/utils'
-import { useAppContext } from '@store/index'
 import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
-import Footer from '@components/footer'
+import NoData from '@components/noData'
 import styles from './articles.module.scss'
 
-const { urlParamHash } = tools
-
 export default function Site(props) {
-  const { companyData, touchCompanyInfor } = useAppContext()
   const [curCode, setcurCode] = useState('D210317000004')
   const [tabs, settabs] = useState([])
   const [artsData, setartsData] = useState(null)
 
   useEffect(() => {
-    touchCompanyInfor()
     touchArticleDic()
   }, [])
 
@@ -59,7 +54,7 @@ export default function Site(props) {
   }
 
   return (
-    <>
+    <BasicLayout title="文章">
       <div className={styles.conBox}>
         {/* breadBar */}
         <BreadBar />
@@ -77,37 +72,41 @@ export default function Site(props) {
             })}
           </ul>
 
-          <ul className={styles.listBox}>
-            {artsData?.list?.map(art => {
-              const { articleCoverImg, articleDescription, articleTitle, createTime, articleUid } = art
-              return (
-                <li key={articleUid} onClick={() => Router.push(`/articles/detail?articleUid=${articleUid}`)}>
-                  <div className={styles.minImgBox}>
-                    <img src={articleCoverImg} alt="" />
-                  </div>
+          {artsData?.list?.length > 0 ? (
+            <ul className={styles.listBox}>
+              {artsData.list.map(art => {
+                const { articleCoverImg, articleDescription, articleTitle, createTime, articleUid } = art
+                return (
+                  <li key={articleUid} onClick={() => Router.push(`/articles/detail?articleUid=${articleUid}`)}>
+                    <div className={styles.minImgBox}>
+                      <img src={articleCoverImg} alt="" />
+                    </div>
 
-                  <div className={styles.casePicBox}>
-                    <h3>{articleTitle}</h3>
-                    <p>{articleDescription}</p>
-                    <p>{createTime}</p>
-                  </div>
-                </li>
-              )
-            })}
-          </ul>
+                    <div className={styles.casePicBox}>
+                      <h3>{articleTitle}</h3>
+                      <p>{articleDescription}</p>
+                      <p>{createTime}</p>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          ) : (
+            <NoData tips="文章" />
+          )}
 
           <div className={styles.pageBox}>
-            <Pagination
-              hideOnSinglePage={true}
-              onChange={pageChange}
-              defaultCurrent={1}
-              total={artsData?.recordTotal}
-              defaultCurrent={1}
-            />
+            {!!artsData?.recordTotal && (
+              <Pagination
+                hideOnSinglePage={true}
+                onChange={pageChange}
+                defaultCurrent={1}
+                total={artsData.recordTotal}
+              />
+            )}
           </div>
         </div>
       </div>
-      <Footer {...companyData} />
-    </>
+    </BasicLayout>
   )
 }
