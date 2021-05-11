@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/Home/HomePageLayout'
 import { Pagination } from 'antd'
+import tools from '@libs/utils'
 import Router from 'next/router'
 import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
 import NoData from '@components/noData'
 import styles from './articles.module.scss'
 
+const { urlParamHash } = tools
+
 export default function Site(props) {
-  const [curCode, setcurCode] = useState('D210317000004')
+  const [curId, setcurId] = useState('D210317000004')
   const [tabs, settabs] = useState([])
   const [artsData, setartsData] = useState(null)
 
@@ -21,16 +24,16 @@ export default function Site(props) {
       console.log(res)
       if (!res?.data) return
       const { data } = res
-      const { code } = data[0]
+      const { uid } = data[0]
+      const theUid = urlParamHash().uid || uid
       settabs(data)
-      setcurCode(code)
-      touchList({ articleDicCode: code })
+      setcurId(theUid)
+      touchList({ uid })
     })
   }
 
   function touchList(config = {}) {
     const param = {
-      articleDicCode: '',
       articleStatus: 1,
       pageNum: 1,
       pageSize: 10,
@@ -47,10 +50,10 @@ export default function Site(props) {
     touchList({ pageNum: num, pageSize: size })
   }
 
-  function codeChange(code) {
-    console.log(code)
-    setcurCode(code)
-    touchList({ articleDicCode: code })
+  function codeChange(id) {
+    console.log(id)
+    setcurId(id)
+    touchList({ uid: id })
   }
 
   return (
@@ -63,9 +66,9 @@ export default function Site(props) {
         <div className={styles.articleBox}>
           <ul className={styles.tabBox}>
             {tabs?.map(tab => {
-              const { code, name } = tab
+              const { uid, name } = tab
               return (
-                <li key={code} className={`${curCode === code ? styles.on : ''}`} onClick={() => codeChange(code)}>
+                <li key={uid} className={`${curId === uid ? styles.on : ''}`} onClick={() => codeChange(uid)}>
                   <span>{name}</span>
                 </li>
               )
@@ -77,9 +80,15 @@ export default function Site(props) {
               {artsData.list.map(art => {
                 const { articleCoverImg, articleDescription, articleTitle, createTime, articleUid } = art
                 return (
-                  <li key={articleUid} onClick={() => Router.push(`/articles/detail?articleUid=${articleUid}`)}>
+                  <li key={articleUid} onClick={() => Router.push(`/articles/details?articleUid=${articleUid}`)}>
                     <div className={styles.minImgBox}>
-                      <img src={articleCoverImg} alt="" />
+                      <img
+                        src={
+                          articleCoverImg ||
+                          'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
+                        }
+                        alt=""
+                      />
                     </div>
 
                     <div className={styles.casePicBox}>

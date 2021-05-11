@@ -40,9 +40,15 @@ export default function CaseList(props) {
             const { coverPicUrl, liveroom, bedroom, title, uid, acreage, styleDic = {}, casePics = [] } = item
             const showPics = casePics?.slice(0, caseLen)
             return (
-              <li key={uid} onClick={() => Router.push(`/cases/detail?uid=${uid}`)}>
+              <li key={uid} onClick={() => Router.push(`/cases/details?uid=${uid}`)}>
                 <div className={styles.minImgBox}>
-                  <img src={coverPicUrl} alt="" />
+                  <img
+                    src={
+                      coverPicUrl ||
+                      'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
+                    }
+                    alt=""
+                  />
                 </div>
                 <div className={styles.casePicBox}>
                   <h3>{title}</h3>
@@ -56,7 +62,13 @@ export default function CaseList(props) {
                       const { url, spaceDic = {} } = pic
                       return (
                         <li className={styles.minImgBox} key={ind}>
-                          <img src={url} alt="" />
+                          <img
+                            src={
+                              url ||
+                              'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
+                            }
+                            alt=""
+                          />
                           {spaceDic?.name && <span>{spaceDic.name}</span>}
                         </li>
                       )

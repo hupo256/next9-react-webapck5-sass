@@ -47,10 +47,16 @@ export default function Site(props) {
               const { headPicUrl, workingTime, name, uid, position, designConcept, description, styles, caseList } = art
               return (
                 <li key={uid}>
-                  <div className={desStyles.desInfo} onClick={() => Router.push(`/designers/detail?uid=${uid}`)}>
+                  <div className={desStyles.desInfo} onClick={() => Router.push(`/designers/details?uid=${uid}`)}>
                     <div className={desStyles.headimg}>
                       <div>
-                        <img src={headPicUrl} alt="" />
+                        <img
+                          src={
+                            headPicUrl ||
+                            'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
+                          }
+                          alt=""
+                        />
                         <span>从业{workingTime}年</span>
                       </div>
                       <div>
@@ -64,13 +70,19 @@ export default function Site(props) {
                     <p>{description}</p>
                   </div>
 
-                  <div className={desStyles.caseInfo} onClick={() => Router.push(`/cases/detail?uid=${uid}`)}>
+                  <div className={desStyles.caseInfo}>
                     {caseList?.list?.map((cs, ind) => {
-                      const { url, acreage, buildingName, liveroom, bedroom, styleDic = {} } = cs
+                      const { url, acreage, buildingName, liveroom, bedroom, styleDic = {}, uid } = cs
                       return (
                         <div key={ind} className={desStyles.minImgBox}>
-                          <img src={url} alt="" />
-                          <div className={desStyles.imgCove}>
+                          <img
+                            src={
+                              url ||
+                              'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
+                            }
+                            alt=""
+                          />
+                          <div className={desStyles.imgCove} onClick={() => Router.push(`/cases/details?uid=${uid}`)}>
                             <p>
                               {buildingName && <span>{`${buildingName} | `}</span>}
                               {acreage && <span>{`${acreage}m² | `}</span>}

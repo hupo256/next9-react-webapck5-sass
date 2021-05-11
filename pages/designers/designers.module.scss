@@ -23,6 +23,7 @@ $borderRadius: 2px;
         height: 192px;
         margin-right: 28px;
         position: relative;
+        cursor: pointer;
 
         img {
           width: 100%;
@@ -60,6 +61,7 @@ $borderRadius: 2px;
 .desInfo {
   width: 373px;
   margin-right: 55px;
+  cursor: pointer;
 
   .headimg {
     display: flex;

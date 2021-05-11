@@ -19,6 +19,7 @@ export default function CaseDetail(props) {
     styleDicName,
     decorationCost,
     designerName,
+    position,
     casePics = [],
     styleDics = [],
     headPicUrl,
@@ -96,15 +97,17 @@ export default function CaseDetail(props) {
                 <img src={headPicUrl} alt="" />
                 <div className={styles.tit}>
                   <h4>{designerName}</h4>
-                  <span>首席设计师</span>
+                  {position && <span>{position}</span>}
                 </div>
               </div>
-              <p>
-                <span>从业年限：</span>
-                <b>
-                  <u>{workingTime}</u>年
-                </b>
-              </p>
+              {workingTime && (
+                <p>
+                  <span>从业年限：</span>
+                  <b>
+                    <u>{workingTime}</u>年
+                  </b>
+                </p>
+              )}
               <p>
                 <span>擅长风格：</span>
                 {styleDics?.map(dic => dic.name).join('/') || '暂无'}
