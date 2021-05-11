@@ -9,7 +9,16 @@ export default function SiteCell(props) {
   return (
     <ul className={styles.listBox}>
       {list.map(item => {
-        const { coverImg, gongdiTitle, buildingName, buildingArea, houseStyleName, houseType = {}, gongdiUid } = item
+        const {
+          coverImg,
+          gongdiTitle,
+          buildingName,
+          buildingArea,
+          houseStyleName,
+          houseType = {},
+          gongdiUid,
+          gongdiStage,
+        } = item
         const { bedroom, parlor } = houseType
         return (
           <li key={gongdiUid} onClick={() => Router.push(`/sites/detail?gongdiUid=${gongdiUid}`)}>
@@ -24,7 +33,7 @@ export default function SiteCell(props) {
                 {(!!bedroom || !!parlor) && <span>{`${bedroom}室${parlor}厅`}</span>}
                 {houseStyleName && <span>{houseStyleName}</span>}
               </p>
-              <Steps />
+              <Steps stage={gongdiStage} />
             </div>
           </li>
         )

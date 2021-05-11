@@ -89,15 +89,17 @@ export default function DiaryList(props) {
                     )
                   })}
                 </ul>
-                <div className={styles.pageBox}>
-                  <Pagination
-                    hideOnSinglePage={true}
-                    onChange={(num, size) => pageChange(num, size, list?.gongdiStage)}
-                    defaultCurrent={1}
-                    total={recordTotal}
-                    size="small"
-                  />
-                </div>
+                {recordTotal > 10 && (
+                  <div className={styles.pageBox}>
+                    <Pagination
+                      hideOnSinglePage={true}
+                      onChange={(num, size) => pageChange(num, size, list?.gongdiStage)}
+                      defaultCurrent={1}
+                      total={recordTotal}
+                      size="small"
+                    />
+                  </div>
+                )}
               </div>
             )
           })}
