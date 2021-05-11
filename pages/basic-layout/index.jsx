@@ -1,4 +1,4 @@
-import BasicLayout from '@components/Home/HomePageLayout'
+import BasicLayout from '@components/PcPreview/HomePageLayout'
 
 const BasicLayoutDemoPage = () => {
   return <BasicLayout title={'whatever you want'}>TEST</BasicLayout>
