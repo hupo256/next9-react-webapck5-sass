@@ -60,9 +60,9 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{footerData.title}</title>
+        {/* <title>{footerData.title || '首页'}</title>
         <meta name="keywords" content={footerData.keywords && JSON.parse(footerData.keywords).join(',')} />
-        <meta name="description" content={footerData.content} />
+        <meta name="description" content={footerData.content} /> */}
       </Head>
       <Layout className={styles.mainLayout}>
         <div className={styles.editableWrapper}>

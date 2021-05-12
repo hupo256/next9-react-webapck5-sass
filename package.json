@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "test": "next test",
-    "dev:build": "NEXT_PUBLIC_NODE_ENV=developmentEnv && next build && next export",
-    "test:build": "NEXT_PUBLIC_NODE_ENV=testingEnv && next build && next export",
-    "prod:build": "NEXT_PUBLIC_NODE_ENV=ProdEnv && next build && next export",
+    "dev:build": "next build && next export",
+    "test:build": "next build && next export",
+    "prod:build": "next build && next export",
     "start": "next start",
     "export": "next build && next export",
     "serve:out": "yarn export && serve -p 3000 out"
