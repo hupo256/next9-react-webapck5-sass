@@ -1,3 +1,3 @@
-import Article from '@components/article'
+import Article from '@components/designers'
 
 export default () => <Article />

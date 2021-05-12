@@ -1,3 +1,3 @@
-import Details from '@components/article/details'
+import Details from '@components/designers/details'
 
 export default () => <Details />
