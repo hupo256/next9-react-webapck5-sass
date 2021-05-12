@@ -21,7 +21,7 @@ export default function SiteCell(props) {
         } = item
         const { bedroom, parlor } = houseType
         return (
-          <li key={gongdiUid} onClick={() => Router.push(`/sites/detail?gongdiUid=${gongdiUid}`)}>
+          <li key={gongdiUid} onClick={() => Router.push(`/sites/details?gongdiUid=${gongdiUid}`)}>
             <div className={styles.minImgBox}>
               <img src={coverImg} alt="" />
             </div>

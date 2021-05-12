@@ -3,7 +3,7 @@ import { Pagination } from 'antd'
 import tools from '@libs/utils'
 import siteApi from '@service/siteApi'
 import NoData from '@components/noData'
-import Viewer from 'react-viewer'
+// import Viewer from 'react-viewer'
 import styles from './diaryList.module.scss'
 
 const { urlParamHash } = tools
@@ -78,13 +78,15 @@ export default function DiaryList(props) {
                             </div>
                           )
                         })}
-                        <Viewer
-                          visible={viewShow}
-                          onClose={() => viewMaskClick(stage)}
-                          onMaskClick={() => viewMaskClick(stage)}
-                          images={fileList?.map(file => ({ src: file.fileUrl, alt: file.fileUid }))}
-                          activeIndex={viewInd}
-                        />
+                        {/* {!!window?.document && (
+                          <Viewer
+                            visible={viewShow}
+                            onClose={() => viewMaskClick(stage)}
+                            onMaskClick={() => viewMaskClick(stage)}
+                            images={fileList?.map(file => ({ src: file.fileUrl, alt: file.fileUid }))}
+                            activeIndex={viewInd}
+                          />
+                        )} */}
                       </li>
                     )
                   })}
