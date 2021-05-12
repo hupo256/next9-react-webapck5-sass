@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import BasicLayout from '@components/Home/HomePageLayout'
+import BasicLayout from '@components/PcPreview/HomePageLayout'
 import tools from '@libs/utils'
 import { CaseWrapper } from '@store/cases'
 import designerApi from '@service/designerApi'

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import BasicLayout from '@components/Home/HomePageLayout'
+import BasicLayout from '@components/PcPreview/HomePageLayout'
 import tools from '@libs/utils'
 import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'

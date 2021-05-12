@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import BasicLayout from '@components/Home/HomePageLayout'
+import BasicLayout from '@components/PcPreview/HomePageLayout'
 import { useAppContext } from '@store/index'
 import { CaseWrapper } from '@store/cases'
 import SearchBar from '@components/searchBar'
