@@ -75,7 +75,7 @@ const Home = () => {
             left={
               <div className={styles.companyHeaderStyle}>
                 <Avatar
-                  src={footerData.icon}
+                  src={footerData.logo}
                   className={'avatar'}
                   style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
                   size="large"
