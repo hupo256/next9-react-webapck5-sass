@@ -1,0 +1,91 @@
+{
+  "code": 200,
+  "message": "",
+  "data": {
+    "title": "案例标题0428",
+    "uid": "47418560f62a4207a826c7da37ccce38",
+    "coverPicUrl": "https://test.img.inbase.in-deco.com/crm_saas/dev/20210428/55c40b12cfb3408db8e9bf6f55949710/1.png",
+    "coverPicUrlOnePixel": "https://test.img.inbase.in-deco.com/crm_saas/dev/20210428/55c40b12cfb3408db8e9bf6f55949710/1.png!S20",
+    "coverPicUrlFiftyPixel": "https://test.img.inbase.in-deco.com/crm_saas/dev/20210428/55c40b12cfb3408db8e9bf6f55949710/1.png!S50",
+    "designerName": "是多少2222",
+    "designerCode": "DR210421000002",
+    "designerUid": "5bea59b572da40989cebd7908076a1d4",
+    "status": "1",
+    "bedroom": 0,
+    "liveroom": 0,
+    "kitchen": 0,
+    "bathroom": 0,
+    "acreage": "111",
+    "decorationCost": "111",
+    "styleDicCode": "D210312000002",
+    "styleDicName": "古风",
+    "operatorName": "zm",
+    "operateTime": "2021-04-29 10:21",
+    "buildingName": "楼盘名称",
+    "caseDesc": "32455",
+    "picSpaceNameList": [null],
+    "keywords": "[\"111\",\"222\",\"9999\"]",
+    "workingTime": "2",
+    "casePics": [
+      {
+        "uid": "6d0f7ce654d04a19bc387f79d1778091",
+        "url": "https://test.img.inbase.in-deco.com/crm_saas/dev/20210428/55c40b12cfb3408db8e9bf6f55949710/1.png",
+        "urlOnePixel": "https://test.img.inbase.in-deco.com/crm_saas/dev/20210428/55c40b12cfb3408db8e9bf6f55949710/1.png!S20",
+        "urlFiftyPixel": "https://test.img.inbase.in-deco.com/crm_saas/dev/20210428/55c40b12cfb3408db8e9bf6f55949710/1.png!S50",
+        "caseUid": null,
+        "picDesc": null,
+        "spaceDic": {
+          "uid": null,
+          "name": null,
+          "code": null,
+          "status": null,
+          "extDescOne": null,
+          "extDescTwo": null,
+          "operateTime": null,
+          "operatorName": null,
+          "seq": null
+        },
+        "colorDic": {
+          "uid": null,
+          "name": null,
+          "code": null,
+          "status": null,
+          "extDescOne": null,
+          "extDescTwo": null,
+          "operateTime": null,
+          "operatorName": null,
+          "seq": null
+        },
+        "styleDic": {
+          "uid": "edc66922609a43d8befa8c56572bb25e",
+          "name": "古风",
+          "code": "D210312000002",
+          "status": "1",
+          "extDescOne": null,
+          "extDescTwo": null,
+          "operateTime": "2021-03-12 15:15:42",
+          "operatorName": null,
+          "seq": null
+        },
+        "categoryDic": {
+          "uid": null,
+          "name": null,
+          "code": null,
+          "status": null,
+          "extDescOne": null,
+          "extDescTwo": null,
+          "operateTime": null,
+          "operatorName": null,
+          "seq": null
+        },
+        "spaceDicCode": null,
+        "colorDicCode": null,
+        "styleDicCode": "D210312000002",
+        "categoryDicCode": null,
+        "isCover": true,
+        "guid": "8bb9c20a-9f22-42d7-9612-3480fd694edc"
+      }
+    ],
+    "styleDics": []
+  }
+}
