@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/Home/HomePageLayout'
 import tools from '@libs/utils'
-import { useAppContext } from '@store/index'
 import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
 import styles from './articles.module.scss'
@@ -9,7 +8,6 @@ import styles from './articles.module.scss'
 const { urlParamHash } = tools
 
 export default function CaseDetail(props) {
-  const { companyData } = useAppContext()
   const [details, setdetails] = useState({})
   const { articleTitle, articleCoverImg, creatorName, createTime, articleContent } = details
 
