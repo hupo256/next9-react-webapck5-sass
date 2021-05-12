@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import BasicLayout from '@components/Home/HomePageLayout'
+import BasicLayout from '@components/PcPreview/HomePageLayout'
 import { Pagination } from 'antd'
 import tools from '@libs/utils'
 import Router from 'next/router'
