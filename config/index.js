@@ -1,10 +1,14 @@
-// 接口host
-const { NODE_ENV } = process.env
+// let prefix = ''
 
-let prefix = ''
-const isProd = NODE_ENV === 'production'
-NODE_ENV === 'development' && (prefix = 'dev')
-NODE_ENV === 'test' && (prefix = 'test')
-const host = isProd ? '//gateway.ingongdi.com/' : `//${prefix}gw.ingongdi.com/`
+// if (!process.env) return false
 
-export default { host }
+// const isDev = process.env.npm_package_scripts_dev_build.indexOf('developmentEnv') !== -1
+// const isTest = process.env.npm_package_scripts_dev_build.indexOf('testingEnv') !== -1
+// const isProd = process.env.npm_package_scripts_dev_build.indexOf('ProdEnv') !== -1
+
+// if (isDev) prefix = 'dev'
+// if (isTest) prefix = 'test'
+
+// const host = isProd ? '//gateway.ingongdi.com/' : `//${prefix}gw.ingongdi.com/`
+// console.log(host)
+export default { host: `//devgw.ingongdi.com/` }
