@@ -14,6 +14,7 @@ export default function FooterComp({ data }) {
     wechatName,
     wechatNumber,
     wechatQrCode,
+    disclaimer,
   } = data
 
   return (
@@ -44,7 +45,7 @@ export default function FooterComp({ data }) {
       <div className={styles.copyRightOut}>
         <div className={styles.copyRightBox}>
           <p>
-            <span>免责声明：本网站部分内容由用户自行上传，如权利人发现存在误传其作品情形，请及时与本站联系。</span>
+            <span>{disclaimer}</span>
             <span>{icp}</span>
           </p>
           <p>{copyright}</p>
