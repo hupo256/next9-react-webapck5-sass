@@ -1,3 +1,3 @@
 const fs = require('fs')
 
-fs.writeFileSync('./.env', 'ENV=DEV')
+fs.writeFileSync('./.env', 'NEXT_PUBLIC_ENV=DEV')

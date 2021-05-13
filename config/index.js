@@ -1,11 +1,11 @@
-const { ENV } = process.env
+const { NEXT_PUBLIC_ENV } = process.env
 
 let host = ''
-if (ENV === 'DEV') {
+if (NEXT_PUBLIC_ENV === 'DEV') {
   host = `//devgw.ingongdi.com/`
 }
 
-if (ENV === 'PROD') {
+if (NEXT_PUBLIC_ENV === 'PROD') {
   host = '//gateway.ingongdi.com/'
 }
 
