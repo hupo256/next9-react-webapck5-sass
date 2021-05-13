@@ -40,7 +40,7 @@ const Home = () => {
   const [showHeaderDrawer, setShowHeaderDrawer] = useState(false)
   const [showFooterDrawer, setShowFooterDrawer] = useState(false)
 
-  const [refresh, setRefresh] = useState(false)
+  // const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -48,14 +48,14 @@ const Home = () => {
       setMenuList(_.get(res, 'data.list', []))
     })()
     ;(async () => {
-      const res = await getFooter()
-      setFooterData(_.get(res, 'data', []))
-    })()
-    ;(async () => {
       const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
       setPublishedData(_.get(res, 'data.templateJson.jsonData'), [])
     })()
-  }, [refresh])
+    ;(async () => {
+      const res = await getFooter()
+      setFooterData(_.get(res, 'data', []))
+    })()
+  }, [])
 
   return (
     <div className={styles.container}>
