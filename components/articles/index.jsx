@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import BasicLayout from '@components/PcPreview/HomePageLayout'
+import Head from 'next/head'
+import BasicLayout from '@components/HomePageLayout'
 import { Pagination } from 'antd'
 import tools from '@libs/utils'
 import Router from 'next/router'
@@ -57,65 +58,70 @@ export default function Site(props) {
   }
 
   return (
-    <BasicLayout title="文章">
-      <div className={styles.conBox}>
-        {/* breadBar */}
-        <BreadBar />
+    <>
+      <Head>
+        <title>{`装修攻略`}</title>
+      </Head>
+      <BasicLayout>
+        <div className={styles.conBox}>
+          {/* breadBar */}
+          <BreadBar />
 
-        {/* articles */}
-        <div className={styles.articleBox}>
-          <ul className={styles.tabBox}>
-            {tabs?.map(tab => {
-              const { uid, name } = tab
-              return (
-                <li key={uid} className={`${curId === uid ? styles.on : ''}`} onClick={() => codeChange(uid)}>
-                  <span>{name}</span>
-                </li>
-              )
-            })}
-          </ul>
-
-          {artsData?.list?.length > 0 ? (
-            <ul className={styles.listBox}>
-              {artsData.list.map(art => {
-                const { articleCoverImg, articleDescription, articleTitle, createTime, articleUid } = art
+          {/* articles */}
+          <div className={styles.articleBox}>
+            <ul className={styles.tabBox}>
+              {tabs?.map(tab => {
+                const { uid, name } = tab
                 return (
-                  <li key={articleUid} onClick={() => Router.push(`/articles/details?articleUid=${articleUid}`)}>
-                    <div className={styles.minImgBox}>
-                      <img
-                        src={
-                          articleCoverImg ||
-                          'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
-                        }
-                        alt=""
-                      />
-                    </div>
-
-                    <div className={styles.casePicBox}>
-                      <h3>{articleTitle}</h3>
-                      <p>{articleDescription}</p>
-                      <p>{createTime}</p>
-                    </div>
+                  <li key={uid} className={`${curId === uid ? styles.on : ''}`} onClick={() => codeChange(uid)}>
+                    <span>{name}</span>
                   </li>
                 )
               })}
             </ul>
-          ) : (
-            <NoData tips="文章" />
-          )}
 
-          <div className={styles.pageBox}>
-            {!!artsData?.recordTotal && (
-              <Pagination
-                hideOnSinglePage={true}
-                onChange={pageChange}
-                defaultCurrent={1}
-                total={artsData.recordTotal}
-              />
+            {artsData?.list?.length > 0 ? (
+              <ul className={styles.listBox}>
+                {artsData.list.map(art => {
+                  const { articleCoverImg, articleDescription, articleTitle, createTime, articleUid } = art
+                  return (
+                    <li key={articleUid} onClick={() => Router.push(`/articles/details?articleUid=${articleUid}`)}>
+                      <div className={styles.minImgBox}>
+                        <img
+                          src={
+                            articleCoverImg ||
+                            'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
+                          }
+                          alt=""
+                        />
+                      </div>
+
+                      <div className={styles.casePicBox}>
+                        <h3>{articleTitle}</h3>
+                        <p>{articleDescription}</p>
+                        <p>{createTime}</p>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            ) : (
+              <NoData tips="文章" />
             )}
+
+            <div className={styles.pageBox}>
+              {!!artsData?.recordTotal && (
+                <Pagination
+                  hideOnSinglePage={true}
+                  onChange={pageChange}
+                  defaultCurrent={1}
+                  total={artsData.recordTotal}
+                />
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </BasicLayout>
+      </BasicLayout>
+    </>
   )
 }

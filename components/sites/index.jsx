@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import BasicLayout from '@components/PcPreview/HomePageLayout'
+import Head from 'next/head'
+import BasicLayout from '@components/HomePageLayout'
 import { CaseWrapper } from '@store/cases'
 import SearchBar from '@components/searchBar'
 import BreadBar from '@components/breadBar'
@@ -8,18 +9,23 @@ import styles from './site.module.scss'
 
 function Sites(props) {
   return (
-    <BasicLayout title="工地直播">
-      <div className="conBox">
-        {/* breadBar */}
-        <BreadBar />
+    <>
+      <Head>
+        <title>{`工地直播`}</title>
+      </Head>
+      <BasicLayout title="工地直播">
+        <div className="conBox">
+          {/* breadBar */}
+          <BreadBar />
 
-        {/* sites */}
-        <div className={styles.siteBox}>
-          <SearchBar from="sites" />
-          <SiteList from="sites" />
+          {/* sites */}
+          <div className={styles.siteBox}>
+            <SearchBar from="sites" />
+            <SiteList from="sites" />
+          </div>
         </div>
-      </div>
-    </BasicLayout>
+      </BasicLayout>
+    </>
   )
 }
 

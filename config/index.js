@@ -1,6 +1,6 @@
 const { NEXT_PUBLIC_ENV } = process.env
 
-let host = ''
+let host = '//devgw.ingongdi.com/'
 if (NEXT_PUBLIC_ENV === 'DEV') {
   host = `//devgw.ingongdi.com/`
 }
