@@ -69,7 +69,7 @@ const MenuListComp = ({ menuList }) => {
               <a
                 href={item.linkUrl}
                 key={index}
-                className={item.linkKey === FAKE_ACTIVE_INDEX ? styles.active : undefined}
+                className={item.linkUrl === location.href.replace(location.origin, '') ? styles.active : undefined}
               >
                 {item.websiteName}
               </a>
