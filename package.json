@@ -14,10 +14,6 @@
     "serve:out": "yarn dev:build && serve -p 3000 out"
   },
   "devDependencies": {
-    "@zeit/next-css": "^1.0.1",
-    "@zeit/next-sass": "^1.0.1",
-    "css-loader": "^5.2.4",
-    "node-sass": "^6.0.0",
     "serve": "^11.3.2",
     "webpack": "^4.37.0"
   },
