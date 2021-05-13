@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import homePageService from '@service/pcPreview' //admin特需
+import axios from 'axios'
 
 import { AppWrapper } from '@store/index'
 
@@ -17,7 +18,26 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     ;(async () => {
       const res = await homePageService.getFooter()
-      setFooterData(_.get(res, 'data', {}))
+      const data = _.get(res, 'data', {})
+      setFooterData(data)
+
+      if (document && !_.isEmpty(data)) {
+        const string = data.header,
+          temp = document.createElement('div')
+
+        temp.innerHTML = string
+        const elemScripts = temp.querySelectorAll('script')
+
+        _.forEach(elemScripts, async elem => {
+          const src = elem.src
+          if (src) {
+            try {
+              const res = await axios.get(src)
+              eval(res.data)
+            } catch (e) {}
+          }
+        })
+      }
     })()
   }, [])
 
