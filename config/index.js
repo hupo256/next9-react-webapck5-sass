@@ -1,14 +1,14 @@
-// let prefix = ''
+const { ENV } = process.env
 
-// if (!process.env) return false
+let host = ''
+if (ENV === 'DEV') {
+  host = `//devgw.ingongdi.com/`
+}
 
-// const isDev = process.env.npm_package_scripts_dev_build.indexOf('developmentEnv') !== -1
-// const isTest = process.env.npm_package_scripts_dev_build.indexOf('testingEnv') !== -1
-// const isProd = process.env.npm_package_scripts_dev_build.indexOf('ProdEnv') !== -1
+if (ENV === 'PROD') {
+  host = '//gateway.ingongdi.com/'
+}
 
-// if (isDev) prefix = 'dev'
-// if (isTest) prefix = 'test'
+console.log('host = ', host)
 
-// const host = isProd ? '//gateway.ingongdi.com/' : `//${prefix}gw.ingongdi.com/`
-// console.log(host)
-export default { host: `//devgw.ingongdi.com/` }
+export default { host }
