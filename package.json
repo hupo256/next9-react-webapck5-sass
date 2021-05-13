@@ -9,11 +9,17 @@
     "test:build": "NEXT_PUBLIC_NODE_ENV=testingEnv && next build && next export",
     "prod:build": "NEXT_PUBLIC_NODE_ENV=ProdEnv && next build && next export",
     "start": "next start",
+    "build": "next build",
     "export": "next build && next export",
     "serve:out": "yarn export && serve -p 3000 out"
   },
   "devDependencies": {
-    "serve": "^11.3.2"
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "css-loader": "^5.2.4",
+    "node-sass": "^6.0.0",
+    "serve": "^11.3.2",
+    "webpack": "^4.37.0"
   },
   "dependencies": {
     "antd": "^4.15.3",

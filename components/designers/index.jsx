@@ -72,12 +72,12 @@ export default function Site(props) {
 
                   <div className={desStyles.caseInfo}>
                     {caseList?.list?.map((cs, ind) => {
-                      const { url, acreage, buildingName, liveroom, bedroom, styleDic = {}, uid } = cs
+                      const { coverPicUrl, acreage, buildingName, liveroom, bedroom, styleDic = {}, uid } = cs
                       return (
                         <div key={ind} className={desStyles.minImgBox}>
                           <img
                             src={
-                              url ||
+                              coverPicUrl ||
                               'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
                             }
                             alt=""
