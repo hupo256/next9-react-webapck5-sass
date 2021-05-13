@@ -2,7 +2,7 @@
 // export default () => <Article />
 
 import React, { useState, useEffect } from 'react'
-import BasicLayout from '@components/PcPreview/HomePageLayout'
+import BasicLayout from '@components/HomePageLayout'
 
 import styles from './articles.module.scss'
 

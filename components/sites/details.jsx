@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import BasicLayout from '@components/PcPreview/HomePageLayout'
+import Head from 'next/head'
+import BasicLayout from '@components/HomePageLayout'
 import tools from '@libs/utils'
 import siteApi from '@service/siteApi'
 import BreadBar from '@components/breadBar'
@@ -11,6 +12,7 @@ const { urlParamHash } = tools
 
 export default function CaseDetail(props) {
   const [details, setdetails] = useState({})
+  const { gongdiTitle, gongdiStage, title, keywords, description } = details
 
   useEffect(() => {
     touchDetails()
@@ -26,18 +28,25 @@ export default function CaseDetail(props) {
   }
 
   return (
-    <BasicLayout title={details?.gongdiTitle}>
-      <div className="grayBg">
-        <div className="conBox">
-          {/* breadBar */}
-          <BreadBar curTit={details?.gongdiTitle} />
+    <>
+      <Head>
+        <title>{title || gongdiTitle}</title>
+        {keywords && <meta name="keywords" content={JSON.parse(keywords).join(',')} />}
+        {description && <meta name="description" content={description} />}
+      </Head>
+      <BasicLayout title={gongdiTitle}>
+        <div className="grayBg">
+          <div className="conBox">
+            {/* breadBar */}
+            <BreadBar curTit={gongdiTitle} />
 
-          {/* detail */}
-          <div className={styles.detailCard}>{details?.gongdiStage && <SiteCell list={[details]} />}</div>
+            {/* detail */}
+            <div className={styles.detailCard}>{gongdiStage && <SiteCell list={[details]} />}</div>
 
-          <DiaryList />
+            <DiaryList />
+          </div>
         </div>
-      </div>
-    </BasicLayout>
+      </BasicLayout>
+    </>
   )
 }

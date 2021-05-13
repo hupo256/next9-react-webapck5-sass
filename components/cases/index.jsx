@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import BasicLayout from '@components/PcPreview/HomePageLayout'
+import Head from 'next/head'
+import BasicLayout from '@components/HomePageLayout'
 import { useAppContext } from '@store/index'
 import { CaseWrapper } from '@store/cases'
 import SearchBar from '@components/searchBar'
@@ -15,18 +16,23 @@ function Cases(props) {
   }, [])
 
   return (
-    <BasicLayout title="案例">
-      <div className="conBox">
-        {/* breadBar */}
-        <BreadBar />
+    <>
+      <Head>
+        <title>{`看案例`}</title>
+      </Head>
+      <BasicLayout>
+        <div className="conBox">
+          {/* breadBar */}
+          <BreadBar />
 
-        {/* case */}
-        <div className={styles.caseBox}>
-          <SearchBar />
-          <CaseList />
+          {/* case */}
+          <div className={styles.caseBox}>
+            <SearchBar />
+            <CaseList />
+          </div>
         </div>
-      </div>
-    </BasicLayout>
+      </BasicLayout>
+    </>
   )
 }
 

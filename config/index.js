@@ -1,6 +1,6 @@
 const { ENV } = process.env
 
-let host = ''
+let host = '//devgw.ingongdi.com/'
 if (ENV === 'DEV') {
   host = `//devgw.ingongdi.com/`
 }
