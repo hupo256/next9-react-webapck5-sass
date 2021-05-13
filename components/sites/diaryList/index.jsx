@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import { Pagination } from 'antd'
 import tools from '@libs/utils'
 import siteApi from '@service/siteApi'
 import NoData from '@components/noData'
-import Viewer from 'react-viewer'
 import styles from './diaryList.module.scss'
+
+const Viewer = dynamic(import('react-viewer'), {
+  ssr: false, //这个要加上,禁止使用 SSR
+})
 
 const { urlParamHash } = tools
 
