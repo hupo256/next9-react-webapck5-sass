@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "test": "next test",
-    "dev:build": "next build && next export",
-    "test:build": "next build && next export",
-    "prod:build": "next build && next export",
+    "dev:build": "node ./dev.env.js && next build && next export",
+    "test:build": "node ./dev.env.js && next build && next export",
+    "prod:build": "node ./prod.env.js && next build && next export",
     "start": "next start",
     "export": "next build && next export",
     "serve:out": "yarn export && serve -p 3000 out"
