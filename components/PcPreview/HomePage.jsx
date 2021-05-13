@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Head from 'next/head'
+
 import styles from './Home.module.scss'
 import _ from 'lodash'
 import CaseProjects from './Case/Case.jsx'
@@ -59,11 +59,6 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <Head>
-        {/* <title>{footerData.title || '首页'}</title>
-        <meta name="keywords" content={footerData.keywords && JSON.parse(footerData.keywords).join(',')} />
-        <meta name="description" content={footerData.content} /> */}
-      </Head>
       <Layout className={styles.mainLayout}>
         <div className={styles.editableWrapper}>
           {/* <div className={styles.editHeader}>
