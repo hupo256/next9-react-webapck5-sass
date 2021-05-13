@@ -11,10 +11,12 @@ import Articles from './Articles/Articles.jsx'
 import LiveShow from './LiveShow/LiveShow.jsx'
 import FooterComp from './FooterComp/FooterComp.jsx'
 
+import { typeMap, paramMap } from '@libs/constants.js'
+
 // import WebSetting from './WebSettingOut'
 // import ChannelManage from '../ChannelManage'
 
-import { Layout, Avatar, Button, Drawer } from 'antd'
+import { Layout, Avatar, Carousel, Drawer } from 'antd'
 
 import homePageService from '@service/pcPreview' //admin特需
 
@@ -31,6 +33,15 @@ const ChapterLayout = ({ children, title, description }) => (
     {children}
   </div>
 )
+
+const contentStyle = {
+  height: '460px',
+  color: '#fff',
+  lineHeight: '160px',
+  textAlign: 'center',
+  background: '#364d79',
+  backgroundSize: 'cover',
+}
 
 const Home = () => {
   const [menuList, setMenuList] = useState([])
@@ -91,10 +102,25 @@ const Home = () => {
           />
         </div>
 
-        <div
-          className={styles.banner}
-          style={{ background: `url(${_.get(publishedData, '0.list.0.imgUrl')} ) no-repeat center center` }}
-        />
+        <Carousel>
+          {_.map(_.get(publishedData, '0.list', null), (item, index) => (
+            <div
+              key={`banner-${index}`}
+              onClick={() =>
+                (window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`)
+              }
+            >
+              <h3
+                style={{
+                  ...contentStyle,
+                  background: `url(${_.get(item, 'imgUrl')} ) no-repeat center center`,
+                }}
+              >
+                {' '}
+              </h3>
+            </div>
+          ))}
+        </Carousel>
 
         <Content className={styles.mainWrapper}>
           <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
