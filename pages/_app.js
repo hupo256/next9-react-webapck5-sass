@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>{footerData.title || '首页'}</title>
         <meta name="keywords" content={footerData.keywords && JSON.parse(footerData.keywords).join(',')} />
-        <meta name="description" content={footerData.content} />
+        <meta name="description" content={footerData.description} />
         <link rel="icon" type="image/png" href={footerData.icon} />
       </Head>
       <AppWrapper>
