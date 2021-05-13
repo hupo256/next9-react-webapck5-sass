@@ -3,7 +3,7 @@ import { Pagination } from 'antd'
 import tools from '@libs/utils'
 import siteApi from '@service/siteApi'
 import NoData from '@components/noData'
-// import Viewer from 'react-viewer'
+import Viewer from 'react-viewer'
 import styles from './diaryList.module.scss'
 
 const { urlParamHash } = tools
@@ -65,10 +65,10 @@ export default function DiaryList(props) {
                 <b className={`${ind === 0 ? styles.cur : ''}`}>{dicName}</b>
                 <ul ref={imgView}>
                   {list?.map(stage => {
-                    const { diaryUid, diaryDate, diaryContent, fileList, viewShow = false, viewInd = 0 } = stage
+                    const { diaryUid, diaryDateFormat, diaryContent, fileList, viewShow = false, viewInd = 0 } = stage
                     return (
                       <li key={diaryUid}>
-                        <p>{diaryDate}</p>
+                        <p>{diaryDateFormat}</p>
                         <p>{diaryContent}</p>
                         {fileList?.map((file, imgInd) => {
                           const { fileUid, fileUrl } = file
@@ -87,6 +87,14 @@ export default function DiaryList(props) {
                             activeIndex={viewInd}
                           />
                         )} */}
+
+                        <Viewer
+                          visible={viewShow}
+                          onClose={() => viewMaskClick(stage)}
+                          onMaskClick={() => viewMaskClick(stage)}
+                          images={fileList?.map(file => ({ src: file.fileUrl, alt: file.fileUid }))}
+                          activeIndex={viewInd}
+                        />
                       </li>
                     )
                   })}

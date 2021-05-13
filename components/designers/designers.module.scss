@@ -39,7 +39,7 @@ $borderRadius: 2px;
           height: 100%;
           top: 0;
           left: 0;
-          background: linear-gradient(0, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 40%);
+          background: linear-gradient(0, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.05) 30%);
           text-align: center;
 
           p {
@@ -68,7 +68,7 @@ $borderRadius: 2px;
 
     div:nth-child(1) {
       position: relative;
-      margin-right: 2em;
+      margin-right: 1.5em;
       img {
         width: 120px;
         height: 120px;
@@ -105,10 +105,20 @@ $borderRadius: 2px;
     h3 {
       > b {
         font-size: 22px;
-        padding-right: 10px;
+        padding-right: 15px;
+        display: inline-block;
+        max-width: 5em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         background: url(https://img.inbase.in-deco.com/crm-saas/img/home-preview/ic_mark.png) no-repeat 0 100%;
       }
       > span {
+        display: inline-block;
+        max-width: 8em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         color: #a27b44;
         background: #f9f6f1;
         padding: 3px 10px;

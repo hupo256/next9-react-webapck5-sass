@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import BasicLayout from '@components/PcPreview/HomePageLayout'
+import Head from 'next/head'
+import BasicLayout from '@components/HomePageLayout'
 import tools from '@libs/utils'
 import { CaseWrapper } from '@store/cases'
 import designerApi from '@service/designerApi'
@@ -11,7 +12,7 @@ const { urlParamHash } = tools
 
 function DesignDetail(props) {
   const [details, setdetails] = useState({})
-  const { headPicUrl, workingTime, name, position, designConcept, description, caseList } = details
+  const { headPicUrl, workingTime, name, position, designConcept, caseList, title, keywords } = details
 
   useEffect(() => {
     touchDetails()
@@ -35,40 +36,45 @@ function DesignDetail(props) {
   }
 
   return (
-    <BasicLayout title={name}>
-      <div className="grayBg">
-        <div className="conBox">
-          {/* breadBar */}
-          <BreadBar curTit={name} />
+    <>
+      <Head>
+        <title>{title || name}</title>
+        {keywords && <meta name="keywords" content={JSON.parse(keywords).join(',')} />}
+      </Head>
+      <BasicLayout title={name}>
+        <div className="grayBg">
+          <div className="conBox">
+            {/* breadBar */}
+            <BreadBar curTit={name} />
 
-          {/* detail */}
-          <div className={styles.detailBox}>
-            <div className={styles.desInfo} onClick={() => Router.push(`/designers/details?uid=${uid}`)}>
-              <div className={styles.headimg}>
-                <div>
-                  <img src={headPicUrl} alt="" />
-                  <span>从业{workingTime}年</span>
-                </div>
-                <div>
-                  <h3>
-                    <b>{name}</b> <span>{position}</span>
-                  </h3>
-                  <p>{details?.styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
-                  <p>{designConcept}</p>
+            {/* detail */}
+            <div className={styles.detailBox}>
+              <div className={styles.desInfo} onClick={() => Router.push(`/designers/details?uid=${uid}`)}>
+                <div className={styles.headimg}>
+                  <div>
+                    <img src={headPicUrl} alt="" />
+                    <span>从业{workingTime}年</span>
+                  </div>
+                  <div>
+                    <h3>
+                      <b>{name}</b> <span>{position}</span>
+                    </h3>
+                    <p>{details?.styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
+                    <p>{designConcept}</p>
+                  </div>
                 </div>
               </div>
-              <p>{description}</p>
+
+              {caseList?.list?.length > 0 && (
+                <div className={styles.desCases}>
+                  <CaseList liData={caseList} />
+                </div>
+              )}
             </div>
-
-            {caseList?.list?.length > 0 && (
-              <div className={styles.desCases}>
-                <CaseList liData={caseList} />
-              </div>
-            )}
           </div>
         </div>
-      </div>
-    </BasicLayout>
+      </BasicLayout>
+    </>
   )
 }
 
