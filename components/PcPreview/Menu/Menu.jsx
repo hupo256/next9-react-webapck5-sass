@@ -62,6 +62,17 @@ const MenuListComp = ({ menuList }) => {
     setExtraCharCount(extraCharCount)
   }, [menuList])
 
+  useEffect(() => {
+    const preservedIndex = parseInt(localStorage.getItem('chunkIndex'))
+    if (preservedIndex) {
+      setChunkIndex(preservedIndex)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('chunkIndex', chunkIndex)
+  }, [chunkIndex])
+
   return (
     <div className={styles.menuWrapper}>
       <div
