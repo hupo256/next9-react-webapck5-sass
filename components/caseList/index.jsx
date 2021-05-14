@@ -7,7 +7,7 @@ import NoData from '@components/noData'
 import styles from './caseList.module.scss'
 import desStyles from './descase.module.scss'
 
-const { urlParamHash } = tools
+const { urlParamHash, baseImgUrl } = tools
 const caseLen = 3 // 众多图片中需要显示前几张
 
 export default function CaseList(props) {
@@ -42,13 +42,7 @@ export default function CaseList(props) {
             return (
               <li key={uid} onClick={() => Router.push(`/cases/details?uid=${uid}`)}>
                 <div className={styles.minImgBox}>
-                  <img
-                    src={
-                      coverPicUrl ||
-                      'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
-                    }
-                    alt=""
-                  />
+                  <img src={coverPicUrl || `${baseImgUrl}20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png`} />
                 </div>
                 <div className={styles.casePicBox}>
                   <h3>{title}</h3>
@@ -62,13 +56,7 @@ export default function CaseList(props) {
                       const { url, spaceDic = {} } = pic
                       return (
                         <li className={styles.minImgBox} key={ind}>
-                          <img
-                            src={
-                              url ||
-                              'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
-                            }
-                            alt=""
-                          />
+                          <img src={url || `${baseImgUrl}20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png`} />
                           {spaceDic?.name && <span>{spaceDic.name}</span>}
                         </li>
                       )

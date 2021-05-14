@@ -1,5 +1,7 @@
 const tools = {}
 
+tools.baseImgUrl = 'https://img.inbase.in-deco.com/crm_saas/release/'
+
 // localStorage
 tools.setStorage = (key, value) => {
   window.localStorage.setItem(key, JSON.stringify(value))

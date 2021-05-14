@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Head from 'next/head'
 import BasicLayout from '@components/HomePageLayout'
 import { Pagination } from 'antd'
 import tools from '@libs/utils'
@@ -9,7 +8,7 @@ import BreadBar from '@components/breadBar'
 import NoData from '@components/noData'
 import styles from './articles.module.scss'
 
-const { urlParamHash } = tools
+const { urlParamHash, baseImgUrl } = tools
 
 export default function Site(props) {
   const [curId, setcurId] = useState('')
@@ -58,70 +57,61 @@ export default function Site(props) {
   }
 
   return (
-    <>
-      <Head>
-        <title>{`装修攻略`}</title>
-      </Head>
-      <BasicLayout>
-        <div className={styles.conBox}>
-          {/* breadBar */}
-          <BreadBar />
+    <BasicLayout headConfig={{ title: '装修攻略' }}>
+      <div className={styles.conBox}>
+        {/* breadBar */}
+        <BreadBar />
 
-          {/* articles */}
-          <div className={styles.articleBox}>
-            <ul className={styles.tabBox}>
-              {tabs?.map(tab => {
-                const { uid, name } = tab
+        {/* articles */}
+        <div className={styles.articleBox}>
+          <ul className={styles.tabBox}>
+            {tabs?.map(tab => {
+              const { uid, name } = tab
+              return (
+                <li key={uid} className={`${curId === uid ? styles.on : ''}`} onClick={() => codeChange(uid)}>
+                  <span>{name}</span>
+                </li>
+              )
+            })}
+          </ul>
+
+          {artsData?.list?.length > 0 ? (
+            <ul className={styles.listBox}>
+              {artsData.list.map(art => {
+                const { articleCoverImg, articleDescription, articleTitle, createTime, articleUid } = art
                 return (
-                  <li key={uid} className={`${curId === uid ? styles.on : ''}`} onClick={() => codeChange(uid)}>
-                    <span>{name}</span>
+                  <li key={articleUid} onClick={() => Router.push(`/articles/details?articleUid=${articleUid}`)}>
+                    <div className={styles.minImgBox}>
+                      <img
+                        src={articleCoverImg || `${baseImgUrl}20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png`}
+                      />
+                    </div>
+
+                    <div className={styles.casePicBox}>
+                      <h3>{articleTitle}</h3>
+                      <p>{articleDescription}</p>
+                      <p>{createTime}</p>
+                    </div>
                   </li>
                 )
               })}
             </ul>
+          ) : (
+            <NoData tips="文章" />
+          )}
 
-            {artsData?.list?.length > 0 ? (
-              <ul className={styles.listBox}>
-                {artsData.list.map(art => {
-                  const { articleCoverImg, articleDescription, articleTitle, createTime, articleUid } = art
-                  return (
-                    <li key={articleUid} onClick={() => Router.push(`/articles/details?articleUid=${articleUid}`)}>
-                      <div className={styles.minImgBox}>
-                        <img
-                          src={
-                            articleCoverImg ||
-                            'https://img.inbase.in-deco.com/crm_saas/release/20210511/5e3f0cd9c02d4a6d94edbd66808e6d21/failImg.png'
-                          }
-                          alt=""
-                        />
-                      </div>
-
-                      <div className={styles.casePicBox}>
-                        <h3>{articleTitle}</h3>
-                        <p>{articleDescription}</p>
-                        <p>{createTime}</p>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
-            ) : (
-              <NoData tips="文章" />
+          <div className={styles.pageBox}>
+            {!!artsData?.recordTotal && (
+              <Pagination
+                hideOnSinglePage={true}
+                onChange={pageChange}
+                defaultCurrent={1}
+                total={artsData.recordTotal}
+              />
             )}
-
-            <div className={styles.pageBox}>
-              {!!artsData?.recordTotal && (
-                <Pagination
-                  hideOnSinglePage={true}
-                  onChange={pageChange}
-                  defaultCurrent={1}
-                  total={artsData.recordTotal}
-                />
-              )}
-            </div>
           </div>
         </div>
-      </BasicLayout>
-    </>
+      </div>
+    </BasicLayout>
   )
 }
