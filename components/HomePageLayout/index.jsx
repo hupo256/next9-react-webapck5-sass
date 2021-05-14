@@ -17,14 +17,14 @@ const Home = ({ children }) => {
   const [totopShow, settotopShow] = useState(false)
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
       setMenuList(_.get(res, 'data.list', []))
     })()
-    ;(async () => {
-      const res = await getFooter()
-      setFooterData(_.get(res, 'data', []))
-    })()
+      ; (async () => {
+        const res = await getFooter()
+        setFooterData(_.get(res, 'data', []))
+      })()
   }, [refresh])
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Home = ({ children }) => {
             left={
               <div className={styles.companyHeaderStyle}>
                 <Avatar
-                  src={footerData.icon}
+                  src={footerData.logo}
                   className={'avatar'}
                   style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
                   size="large"

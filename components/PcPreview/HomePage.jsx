@@ -13,12 +13,11 @@ import FooterComp from './FooterComp/FooterComp.jsx'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
-// import WebSetting from './WebSettingOut'
-// import ChannelManage from '../ChannelManage'
 
-import { Layout, Avatar, Carousel, Drawer } from 'antd'
 
-import homePageService from '@service/pcPreview' //admin特需
+import { Layout, Avatar, Carousel } from 'antd'
+
+import homePageService from '@service/pcPreview'
 
 const { getMenuList, getFooter, getPublishedData } = homePageService
 
@@ -47,26 +46,39 @@ const Home = () => {
   const [menuList, setMenuList] = useState([])
   const [footerData, setFooterData] = useState([])
   const [publishedData, setPublishedData] = useState([])
+  const [totopShow, settotopShow] = useState(false)
 
-  // const [showHeaderDrawer, setShowHeaderDrawer] = useState(false)
-  // const [showFooterDrawer, setShowFooterDrawer] = useState(false)
 
-  // const [refresh, setRefresh] = useState(false)
+
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
       setMenuList(_.get(res, 'data.list', []))
     })()
-    ;(async () => {
-      const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
-      setPublishedData(_.get(res, 'data.templateJson.jsonData'), [])
-    })()
-    ;(async () => {
-      const res = await getFooter()
-      setFooterData(_.get(res, 'data', []))
-    })()
+      ; (async () => {
+        const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
+        setPublishedData(_.get(res, 'data.templateJson.jsonData'), [])
+      })()
+      ; (async () => {
+        const res = await getFooter()
+        setFooterData(_.get(res, 'data', []))
+      })()
   }, [])
+  useEffect(() => {
+    document.addEventListener('scroll', conScroll)
+    return () => {
+      document.removeEventListener('scroll', conScroll)
+    }
+  }, [])
+
+  function conScroll() {
+    const clientHeight = document.documentElement.clientHeight //可视区域高度
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop //滚动条滚动高度
+    // console.log(scrollTop, clientHeight)
+    settotopShow(scrollTop > clientHeight / 3)
+  }
+
 
   if (_.isEmpty(menuList) || _.isEmpty(publishedData) || _.isEmpty(footerData)) return null
 
@@ -74,11 +86,7 @@ const Home = () => {
     <div className={styles.container}>
       <Layout className={styles.mainLayout}>
         <div className={styles.editableWrapper}>
-          {/* <div className={styles.editHeader}>
-            <Button className={styles.editBtn} type="primary" onClick={() => setShowHeaderDrawer(true)}>
-              编辑
-            </Button>
-          </div> */}
+
           <HeaderLayout
             left={
               <div className={styles.companyHeaderStyle}>
@@ -150,31 +158,14 @@ const Home = () => {
           </div>
         </Content>
 
-        {/* <div className={styles.editableWrapper}> */}
-        {/* <div className={styles.editHeader}>
-            <Button className={styles.editBtn} type="primary" onClick={() => setShowFooterDrawer(true)}>
-              编辑
-            </Button>
-          </div> */}
+
+
         <FooterComp data={footerData} />
-        {/* </div> */}
       </Layout>
 
-      {/* <Drawer title="编辑频道" placement="right" closable={true} onClose={() => {
-          setRefresh(!refresh);
-          setShowHeaderDrawer(false);
-        }} visible={showHeaderDrawer} width={900}>
-        <ChannelManage />
-      </Drawer>
 
-      <Drawer title="编辑公司信息" placement="right" closable={true} onClose={() => {
-          setRefresh(!refresh);
-          setShowFooterDrawer(false);
-        }} visible={showFooterDrawer} width={600}>
-        <WebSetting />
-      </Drawer> */}
 
-      <div className={styles.scrollToTop} onClick={() => scrollTo(0, 0)} />
+      <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
     </div>
   )
 }
