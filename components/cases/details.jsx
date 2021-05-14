@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import BasicLayout from '@components/HomePageLayout'
 import tools from '../../libs/utils'
-import { useAppContext } from '@store/index'
 import caseApi from '@service/caseApi'
 import BreadBar from '@components/breadBar'
 import styles from './case.module.scss'
 
-const { urlParamHash } = tools
+const { urlParamHash, createMeta } = tools
 
 export default function CaseDetail(props) {
-  const { companyData } = useAppContext()
   const [details, setdetails] = useState({})
   const {
     buildingName,
@@ -46,7 +44,7 @@ export default function CaseDetail(props) {
     <>
       <Head>
         <title>{title || buildingName}</title>
-        {keywords && <meta name="keywords" content={JSON.parse(keywords).join(',')} />}
+        {keywords && createMeta(keywords)}
         {description && <meta name="description" content={description} />}
       </Head>
       <BasicLayout title={buildingName}>

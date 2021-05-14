@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { message } from 'antd'
+import Router from 'next/router'
 import config from '../config'
-import tools from '../libs/utils'
+import tools from '@libs/utils'
 
 const { getStorage } = tools
 const { host } = config
@@ -32,18 +33,17 @@ ajaxinstance.interceptors.request.use(
 // 响应拦截器
 ajaxinstance.interceptors.response.use(
   response => {
+    // console.log(response)
     const { config, data } = response
     const { code } = data
     message.destroy()
-    if (code === 100001) {
-      // 相应的错误码处理
-    }
+    // 跳到首页
+    if (code === 2001) return Router.push('/')
     return { data: data.data, code, message: data?.message }
   },
   async error => {
     message.destroy()
     console.log(error)
-    // message.error(error)
   },
 )
 

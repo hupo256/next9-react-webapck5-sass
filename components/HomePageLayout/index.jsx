@@ -14,6 +14,7 @@ const Home = ({ children }) => {
   const [menuList, setMenuList] = useState([])
   const [footerData, setFooterData] = useState([])
   const [refresh, setRefresh] = useState(false)
+  const [totopShow, settotopShow] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -25,6 +26,20 @@ const Home = ({ children }) => {
       setFooterData(_.get(res, 'data', []))
     })()
   }, [refresh])
+
+  useEffect(() => {
+    document.addEventListener('scroll', conScroll)
+    return () => {
+      document.removeEventListener('scroll', conScroll)
+    }
+  }, [])
+
+  function conScroll() {
+    const clientHeight = document.documentElement.clientHeight //可视区域高度
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop //滚动条滚动高度
+    // console.log(scrollTop, clientHeight)
+    settotopShow(scrollTop > clientHeight / 3)
+  }
 
   return (
     <div className={styles.container}>
@@ -57,7 +72,7 @@ const Home = ({ children }) => {
         <Content className={styles.mainWrapper}>{children}</Content>
         <FooterComp data={footerData} />
       </Layout>
-      <div className={styles.scrollToTop} onClick={() => scrollTo(0, 0)} />
+      <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
     </div>
   )
 }

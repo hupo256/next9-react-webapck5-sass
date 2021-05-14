@@ -6,7 +6,7 @@ import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
 import styles from './articles.module.scss'
 
-const { urlParamHash } = tools
+const { urlParamHash, createMeta } = tools
 
 export default function CaseDetail(props) {
   const [details, setdetails] = useState({})
@@ -30,7 +30,7 @@ export default function CaseDetail(props) {
     <>
       <Head>
         <title>{title || articleTitle}</title>
-        {keywords && <meta name="keywords" content={JSON.parse(keywords).join(',')} />}
+        {keywords && createMeta(keywords)}
         {description && <meta name="description" content={description} />}
       </Head>
       <BasicLayout title={details?.articleTitle}>
