@@ -138,7 +138,7 @@ const Home = () => {
           </div>
 
           <ChapterLayout title={'装修攻略'} description={'一分钟了解家装'}>
-            <Articles data={_.get(publishedData, '5.list')} />
+            <Articles data={_.slice(_.get(publishedData, '5.list'), 0, 3)} />
           </ChapterLayout>
 
           <div className={styles.designerSectionWiderBackground}>
