@@ -1,12 +1,16 @@
+$hightColor: #ff7300;
+
 .menuWrapper {
   display: flex;
-  justify-content: space-between;
+  // justify-content: flex-end;
   align-items: center;
   position: relative;
+  padding-left: 2em;
 }
 .menuItemWrapper .active {
   border-bottom: 2px solid var(--themeColor);
-  padding-bottom: 14px;
+  color: var(--themeColor);
+  padding-bottom: 9px;
 }
 .menuWrapper .left {
   position: absolute;
@@ -27,11 +31,14 @@
 
 .menuRoot {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
 }
 .menuRoot a {
-  line-height: 64px;
+  line-height: 58px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1d1d1d;
 }
 .menuRoot a:last-child {
   gap: unset;
@@ -39,6 +46,7 @@
 
 .menuItemWrapper {
   position: relative;
+  height: 58px;
 }
 .arrowWrapperPrev {
   height: 100%;

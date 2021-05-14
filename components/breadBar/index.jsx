@@ -5,7 +5,7 @@ import styles from './breadBar.module.scss'
 const breadData = {
   cases: {
     url: '/cases',
-    name: '看案例',
+    name: '装修案例',
   },
   sites: {
     url: '/sites',
@@ -17,7 +17,7 @@ const breadData = {
   },
   articles: {
     url: '/articles',
-    name: '专题文章',
+    name: '装修攻略',
   },
 }
 export default function Footer(props) {

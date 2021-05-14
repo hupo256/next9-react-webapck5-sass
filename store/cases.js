@@ -18,7 +18,7 @@ export function CaseWrapper({ children }) {
   function touchSearchTags(fromTag) {
     const apiTool = fromTag === 'sites' ? siteApi.siteParams : caseApi.queryCaseOptionsForWeb
     apiTool().then(res => {
-      console.log(res)
+      // console.log(res)
       if (!res?.data) return
       const { data } = res
       setsearchTags(data)
@@ -34,7 +34,7 @@ export function CaseWrapper({ children }) {
     }
     delete config.from
     apiTool({ ...param, ...config }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (!res?.data) return
       const { data } = res
       setdataList(data)

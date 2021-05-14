@@ -26,4 +26,10 @@ tools.urlParamHash = (url = location.href) => {
   return params
 }
 
+tools.createMeta = keywords => {
+  console.log(typeof keywords)
+  const con = typeof keywords === 'string' ? JSON.parse(keywords) : keywords
+  return <meta name="keywords" content={con.join(',')} />
+}
+
 export default tools
