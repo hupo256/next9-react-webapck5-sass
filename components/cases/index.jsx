@@ -11,7 +11,7 @@ function Cases(props) {
   return (
     <>
       <Head>
-        <title>{`看案例`}</title>
+        <title>{`装修案例`}</title>
       </Head>
       <BasicLayout>
         <div className="conBox">

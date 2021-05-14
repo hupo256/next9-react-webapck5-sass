@@ -8,9 +8,9 @@ import SiteCell from './siteList/siteCell'
 import DiaryList from './diaryList'
 import styles from './site.module.scss'
 
-const { urlParamHash } = tools
+const { urlParamHash, createMeta } = tools
 
-export default function CaseDetail(props) {
+export default function SiteDetail(props) {
   const [details, setdetails] = useState({})
   const { gongdiTitle, gongdiStage, title, keywords, description } = details
 
@@ -31,7 +31,7 @@ export default function CaseDetail(props) {
     <>
       <Head>
         <title>{title || gongdiTitle}</title>
-        {keywords && <meta name="keywords" content={JSON.parse(keywords).join(',')} />}
+        {keywords && createMeta(keywords)}
         {description && <meta name="description" content={description} />}
       </Head>
       <BasicLayout title={gongdiTitle}>

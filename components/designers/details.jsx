@@ -8,11 +8,11 @@ import BreadBar from '@components/breadBar'
 import CaseList from '@components/caseList'
 import styles from './designers.module.scss'
 
-const { urlParamHash } = tools
+const { urlParamHash, createMeta } = tools
 
 function DesignDetail(props) {
   const [details, setdetails] = useState({})
-  const { headPicUrl, workingTime, name, position, designConcept, caseList, title, keywords } = details
+  const { headPicUrl, workingTime, name, position, designConcept, caseList, title, keywords, description } = details
 
   useEffect(() => {
     touchDetails()
@@ -39,7 +39,8 @@ function DesignDetail(props) {
     <>
       <Head>
         <title>{title || name}</title>
-        {keywords && <meta name="keywords" content={JSON.parse(keywords).join(',')} />}
+        {keywords && createMeta(keywords)}
+        {description && <meta name="description" content={description} />}
       </Head>
       <BasicLayout title={name}>
         <div className="grayBg">
