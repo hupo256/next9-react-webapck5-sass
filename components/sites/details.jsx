@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Head from 'next/head'
 import BasicLayout from '@components/HomePageLayout'
 import tools from '@libs/utils'
 import siteApi from '@service/siteApi'
@@ -8,11 +7,11 @@ import SiteCell from './siteList/siteCell'
 import DiaryList from './diaryList'
 import styles from './site.module.scss'
 
-const { urlParamHash, createMeta } = tools
+const { urlParamHash } = tools
 
 export default function SiteDetail(props) {
   const [details, setdetails] = useState({})
-  const { gongdiTitle, gongdiStage, title, keywords, description } = details
+  const { gongdiTitle, gongdiStage } = details
 
   useEffect(() => {
     touchDetails()
@@ -28,25 +27,22 @@ export default function SiteDetail(props) {
   }
 
   return (
-    <>
-      <Head>
-        <title>{title || gongdiTitle}</title>
-        {keywords && createMeta(keywords)}
-        {description && <meta name="description" content={description} />}
-      </Head>
-      <BasicLayout title={gongdiTitle}>
-        <div className="grayBg">
-          <div className="conBox">
-            {/* breadBar */}
-            <BreadBar curTit={gongdiTitle} />
+    <BasicLayout headConfig={details}>
+      <div className="grayBg">
+        <div className="conBox">
+          {/* breadBar */}
+          <BreadBar curTit={gongdiTitle} />
 
-            {/* detail */}
-            <div className={styles.detailCard}>{gongdiStage && <SiteCell list={[details]} />}</div>
+          {/* detail */}
+          {gongdiStage && (
+            <div className={styles.detailCard}>
+              <SiteCell list={[details]} />
+            </div>
+          )}
 
-            <DiaryList />
-          </div>
+          <DiaryList />
         </div>
-      </BasicLayout>
-    </>
+      </div>
+    </BasicLayout>
   )
 }
