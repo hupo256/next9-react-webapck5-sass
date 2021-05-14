@@ -1,80 +1,85 @@
 import React, { useState, useEffect } from 'react'
-import styles from './HomePageLayout.module.scss'
-import _ from 'lodash'
-import MenuList from '../PcPreview/Menu/Menu.jsx'
-import HeaderLayout from '../PcPreview/HeaderLayout/HeaderLayout.jsx'
-import FooterComp from '../PcPreview/FooterComp/FooterComp.jsx'
 import { Layout, Avatar } from 'antd'
-import homePageService from '@service/pcPreview' //admin特需
+import Header from '@components/header'
+import MenuList from '@components/PcPreview/Menu/Menu.jsx'
+import HeaderLayout from '@components/PcPreview/HeaderLayout/HeaderLayout.jsx'
+import FooterComp from '@components/PcPreview/FooterComp/FooterComp.jsx'
+import basicApi from '@service/basicApi'
+import styles from './HomePageLayout.module.scss'
 
-const { getMenuList, getFooter } = homePageService
 const { Content } = Layout
+const { getMenuList, companyinfoView } = basicApi
 
-const Home = ({ children }) => {
+export default function BasicLayout(props) {
+  const { children, headConfig } = props
   const [menuList, setMenuList] = useState([])
   const [footerData, setFooterData] = useState([])
-  const [refresh, setRefresh] = useState(false)
   const [totopShow, settotopShow] = useState(false)
 
   useEffect(() => {
-    ; (async () => {
-      const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
-      setMenuList(_.get(res, 'data.list', []))
-    })()
-      ; (async () => {
-        const res = await getFooter()
-        setFooterData(_.get(res, 'data', []))
-      })()
-  }, [refresh])
+    touchBasicInfor()
 
-  useEffect(() => {
     document.addEventListener('scroll', conScroll)
     return () => {
       document.removeEventListener('scroll', conScroll)
     }
   }, [])
 
+  async function touchBasicInfor() {
+    const [menu, companyInfor] = await Promise.all([
+      getMenuList({ keyword: '', pageNum: 1, pageSize: 18 }),
+      companyinfoView(),
+    ])
+    setMenuList(menu.data?.list)
+    setFooterData(companyInfor.data)
+  }
+
   function conScroll() {
     const clientHeight = document.documentElement.clientHeight //可视区域高度
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop //滚动条滚动高度
-    // console.log(scrollTop, clientHeight)
     settotopShow(scrollTop > clientHeight / 3)
   }
 
   return (
-    <div className={styles.container}>
-      <Layout className={styles.mainLayout}>
-        <div className={styles.editableWrapper}>
-          <HeaderLayout
-            left={
-              <div className={styles.companyHeaderStyle}>
-                <Avatar
-                  src={footerData.logo}
-                  className={'avatar'}
-                  style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
-                  size="large"
-                  gap={20}
-                >
-                  C
-                </Avatar>
-                <h1>{footerData.companyName}</h1>
-              </div>
-            }
-            middle={<MenuList menuList={menuList} />}
-            right={
-              <>
-                <img className={styles.phoneIcon} src={'/img/ic_phone_slices/ic_phone.png'} />
-                <span className={styles.phone}>{footerData.customerService}</span>
-              </>
-            }
-          />
-        </div>
-        <Content className={styles.mainWrapper}>{children}</Content>
-        <FooterComp data={footerData} />
-      </Layout>
-      <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
-    </div>
+    <>
+      {headConfig && <Header {...headConfig} />}
+      <div className={styles.container}>
+        <Layout className={styles.mainLayout}>
+          <div className={styles.editableWrapper}>
+            <HeaderLayout
+              left={
+                <div className={styles.companyHeaderStyle}>
+                  <Avatar
+                    src={footerData.icon}
+                    className={'avatar'}
+                    style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
+                    size="large"
+                    gap={20}
+                  >
+                    C
+                  </Avatar>
+                  <h1>{footerData.companyName}</h1>
+                </div>
+              }
+              middle={<MenuList menuList={menuList} />}
+              right={
+                <>
+                  <img
+                    className={styles.phoneIcon}
+                    src={
+                      'https://img.inbase.in-deco.com/crm_saas/release/20210514/26b37fd6c4814b6ba0f589a8e8551f0b/ic_phone.png'
+                    }
+                  />
+                  <span className={styles.phone}>{footerData.customerService}</span>
+                </>
+              }
+            />
+          </div>
+          <Content className={styles.mainWrapper}>{children}</Content>
+          <FooterComp data={footerData} />
+        </Layout>
+        <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
+      </div>
+    </>
   )
 }
-
-export default Home
