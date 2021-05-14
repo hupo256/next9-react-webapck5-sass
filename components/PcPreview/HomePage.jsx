@@ -48,8 +48,8 @@ const Home = () => {
   const [footerData, setFooterData] = useState([])
   const [publishedData, setPublishedData] = useState([])
 
-  const [showHeaderDrawer, setShowHeaderDrawer] = useState(false)
-  const [showFooterDrawer, setShowFooterDrawer] = useState(false)
+  // const [showHeaderDrawer, setShowHeaderDrawer] = useState(false)
+  // const [showFooterDrawer, setShowFooterDrawer] = useState(false)
 
   // const [refresh, setRefresh] = useState(false)
 
@@ -67,6 +67,8 @@ const Home = () => {
       setFooterData(_.get(res, 'data', []))
     })()
   }, [])
+
+  if (_.isEmpty(menuList) || _.isEmpty(publishedData) || _.isEmpty(footerData)) return null
 
   return (
     <div className={styles.container}>
