@@ -1,10 +1,3 @@
-import _ from 'lodash'
-
-export const sampleList = (typeName = 'item') =>
-  _.times(5, num => ({
-    name: `${typeName} ${num}`,
-  }))
-
 const tools = {}
 
 // localStorage
@@ -24,12 +17,6 @@ tools.urlParamHash = (url = location.href) => {
     params[h[0]] = h[1]
   }
   return params
-}
-
-tools.createMeta = keywords => {
-  console.log(typeof keywords)
-  const con = typeof keywords === 'string' ? JSON.parse(keywords) : keywords
-  return <meta name="keywords" content={con.join(',')} />
 }
 
 export default tools

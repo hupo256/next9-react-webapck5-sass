@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import Head from 'next/head'
 import BasicLayout from '@components/HomePageLayout'
 import tools from '@libs/utils'
 import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
 import styles from './articles.module.scss'
 
-const { urlParamHash, createMeta } = tools
+const { urlParamHash } = tools
 
 export default function CaseDetail(props) {
   const [details, setdetails] = useState({})
-  const { articleTitle, articleCoverImg, creatorName, createTime, articleContent, title, keywords, description } =
-    details
+  const { articleTitle, articleCoverImg, creatorName, createTime, articleContent } = details
 
   useEffect(() => {
     touchDetail()
@@ -27,29 +25,22 @@ export default function CaseDetail(props) {
   }
 
   return (
-    <>
-      <Head>
-        <title>{title || articleTitle}</title>
-        {keywords && createMeta(keywords)}
-        {description && <meta name="description" content={description} />}
-      </Head>
-      <BasicLayout title={details?.articleTitle}>
-        <div className={styles.conBox}>
-          {/* breadBar */}
-          <BreadBar curTit={details?.articleTitle} />
+    <BasicLayout headConfig={details}>
+      <div className={styles.conBox}>
+        {/* breadBar */}
+        <BreadBar curTit={details?.articleTitle} />
 
-          {/* detail */}
-          <div className={styles.detailBox}>
-            <h3>{articleTitle}</h3>
-            <p className={styles.subTit}>
-              {creatorName && <span>作者：{creatorName}</span>}
-              {createTime && <span>发布时间：{createTime}</span>}
-            </p>
-            <img src={articleCoverImg} alt="" />
-            <div dangerouslySetInnerHTML={{ __html: articleContent }} />
-          </div>
+        {/* detail */}
+        <div className={styles.detailBox}>
+          <h3>{articleTitle}</h3>
+          <p className={styles.subTit}>
+            {creatorName && <span>作者：{creatorName}</span>}
+            {createTime && <span>发布时间：{createTime}</span>}
+          </p>
+          <img src={articleCoverImg} alt="" />
+          <div dangerouslySetInnerHTML={{ __html: articleContent }} />
         </div>
-      </BasicLayout>
-    </>
+      </div>
+    </BasicLayout>
   )
 }
