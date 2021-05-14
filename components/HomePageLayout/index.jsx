@@ -42,7 +42,7 @@ export default function BasicLayout(props) {
 
   return (
     <>
-      {headConfig && <Header {...headConfig} />}
+      <Header {...headConfig} />
       <div className={styles.container}>
         <Layout className={styles.mainLayout}>
           <div className={styles.editableWrapper}>

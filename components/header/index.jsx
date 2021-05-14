@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 export default function Footer(props) {
   const { title, keywords, description } = props
-  const con = typeof keywords === 'string' ? JSON.parse(keywords) : keywords
+  const con = keywords && typeof keywords === 'string' ? JSON.parse(keywords) : keywords
 
   return (
     <Head>
