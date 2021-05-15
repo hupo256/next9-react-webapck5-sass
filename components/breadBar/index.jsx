@@ -19,6 +19,10 @@ const breadData = {
     url: '/articles',
     name: '装修攻略',
   },
+  scss: {
+    url: '/scss',
+    name: 'tta',
+  },
 }
 export default function Footer(props) {
   const [levalTwo, setlevalTwo] = useState('')
@@ -33,7 +37,7 @@ export default function Footer(props) {
     const arr = pathname.split('/')
     const len = arr.length
     len > 2 && setlevalTwo(arr[1])
-    len === 2 && setlevalTex(breadData[arr[1]].name)
+    len === 2 && setlevalTex(breadData?.[arr[1]]?.name)
   }
 
   return (
