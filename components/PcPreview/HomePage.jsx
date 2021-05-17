@@ -56,15 +56,18 @@ const Home = () => {
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
       setMenuList(_.get(res, 'data.list', []))
     })()
+
       ; (async () => {
         const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
         setPublishedData(_.get(res, 'data.templateJson.jsonData'), [])
       })()
+
       ; (async () => {
         const res = await getFooter()
         setFooterData(_.get(res, 'data', []))
       })()
   }, [])
+
   useEffect(() => {
     document.addEventListener('scroll', conScroll)
     return () => {
