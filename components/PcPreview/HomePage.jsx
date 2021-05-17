@@ -93,10 +93,10 @@ const Home = () => {
             }
             middle={<MenuList menuList={menuList} />}
             right={
-              <>
+              <div className={styles.contactHeader}>
                 <img className={styles.phoneIcon} src={'/img/ic_phone_slices/ic_phone.png'} />
                 <span className={styles.phone}>{footerData.customerService}</span>
-              </>
+              </div>
             }
           />
         </div>
