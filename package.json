@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:build": "node ./dev.env.js && next build && next export",
-    "test:build": "node ./dev.env.js && next build && next export",
+    "test:build": "node ./test.env.js && next build && next export",
     "prod:build": "node ./prod.env.js && next build && next export",
     "start": "next start",
     "build": "next build",

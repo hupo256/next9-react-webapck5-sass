@@ -2,22 +2,16 @@ import _ from 'lodash'
 import styles from './Menu.module.scss'
 import { useState, useEffect } from 'react'
 
-const FAKE_ACTIVE_INDEX = 'home'
 const MAX_CHUNK_SIZE = 40
 const MIN_CHUNK_SIZE = 20
 
-const isCurrentMenu = (linkUrl, location) => {
-  const value = location.href.replace(location.origin, '')
-
-  if (value.length === 1) {
-    return linkUrl === value
+const isCurrentMenu = ({ uid, linkKey }) => {
+  const currentMenuUid = localStorage.getItem('currentMenu')
+  if (currentMenuUid) {
+    return currentMenuUid === uid
   }
 
-  if (value.length > 1) {
-    return linkUrl === _.trimEnd(value, '/')
-  }
-
-  return false
+  return linkKey === 'home'
 }
 
 const MenuListComp = ({ menuList }) => {
@@ -32,6 +26,7 @@ const MenuListComp = ({ menuList }) => {
   const hasNext = () => {
     return Boolean(chunkIndex + 1 < menuChunkList.length)
   }
+
 
   useEffect(() => {
     if (_.isEmpty(menuList)) return
@@ -62,6 +57,30 @@ const MenuListComp = ({ menuList }) => {
     setExtraCharCount(extraCharCount)
   }, [menuList])
 
+
+  useEffect(() => {
+    if (_.isEmpty(menuChunkList)) return
+
+    const currentMenu = localStorage.getItem('currentMenu')
+    if (currentMenu) {
+      _.forEach(menuChunkList, (chunk, index) => {
+        _.forEach(chunk, (item, i) => {
+          if (item.uid === currentMenu) {
+            console.log(index)
+            setChunkIndex(index)
+            return
+          }
+        })
+      })
+
+    }
+  }, [menuChunkList])
+
+  const clickMenuItem = ({ uid, linkUrl }) => {
+    localStorage.setItem('currentMenu', uid)
+    window.location.href = linkUrl
+  }
+
   return (
     <div className={styles.menuWrapper}>
       <div
@@ -82,9 +101,10 @@ const MenuListComp = ({ menuList }) => {
                 </div>
               )}
               <a
-                href={item.linkUrl}
+                // href={item.linkUrl}
                 key={index}
-                className={isCurrentMenu(item.linkUrl, location) ? styles.active : undefined}
+                className={isCurrentMenu(item) ? styles.active : undefined}
+                onClick={e => clickMenuItem(item)}
               >
                 {item.websiteName}
               </a>

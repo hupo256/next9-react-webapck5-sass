@@ -1,5 +1,6 @@
 import 'antd/dist/antd.css'
 import '../styles/globals.css'
+import _ from 'lodash'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import homePageService from '@service/pcPreview' //admin特需
@@ -16,7 +17,7 @@ function MyApp({ Component, pageProps }) {
   })
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       const res = await homePageService.getFooter()
       const data = _.get(res, 'data', {})
       setFooterData(data)
@@ -34,12 +35,14 @@ function MyApp({ Component, pageProps }) {
             try {
               const res = await axios.get(src)
               eval(res.data)
-            } catch (e) {}
+            } catch (e) { }
           }
         })
       }
     })()
   }, [])
+
+  if (_.isEmpty(footerData)) return null
 
   return (
     <>
