@@ -50,7 +50,7 @@ export default function BasicLayout(props) {
               left={
                 <div className={styles.companyHeaderStyle}>
                   <Avatar
-                    src={footerData.icon}
+                    src={footerData?.icon}
                     className={'avatar'}
                     style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
                     size="large"
