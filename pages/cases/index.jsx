@@ -6,25 +6,21 @@ import CaseList from '@components/caseList'
 import BreadBar from '@components/breadBar'
 import styles from './case.module.scss'
 
-function Cases(props) {
+export default function Cases(props) {
   return (
-    <BasicLayout headConfig={{ title: '装修案例' }}>
-      <div className="conBox">
-        {/* breadBar */}
-        <BreadBar />
+    <CaseWrapper>
+      <BasicLayout headConfig={{ title: '装修案例' }}>
+        <div className="conBox">
+          {/* breadBar */}
+          <BreadBar />
 
-        {/* case */}
-        <div className={styles.caseBox}>
-          <SearchBar />
-          <CaseList />
+          {/* case */}
+          <div className={styles.caseBox}>
+            <SearchBar />
+            <CaseList />
+          </div>
         </div>
-      </div>
-    </BasicLayout>
+      </BasicLayout>
+    </CaseWrapper>
   )
 }
-
-export default props => (
-  <CaseWrapper>
-    <Cases {...props} />
-  </CaseWrapper>
-)

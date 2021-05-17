@@ -30,8 +30,8 @@ export default function BasicLayout(props) {
       getMenuList({ keyword: '', pageNum: 1, pageSize: 18 }),
       companyinfoView(),
     ])
-    setMenuList(menu.data?.list)
-    setFooterData(companyInfor.data)
+    setMenuList(menu?.data?.list)
+    setFooterData(companyInfor?.data)
   }
 
   function conScroll() {
