@@ -30,8 +30,8 @@ export default function BasicLayout(props) {
       getMenuList({ keyword: '', pageNum: 1, pageSize: 18 }),
       companyinfoView(),
     ])
-    setMenuList(menu?.data?.list)
-    setFooterData(companyInfor?.data)
+    setMenuList(menu.data?.list)
+    setFooterData(companyInfor.data)
   }
 
   function conScroll() {
@@ -50,7 +50,7 @@ export default function BasicLayout(props) {
               left={
                 <div className={styles.companyHeaderStyle}>
                   <Avatar
-                    src={footerData?.icon}
+                    src={footerData.icon}
                     className={'avatar'}
                     style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
                     size="large"
@@ -58,10 +58,7 @@ export default function BasicLayout(props) {
                   >
                     C
                   </Avatar>
-                  <h1>
-                    {footerData.companyName}
-                    <img src={footerData?.logo} />
-                  </h1>
+                  <h1>{footerData.companyName}</h1>
                 </div>
               }
               middle={<MenuList menuList={menuList} />}
