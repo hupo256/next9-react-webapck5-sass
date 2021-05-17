@@ -49,16 +49,12 @@ export default function BasicLayout(props) {
             <HeaderLayout
               left={
                 <div className={styles.companyHeaderStyle}>
-                  <Avatar
-                    src={footerData.icon}
-                    className={'avatar'}
-                    style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
-                    size="large"
-                    gap={20}
-                  >
-                    C
-                  </Avatar>
-                  <h1>{footerData.companyName}</h1>
+                  <img
+                    src={footerData.logo}
+                    alt={footerData.companyName}
+                    className={styles.logoStyle}
+                    onClick={() => (window.location.href = '/')}
+                  />
                 </div>
               }
               middle={<MenuList menuList={menuList} />}
