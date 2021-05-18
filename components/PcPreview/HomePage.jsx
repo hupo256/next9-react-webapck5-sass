@@ -13,7 +13,7 @@ import FooterComp from './FooterComp/FooterComp.jsx'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
-import { Layout, Avatar, Carousel } from 'antd'
+import { Layout, Carousel } from 'antd'
 
 import homePageService from '@service/pcPreview'
 
