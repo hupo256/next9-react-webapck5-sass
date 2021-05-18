@@ -81,7 +81,7 @@ export default function CaseDetail(props) {
                   const { url, picDesc = '', spaceDic = {} } = pic
                   return (
                     <div key={ind}>
-                      <b>{spaceDic?.name}</b>
+                      <b>{spaceDic?.name || '其它'}</b>
                       <img src={url} alt="" />
                       <p>{picDesc}</p>
                     </div>
