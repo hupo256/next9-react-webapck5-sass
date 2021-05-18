@@ -24,10 +24,14 @@
 }
 
 .companyHeaderStyle h1 {
-  font-size: 16px;
-  font-weight: 500;
-  color: #3e3e3e;
-  line-height: 22px;
+  font-size: 0;
+  // font-weight: 500;
+  // color: #3e3e3e;
+  // line-height: 22px;
+
+  img {
+    height: 32px;
+  }
 }
 
 .chapterWrapper {

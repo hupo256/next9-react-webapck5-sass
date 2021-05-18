@@ -6,7 +6,7 @@ import { typeMap, paramMap } from '@libs/constants.js'
 const KeyPoints = ({ pointsList }) => {
   return (
     <div className={styles.featurePoints}>
-      {_.map(pointsList, (feature, index) => (
+      {_.map(pointsList, (feature, index) => feature.type === 'games' || (
         <div
           key={index}
           className={styles.featurePoint}

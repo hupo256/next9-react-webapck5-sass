@@ -58,7 +58,10 @@ export default function BasicLayout(props) {
                   >
                     C
                   </Avatar>
-                  <h1>{footerData.companyName}</h1>
+                  <h1>
+                    {footerData.companyName}
+                    <img src={footerData?.logo} />
+                  </h1>
                 </div>
               }
               middle={<MenuList menuList={menuList} />}
