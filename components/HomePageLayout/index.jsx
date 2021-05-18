@@ -49,19 +49,12 @@ export default function BasicLayout(props) {
             <HeaderLayout
               left={
                 <div className={styles.companyHeaderStyle}>
-                  <Avatar
-                    src={footerData?.icon}
-                    className={'avatar'}
-                    style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
-                    size="large"
-                    gap={20}
-                  >
-                    C
-                  </Avatar>
-                  <h1>
-                    {footerData.companyName}
-                    <img src={footerData?.logo} />
-                  </h1>
+                  <img
+                    src={footerData?.logo}
+                    alt={footerData?.companyName}
+                    className={styles.logoStyle}
+                    onClick={() => (window.location.href = '/')}
+                  />
                 </div>
               }
               middle={<MenuList menuList={menuList} />}
@@ -73,7 +66,7 @@ export default function BasicLayout(props) {
                       'https://img.inbase.in-deco.com/crm_saas/release/20210514/26b37fd6c4814b6ba0f589a8e8551f0b/ic_phone.png'
                     }
                   />
-                  <span className={styles.phone}>{footerData.customerService}</span>
+                  <span className={styles.phone}>{footerData?.customerService}</span>
                 </>
               }
             />

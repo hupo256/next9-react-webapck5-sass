@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './siteList.module.scss'
 
-const stageList = [
+const dicList = [
   {
     gongdiStage: 'D210312000010',
     gongdiStageName: '开工大吉',
@@ -33,34 +33,35 @@ const stageList = [
 ]
 
 export default function Steps(props) {
-  const { stage } = props
+  const { stage, dicList } = props
   const [curInd, setcurInd] = useState(0)
+  const dLen = dicList.length
 
   useEffect(() => {
     touchCurInd()
   }, [])
 
   function touchCurInd() {
-    stageList.forEach((item, ind) => {
-      if (item.gongdiStage === stage) setcurInd(ind)
+    dicList.forEach((item, ind) => {
+      if (item.code === stage) setcurInd(ind)
     })
   }
 
   return (
     <div className={styles.setpBox}>
       <div className={styles.stepBg}>
-        <div className={styles.stepHight} style={{ width: `${((curInd + 1) * 100) / stageList.length}%` }}></div>
+        <div className={styles.stepHight} style={{ width: `${((curInd + 1) * 100) / dLen}%` }}></div>
       </div>
       <div className={styles.stepList}>
-        {stageList.map((item, ind) => {
-          const { gongdiStage, gongdiStageName } = item
-          const relativeNum = +stage.slice(1) - +gongdiStage.slice(1)
+        {dicList.map((item, ind) => {
+          const { code, name } = item
+          const relativeNum = curInd - ind
           let cls = ''
           relativeNum > 0 && (cls = 'pass')
           relativeNum === 0 && (cls = 'cur')
           return (
-            <span key={gongdiStage} className={styles[cls]}>
-              {gongdiStageName}
+            <span key={code} className={styles[cls]}>
+              {name}
             </span>
           )
         })}
