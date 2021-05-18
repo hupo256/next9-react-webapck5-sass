@@ -13,7 +13,7 @@ const CaseProjects = ({ data, domain = '' }) => {
   _.forEach(data, (item, index) => {
     data[index]['name'] = `${item.title.length > 6 ? item.title.slice(0, 6) + '...' : item.title}`
     data[index]['text'] = `${item.acreage}m² | ${CHN_NUM_CHAR[item.bedroom]}室${CHN_NUM_CHAR[item.liveroom]}厅 | ${
-      item.decorationCost / 10000
+      item.decorationCost
     }万元`
     caseStyle[`image${index}`] = {
       background: `url(${item.coverPicUrl}) no-repeat center center`,
