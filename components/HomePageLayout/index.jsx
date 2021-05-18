@@ -50,8 +50,8 @@ export default function BasicLayout(props) {
               left={
                 <div className={styles.companyHeaderStyle}>
                   <img
-                    src={footerData.logo}
-                    alt={footerData.companyName}
+                    src={footerData?.logo}
+                    alt={footerData?.companyName}
                     className={styles.logoStyle}
                     onClick={() => (window.location.href = '/')}
                   />
@@ -66,7 +66,7 @@ export default function BasicLayout(props) {
                       'https://img.inbase.in-deco.com/crm_saas/release/20210514/26b37fd6c4814b6ba0f589a8e8551f0b/ic_phone.png'
                     }
                   />
-                  <span className={styles.phone}>{footerData.customerService}</span>
+                  <span className={styles.phone}>{footerData?.customerService}</span>
                 </>
               }
             />
