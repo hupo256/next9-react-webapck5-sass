@@ -13,8 +13,6 @@ import FooterComp from './FooterComp/FooterComp.jsx'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
-
-
 import { Layout, Avatar, Carousel } from 'antd'
 
 import homePageService from '@service/pcPreview'
@@ -48,24 +46,19 @@ const Home = () => {
   const [publishedData, setPublishedData] = useState([])
   const [totopShow, settotopShow] = useState(false)
 
-
-
-
   useEffect(() => {
-    ; (async () => {
+    ;(async () => {
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
       setMenuList(_.get(res, 'data.list', []))
     })()
-
-      ; (async () => {
-        const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
-        setPublishedData(_.get(res, 'data.templateJson.jsonData'), [])
-      })()
-
-      ; (async () => {
-        const res = await getFooter()
-        setFooterData(_.get(res, 'data', []))
-      })()
+    ;(async () => {
+      const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
+      setPublishedData(_.get(res, 'data.templateJson.jsonData'), [])
+    })()
+    ;(async () => {
+      const res = await getFooter()
+      setFooterData(_.get(res, 'data', []))
+    })()
   }, [])
 
   useEffect(() => {
@@ -78,10 +71,8 @@ const Home = () => {
   function conScroll() {
     const clientHeight = document.documentElement.clientHeight //可视区域高度
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop //滚动条滚动高度
-    // console.log(scrollTop, clientHeight)
     settotopShow(scrollTop > clientHeight / 3)
   }
-
 
   if (_.isEmpty(menuList) || _.isEmpty(publishedData) || _.isEmpty(footerData)) return null
 
@@ -89,33 +80,28 @@ const Home = () => {
     <div className={styles.container}>
       <Layout className={styles.mainLayout}>
         <div className={styles.editableWrapper}>
-
           <HeaderLayout
             left={
               <div className={styles.companyHeaderStyle}>
-                <Avatar
+                <img
                   src={footerData.logo}
-                  className={'avatar'}
-                  style={{ backgroundColor: '#FF7300', verticalAlign: 'middle' }}
-                  size="large"
-                  gap={20}
-                >
-                  C
-                </Avatar>
-                <h1>{footerData.companyName}</h1>
+                  alt={footerData.companyName}
+                  className={styles.logoStyle}
+                  onClick={() => (window.location.href = '/')}
+                />
               </div>
             }
             middle={<MenuList menuList={menuList} />}
             right={
-              <>
+              <div className={styles.contactHeader}>
                 <img className={styles.phoneIcon} src={'/img/ic_phone_slices/ic_phone.png'} />
                 <span className={styles.phone}>{footerData.customerService}</span>
-              </>
+              </div>
             }
           />
         </div>
 
-        <Carousel>
+        <Carousel autoplay>
           {_.map(_.get(publishedData, '0.list', null), (item, index) => (
             <div
               key={`banner-${index}`}
@@ -161,12 +147,8 @@ const Home = () => {
           </div>
         </Content>
 
-
-
         <FooterComp data={footerData} />
       </Layout>
-
-
 
       <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
     </div>
