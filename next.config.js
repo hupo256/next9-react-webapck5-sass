@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 
-console.log('process.env 11 ===>', process.env)
+// console.log('process.env 11 ===>', process.env)
 
 module.exports = {
   pageExtensions: ['jsx', 'js'],

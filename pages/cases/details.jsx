@@ -67,7 +67,7 @@ export default function CaseDetail(props) {
                   </li>
                   <li>
                     <span>装修造价：</span>
-                    <b>{decorationCost || '暂无'}</b>
+                    <b>{`${decorationCost ? decorationCost + '万' : '暂无'}`}</b>
                   </li>
                   <li>
                     <span>设计师：</span>

@@ -62,6 +62,7 @@ export default function Footer(props) {
       {labels?.map(item => {
         const { label, tagKey } = item
         const tagArr = searchTags?.[tagKey]
+        if (tagArr?.length === 0) return null
         return (
           <li key={label}>
             <b>{label}</b>

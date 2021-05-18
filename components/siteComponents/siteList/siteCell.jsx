@@ -18,6 +18,7 @@ export default function SiteCell(props) {
           houseType = {},
           gongdiUid,
           gongdiStage,
+          dicList,
         } = item
         const { bedroom, parlor } = houseType
         return (
@@ -33,7 +34,7 @@ export default function SiteCell(props) {
                 {(!!bedroom || !!parlor) && <span>{`${bedroom}室${parlor}厅`}</span>}
                 {houseStyleName && <span>{houseStyleName}</span>}
               </p>
-              <Steps stage={gongdiStage} />
+              <Steps stage={gongdiStage} dicList={dicList} />
             </div>
           </li>
         )
