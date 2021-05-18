@@ -24,7 +24,10 @@ export default function FooterComp({ data }) {
           <div>
             <b>公众号</b>
             <img className={styles.qrCodeImg} src={wechatQrCode} alt="" />
-            <p>微信公众号：{wechatName}</p>
+            <p>
+              微信公众号：
+              {wechatName}
+            </p>
           </div>
           <div className={styles.contactUs}>
             <b>联系我们</b>
