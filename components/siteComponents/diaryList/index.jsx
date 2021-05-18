@@ -29,21 +29,21 @@ export default function DiaryList(props) {
     })
   }
 
-  function touchDiaryList() {
+  function touchDiaryList(config) {
     const { gongdiUid = '' } = urlParamHash()
     const param = {
       gongdiUid,
       pageNum: 1,
-      pageSize: 10,
+      pageSize: 5,
     }
-    siteApi.siteDiaryList(param).then(res => {
+    siteApi.siteDiaryList({ ...param, ...config }).then(res => {
       console.log(res)
     })
   }
 
-  function pageChange(num, size, gdStage) {
-    console.log(num, size)
-    touchDiaryList({ pageNum: num, pageSize: size, gongdiStage: gdStage })
+  function pageChange(num, size, gongdiStage) {
+    console.log(num, size, gongdiStage)
+    touchDiaryList({ pageNum: num, pageSize: size, gongdiStage })
   }
 
   function diaryImgClick(imgInd, item) {
@@ -82,16 +82,6 @@ export default function DiaryList(props) {
                             </div>
                           )
                         })}
-                        {/* {!!window?.document && (
-                          <Viewer
-                            visible={viewShow}
-                            onClose={() => viewMaskClick(stage)}
-                            onMaskClick={() => viewMaskClick(stage)}
-                            images={fileList?.map(file => ({ src: file.fileUrl, alt: file.fileUid }))}
-                            activeIndex={viewInd}
-                          />
-                        )} */}
-
                         <Viewer
                           visible={viewShow}
                           onClose={() => viewMaskClick(stage)}
@@ -107,7 +97,8 @@ export default function DiaryList(props) {
                   <div className={styles.pageBox}>
                     <Pagination
                       hideOnSinglePage={true}
-                      onChange={(num, size) => pageChange(num, size, list?.gongdiStage)}
+                      defaultPageSize={5}
+                      onChange={(num, size) => pageChange(num, size, dicCode)}
                       defaultCurrent={1}
                       total={recordTotal}
                       size="small"
