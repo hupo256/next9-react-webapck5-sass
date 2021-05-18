@@ -20,7 +20,7 @@ module.exports = {
     return config
   },
   env: {
-    WEBPACK_ENV: JSON.stringify(process.env?.NODE_ENV),
+    WEBPACK_ENV: JSON.stringify(process.env.NODE_ENV),
   },
   publicRuntimeConfig: {
     IS_ENV: process.env?.NODE_ENV,
