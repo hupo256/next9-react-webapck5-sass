@@ -19,10 +19,6 @@ const breadData = {
     url: '/articles',
     name: '装修攻略',
   },
-  scss: {
-    url: '/scss',
-    name: 'tta',
-  },
 }
 export default function Footer(props) {
   const [levalTwo, setlevalTwo] = useState('')

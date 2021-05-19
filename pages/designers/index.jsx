@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/HomePageLayout'
-import { Pagination } from 'antd'
+import { Pagination, Tooltip } from 'antd'
 import Router from 'next/router'
 import tools from '@libs/utils'
 import designerApi from '@service/designerApi'
@@ -59,7 +59,9 @@ export default function Site(props) {
                           <b>{name}</b> <span>{position}</span>
                         </h3>
                         <p>{styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
-                        <p>{designConcept}</p>
+                        <Tooltip title={designConcept}>
+                          <p className={styles.desConcept}>{designConcept}</p>
+                        </Tooltip>
                       </div>
                     </div>
                     <p>{description}</p>

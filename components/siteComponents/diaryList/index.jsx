@@ -41,9 +41,9 @@ export default function DiaryList(props) {
     })
   }
 
-  function pageChange(num, size, gongdiStage) {
-    console.log(num, size, gongdiStage)
-    touchDiaryList({ pageNum: num, pageSize: size, gongdiStage })
+  function pageChange(num, size, gongdiDicUid) {
+    console.log(num, size, gongdiDicUid)
+    touchDiaryList({ pageNum: num, pageSize: size, gongdiDicUid })
   }
 
   function diaryImgClick(imgInd, item) {
@@ -62,7 +62,7 @@ export default function DiaryList(props) {
       {diarys?.length > 0 ? (
         <div className={styles.diaryBox}>
           {diarys.map((diary, ind) => {
-            const { dicCode, dicName, pageList = {} } = diary
+            const { dicCode, dicName, dicUid, pageList = {} } = diary
             const { recordTotal, list } = pageList
             return (
               <div key={dicCode} className={styles.cellDiary}>
@@ -98,7 +98,7 @@ export default function DiaryList(props) {
                     <Pagination
                       hideOnSinglePage={true}
                       defaultPageSize={5}
-                      onChange={(num, size) => pageChange(num, size, dicCode)}
+                      onChange={(num, size) => pageChange(num, size, dicUid)}
                       defaultCurrent={1}
                       total={recordTotal}
                       size="small"

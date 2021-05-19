@@ -34,6 +34,7 @@ export default function Site(props) {
 
   function touchList(config = {}) {
     const param = {
+      articleDicUid: curId,
       articleStatus: 1,
       pageNum: 1,
       pageSize: 10,
