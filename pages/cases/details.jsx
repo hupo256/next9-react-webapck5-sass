@@ -3,6 +3,7 @@ import BasicLayout from '@components/HomePageLayout'
 import tools from '@libs/utils'
 import caseApi from '@service/caseApi'
 import BreadBar from '@components/breadBar'
+import RoomType from '@components/roomType'
 import styles from './case.module.scss'
 
 const { urlParamHash } = tools
@@ -11,8 +12,6 @@ export default function CaseDetail(props) {
   const [details, setdetails] = useState({})
   const {
     buildingName,
-    liveroom,
-    bedroom,
     acreage,
     styleDicName,
     decorationCost,
@@ -55,7 +54,9 @@ export default function CaseDetail(props) {
                   </li>
                   <li>
                     <span>案例户型：</span>
-                    <b>{`${bedroom || 0}室${liveroom || 0}厅`}</b>
+                    <b>
+                      <RoomType {...details} />
+                    </b>
                   </li>
                   <li>
                     <span>案例面积：</span>

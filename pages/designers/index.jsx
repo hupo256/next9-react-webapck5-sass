@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/HomePageLayout'
-import { Pagination } from 'antd'
+import { Pagination, Tooltip } from 'antd'
 import Router from 'next/router'
 import tools from '@libs/utils'
 import designerApi from '@service/designerApi'
 import BreadBar from '@components/breadBar'
+import RoomType from '@components/roomType'
 import desStyles from './designers.module.scss'
 
 const { baseImgUrl } = tools
@@ -59,15 +60,17 @@ export default function Site(props) {
                           <b>{name}</b> <span>{position}</span>
                         </h3>
                         <p>{styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
-                        <p>{designConcept}</p>
+                        <Tooltip title={designConcept}>
+                          <p className={styles.desConcept}>{designConcept}</p>
+                        </Tooltip>
                       </div>
                     </div>
                     <p>{description}</p>
                   </div>
 
                   <div className={desStyles.caseInfo}>
-                    {caseList?.list?.map((cs, ind) => {
-                      const { coverPicUrl, acreage, buildingName, liveroom, bedroom, styleDic = {}, uid } = cs
+                    {caseList?.list?.map((item, ind) => {
+                      const { coverPicUrl, acreage, buildingName, styleDic = {}, uid } = item
                       return (
                         <div key={ind} className={desStyles.minImgBox}>
                           <img
@@ -77,7 +80,7 @@ export default function Site(props) {
                             <p>
                               {buildingName && <span>{`${buildingName}`}</span>}
                               {acreage && <span>{` | ${acreage}m²`}</span>}
-                              {(!!bedroom || !!liveroom) && <span>{` | ${bedroom}室${liveroom}厅`}</span>}
+                              <RoomType {...item} />
                               {styleDic?.name && <span>{` | ${styleDic.name}`}</span>}
                             </p>
                             <a onClick={() => Router.push(`/cases/details?uid=${uid}`)}>查看详情</a>

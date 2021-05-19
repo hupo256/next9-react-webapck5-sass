@@ -31,15 +31,6 @@ const ChapterLayout = ({ children, title, description }) => (
   </div>
 )
 
-const contentStyle = {
-  height: '460px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#364d79',
-  backgroundSize: 'cover',
-}
-
 const Home = () => {
   const [menuList, setMenuList] = useState([])
   const [footerData, setFooterData] = useState([])
@@ -110,9 +101,9 @@ const Home = () => {
               }
             >
               <h3
+                className={styles.banner}
                 style={{
-                  ...contentStyle,
-                  background: `url(${_.get(item, 'imgUrl')} ) no-repeat center center`,
+                  backgroundImage: `url(${_.get(item, 'imgUrl')})`,
                 }}
               >
                 {' '}

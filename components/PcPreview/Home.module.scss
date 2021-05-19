@@ -5,10 +5,13 @@
 }
 
 .banner {
-  height: 450px;
+  height: 460px;
+  color: #fff;
+  line-height: 160px;
   text-align: center;
-  padding-top: 66px;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .mainWrapper {
