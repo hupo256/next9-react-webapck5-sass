@@ -17,8 +17,8 @@ export default function CaseDetail(props) {
     decorationCost,
     designerName,
     position,
-    casePics = [],
-    styleDics = [],
+    casePicGroups,
+    styleDics,
     headPicUrl,
     workingTime,
   } = details
@@ -78,13 +78,20 @@ export default function CaseDetail(props) {
               </div>
 
               <div className={styles.detDec}>
-                {casePics?.map((pic, ind) => {
-                  const { url, picDesc = '', spaceDic = {} } = pic
+                {casePicGroups?.map(cPic => {
+                  const { spaceName = '其它', spaceDicCode, casePics } = cPic
                   return (
-                    <div key={ind}>
-                      <b>{spaceDic?.name || '其它'}</b>
-                      <img src={url} alt="" />
-                      <p>{picDesc}</p>
+                    <div key={spaceDicCode}>
+                      <b>{spaceName}</b>
+                      {casePics?.map((pic, ind) => {
+                        const { url, picDesc = '' } = pic
+                        return (
+                          <div key={ind}>
+                            <img src={url} alt="" />
+                            <p>{picDesc}</p>
+                          </div>
+                        )
+                      })}
                     </div>
                   )
                 })}

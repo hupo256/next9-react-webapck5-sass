@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './noData.module.scss'
 
-export default function Footer(props) {
+export default function NoData(props) {
   const { tips = '数据' } = props
 
   return (

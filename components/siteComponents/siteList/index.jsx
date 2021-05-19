@@ -5,7 +5,7 @@ import NoData from '@components/noData'
 import SiteCell from './siteCell'
 import styles from './siteList.module.scss'
 
-export default function CaseList(props) {
+export default function SiteList(props) {
   const { from } = props
   const { touchDataList, dataList } = useCaseContext()
   useEffect(() => {

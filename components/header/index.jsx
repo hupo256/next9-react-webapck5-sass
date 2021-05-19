@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 
-export default function Footer(props) {
+export default function Header(props) {
   const { title, keywords, description } = props
   const con = keywords && typeof keywords === 'string' ? JSON.parse(keywords) : keywords
 
