@@ -70,7 +70,7 @@ export default function Site(props) {
 
                   <div className={desStyles.caseInfo}>
                     {caseList?.list?.map((item, ind) => {
-                      const { coverPicUrl, acreage, buildingName, styleDic = {}, uid } = item
+                      const { coverPicUrl, acreage, buildingName, bedroom, liveroom, styleDic = {}, uid } = item
                       return (
                         <div key={ind} className={desStyles.minImgBox}>
                           <img
@@ -78,11 +78,16 @@ export default function Site(props) {
                           />
                           <div className={desStyles.imgCove}>
                             <p>
-                              {buildingName && <span>{`${buildingName}`}</span>}
-                              {acreage && <span>{` | ${acreage}m²`}</span>}
+                              {buildingName && (
+                                <b>
+                                  {`${buildingName}`}
+                                  {/* <s>{`${buildingName}`}</s> */}
+                                </b>
+                              )}
+                              {acreage && <span>{`${acreage}m² | `}</span>}
                               <RoomType {...item} />
-                              {/* {(!!bedroom || !!liveroom) && <RoomType {...item} />} */}
-                              {styleDic?.name && <span>{` | ${styleDic.name}`}</span>}
+                              {!!bedroom || !!liveroom ? ` | ` : ''}
+                              {styleDic?.name && <span>{`${styleDic.name}`}</span>}
                             </p>
                             <a onClick={() => Router.push(`/cases/details?uid=${uid}`)}>查看详情</a>
                           </div>
