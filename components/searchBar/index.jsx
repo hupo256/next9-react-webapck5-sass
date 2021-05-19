@@ -32,7 +32,7 @@ export const siteLabels = [
   },
 ]
 
-export default function Footer(props) {
+export default function SearchBar(props) {
   const { from } = props
   const { searchPara, setsearchPara, searchTags, touchSearchTags, touchDataList } = useCaseContext()
   const isSite = from === 'sites'

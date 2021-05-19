@@ -13,14 +13,14 @@ const breadData = {
   },
   designers: {
     url: '/designers',
-    name: '找设计师',
+    name: '设计师',
   },
   articles: {
     url: '/articles',
     name: '装修攻略',
   },
 }
-export default function Footer(props) {
+export default function BreadBar(props) {
   const [levalTwo, setlevalTwo] = useState('')
   const [levalTex, setlevalTex] = useState('')
 

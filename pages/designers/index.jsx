@@ -81,6 +81,7 @@ export default function Site(props) {
                               {buildingName && <span>{`${buildingName}`}</span>}
                               {acreage && <span>{` | ${acreage}m²`}</span>}
                               <RoomType {...item} />
+                              {/* {(!!bedroom || !!liveroom) && <RoomType {...item} />} */}
                               {styleDic?.name && <span>{` | ${styleDic.name}`}</span>}
                             </p>
                             <a onClick={() => Router.push(`/cases/details?uid=${uid}`)}>查看详情</a>
