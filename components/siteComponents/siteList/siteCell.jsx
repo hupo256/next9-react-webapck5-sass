@@ -21,7 +21,6 @@ export default function SiteCell(props) {
           gongdiStage,
           dicList,
         } = item
-        const { parlor } = houseType
         return (
           <li key={gongdiUid} onClick={() => Router.push(`/sites/details?gongdiUid=${gongdiUid}`)}>
             <div className={styles.minImgBox}>
@@ -32,7 +31,7 @@ export default function SiteCell(props) {
               <h5>{buildingName}</h5>
               <p>
                 {buildingArea && <span>{`${buildingArea}m²`}</span>}
-                <RoomType {...houseType} liveroom={parlor} />
+                <RoomType {...houseType} />
                 {houseStyleName && <span>{houseStyleName}</span>}
               </p>
               <Steps stage={gongdiStage} dicList={dicList} />
