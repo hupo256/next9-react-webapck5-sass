@@ -60,3 +60,26 @@ li {
   background: #ff7300;
   font-weight: 400;
 }
+
+/* 定制carousel */
+.ant-carousel .slick-dots li {
+  background: #ffffff;
+  opacity: 0.5;
+  border-radius: 4px;
+  height: 7px;
+}
+.ant-carousel .slick-dots li button {
+  background-color: #fff;
+  height: 7px;
+  border-radius: 4px;
+  width: 14px;
+}
+.ant-carousel .slick-dots li.slick-active {
+  opacity: 1;
+}
+.ant-carousel .slick-dots li.slick-active .button {
+  width: 30px;
+}
+.ant-carousel .slick-slide {
+  height: 460px;
+}
