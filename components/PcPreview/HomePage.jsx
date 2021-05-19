@@ -92,7 +92,7 @@ const Home = () => {
           />
         </div>
 
-        <Carousel autoplay2>
+        <Carousel autoplay>
           {_.map(_.get(publishedData, '0.list', null), (item, index) => (
             <div
               key={`banner-${index}`}
