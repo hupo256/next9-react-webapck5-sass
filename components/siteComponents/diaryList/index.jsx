@@ -29,21 +29,21 @@ export default function DiaryList(props) {
     })
   }
 
-  function touchDiaryList(config) {
+  function pageChange(num, size, gongdiDicUid, curInd) {
     const { gongdiUid = '' } = urlParamHash()
+    console.log(num, size, gongdiDicUid)
     const param = {
       gongdiUid,
-      pageNum: 1,
-      pageSize: 5,
+      gongdiDicUid,
+      pageNum: num,
+      pageSize: size,
     }
     siteApi.siteDiaryList({ ...param, ...config }).then(res => {
       console.log(res)
+      if (!res?.data) return
+      diarys[curInd].pageList.list = res.data?.list || []
+      setdiarys(diarys.slice())
     })
-  }
-
-  function pageChange(num, size, gongdiDicUid) {
-    console.log(num, size, gongdiDicUid)
-    touchDiaryList({ pageNum: num, pageSize: size, gongdiDicUid })
   }
 
   function diaryImgClick(imgInd, item) {
@@ -98,7 +98,7 @@ export default function DiaryList(props) {
                     <Pagination
                       hideOnSinglePage={true}
                       defaultPageSize={5}
-                      onChange={(num, size) => pageChange(num, size, dicUid)}
+                      onChange={(num, size) => pageChange(num, size, dicUid, ind)}
                       defaultCurrent={1}
                       total={recordTotal}
                       size="small"
