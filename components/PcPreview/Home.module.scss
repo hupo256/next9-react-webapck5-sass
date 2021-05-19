@@ -1,16 +1,3 @@
-// body {
-//   --themeColor: #ff7300;
-
-//   // wechat-sass-front 特需 样式重置
-//   p {
-//     margin-bottom: 0;
-//   }
-
-//   h1 {
-//     margin-bottom: 0;
-//   }
-// }
-
 .mainLayout {
   min-height: 100vh;
   background-color: #fff;
@@ -55,10 +42,8 @@
   align-items: center;
   height: 100%;
   gap: 12px;
-}
-.companyHeaderStyle .avatar {
-  background-color: '--themeColor';
-  vertical-align: 'middle';
+  overflow: hidden;
+  max-width: 200px;
 }
 
 .companyHeaderStyle h1 {

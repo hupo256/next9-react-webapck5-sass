@@ -42,19 +42,19 @@ export default function Footer(props) {
     touchSearchTags(from)
   }, [])
 
-  function tagClick(e, key, code) {
+  function tagClick(key, code) {
     let curCode = ''
     const preCode = searchPara[key]
-    if (preCode === code) {
-      curCode = ''
-      delete searchPara[key]
-    } else {
-      curCode = code
-      searchPara[key] = code
-    }
+    // if (preCode === code) {
+    //   curCode = ''
+    //   delete searchPara[key]
+    // } else {
+    curCode = code
+    searchPara[key] = code
+    // }
 
     setsearchPara(searchPara)
-    touchDataList({ [key]: curCode, from })
+    preCode !== code && touchDataList({ [key]: curCode, from })
   }
 
   return (
@@ -73,7 +73,7 @@ export default function Footer(props) {
                 return (
                   <span
                     className={`${searchPara?.[tagKey] === val ? styles.on : ''}`}
-                    onClick={e => tagClick(e, tagKey, val)}
+                    onClick={() => tagClick(tagKey, val)}
                     key={name}
                   >
                     {name}

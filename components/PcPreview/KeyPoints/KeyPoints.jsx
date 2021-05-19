@@ -3,15 +3,20 @@ import _ from 'lodash'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
-const KeyPoints = ({ pointsList }) => {
+const KeyPoints = ({ pointsList, domain = '' }) => {
   return (
     <div className={styles.featurePoints}>
       {_.map(pointsList, (feature, index) => (
         <div
           key={index}
           className={styles.featurePoint}
-          onClick={() => feature.type === 'games' ||
-            (window.location.href = `/${typeMap[feature.type]}/details?${paramMap[feature.type]}=${feature.uid}`)
+          onClick={() =>
+            feature.type === 'games' ||
+            !feature.uid ||
+            !feature.type ||
+            (window.location.href = `${domain}/${typeMap[feature.type]}/details?${paramMap[feature.type]}=${
+              feature.uid
+            }`)
           }
           style={{ cursor: feature.type === 'games' ? 'default' : 'pointer' }}
         >

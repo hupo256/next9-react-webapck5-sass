@@ -19,6 +19,6 @@ if (NEXT_PUBLIC_ENV === 'PROD') {
   host = '//gateway.ingongdi.com/'
 }
 
-// console.log('host = ', host)
+console.log('host = ', host)
 
 export default { host }
