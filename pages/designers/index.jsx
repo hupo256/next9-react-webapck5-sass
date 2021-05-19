@@ -5,6 +5,7 @@ import Router from 'next/router'
 import tools from '@libs/utils'
 import designerApi from '@service/designerApi'
 import BreadBar from '@components/breadBar'
+import RoomType from '@components/roomType'
 import desStyles from './designers.module.scss'
 
 const { baseImgUrl } = tools
@@ -68,8 +69,8 @@ export default function Site(props) {
                   </div>
 
                   <div className={desStyles.caseInfo}>
-                    {caseList?.list?.map((cs, ind) => {
-                      const { coverPicUrl, acreage, buildingName, liveroom, bedroom, styleDic = {}, uid } = cs
+                    {caseList?.list?.map((item, ind) => {
+                      const { coverPicUrl, acreage, buildingName, styleDic = {}, uid } = item
                       return (
                         <div key={ind} className={desStyles.minImgBox}>
                           <img
@@ -79,7 +80,7 @@ export default function Site(props) {
                             <p>
                               {buildingName && <span>{`${buildingName}`}</span>}
                               {acreage && <span>{` | ${acreage}m²`}</span>}
-                              {(!!bedroom || !!liveroom) && <span>{` | ${bedroom}室${liveroom}厅`}</span>}
+                              <RoomType {...item} />
                               {styleDic?.name && <span>{` | ${styleDic.name}`}</span>}
                             </p>
                             <a onClick={() => Router.push(`/cases/details?uid=${uid}`)}>查看详情</a>
