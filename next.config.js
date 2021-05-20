@@ -12,11 +12,7 @@ module.exports = {
     // console.log('dev===========>', dev)
     // console.log('isServer===========>', isServer)
     // console.log('defaultLoaders===========>', defaultLoaders)
-    // console.log('webpack.version', webpack.version)
-
-    // new webpack.DefinePlugin({
-    //   IS_ENV: JSON.stringify(dev ? 'dev' : 'prod'),
-    // })
+    console.log('webpack.version', options.webpack.version)
 
     const { ModuleFederationPlugin } = options.webpack.container
     config.plugins.push(
@@ -26,13 +22,6 @@ module.exports = {
         exposes: {
           './noData': './components/noData',
         },
-        // remotes: {
-        //   app2: 'app2@http://localhost:3002/remoteEntry.js',
-        // },
-        // shared: {
-        //   react: { singleton: true },
-        //   'react-dom': { singleton: true },
-        // },
       }),
     )
     return config
