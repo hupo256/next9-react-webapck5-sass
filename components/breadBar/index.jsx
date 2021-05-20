@@ -32,7 +32,9 @@ export default function BreadBar(props) {
     const { pathname } = location
     const arr = pathname.split('/')
     const len = arr.length
-    len > 2 && setlevalTwo(arr[1])
+    // 部署后nginx会在一级后默认加个 /
+    // 下面兼容这个场景
+    len > 2 && arr[2].includes('details') && setlevalTwo(arr[1])
     len === 2 && setlevalTex(breadData?.[arr[1]]?.name)
   }
 
