@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
   })
 
   useEffect(() => {
-    ; (async () => {
+    ;(async () => {
       const res = await homePageService.getFooter()
       const data = _.get(res, 'data', {})
       setFooterData(data)
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }) {
             try {
               const res = await axios.get(src)
               eval(res.data)
-            } catch (e) { }
+            } catch (e) {}
           }
         })
       }
