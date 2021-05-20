@@ -9,7 +9,7 @@ const breadData = {
   },
   sites: {
     url: '/sites',
-    name: '工地直播',
+    name: '参观工地',
   },
   designers: {
     url: '/designers',
