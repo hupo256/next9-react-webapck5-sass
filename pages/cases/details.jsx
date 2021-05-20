@@ -54,9 +54,7 @@ export default function CaseDetail(props) {
                   </li>
                   <li>
                     <span>案例户型：</span>
-                    <b>
-                      <RoomType {...details} />
-                    </b>
+                    <b>{!!bedroom || !!liveroom ? <RoomType {...details} /> : '暂无'}</b>
                   </li>
                   <li>
                     <span>案例面积：</span>
