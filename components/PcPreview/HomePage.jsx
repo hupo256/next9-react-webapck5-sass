@@ -94,23 +94,27 @@ const Home = () => {
         </div>
 
         <Carousel autoplay>
-          {_.map(_.get(publishedData, '0.list', null), (item, index) => (
-            <div
-              key={`banner-${index}`}
-              onClick={() =>
-                (window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`)
-              }
-            >
-              <h3
-                className={styles.banner}
-                style={{
-                  backgroundImage: `url(${_.get(item, 'imgUrl')})`,
-                }}
-              >
-                {' '}
-              </h3>
-            </div>
-          ))}
+          {_.map(
+            _.get(publishedData, '0.list', null),
+            (item, index) =>
+              item.type === 'games' || (
+                <div
+                  key={`banner-${index}`}
+                  onClick={() =>
+                    (window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`)
+                  }
+                >
+                  <h3
+                    className={styles.banner}
+                    style={{
+                      backgroundImage: `url(${_.get(item, 'imgUrl')})`,
+                    }}
+                  >
+                    {' '}
+                  </h3>
+                </div>
+              ),
+          )}
         </Carousel>
 
         <Content className={styles.mainWrapper}>
