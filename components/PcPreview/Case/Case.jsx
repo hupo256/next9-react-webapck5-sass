@@ -1,6 +1,6 @@
 import { BtnMore } from '../btn'
 import _ from 'lodash'
-import styles from './Case.module.less'
+import styles from './Case.module.scss'
 
 const CHN_NUM_CHAR = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
 

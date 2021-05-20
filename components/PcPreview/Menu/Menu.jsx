@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import styles from './Menu.module.less'
+import styles from './Menu.module.scss'
 import { useState, useEffect } from 'react'
 
 const MAX_CHUNK_SIZE = 40
@@ -26,6 +26,7 @@ const MenuListComp = ({ menuList }) => {
   const hasNext = () => {
     return Boolean(chunkIndex + 1 < menuChunkList.length)
   }
+
 
   useEffect(() => {
     if (_.isEmpty(menuList)) return
@@ -56,6 +57,7 @@ const MenuListComp = ({ menuList }) => {
     setExtraCharCount(extraCharCount)
   }, [menuList])
 
+
   useEffect(() => {
     if (_.isEmpty(menuChunkList)) return
 
@@ -70,6 +72,7 @@ const MenuListComp = ({ menuList }) => {
           }
         })
       })
+
     }
   }, [menuChunkList])
 
