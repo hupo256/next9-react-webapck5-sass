@@ -21,6 +21,8 @@ export default function CaseDetail(props) {
     styleDics,
     headPicUrl,
     workingTime,
+    bedroom,
+    liveroom,
   } = details
 
   useEffect(() => {
