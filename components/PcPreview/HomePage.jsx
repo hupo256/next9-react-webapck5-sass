@@ -79,6 +79,7 @@ const Home = () => {
                   alt={footerData.companyName}
                   className={styles.logoStyle}
                   onClick={() => (window.location.href = '/')}
+                  style={{ cursor: 'pointer' }}
                 />
               </div>
             }
