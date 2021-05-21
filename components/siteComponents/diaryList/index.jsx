@@ -38,7 +38,7 @@ export default function DiaryList(props) {
       pageNum: num,
       pageSize: size,
     }
-    siteApi.siteDiaryList({ ...param, ...config }).then(res => {
+    siteApi.siteDiaryList(param).then(res => {
       console.log(res)
       if (!res?.data) return
       diarys[curInd].pageList.list = res.data?.list || []

@@ -54,6 +54,10 @@ $borderColor: #eee;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
+
+          span {
+            color: rgba(0, 0, 0, 0.85);
+          }
         }
       }
     }
