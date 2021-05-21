@@ -53,9 +53,9 @@ const MenuListComp = ({ menuList }) => {
 
       while (charCount <= MAX_CHUNK_SIZE && !_.isNil(menuListClone[index])) {
         oneChunk.push(menuListClone[index])
-        const websiteName = _.get(menuListClone, `${index}.websiteName`, '')
-        if (websiteName) {
-          charCount += websiteName.length
+        const webViewName = _.get(menuListClone, `${index}.webViewName`, '')
+        if (webViewName) {
+          charCount += webViewName.length
         }
         index++
       }
@@ -149,7 +149,7 @@ const MenuListComp = ({ menuList }) => {
                 className={isCurrentMenu(item, current) ? styles.active : undefined}
                 onClick={e => clickMenuItem(item)}
               >
-                {item.websiteName}
+                {item.webViewName}
               </a>
               {index + 1 === menuChunkList[chunkIndex].length && hasNext() && (
                 <div className={styles.arrowWrapperNext} onClick={() => setChunkIndex(chunkIndex + 1)}>
