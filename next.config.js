@@ -17,11 +17,18 @@ module.exports = {
     const { ModuleFederationPlugin } = options.webpack.container
     config.plugins.push(
       new ModuleFederationPlugin({
-        name: 'noData',
-        filename: 'noData.js',
+        name: 'mktNext',
+        filename: 'remoteEntry.js',
         exposes: {
           './noData': './components/noData',
         },
+        // remotes: {
+        //   fdTest: 'fdTest@http://localhost:3004/remoteEntry.js',
+        // },
+        // shared: {
+        //   react: { singleton: true, eager: true },
+        //   'react-dom': { singleton: true },
+        // },
       }),
     )
     return config
