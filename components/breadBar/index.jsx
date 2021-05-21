@@ -34,8 +34,10 @@ export default function BreadBar(props) {
     const len = arr.length
     // 部署后nginx会在一级后默认加个 /
     // 下面兼容这个场景
-    len > 2 && arr[2].includes('details') && setlevalTwo(arr[1])
-    len === 2 && setlevalTex(breadData?.[arr[1]]?.name)
+    if (len > 2) {
+      arr[2].includes('details') && setlevalTwo(arr[1])
+      !arr[2].includes('details') && setlevalTex(breadData?.[arr[1]]?.name)
+    }
   }
 
   return (
