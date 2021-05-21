@@ -13,7 +13,7 @@ import FooterComp from './FooterComp/FooterComp.jsx'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
-import { Layout, Carousel } from 'antd'
+import { Layout, Carousel, message } from 'antd'
 
 import homePageService from '@service/pcPreview'
 
@@ -97,10 +97,13 @@ const Home = () => {
           {_.map(_.get(publishedData, '0.list', null), (item, index) => (
             <div
               key={`banner-${index}`}
-              onClick={() =>
-                item.type === 'games' ||
-                (window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`)
-              }
+              onClick={() => {
+                if (item.type === 'games') {
+                  message.warning('PC端不允许跳转到小游戏')
+                  return
+                }
+                window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`
+              }}
             >
               <h3
                 className={styles.banner}
