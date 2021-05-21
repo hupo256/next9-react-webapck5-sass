@@ -120,7 +120,8 @@ const MenuListComp = ({ menuList }) => {
     setCurrent(null)
   }, [menuList])
 
-  const clickMenuItem = ({ linkUrl }) => {
+  const clickMenuItem = ({ linkUrl, uid }) => {
+    if (!uid) return
     window.location.href = linkUrl
   }
 
