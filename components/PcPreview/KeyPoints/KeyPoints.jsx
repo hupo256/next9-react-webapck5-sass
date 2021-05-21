@@ -3,6 +3,9 @@ import _ from 'lodash'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
+const isHide = feature => {
+  return feature.type === 'games' || !feature.uid || !feature.type
+}
 const KeyPoints = ({ pointsList, domain = '' }) => {
   return (
     <div className={styles.featurePoints}>
@@ -11,14 +14,12 @@ const KeyPoints = ({ pointsList, domain = '' }) => {
           key={index}
           className={styles.featurePoint}
           onClick={() =>
-            feature.type === 'games' ||
-            !feature.uid ||
-            !feature.type ||
+            isHide(feature) ||
             (window.location.href = `${domain}/${typeMap[feature.type]}/details?${paramMap[feature.type]}=${
               feature.uid
             }`)
           }
-          style={{ cursor: feature.type === 'games' ? 'default' : 'pointer' }}
+          style={{ cursor: isHide(feature) ? 'default' : 'pointer' }}
         >
           <img src={feature.icon} />
           <p className={styles.pointTitle}>{feature.title}</p>
