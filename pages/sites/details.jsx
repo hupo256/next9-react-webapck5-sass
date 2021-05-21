@@ -34,11 +34,9 @@ export default function SiteDetail(props) {
           <BreadBar curTit={gongdiTitle} />
 
           {/* detail */}
-          {gongdiStage && (
-            <div className={styles.detailCard}>
-              <SiteCell list={[details]} />
-            </div>
-          )}
+          <div className={styles.detailCard}>
+            <SiteCell list={[details]} />
+          </div>
 
           <DiaryList />
         </div>
