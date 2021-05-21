@@ -12,4 +12,5 @@ export const paramMap = {
   site: 'gongdiUid',
   article: 'articleUid',
   design: 'uid',
+  special: 'uid',
 }
