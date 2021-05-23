@@ -22,13 +22,10 @@ module.exports = {
         exposes: {
           './noData': './components/noData',
         },
-        // remotes: {
-        //   fdTest: 'fdTest@http://localhost:3004/remoteEntry.js',
-        // },
-        // shared: {
-        //   react: { singleton: true, eager: true },
-        //   'react-dom': { singleton: true },
-        // },
+        remotes: {
+          fdTest: 'fdTest@http://localhost:3004/remoteEntry.js',
+        },
+        // shared: ['react', 'react-dom', 'react-router-dom'],
       }),
     )
     return config
