@@ -13,7 +13,7 @@ import FooterComp from './FooterComp/FooterComp.jsx'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
-import { Layout, Avatar, Carousel } from 'antd'
+import { Layout, Carousel, message } from 'antd'
 
 import homePageService from '@service/pcPreview'
 
@@ -30,15 +30,6 @@ const ChapterLayout = ({ children, title, description }) => (
     {children}
   </div>
 )
-
-const contentStyle = {
-  height: '460px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#364d79',
-  backgroundSize: 'cover',
-}
 
 const Home = () => {
   const [menuList, setMenuList] = useState([])
@@ -88,6 +79,7 @@ const Home = () => {
                   alt={footerData.companyName}
                   className={styles.logoStyle}
                   onClick={() => (window.location.href = '/')}
+                  style={{ cursor: 'pointer' }}
                 />
               </div>
             }
@@ -105,14 +97,18 @@ const Home = () => {
           {_.map(_.get(publishedData, '0.list', null), (item, index) => (
             <div
               key={`banner-${index}`}
-              onClick={() =>
-                (window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`)
-              }
+              onClick={() => {
+                if (item.type === 'games') {
+                  message.warning('PC端不允许跳转到小游戏')
+                  return
+                }
+                window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`
+              }}
             >
               <h3
+                className={styles.banner}
                 style={{
-                  ...contentStyle,
-                  background: `url(${_.get(item, 'imgUrl')} ) no-repeat center center`,
+                  backgroundImage: `url(${_.get(item, 'imgUrl')})`,
                 }}
               >
                 {' '}
@@ -131,18 +127,18 @@ const Home = () => {
           </ChapterLayout>
 
           <div className={styles.designerSectionWiderBackground}>
-            <ChapterLayout title={'首席设计师'} description={'定制全套装修方案'}>
-              <DesignerContent data={_.get(publishedData, '4.list')} />
+            <ChapterLayout title={'参观工地'} description={'全程透明 追踪可查'}>
+              <LiveShow data={_.get(publishedData, '3.list')} />
             </ChapterLayout>
           </div>
 
-          <ChapterLayout title={'装修攻略'} description={'一分钟了解家装'}>
-            <Articles data={_.slice(_.get(publishedData, '5.list'), 0, 3)} />
+          <ChapterLayout title={'首席设计师'} description={'定制全套装修方案'}>
+            <DesignerContent data={_.get(publishedData, '4.list')} />
           </ChapterLayout>
 
           <div className={styles.designerSectionWiderBackground}>
-            <ChapterLayout title={'工地直播'} description={'全程透明 追踪可查'}>
-              <LiveShow data={_.get(publishedData, '3.list')} />
+            <ChapterLayout title={'装修攻略'} description={'一分钟了解家装'}>
+              <Articles data={_.slice(_.get(publishedData, '5.list'), 0, 3)} />
             </ChapterLayout>
           </div>
         </Content>

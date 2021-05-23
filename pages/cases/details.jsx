@@ -3,6 +3,7 @@ import BasicLayout from '@components/HomePageLayout'
 import tools from '@libs/utils'
 import caseApi from '@service/caseApi'
 import BreadBar from '@components/breadBar'
+import RoomType from '@components/roomType'
 import styles from './case.module.scss'
 
 const { urlParamHash } = tools
@@ -11,17 +12,17 @@ export default function CaseDetail(props) {
   const [details, setdetails] = useState({})
   const {
     buildingName,
-    liveroom,
-    bedroom,
     acreage,
     styleDicName,
     decorationCost,
     designerName,
     position,
-    casePics = [],
-    styleDics = [],
+    casePicGroups,
+    styleDics,
     headPicUrl,
     workingTime,
+    bedroom,
+    liveroom,
   } = details
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function CaseDetail(props) {
                   </li>
                   <li>
                     <span>案例户型：</span>
-                    <b>{`${bedroom || 0}室${liveroom || 0}厅`}</b>
+                    <b>{!!bedroom ? <RoomType {...details} detailsTag={true} /> : '暂无'}</b>
                   </li>
                   <li>
                     <span>案例面积：</span>
@@ -77,13 +78,20 @@ export default function CaseDetail(props) {
               </div>
 
               <div className={styles.detDec}>
-                {casePics?.map((pic, ind) => {
-                  const { url, picDesc = '', spaceDic = {} } = pic
+                {casePicGroups?.map(cPic => {
+                  const { spaceName = '其它', spaceDicCode, casePics } = cPic
                   return (
-                    <div key={ind}>
-                      <b>{spaceDic?.name}</b>
-                      <img src={url} alt="" />
-                      <p>{picDesc}</p>
+                    <div key={spaceDicCode}>
+                      <b>{spaceName}</b>
+                      {casePics?.map((pic, ind) => {
+                        const { url, picDesc = '' } = pic
+                        return (
+                          <div key={ind}>
+                            <img src={url} alt="" />
+                            <p>{picDesc}</p>
+                          </div>
+                        )
+                      })}
                     </div>
                   )
                 })}

@@ -9,22 +9,18 @@ const breadData = {
   },
   sites: {
     url: '/sites',
-    name: '工地直播',
+    name: '参观工地',
   },
   designers: {
     url: '/designers',
-    name: '找设计师',
+    name: '设计师',
   },
   articles: {
     url: '/articles',
     name: '装修攻略',
   },
-  scss: {
-    url: '/scss',
-    name: 'tta',
-  },
 }
-export default function Footer(props) {
+export default function BreadBar(props) {
   const [levalTwo, setlevalTwo] = useState('')
   const [levalTex, setlevalTex] = useState('')
 
@@ -36,8 +32,12 @@ export default function Footer(props) {
     const { pathname } = location
     const arr = pathname.split('/')
     const len = arr.length
-    len > 2 && setlevalTwo(arr[1])
-    len === 2 && setlevalTex(breadData?.[arr[1]]?.name)
+    // 部署后nginx会在一级后默认加个 /
+    // 下面兼容这个场景
+    if (len > 2) {
+      arr[2].includes('details') && setlevalTwo(arr[1])
+      !arr[2].includes('details') && setlevalTex(breadData?.[arr[1]]?.name)
+    }
   }
 
   return (

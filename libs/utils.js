@@ -21,4 +21,8 @@ tools.urlParamHash = (url = location.href) => {
   return params
 }
 
+tools.openNewPage = (url, pageName = 'viewPage') => {
+  window.open(url, pageName)
+}
+
 export default tools

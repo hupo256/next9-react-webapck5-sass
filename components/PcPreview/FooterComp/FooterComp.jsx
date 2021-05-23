@@ -24,20 +24,23 @@ export default function FooterComp({ data }) {
           <div>
             <b>公众号</b>
             <img className={styles.qrCodeImg} src={wechatQrCode} alt="" />
-            <p>微信公众号：{wechatName}</p>
+            <p>
+              微信公众号：
+              {wechatName}
+            </p>
           </div>
           <div className={styles.contactUs}>
             <b>联系我们</b>
-            <p>{customerService}</p>
-            <p>{email}</p>
-            <p>{wechatNumber}</p>
+            <p className={styles.customerService}>{customerService}</p>
+            <p className={styles.email}>{email}</p>
+            <p className={styles.wechat}>{wechatNumber}</p>
           </div>
           <div>
             <b>门店地址</b>
             <div className={styles.minImgBox}>
               <img src={storeCover} alt="" />
             </div>
-            <p>{storeAddress}</p>
+            <p className={styles.storeAddress}>{storeAddress}</p>
           </div>
         </div>
       </div>

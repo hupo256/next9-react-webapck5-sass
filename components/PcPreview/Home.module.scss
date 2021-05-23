@@ -1,16 +1,3 @@
-// body {
-//   --themeColor: #ff7300;
-
-//   // wechat-sass-front 特需 样式重置
-//   p {
-//     margin-bottom: 0;
-//   }
-
-//   h1 {
-//     margin-bottom: 0;
-//   }
-// }
-
 .mainLayout {
   min-height: 100vh;
   background-color: #fff;
@@ -18,10 +5,13 @@
 }
 
 .banner {
-  height: 450px;
+  height: 460px;
+  color: #fff;
+  line-height: 160px;
   text-align: center;
-  padding-top: 66px;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .mainWrapper {
@@ -55,10 +45,8 @@
   align-items: center;
   height: 100%;
   gap: 12px;
-}
-.companyHeaderStyle .avatar {
-  background-color: '--themeColor';
-  vertical-align: 'middle';
+  overflow: hidden;
+  max-width: 200px;
 }
 
 .companyHeaderStyle h1 {

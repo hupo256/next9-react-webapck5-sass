@@ -29,21 +29,21 @@ export default function DiaryList(props) {
     })
   }
 
-  function touchDiaryList() {
+  function pageChange(num, size, gongdiDicUid, curInd) {
     const { gongdiUid = '' } = urlParamHash()
+    console.log(num, size, gongdiDicUid)
     const param = {
       gongdiUid,
-      pageNum: 1,
-      pageSize: 10,
+      gongdiDicUid,
+      pageNum: num,
+      pageSize: size,
     }
     siteApi.siteDiaryList(param).then(res => {
       console.log(res)
+      if (!res?.data) return
+      diarys[curInd].pageList.list = res.data?.list || []
+      setdiarys(diarys.slice())
     })
-  }
-
-  function pageChange(num, size, gdStage) {
-    console.log(num, size)
-    touchDiaryList({ pageNum: num, pageSize: size, gongdiStage: gdStage })
   }
 
   function diaryImgClick(imgInd, item) {
@@ -62,7 +62,7 @@ export default function DiaryList(props) {
       {diarys?.length > 0 ? (
         <div className={styles.diaryBox}>
           {diarys.map((diary, ind) => {
-            const { dicCode, dicName, pageList = {} } = diary
+            const { dicCode, dicName, dicUid, pageList = {} } = diary
             const { recordTotal, list } = pageList
             return (
               <div key={dicCode} className={styles.cellDiary}>
@@ -82,16 +82,6 @@ export default function DiaryList(props) {
                             </div>
                           )
                         })}
-                        {/* {!!window?.document && (
-                          <Viewer
-                            visible={viewShow}
-                            onClose={() => viewMaskClick(stage)}
-                            onMaskClick={() => viewMaskClick(stage)}
-                            images={fileList?.map(file => ({ src: file.fileUrl, alt: file.fileUid }))}
-                            activeIndex={viewInd}
-                          />
-                        )} */}
-
                         <Viewer
                           visible={viewShow}
                           onClose={() => viewMaskClick(stage)}
@@ -107,7 +97,8 @@ export default function DiaryList(props) {
                   <div className={styles.pageBox}>
                     <Pagination
                       hideOnSinglePage={true}
-                      onChange={(num, size) => pageChange(num, size, list?.gongdiStage)}
+                      defaultPageSize={5}
+                      onChange={(num, size) => pageChange(num, size, dicUid, ind)}
                       defaultCurrent={1}
                       total={recordTotal}
                       size="small"

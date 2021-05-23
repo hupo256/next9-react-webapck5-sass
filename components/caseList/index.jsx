@@ -4,6 +4,7 @@ import tools from '@libs/utils'
 import { Pagination } from 'antd'
 import { useCaseContext } from '@store/cases'
 import NoData from '@components/noData'
+import RoomType from '@components/roomType'
 import styles from './caseList.module.scss'
 import desStyles from './descase.module.scss'
 
@@ -37,7 +38,7 @@ export default function CaseList(props) {
       {theData?.list?.length > 0 ? (
         <ul className={`${styles.listBox} ${liData ? desStyles.desingCases : ''}`}>
           {theData.list.map(item => {
-            const { coverPicUrl, liveroom, bedroom, title, uid, acreage, styleDic = {}, casePics = [] } = item
+            const { coverPicUrl, title, uid, acreage, styleDic = {}, casePics = [] } = item
             const showPics = casePics?.slice(0, caseLen)
             return (
               <li key={uid} onClick={() => Router.push(`/cases/details?uid=${uid}`)}>
@@ -48,7 +49,7 @@ export default function CaseList(props) {
                   <h3>{title}</h3>
                   <p>
                     {acreage && <span>{`${acreage}m²`}</span>}
-                    {(!!bedroom || !!liveroom) && <span>{`${bedroom}室${liveroom}厅`}</span>}
+                    <RoomType {...item} />
                     {styleDic?.name && <span>{styleDic.name}</span>}
                   </p>
                   <ul className={`${liData ? desStyles.picList : ''}`}>

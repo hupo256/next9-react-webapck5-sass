@@ -1,5 +1,6 @@
 import React from 'react'
 import Router from 'next/router'
+import RoomType from '@components/roomType'
 import Steps from './steps'
 import styles from './siteList.module.scss'
 
@@ -20,7 +21,6 @@ export default function SiteCell(props) {
           gongdiStage,
           dicList,
         } = item
-        const { bedroom, parlor } = houseType
         return (
           <li key={gongdiUid} onClick={() => Router.push(`/sites/details?gongdiUid=${gongdiUid}`)}>
             <div className={styles.minImgBox}>
@@ -31,7 +31,7 @@ export default function SiteCell(props) {
               <h5>{buildingName}</h5>
               <p>
                 {buildingArea && <span>{`${buildingArea}m²`}</span>}
-                {(!!bedroom || !!parlor) && <span>{`${bedroom}室${parlor}厅`}</span>}
+                <RoomType {...houseType} />
                 {houseStyleName && <span>{houseStyleName}</span>}
               </p>
               <Steps stage={gongdiStage} dicList={dicList} />
