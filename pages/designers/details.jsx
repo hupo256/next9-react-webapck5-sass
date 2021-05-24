@@ -43,7 +43,7 @@ function DesignDetail(props) {
 
           {/* detail */}
           <div className={styles.detailBox}>
-            <div className={styles.desInfo} onClick={() => Router.push(`/designers/details?uid=${uid}`)}>
+            <div className={styles.desInfo}>
               <div className={styles.headimg}>
                 <div>
                   <img src={headPicUrl} alt="" />

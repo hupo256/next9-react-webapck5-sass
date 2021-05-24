@@ -140,13 +140,13 @@ $borderRadius: 2px;
     h3 {
       > b {
         font-size: 22px;
-        padding-right: 15px;
+        padding: 10px 15px 0 0;
         display: inline-block;
         max-width: 5em;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        background: url(https://img.inbase.in-deco.com/crm-saas/img/home-preview/ic_mark.png) no-repeat 0 100%;
+        background: url(https://img.inbase.in-deco.com/crm-saas/img/home-preview/ic_mark.png) no-repeat 0 5px;
       }
       > span {
         display: inline-block;
@@ -179,6 +179,18 @@ $borderRadius: 2px;
     padding: 28px;
     margin: 0;
     border-radius: $borderRadius;
+    cursor: default;
+
+    div:nth-child(2) {
+      p:nth-child(3) {
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        white-space: normal;
+      }
+    }
 
     div:nth-child(2) {
       p:nth-child(3) {
