@@ -21,6 +21,7 @@ $borderRadius: 2px;
 .tabBox {
   padding: 1em 0;
   display: flex;
+  flex-wrap: wrap;
 
   li {
     width: 8em;
