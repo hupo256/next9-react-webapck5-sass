@@ -48,8 +48,7 @@ export default function Site(props) {
           {desData?.list?.length > 0 ? (
             <ul className={desStyles.listBox}>
               {desData?.list?.map(art => {
-                const { headPicUrl, workingTime, name, uid, position, designConcept, description, styles, caseList } =
-                  art
+                const { headPicUrl, workingTime, name, uid, position, designConcept, profile, styles, caseList } = art
                 return (
                   <li key={uid}>
                     <div className={desStyles.desInfo} onClick={() => Router.push(`/designers/details?uid=${uid}`)}>
@@ -66,11 +65,11 @@ export default function Site(props) {
                           </h3>
                           <p>{styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
                           <Tooltip title={designConcept}>
-                            <p className={styles.desConcept}>{designConcept}</p>
+                            <p>{designConcept}</p>
                           </Tooltip>
                         </div>
                       </div>
-                      <p>{description}</p>
+                      <p>{profile}</p>
                     </div>
 
                     <div className={desStyles.caseInfo}>
