@@ -79,7 +79,7 @@ export default function Site(props) {
           {artsData?.list?.length > 0 ? (
             <ul className={styles.listBox}>
               {artsData.list.map(art => {
-                const { articleCoverImg, articleDescription, articleTitle, createTime, articleUid } = art
+                const { articleCoverImg, articleShortContent, articleTitle, createTime, articleUid } = art
                 return (
                   <li key={articleUid} onClick={() => Router.push(`/articles/details?articleUid=${articleUid}`)}>
                     <div className={styles.minImgBox}>
@@ -90,7 +90,7 @@ export default function Site(props) {
 
                     <div className={styles.casePicBox}>
                       <h3>{articleTitle}</h3>
-                      <p>{articleDescription}</p>
+                      <p>{articleShortContent}</p>
                       <p>{createTime}</p>
                     </div>
                   </li>
