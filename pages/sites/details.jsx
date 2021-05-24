@@ -34,7 +34,7 @@ export default function SiteDetail(props) {
           <BreadBar curTit={gongdiTitle} />
 
           {/* detail */}
-          {dicList?.length > 0 && (
+          {dicList && (
             <div className={styles.detailCard}>
               <SiteCell list={[details]} />
             </div>

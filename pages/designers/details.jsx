@@ -11,7 +11,7 @@ const { urlParamHash } = tools
 
 function DesignDetail(props) {
   const [details, setdetails] = useState({})
-  const { headPicUrl, workingTime, name, position, designConcept, caseList } = details
+  const { headPicUrl, workingTime, name, position, designConcept, caseList, profile } = details
 
   useEffect(() => {
     touchDetails()
@@ -57,6 +57,7 @@ function DesignDetail(props) {
                   <p>{designConcept}</p>
                 </div>
               </div>
+              {profile && <p>{profile}</p>}
             </div>
 
             {caseList?.list?.length > 0 && (
