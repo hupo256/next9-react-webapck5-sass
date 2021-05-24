@@ -6,7 +6,9 @@ module.exports = {
   future: { webpack5: true },
   webpack: (config, options) => {
     // webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // console.log('config===========>', config)
+    console.log('config===========>')
+    console.log(JSON.stringify(config, null, 2))
+    console.log('config===========>')
     // console.log('options===========>', options)
     // console.log('buildId===========>', buildId)
     // console.log('dev===========>', dev)
