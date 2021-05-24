@@ -76,7 +76,6 @@ const Home = () => {
               <div className={styles.companyHeaderStyle}>
                 <img
                   src={footerData.logo}
-                  alt={footerData.companyName}
                   className={styles.logoStyle}
                   onClick={() => (window.location.href = '/')}
                   style={{ cursor: 'pointer' }}
@@ -94,7 +93,7 @@ const Home = () => {
         </div>
 
         <Carousel autoplay>
-          {_.map(_.get(publishedData, '0.list', null), (item, index) => (
+          {_.map(_.find(publishedData, { flag: 'banner' })['list'], (item, index) => (
             <div
               key={`banner-${index}`}
               onClick={() => {
@@ -122,26 +121,26 @@ const Home = () => {
 
         <Content className={styles.mainWrapper}>
           <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
-            <KeyPoints pointsList={_.get(publishedData, '1.list')} />
+            <KeyPoints pointsList={_.find(publishedData, { flag: 'highlights' })['list']} />
           </ChapterLayout>
 
           <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
-            <CaseProjects data={_.get(publishedData, '2.list')} />
+            <CaseProjects data={_.find(publishedData, { flag: 'case' })['list']} />
           </ChapterLayout>
 
           <div className={styles.designerSectionWiderBackground}>
             <ChapterLayout title={'参观工地'} description={'全程透明 追踪可查'}>
-              <LiveShow data={_.get(publishedData, '3.list')} />
+              <LiveShow data={_.find(publishedData, { flag: 'site' })['list']} />
             </ChapterLayout>
           </div>
 
           <ChapterLayout title={'首席设计师'} description={'定制全套装修方案'}>
-            <DesignerContent data={_.get(publishedData, '4.list')} />
+            <DesignerContent data={_.find(publishedData, { flag: 'design' })['list']} />
           </ChapterLayout>
 
           <div className={styles.designerSectionWiderBackground}>
             <ChapterLayout title={'装修攻略'} description={'一分钟了解家装'}>
-              <Articles data={_.slice(_.get(publishedData, '5.list'), 0, 3)} />
+              <Articles data={_.slice(_.find(publishedData, { flag: 'article' })['list'], 0, 3)} />
             </ChapterLayout>
           </div>
         </Content>
