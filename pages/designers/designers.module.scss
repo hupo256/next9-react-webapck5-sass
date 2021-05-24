@@ -180,6 +180,12 @@ $borderRadius: 2px;
     margin: 0;
     border-radius: $borderRadius;
 
+    div:nth-child(2) {
+      p:nth-child(3) {
+        width: 100%;
+      }
+    }
+
     > p {
       display: block;
       padding-top: 20px;

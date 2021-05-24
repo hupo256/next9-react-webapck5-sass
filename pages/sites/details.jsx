@@ -11,7 +11,7 @@ const { urlParamHash } = tools
 
 export default function SiteDetail(props) {
   const [details, setdetails] = useState({})
-  const { gongdiTitle, gongdiStage } = details
+  const { gongdiTitle, dicList } = details
 
   useEffect(() => {
     touchDetails()
@@ -34,9 +34,11 @@ export default function SiteDetail(props) {
           <BreadBar curTit={gongdiTitle} />
 
           {/* detail */}
-          <div className={styles.detailCard}>
-            <SiteCell list={[details]} />
-          </div>
+          {dicList && (
+            <div className={styles.detailCard}>
+              <SiteCell list={[details]} />
+            </div>
+          )}
 
           <DiaryList />
         </div>
