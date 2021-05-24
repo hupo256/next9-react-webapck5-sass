@@ -43,18 +43,11 @@ export default function SearchBar(props) {
   }, [])
 
   function tagClick(key, code) {
-    let curCode = ''
     const preCode = searchPara[key]
-    // if (preCode === code) {
-    //   curCode = ''
-    //   delete searchPara[key]
-    // } else {
-    curCode = code
     searchPara[key] = code
-    // }
 
     setsearchPara(searchPara)
-    preCode !== code && touchDataList({ [key]: curCode, from })
+    preCode !== code && touchDataList({ [key]: code, from })
   }
 
   return (
