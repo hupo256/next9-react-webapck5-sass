@@ -3,6 +3,7 @@ import styles from './siteList.module.scss'
 
 export default function Steps(props) {
   const { stage, dicList } = props
+  console.log(dicList)
   const [curInd, setcurInd] = useState(0)
   const dLen = dicList.length
 
