@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+// import dynamic from 'next/dynamic'
+// import Loadable from '@components/loading/index'
+
+// const SayHi = dynamic(import('fdTest/sayHi'), {
+//   ssr: false, //这个要加上,禁止使用 SSR
+// })
+// const SayHi = Loadable(() => import('fdTest/sayHi'))
+
 import styles from './breadBar.module.scss'
 
 const breadData = {
@@ -31,22 +39,20 @@ export default function BreadBar(props) {
   function touchRoute() {
     const { pathname } = location
     const arr = pathname.split('/')
-    const len = arr.length
     // 部署后nginx会在一级后默认加个 /
     // 下面兼容这个场景
-    if (len > 2) {
-      arr[2].includes('details') && setlevalTwo(arr[1])
-      !arr[2].includes('details') && setlevalTex(breadData?.[arr[1]]?.name)
-    }
+    arr[2].includes('details') && setlevalTwo(arr[1])
+    setlevalTex(breadData?.[arr[1]]?.name)
   }
 
   return (
     <div className={styles.breadBox}>
+      {/* <SayHi /> */}
       <span>当前位置：</span>
       <Link href="/">首页</Link> &gt; {` `}
       {levalTwo ? (
         <>
-          <Link href={breadData[levalTwo].url}>{breadData[levalTwo].name}</Link> &gt; <span>{props.curTit}</span>
+          <Link href={breadData[levalTwo]?.url}>{levalTex}</Link> &gt; <span>{props.curTit}</span>
         </>
       ) : (
         <span>{levalTex}</span>
