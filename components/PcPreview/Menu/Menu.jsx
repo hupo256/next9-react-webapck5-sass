@@ -2,7 +2,7 @@ import _ from 'lodash'
 import styles from './Menu.module.scss'
 import { useState, useEffect } from 'react'
 
-const MAX_CHUNK_SIZE = 30
+const MAX_CHUNK_SIZE = 25
 const MIN_CHUNK_SIZE = 20
 
 const isCurrentMenu = (item, current) => {
