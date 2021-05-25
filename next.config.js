@@ -28,7 +28,7 @@ module.exports = {
         shared: {
           react: { singleton: true, eager: true },
           'react-dom': { singleton: true, eager: true },
-          'react-router-dom': { singleton: true, eager: true },
+          // 'react-router-dom': { singleton: true, eager: true },
         },
         // shared: {
         //   react: { singleton: true, eager: true },
