@@ -8,6 +8,12 @@ import BreadBar from '@components/breadBar'
 import NoData from '@components/noData'
 import styles from './articles.module.scss'
 
+import dynamic from 'next/dynamic'
+const SayHi = dynamic(import('fdTest/sayHi'), {
+  ssr: false, //这个要加上,禁止使用 SSR
+})
+console.log('React.version ===> ', React.version)
+
 const { urlParamHash, baseImgUrl } = tools
 
 export default function Article(props) {
@@ -60,6 +66,7 @@ export default function Article(props) {
   return (
     <BasicLayout headConfig={{ title: '装修攻略' }}>
       <div className={styles.conBox}>
+        {/* <SayHi /> */}
         {/* breadBar */}
         <BreadBar />
 

@@ -1,17 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-
-import dynamic from 'next/dynamic'
-const SayHi = dynamic(import('fdTest/sayHi'), {
-  ssr: false, //这个要加上,禁止使用 SSR
-})
-
-// import Loadable from '@components/loading/index'
-// const SayHi = Loadable(() => import('fdTest/sayHi'))
-
 import styles from './breadBar.module.scss'
-
-console.log('React.version ===> ', React.version)
 
 const breadData = {
   cases: {
@@ -42,15 +31,15 @@ export default function BreadBar(props) {
   function touchRoute() {
     const { pathname } = location
     const arr = pathname.split('/')
-    // 部署后nginx会在一级后默认加个 /
+    // 部署后nginx会在一级路由后面默认加个 /
     // 下面兼容这个场景
-    arr[2].includes('details') && setlevalTwo(arr[1])
+    const len = arr.length
+    len > 2 && arr[2].includes('details') && setlevalTwo(arr[1])
     setlevalTex(breadData?.[arr[1]]?.name)
   }
 
   return (
     <div className={styles.breadBox}>
-      {/* <SayHi /> */}
       <span>当前位置：</span>
       <Link href="/">首页</Link> &gt; {` `}
       {levalTwo ? (
