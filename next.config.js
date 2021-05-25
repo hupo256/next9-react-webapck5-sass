@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   pageExtensions: ['jsx', 'js'],
-  trailingSlash: true,
+  // trailingSlash: true,
   sassOptions: { includePaths: [path.join(__dirname, 'styles')] },
   future: { webpack5: true },
   webpack: (config, options) => {
