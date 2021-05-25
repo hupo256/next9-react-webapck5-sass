@@ -9,9 +9,8 @@ import NoData from '@components/noData'
 import styles from './articles.module.scss'
 
 import dynamic from 'next/dynamic'
-const SayHi = dynamic(import('fdTest/sayHi'), {
-  ssr: false, //这个要加上,禁止使用 SSR
-})
+const SayHi = dynamic(import('fdTest/sayHi'), { ssr: false })
+// const ShowTex = dynamic(import('sample/showTex'), { ssr: false })
 console.log('React.version ===> ', React.version)
 
 const { urlParamHash, baseImgUrl } = tools
@@ -66,7 +65,8 @@ export default function Article(props) {
   return (
     <BasicLayout headConfig={{ title: '装修攻略' }}>
       <div className={styles.conBox}>
-        {/* <SayHi /> */}
+        <SayHi />
+        {/* <ShowTex /> */}
         {/* breadBar */}
         <BreadBar />
 

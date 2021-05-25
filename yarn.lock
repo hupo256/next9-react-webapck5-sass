@@ -166,7 +166,7 @@
   resolved "https://registry.nlark.com/@types/prop-types/download/@types/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha1-KrDV2i5YFflLC51LldHl8kOrLKc=
 
-"@types/react@^17.0.5":
+"@types/react@^17.0.7":
   version "17.0.7"
   resolved "https://registry.nlark.com/@types/react/download/@types/react-17.0.7.tgz#5f2ca73d8baee8c286e96c95df557799ac0d1996"
   integrity sha1-XyynPYuu6MKG6WyV31V3mawNGZY=
