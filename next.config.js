@@ -24,10 +24,12 @@ module.exports = {
         remotes: {
           fdTest: 'fdTest@http://localhost:3004/remoteEntry.js',
         },
-        shared: ['react', 'react-dom'],
-        // shared: {
-        //   react: { singleton: true, eager: true },
-        // },
+        // shared: ['react', 'react-dom'],
+        shared: {
+          react: { singleton: true, eager: true },
+          'react-dom': { singleton: true, eager: true },
+          'react-router-dom': { singleton: true, eager: true },
+        },
         // shared: {
         //   react: { singleton: true, eager: true },
         //   'react-dom': { singleton: true, eager: true },
