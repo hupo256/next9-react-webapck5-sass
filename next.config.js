@@ -4,7 +4,7 @@ const { withModuleFederation } = require('@module-federation/nextjs-mf')
 module.exports = {
   pageExtensions: ['jsx', 'js'],
   // trailingSlash: true,
-  sassOptions: { includePaths: [path.join(__dirname, 'styles')] },
+  // sassOptions: { includePaths: [path.join(__dirname, 'styles')] },
   future: { webpack5: true },
   webpack: (config, options) => {
     const { buildId, dev, isServer, defaultLoaders, webpack } = options
