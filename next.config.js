@@ -5,6 +5,7 @@ const webpack = require('webpack')
 
 module.exports = {
   pageExtensions: ['jsx', 'js'],
+  trailingSlash: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
