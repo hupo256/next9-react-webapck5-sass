@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 // import Loadable from '@components/loading/index'
 
 // const SayHi = dynamic(import('fdTest/sayHi'), {
@@ -39,12 +39,10 @@ export default function BreadBar(props) {
   function touchRoute() {
     const { pathname } = location
     const arr = pathname.split('/')
-    const len = arr.length
     // 部署后nginx会在一级后默认加个 /
     // 下面兼容这个场景
-    const theNum = len > 2 ? 2 : 1
-    arr[theNum].includes('details') && setlevalTwo(arr[theNum])
-    !arr[theNum].includes('details') && setlevalTex(breadData?.[arr[theNum]]?.name)
+    arr[2].includes('details') && setlevalTwo(arr[1])
+    setlevalTex(breadData?.[arr[1]]?.name)
   }
 
   return (
@@ -54,7 +52,7 @@ export default function BreadBar(props) {
       <Link href="/">首页</Link> &gt; {` `}
       {levalTwo ? (
         <>
-          <Link href={breadData[levalTwo].url}>{breadData[levalTwo].name}</Link> &gt; <span>{props.curTit}</span>
+          <Link href={breadData[levalTwo]?.url}>{levalTex}</Link> &gt; <span>{props.curTit}</span>
         </>
       ) : (
         <span>{levalTex}</span>
