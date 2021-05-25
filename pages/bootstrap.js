@@ -8,7 +8,7 @@ import axios from 'axios'
 
 import { AppWrapper } from '@store/index'
 
-function MyApp({ Component, pageProps }) {
+export default function NextApp({ Component, pageProps }) {
   const [footerData, setFooterData] = useState({
     title: '',
     keywords: '',
@@ -58,5 +58,3 @@ function MyApp({ Component, pageProps }) {
     </>
   )
 }
-
-export default MyApp

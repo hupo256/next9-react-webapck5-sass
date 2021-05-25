@@ -105,20 +105,20 @@
   resolved "https://registry.npm.taobao.org/@hapi/hoek/download/@hapi/hoek-9.2.0.tgz#f3933a44e365864f4dad5db94158106d511e8131"
   integrity sha1-85M6RONlhk9NrV25QVgQbVEegTE=
 
-"@next/env@10.2.2":
-  version "10.2.2"
-  resolved "https://registry.nlark.com/@next/env/download/@next/env-10.2.2.tgz#cb61f6c29f349815108184c2f1926ada65458e28"
-  integrity sha1-y2H2wp80mBUQgYTC8ZJq2mVFjig=
+"@next/env@10.2.3":
+  version "10.2.3"
+  resolved "https://registry.nlark.com/@next/env/download/@next/env-10.2.3.tgz#ede3bbe68cec9939c37168ea2077f9adbc68334e"
+  integrity sha1-7eO75ozsmTnDcWjqIHf5rbxoM04=
 
-"@next/polyfill-module@10.2.2":
-  version "10.2.2"
-  resolved "https://registry.nlark.com/@next/polyfill-module/download/@next/polyfill-module-10.2.2.tgz#48d108dd562ed021dd23510c0ffe96badf5f9c04"
-  integrity sha1-SNEI3VYu0CHdI1EMD/6Wut9fnAQ=
+"@next/polyfill-module@10.2.3":
+  version "10.2.3"
+  resolved "https://registry.nlark.com/@next/polyfill-module/download/@next/polyfill-module-10.2.3.tgz#5a29f50c3ce3a56b8268d3b8331c691d8039467a"
+  integrity sha1-Win1DDzjpWuCaNO4MxxpHYA5Rno=
 
-"@next/react-dev-overlay@10.2.2":
-  version "10.2.2"
-  resolved "https://registry.nlark.com/@next/react-dev-overlay/download/@next/react-dev-overlay-10.2.2.tgz#88fb5013d3df70bd37b854234c41d884e108a149"
-  integrity sha1-iPtQE9PfcL03uFQjTEHYhOEIoUk=
+"@next/react-dev-overlay@10.2.3":
+  version "10.2.3"
+  resolved "https://registry.nlark.com/@next/react-dev-overlay/download/@next/react-dev-overlay-10.2.3.tgz#95313d10a8848f6c7b9e31ae3bd2a3627d136841"
+  integrity sha1-lTE9EKiEj2x7njGuO9KjYn0TaEE=
   dependencies:
     "@babel/code-frame" "7.12.11"
     anser "1.4.9"
@@ -132,10 +132,10 @@
     stacktrace-parser "0.1.10"
     strip-ansi "6.0.0"
 
-"@next/react-refresh-utils@10.2.2":
-  version "10.2.2"
-  resolved "https://registry.nlark.com/@next/react-refresh-utils/download/@next/react-refresh-utils-10.2.2.tgz#69dd150e3656aebe63fc828916105f1472810488"
-  integrity sha1-ad0VDjZWrr5j/IKJFhBfFHKBBIg=
+"@next/react-refresh-utils@10.2.3":
+  version "10.2.3"
+  resolved "https://registry.nlark.com/@next/react-refresh-utils/download/@next/react-refresh-utils-10.2.3.tgz#2f3e42fe6680798f276e3621345c2886b231348b"
+  integrity sha1-Lz5C/maAeY8nbjYhNFwohrIxNIs=
 
 "@opentelemetry/api@0.14.0":
   version "0.14.0"
@@ -1527,17 +1527,17 @@ negotiator@0.6.2:
   resolved "https://registry.npm.taobao.org/negotiator/download/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha1-/qz3zPUlp3rpY0Q2pkiD/+yjRvs=
 
-next@10.2.2:
-  version "10.2.2"
-  resolved "https://registry.nlark.com/next/download/next-10.2.2.tgz#aadcc526e420282b4a735b0595041195d748a91d"
-  integrity sha1-qtzFJuQgKCtKc1sFlQQRlddIqR0=
+next@10.2.3:
+  version "10.2.3"
+  resolved "https://registry.nlark.com/next/download/next-10.2.3.tgz#5aa058a63626338cea91c198fda8f2715c058394"
+  integrity sha1-WqBYpjYmM4zqkcGY/ajycVwFg5Q=
   dependencies:
     "@babel/runtime" "7.12.5"
     "@hapi/accept" "5.0.2"
-    "@next/env" "10.2.2"
-    "@next/polyfill-module" "10.2.2"
-    "@next/react-dev-overlay" "10.2.2"
-    "@next/react-refresh-utils" "10.2.2"
+    "@next/env" "10.2.3"
+    "@next/polyfill-module" "10.2.3"
+    "@next/react-dev-overlay" "10.2.3"
+    "@next/react-refresh-utils" "10.2.3"
     "@opentelemetry/api" "0.14.0"
     assert "2.0.0"
     ast-types "0.13.2"

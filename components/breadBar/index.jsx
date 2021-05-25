@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import next from 'next'
 
-import dynamic from 'next/dynamic'
-const SayHi = dynamic(import('fdTest/sayHi'), {
-  ssr: false, //这个要加上,禁止使用 SSR
-})
+// import dynamic from 'next/dynamic'
+// const SayHi = dynamic(import('fdTest/sayHi'), {
+//   ssr: false, //这个要加上,禁止使用 SSR
+// })
 
 // import Loadable from '@components/loading/index'
 // const SayHi = Loadable(() => import('fdTest/sayHi'))
 
 import styles from './breadBar.module.scss'
+
+console.log('React.version ===> ', React.version)
 
 const breadData = {
   cases: {
@@ -50,7 +53,7 @@ export default function BreadBar(props) {
 
   return (
     <div className={styles.breadBox}>
-      <SayHi />
+      {/* <SayHi /> */}
       <span>当前位置：</span>
       <Link href="/">首页</Link> &gt; {` `}
       {levalTwo ? (

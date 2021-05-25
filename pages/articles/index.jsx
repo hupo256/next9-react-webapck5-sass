@@ -10,7 +10,7 @@ import styles from './articles.module.scss'
 
 const { urlParamHash, baseImgUrl } = tools
 
-export default function Site(props) {
+export default function Article(props) {
   const [curId, setcurId] = useState('')
   const [tabs, settabs] = useState([])
   const [artsData, setartsData] = useState(null)
