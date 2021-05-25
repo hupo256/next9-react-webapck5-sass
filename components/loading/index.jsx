@@ -28,7 +28,7 @@ const DefaultLoading = ({ isLoading, error }) => {
   }
 }
 
-export default (loader, loading = DefaultLoading) => {
+export default function Loader(loader, loading = DefaultLoading) {
   return Loadable({
     loader,
     loading,

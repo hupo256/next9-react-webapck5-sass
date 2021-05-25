@@ -6,8 +6,8 @@ module.exports = {
   future: { webpack5: true },
   webpack: (config, options) => {
     // webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    console.log('config===========>')
-    console.log(JSON.stringify(config, null, 2))
+    // console.log('config===========>')
+    // console.log(JSON.stringify(config, null, 2))
     console.log('config===========>')
     // console.log('options===========>', options)
     // console.log('buildId===========>', buildId)
@@ -28,6 +28,10 @@ module.exports = {
           fdTest: 'fdTest@http://localhost:3004/remoteEntry.js',
         },
         // shared: ['react', 'react-dom', 'react-router-dom'],
+        shared: {
+          react: { eager: true },
+          'react-dom': { eager: true },
+        },
       }),
     )
     return config
