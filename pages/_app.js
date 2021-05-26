@@ -5,6 +5,7 @@ import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import homePageService from '@service/pcPreview' //admin特需
 import axios from 'axios'
+import ExpiredPage from '@components/404/404.jsx'
 
 import { AppWrapper } from '@store/index'
 
@@ -16,9 +17,16 @@ function MyApp({ Component, pageProps }) {
     icon: '',
   })
 
+  const [expired, setExpired] = useState(false)
+
   useEffect(() => {
     ;(async () => {
       const res = await homePageService.getFooter()
+      if (res.code === '190002') {
+        setExpired(res.message)
+        return
+      }
+
       const data = _.get(res, 'data', {})
       setFooterData(data)
 
@@ -43,6 +51,8 @@ function MyApp({ Component, pageProps }) {
   }, [])
 
   if (_.isEmpty(footerData)) return null
+
+  if (expired) return <ExpiredPage />
 
   return (
     <>
