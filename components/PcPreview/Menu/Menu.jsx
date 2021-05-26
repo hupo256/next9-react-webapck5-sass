@@ -2,7 +2,7 @@ import _ from 'lodash'
 import styles from './Menu.module.scss'
 import { useState, useEffect } from 'react'
 
-const MAX_CHUNK_SIZE = 40
+const MAX_CHUNK_SIZE = 25
 const MIN_CHUNK_SIZE = 20
 
 const isCurrentMenu = (item, current) => {
@@ -21,7 +21,7 @@ const findParent = (menuList, url) => {
     return _.find(menuList, { linkUrl: '/designers' })
   }
   if (/articles/.test(url)) {
-    return _.find(menuList, { linkUrl: '/articles' })
+    return _.find(menuList, { linkUrl: '/articles?uid=' })
   }
   return null
 }
@@ -87,6 +87,11 @@ const MenuListComp = ({ menuList }) => {
   useEffect(() => {
     if (_.isEmpty(menuList)) return
 
+    if (location.pathname === '/') {
+      setCurrent(_.find(menuList, { linkKey: 'home' }))
+      return
+    }
+
     const url = new URL(location.href)
     const [uid] = url.searchParams.values()
 
@@ -111,7 +116,7 @@ const MenuListComp = ({ menuList }) => {
       return
     }
 
-    const res = _.find(menuList, { linkUrl: location.pathname })
+    const res = findParent(menuList, location.href)
     if (res) {
       setCurrent(res)
       return

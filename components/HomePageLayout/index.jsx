@@ -51,9 +51,9 @@ export default function BasicLayout(props) {
                 <div className={styles.companyHeaderStyle}>
                   <img
                     src={footerData?.logo}
-                    alt={footerData?.companyName}
                     className={styles.logoStyle}
                     onClick={() => (window.location.href = '/')}
+                    style={{ cursor: 'pointer' }}
                   />
                 </div>
               }

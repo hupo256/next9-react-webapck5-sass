@@ -21,10 +21,10 @@ export default function FooterComp({ data }) {
     <>
       <div className={styles.companyOut}>
         <div className={styles.companyBox}>
-          <div>
+          <div className={styles.wechatWrapper}>
             <b>公众号</b>
             <img className={styles.qrCodeImg} src={wechatQrCode} alt="" />
-            <p>
+            <p className={styles.wechatName}>
               微信公众号：
               {wechatName}
             </p>
@@ -35,7 +35,7 @@ export default function FooterComp({ data }) {
             <p className={styles.email}>{email}</p>
             <p className={styles.wechat}>{wechatNumber}</p>
           </div>
-          <div>
+          <div className={styles.companyAddressWrapper}>
             <b>门店地址</b>
             <div className={styles.minImgBox}>
               <img src={storeCover} alt="" />
