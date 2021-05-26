@@ -10,16 +10,7 @@ export default function Cases(props) {
   return (
     <CaseWrapper>
       <BasicLayout headConfig={{ title: '装修案例' }}>
-        <div className="conBox">
-          {/* breadBar */}
-          <BreadBar />
-
-          {/* case */}
-          <div className={styles.caseBox}>
-            <SearchBar />
-            <CaseList />
-          </div>
-        </div>
+        <div className="conBox">test</div>
       </BasicLayout>
     </CaseWrapper>
   )
