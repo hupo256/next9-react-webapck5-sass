@@ -6,25 +6,21 @@ import BreadBar from '@components/breadBar'
 import SiteList from '@components/siteComponents/siteList'
 import styles from './site.module.scss'
 
-function Sites(props) {
+export default function Sites(props) {
   return (
-    <BasicLayout headConfig={{ title: '工地直播' }}>
-      <div className="conBox">
-        {/* breadBar */}
-        <BreadBar />
+    <CaseWrapper>
+      <BasicLayout headConfig={{ title: '参观工地' }}>
+        <div className="conBox">
+          {/* breadBar */}
+          <BreadBar />
 
-        {/* sites */}
-        <div className={styles.siteBox}>
-          <SearchBar from="sites" />
-          <SiteList from="sites" />
+          {/* sites */}
+          <div className={styles.siteBox}>
+            <SearchBar from="sites" />
+            <SiteList from="sites" />
+          </div>
         </div>
-      </div>
-    </BasicLayout>
+      </BasicLayout>
+    </CaseWrapper>
   )
 }
-
-export default props => (
-  <CaseWrapper>
-    <Sites {...props} />
-  </CaseWrapper>
-)

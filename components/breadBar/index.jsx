@@ -13,7 +13,7 @@ const breadData = {
   },
   designers: {
     url: '/designers',
-    name: '设计师',
+    name: '找设计师',
   },
   articles: {
     url: '/articles',
