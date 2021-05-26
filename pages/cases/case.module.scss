@@ -45,16 +45,8 @@ $borderColor: #eee;
           color: rgba(153, 153, 153, 1);
           vertical-align: middle;
         }
-        b {
-          color: rgba(29, 29, 29, 1);
-          font-weight: 400;
-          vertical-align: middle;
-          display: inline-block;
+        p {
           width: 55%;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-
           span {
             color: rgba(0, 0, 0, 0.85);
           }
