@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/HomePageLayout'
+import { Tooltip } from 'antd'
 import tools from '@libs/utils'
 import { CaseWrapper } from '@store/cases'
 import designerApi from '@service/designerApi'
 import BreadBar from '@components/breadBar'
 import CaseList from '@components/caseList'
+import TextTip from '@components/textTip'
 import styles from './designers.module.scss'
 
 const { urlParamHash } = tools
@@ -52,20 +54,23 @@ export default function DesignDetail(props) {
                   </div>
                   <div>
                     <h3>
-                      <b>{name}</b> <span>{position}</span>
+                      <TextTip content={name} />
+                      <span>{position}</span>
                     </h3>
-                    <p>{details?.styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
-                    <p>{designConcept}</p>
+                    <TextTip content={details?.styles?.map(dic => dic.name).join(' / ') || '暂无'} />
+                    <Tooltip title={designConcept}>
+                      <p>{designConcept}</p>
+                    </Tooltip>
                   </div>
+                  {profile && <p>{profile}</p>}
                 </div>
-                {profile && <p>{profile}</p>}
-              </div>
 
-              {caseList?.list?.length > 0 && (
-                <div className={styles.desCases}>
-                  <CaseList liData={caseList} />
-                </div>
-              )}
+                {caseList?.list?.length > 0 && (
+                  <div className={styles.desCases}>
+                    <CaseList liData={caseList} />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

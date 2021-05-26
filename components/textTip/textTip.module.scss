@@ -1,0 +1,10 @@
+$grayFont: #666666;
+.textTip {
+  color: $grayFont;
+  font-weight: 400;
+  vertical-align: middle;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

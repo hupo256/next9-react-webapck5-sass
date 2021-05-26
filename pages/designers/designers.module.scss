@@ -1,6 +1,5 @@
 $hightColor: #ff7300;
 $fontColor: #333330;
-$grayFont: #666666;
 $grayColor: #b5b5b5;
 $borderRadius: 2px;
 
@@ -126,30 +125,26 @@ $borderRadius: 2px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 0.55em 0;
+      padding: 0.35em 0;
 
+      p:nth-child(2),
       p:nth-child(3) {
-        color: $grayFont;
         width: 14em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
       }
     }
 
     h3 {
-      > b {
+      display: flex;
+      align-items: center;
+      > p {
         font-size: 22px;
         padding: 10px 15px 0 0;
-        display: inline-block;
         max-width: 5em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        color: $fontColor;
+        font-weight: 600;
         background: url(https://img.inbase.in-deco.com/crm-saas/img/home-preview/ic_mark.png) no-repeat 0 5px;
       }
       > span {
-        display: inline-block;
         max-width: 8em;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -159,6 +154,7 @@ $borderRadius: 2px;
         padding: 3px 10px;
         border-radius: 20px;
         font-size: 14px;
+        margin-top: 8px;
       }
     }
   }

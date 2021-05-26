@@ -4,6 +4,7 @@ import tools from '@libs/utils'
 import caseApi from '@service/caseApi'
 import BreadBar from '@components/breadBar'
 import RoomType from '@components/roomType'
+import TextTip from '@components/textTip'
 import styles from './case.module.scss'
 
 const { urlParamHash } = tools
@@ -22,7 +23,6 @@ export default function CaseDetail(props) {
     headPicUrl,
     workingTime,
     bedroom,
-    liveroom,
   } = details
 
   useEffect(() => {
@@ -52,27 +52,27 @@ export default function CaseDetail(props) {
                 <ul>
                   <li>
                     <span>楼盘名称：</span>
-                    <b>{buildingName || '暂无'}</b>
+                    <TextTip content={buildingName || '暂无'} />
                   </li>
                   <li>
                     <span>案例户型：</span>
-                    <b>{!!bedroom ? <RoomType {...details} detailsTag={true} /> : '暂无'}</b>
+                    <p>{!!bedroom ? <RoomType {...details} detailsTag={true} /> : '暂无'}</p>
                   </li>
                   <li>
                     <span>案例面积：</span>
-                    <b>{acreage ? `${acreage}m²` : '暂无'}</b>
+                    <p>{acreage ? `${acreage}m²` : '暂无'}</p>
                   </li>
                   <li>
                     <span>案例风格：</span>
-                    <b>{styleDicName || '暂无'}</b>
+                    <TextTip content={styleDicName || '暂无'} />
                   </li>
                   <li>
                     <span>装修造价：</span>
-                    <b>{`${decorationCost ? decorationCost + '万' : '暂无'}`}</b>
+                    <p>{`${decorationCost ? decorationCost + '万' : '暂无'}`}</p>
                   </li>
                   <li>
                     <span>设计师：</span>
-                    <b>{designerName || '暂无'}</b>
+                    <p>{designerName || '暂无'}</p>
                   </li>
                 </ul>
               </div>
