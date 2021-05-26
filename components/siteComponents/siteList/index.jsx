@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Pagination } from 'antd'
 import { useCaseContext } from '@store/cases'
 import NoData from '@components/noData'
 import SiteCell from './siteCell'
 import styles from './siteList.module.scss'
 
+const recordTotal = 35
+
 export default function SiteList(props) {
   const { from } = props
-  const { touchDataList, dataList } = useCaseContext()
+  const { touchDataList, dataList, curPage } = useCaseContext()
   useEffect(() => {
     touchDataList({ from })
   }, [])
@@ -22,15 +24,13 @@ export default function SiteList(props) {
       {dataList?.list?.length > 0 ? <SiteCell list={dataList.list} /> : <NoData tips="工地" />}
 
       <div className={styles.pageBox}>
-        {dataList?.recordTotal && (
-          <Pagination
-            hideOnSinglePage={true}
-            onChange={pageChange}
-            defaultCurrent={1}
-            total={dataList.recordTotal}
-            defaultCurrent={1}
-          />
-        )}
+        <Pagination
+          current={curPage}
+          hideOnSinglePage={true}
+          onChange={pageChange}
+          defaultCurrent={1}
+          total={dataList?.recordTotal}
+        />
       </div>
     </>
   )
