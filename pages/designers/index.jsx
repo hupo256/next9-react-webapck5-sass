@@ -7,6 +7,7 @@ import designerApi from '@service/designerApi'
 import BreadBar from '@components/breadBar'
 import NoData from '@components/noData'
 import RoomType from '@components/roomType'
+import TextTip from '@components/textTip'
 import desStyles from './designers.module.scss'
 
 const { baseImgUrl } = tools
@@ -61,15 +62,16 @@ export default function Site(props) {
                         </div>
                         <div>
                           <h3>
-                            <b>{name}</b> <span>{position}</span>
+                            <TextTip content={name} />
+                            <span>{position}</span>
                           </h3>
-                          <p>{styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
-                          <Tooltip title={designConcept}>
-                            <p>{designConcept}</p>
-                          </Tooltip>
+                          <TextTip content={styles?.map(dic => dic.name).join(' / ') || '暂无'} />
+                          <TextTip content={designConcept} />
                         </div>
                       </div>
-                      <p>{profile}</p>
+                      <Tooltip title={profile}>
+                        <p>{profile}</p>
+                      </Tooltip>
                     </div>
 
                     <div className={desStyles.caseInfo}>
