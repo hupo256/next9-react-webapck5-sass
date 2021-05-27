@@ -28,7 +28,7 @@ export default function Site(props) {
       const theUid = urlParamHash().uid || uid
       settabs(data)
       setcurId(theUid)
-      touchList({ articleDicUid: uid })
+      touchList({ articleDicUid: theUid })
     })
   }
 
