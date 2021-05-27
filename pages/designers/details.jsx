@@ -53,13 +53,12 @@ function DesignDetail(props) {
                 </div>
                 <div>
                   <h3>
-                    <TextTip content={name} />
+                    <p>{name}</p>
                     <span>{position}</span>
                   </h3>
-                  <TextTip content={details?.styles?.map(dic => dic.name).join(' / ') || '暂无'} />
-                  <Tooltip title={designConcept}>
-                    <p>{designConcept}</p>
-                  </Tooltip>
+                  {/* <TextTip content={details?.styles?.map(dic => dic.name).join(' / ') || '暂无'} /> */}
+                  <p>{details?.styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
+                  <p>{designConcept}</p>
                 </div>
               </div>
               {profile && <p>{profile}</p>}

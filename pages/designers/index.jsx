@@ -65,13 +65,12 @@ export default function Site(props) {
                             <TextTip content={name} />
                             <span>{position}</span>
                           </h3>
-                          <TextTip content={styles?.map(dic => dic.name).join(' / ') || '暂无'} />
+                          {/* <TextTip content={styles?.map(dic => dic.name).join(' / ') || '暂无'} /> */}
+                          <p>{styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
                           <TextTip content={designConcept} />
                         </div>
                       </div>
-                      <Tooltip title={profile}>
-                        <p>{profile}</p>
-                      </Tooltip>
+                      <p>{profile}</p>
                     </div>
 
                     <div className={desStyles.caseInfo}>
@@ -84,12 +83,7 @@ export default function Site(props) {
                             />
                             <div className={desStyles.imgCove}>
                               <p>
-                                {buildingName && (
-                                  <b>
-                                    {`${buildingName}`}
-                                    {/* <s>{`${buildingName}`}</s> */}
-                                  </b>
-                                )}
+                                {buildingName && <b>{`${buildingName}`}</b>}
                                 {acreage && <span>{`${acreage}m² | `}</span>}
                                 <RoomType {...item} />
                                 {!!bedroom ? ` | ` : ''}

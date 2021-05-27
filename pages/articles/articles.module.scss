@@ -1,8 +1,7 @@
 $hightColor: #ff7300;
-$fontColor: #333330;
+$fontColor: #1d1d1d;
 $grayFont: #666666;
 $grayColor: #b5b5b5;
-$borderRadius: 2px;
 
 .conBox {
   width: 1110px;
@@ -28,9 +27,23 @@ $borderRadius: 2px;
     font-size: 16px;
     padding-bottom: 1em;
 
+    span {
+      word-break: break-all;
+      cursor: pointer;
+
+      b {
+        font-weight: 500;
+      }
+    }
+
     &.on {
       span {
         position: relative;
+
+        b {
+          position: relative;
+          z-index: 3;
+        }
 
         &::before {
           position: absolute;
@@ -54,6 +67,7 @@ $borderRadius: 2px;
     height: 156px;
     margin-right: 20px;
     overflow: hidden;
+    border-radius: 4px;
 
     img {
       width: 100%;
@@ -72,13 +86,13 @@ $borderRadius: 2px;
 
     .casePicBox {
       width: 72%;
+      padding: 6px 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
       h3 {
         font-size: 16px;
-        padding: 0.2em 0;
         font-weight: 500;
         color: $fontColor;
         overflow: hidden;
@@ -93,6 +107,7 @@ $borderRadius: 2px;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;
+        height: 3.4em;
       }
       p:nth-child(3) {
         color: $grayColor;
@@ -123,6 +138,7 @@ $borderRadius: 2px;
   img {
     width: 100%;
     margin-bottom: 1em;
+    border-radius: 4px;
   }
   p {
     margin: 1em 0;
