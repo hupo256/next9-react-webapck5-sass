@@ -52,7 +52,7 @@ export default function CaseDetail(props) {
                 <ul>
                   <li>
                     <span>楼盘名称：</span>
-                    <TextTip content={buildingName || '暂无'} />
+                    <p>{buildingName || '暂无'}</p>
                   </li>
                   <li>
                     <span>案例户型：</span>
@@ -64,7 +64,7 @@ export default function CaseDetail(props) {
                   </li>
                   <li>
                     <span>案例风格：</span>
-                    <TextTip content={styleDicName || '暂无'} />
+                    <p>{styleDicName || '暂无'}</p>
                   </li>
                   <li>
                     <span>装修造价：</span>

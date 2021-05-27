@@ -70,7 +70,10 @@ export default function Site(props) {
               const { uid, name } = tab
               return (
                 <li key={uid} className={`${curId === uid ? styles.on : ''}`} onClick={() => codeChange(uid)}>
-                  <span>{name}</span>
+                  <span>
+                    <b>{name}</b>
+                  </span>
+                  {/* <span>{name}</span> */}
                 </li>
               )
             })}

@@ -10,6 +10,7 @@ $fontColor: rgba(51, 51, 48, 1);
     height: 227px;
     margin-right: 25px;
     overflow: hidden;
+    border-radius: 4px;
 
     img {
       width: 100%;
@@ -111,6 +112,7 @@ $fontColor: rgba(51, 51, 48, 1);
             position: relative;
             flex: 1;
             text-align: center;
+            font-size: 12px;
 
             &::before {
               display: inline-block;
@@ -121,7 +123,7 @@ $fontColor: rgba(51, 51, 48, 1);
               height: 12px;
               border: 2px solid $grayColor;
               position: absolute;
-              bottom: 27px;
+              bottom: 25px;
               left: 50%;
               margin-left: -6px;
             }
@@ -139,7 +141,7 @@ $fontColor: rgba(51, 51, 48, 1);
                 width: 15px;
                 height: 15px;
                 border-radius: 8px;
-                bottom: 25px;
+                bottom: 23px;
                 border: 3px solid $hightColor;
                 box-shadow: 0px 4px 8px 0px rgba(255, 115, 0, 0.5);
               }
