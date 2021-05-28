@@ -58,7 +58,7 @@ export default function Site(props) {
   }
 
   return (
-    <BasicLayout headConfig={{ title: '装修攻略' }}>
+    <BasicLayout headConfig={{ title: '装修攻略' }} pushType="article">
       <div className={styles.conBox}>
         {/* breadBar */}
         <BreadBar />
