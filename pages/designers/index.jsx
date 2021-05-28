@@ -103,16 +103,16 @@ export default function Site(props) {
             <NoData tips="设计师" />
           )}
 
-          <div className={desStyles.pageBox}>
-            {desData?.recordTotal && (
+          {!!desData?.recordTotal && (
+            <div className={desStyles.pageBox}>
               <Pagination
                 hideOnSinglePage={true}
                 onChange={pageChange}
                 defaultCurrent={1}
                 total={desData.recordTotal}
               />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </BasicLayout>
