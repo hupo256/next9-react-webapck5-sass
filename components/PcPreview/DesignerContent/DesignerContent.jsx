@@ -11,6 +11,12 @@ const DesignerContent = ({ data, domain = '' }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const Carousel = useRef()
 
+  const toCasePage = (e, uid) => {
+    if (/^DesignerContent_container/.test(e.target.classList[0])) {
+      window.location.href = `${domain}/cases/details?uid=${uid}`
+    }
+  }
+
   return (
     <div className={styles.carouselContainer}>
       <div style={{ height: '500px', marginTop: '60px' }}>
@@ -24,12 +30,14 @@ const DesignerContent = ({ data, domain = '' }) => {
             <div className={index === currentIndex ? '' : styles.inactive} key={index}>
               <div
                 style={{
-                  background: value.caseCoverUrlList[0]
-                    ? `url(${value.caseCoverUrlList[0]}) no-repeat center center`
+                  background: _.get(value, 'caseList.list.0.coverPicUrl', null)
+                    ? `url(${value['caseList']['list'][0].coverPicUrl}) no-repeat center center`
                     : `url(/img/designer/designer-placeholder.png) no-repeat center center`,
                   backgroundSize: 'cover',
+                  cursor: 'pointer',
                 }}
                 className={styles.container}
+                onClick={e => index === currentIndex && toCasePage(e, value['caseList']['list'][0].uid)}
               >
                 {index === currentIndex && (
                   <div className={styles.designerWrapper}>
