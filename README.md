@@ -13,7 +13,8 @@ cd front-marketing-website
 ## 安装依赖
 
 ```bash
-yarn dev
+yarn
+
 ```
 
 ## 本地运行
