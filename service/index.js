@@ -47,9 +47,6 @@ ajaxinstance.interceptors.response.use(
     // 跳到首页
     if (code === 2001) return Router.push('/')
     if (code === 190002) return Router.push('/404')
-    if (data?.message) {
-      message.error(data?.message)
-    }
     return { data: data.data, code, message: data?.message }
   },
   async error => {
