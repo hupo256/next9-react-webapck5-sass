@@ -25,11 +25,11 @@
   padding-right: 1em;
 
   & > b {
-  color: rgba(244, 243, 244, 1);
-  display: block;
-  font-size: 16px;
-  padding-bottom: 25px;
-}
+    color: rgba(244, 243, 244, 1);
+    display: block;
+    font-size: 16px;
+    padding-bottom: 25px;
+  }
 }
 .companyBox > div .qrCodeImg {
   width: 78px;
@@ -89,7 +89,8 @@
 }
 .storeAddress {
   text-indent: 29px;
-  background: url(/img/add.png) no-repeat left center;
+  background: url(/img/add.png) no-repeat left top;
+  line-height: 14px;
   background-size: 16px;
   margin-top: 12px;
 }

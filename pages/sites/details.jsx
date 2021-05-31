@@ -27,7 +27,7 @@ export default function SiteDetail(props) {
   }
 
   return (
-    <BasicLayout headConfig={details}>
+    <BasicLayout headConfig={details} pushType="site">
       <div className="grayBg">
         <div className="conBox">
           {/* breadBar */}

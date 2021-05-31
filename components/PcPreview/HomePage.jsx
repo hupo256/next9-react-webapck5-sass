@@ -10,6 +10,7 @@ import DesignerContent from './DesignerContent/DesignerContent.jsx'
 import Articles from './Articles/Articles.jsx'
 import LiveShow from './LiveShow/LiveShow.jsx'
 import FooterComp from './FooterComp/FooterComp.jsx'
+import Regisiter from './Regisiter/Regisiter.jsx'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
@@ -36,6 +37,7 @@ const Home = () => {
   const [footerData, setFooterData] = useState([])
   const [publishedData, setPublishedData] = useState([])
   const [totopShow, settotopShow] = useState(false)
+  const [regisiterFromVisiable, setRegisiterFromVisiable] = useState(true) //marketing 独有
 
   useEffect(() => {
     ;(async () => {
@@ -112,7 +114,6 @@ const Home = () => {
             }
           />
         </div>
-
         <Carousel autoplay>
           {_.map(publishedData['banner'], (item, index) => (
             <div
@@ -139,7 +140,6 @@ const Home = () => {
             </div>
           ))}
         </Carousel>
-
         <Content className={styles.mainWrapper}>
           {_.isEmpty(publishedData['highlights']) || (
             <ChapterLayout title={'产品特点'}>
@@ -171,8 +171,8 @@ const Home = () => {
             </div>
           )}
         </Content>
-
         <FooterComp data={footerData} />
+        {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} />}
       </Layout>
 
       <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />

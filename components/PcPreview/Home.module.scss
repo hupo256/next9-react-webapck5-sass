@@ -12,6 +12,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  margin-top: 58px;
 }
 
 .mainWrapper {
@@ -96,8 +97,13 @@
 }
 
 .editableWrapper {
-  position: relative;
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 9;
 }
 .editHeader,
 .editFooter {

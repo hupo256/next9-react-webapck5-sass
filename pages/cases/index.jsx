@@ -9,8 +9,17 @@ import styles from './case.module.scss'
 export default function Cases(props) {
   return (
     <CaseWrapper>
-      <BasicLayout headConfig={{ title: '装修案例 333' }}>
-        <div className="conBox">WWW</div>
+      <BasicLayout headConfig={{ title: '装修案例' }} pushType="case">
+        <div className="conBox">
+          {/* breadBar */}
+          <BreadBar />
+
+          {/* case */}
+          <div className={styles.caseBox}>
+            <SearchBar />
+            <CaseList />
+          </div>
+        </div>
       </BasicLayout>
     </CaseWrapper>
   )

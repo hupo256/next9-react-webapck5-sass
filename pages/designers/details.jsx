@@ -37,7 +37,7 @@ function DesignDetail(props) {
   }
 
   return (
-    <BasicLayout headConfig={details}>
+    <BasicLayout headConfig={details} pushType="designer">
       <div className="grayBg">
         <div className="conBox">
           {/* breadBar */}

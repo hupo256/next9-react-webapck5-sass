@@ -6,15 +6,16 @@ import HeaderLayout from '@components/PcPreview/HeaderLayout/HeaderLayout.jsx'
 import FooterComp from '@components/PcPreview/FooterComp/FooterComp.jsx'
 import basicApi from '@service/basicApi'
 import styles from './HomePageLayout.module.scss'
-
+import Regisiter from '../PcPreview/Regisiter/Regisiter.jsx'
 const { Content } = Layout
 const { getMenuList, companyinfoView } = basicApi
 
 export default function BasicLayout(props) {
-  const { children, headConfig } = props
+  const { children, headConfig, pushType } = props
   const [menuList, setMenuList] = useState([])
   const [footerData, setFooterData] = useState([])
   const [totopShow, settotopShow] = useState(false)
+  const [regisiterFromVisiable, setRegisiterFromVisiable] = useState(true) //marketing 独有
 
   useEffect(() => {
     touchBasicInfor()
@@ -73,6 +74,7 @@ export default function BasicLayout(props) {
           </div>
           <Content className={styles.mainWrapper}>{children}</Content>
           <FooterComp data={footerData} />
+          {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} type={pushType} />}
         </Layout>
         <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
       </div>
