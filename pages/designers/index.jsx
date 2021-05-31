@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/HomePageLayout'
-import { Pagination, Tooltip } from 'antd'
+import { Pagination } from 'antd'
 import Router from 'next/router'
 import tools from '@libs/utils'
 import designerApi from '@service/designerApi'

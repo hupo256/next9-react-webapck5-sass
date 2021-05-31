@@ -18,7 +18,7 @@ export default function Steps(props) {
 
   return (
     <div className={styles.setpBox}>
-      <div className={styles.stepBg}>
+      <div className={styles.stepBg} style={{ width: `${68 * dLen - 20}px` }}>
         <div className={styles.stepHight} style={{ width: `${((curInd + 1) * 100) / dLen}%` }}></div>
       </div>
       <div className={styles.stepList}>
