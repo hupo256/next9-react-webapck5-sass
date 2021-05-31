@@ -11,7 +11,7 @@ const { Content } = Layout
 const { getMenuList, companyinfoView } = basicApi
 
 export default function BasicLayout(props) {
-  const { children, headConfig } = props
+  const { children, headConfig, pushType } = props
   const [menuList, setMenuList] = useState([])
   const [footerData, setFooterData] = useState([])
   const [totopShow, settotopShow] = useState(false)
@@ -74,7 +74,7 @@ export default function BasicLayout(props) {
           </div>
           <Content className={styles.mainWrapper}>{children}</Content>
           <FooterComp data={footerData} />
-          {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} />}
+          {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} type={pushType} />}
         </Layout>
         <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
       </div>

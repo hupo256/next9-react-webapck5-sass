@@ -6,7 +6,7 @@ const { NEXT_PUBLIC_ENV } = process.env
 
 const { IS_ENV } = publicRuntimeConfig // 全局配置文件中暴露出来的环境变量
 
-let host = '//testgw.ingongdi.com/'
+let host = '//devgw.ingongdi.com/'
 if (NEXT_PUBLIC_ENV === 'DEV') {
   host = `//devgw.ingongdi.com/`
 }

@@ -1,16 +1,20 @@
 import styles from './Regisiter.module.scss'
 import React, { useState } from 'react'
 import { Button, Input } from 'antd'
+import service from '@service/pcPreview'
+import { pushMsgMap } from '@libs/constants.js'
 
-const Regisiter = ({ setRegisiterFromVisiable }) => {
+const Regisiter = ({ setRegisiterFromVisiable, type = 'home' }) => {
   const [name, setName] = useState(null)
   const [phone, setPhone] = useState(null)
 
-  const handleSubmit = e => {
-    console.log(name)
-    console.log(phone)
-    // todo... call api
+  const handleSubmit = async e => {
+    console.log(type)
+    await service.trackWebPush({ trackName: name || '', trackPhone: phone || '', trackSource: pushMsgMap[type] })
+    setName(null)
+    setPhone(null)
   }
+
   const handleClose = e => {
     setName(null)
     setPhone(null)

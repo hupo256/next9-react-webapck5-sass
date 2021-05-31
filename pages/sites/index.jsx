@@ -9,7 +9,7 @@ import styles from './site.module.scss'
 export default function Sites(props) {
   return (
     <CaseWrapper>
-      <BasicLayout headConfig={{ title: '参观工地' }}>
+      <BasicLayout headConfig={{ title: '参观工地' }} pushType="site">
         <div className="conBox">
           {/* breadBar */}
           <BreadBar />

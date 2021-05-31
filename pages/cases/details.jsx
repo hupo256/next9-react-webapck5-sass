@@ -38,7 +38,7 @@ export default function CaseDetail(props) {
   }
 
   return (
-    <BasicLayout headConfig={details}>
+    <BasicLayout headConfig={details} pushType="case">
       <div className="grayBg">
         <div className="conBox">
           {/* breadBar */}
