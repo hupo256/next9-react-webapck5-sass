@@ -1,3 +1,33 @@
+## 项目简介
+
+官网预览项目。
+基于 react17 + sass + antd4, 出于 SEO 的需要，引入了 Next.js 框架,
+
+## 开始
+
+```bash
+clone http://code.in-deco.com/crm-saas/front-marketing-website.git
+cd front-marketing-website
+```
+
+## 安装依赖
+
+```bash
+yarn dev
+```
+
+## 本地运行
+
+```bash
+yarn dev
+```
+
+## 打包发布
+
+```bash
+yarn export
+```
+
 更新记录：
 
 2020-4-27 ximing  
@@ -14,18 +44,6 @@
 - webpack 4
 - prettier
 - ant design
-
-## 运行
-
-```bash
-yarn dev
-```
-
-## 打包发布
-
-```bash
-yarn export
-```
 
 ## 本地预览站点
 
