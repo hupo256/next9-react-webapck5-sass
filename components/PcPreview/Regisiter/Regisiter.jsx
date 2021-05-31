@@ -1,6 +1,6 @@
 import styles from './Regisiter.module.scss'
 import React, { useState } from 'react'
-import { Button, Input } from 'antd'
+import { Button, Input, message } from 'antd'
 import service from '@service/pcPreview'
 import { pushMsgMap } from '@libs/constants.js'
 
@@ -9,8 +9,24 @@ const Regisiter = ({ setRegisiterFromVisiable, type = 'home' }) => {
   const [phone, setPhone] = useState(null)
 
   const handleSubmit = async e => {
-    console.log(type)
-    await service.trackWebPush({ trackName: name || '', trackPhone: phone || '', trackSource: pushMsgMap[type] })
+    if (!phone) {
+      message.warning('手机号为必填，请填写后提交哦！')
+      return
+    }
+
+    const { code, message: msg } = await service.trackWebPush({
+      trackName: name || '',
+      trackPhone: phone,
+      trackSource: pushMsgMap[type],
+    })
+
+    if (msg === '手机号格式不正确，请检查') {
+      message.warning('手机号输入有误，请重试！')
+      return
+    }
+
+    message.success('提交成功，您的专属管家马上会与您取得联系，请稍后')
+
     setName(null)
     setPhone(null)
   }
