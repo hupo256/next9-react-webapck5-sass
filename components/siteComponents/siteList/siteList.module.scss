@@ -3,8 +3,6 @@ $grayColor: rgba(229, 229, 229, 1);
 $fontColor: rgba(51, 51, 48, 1);
 
 .listBox {
-  // padding-top: 35px;
-
   .minImgBox {
     width: 359px;
     height: 227px;
@@ -24,6 +22,10 @@ $fontColor: rgba(51, 51, 48, 1);
     margin-bottom: 46px;
     display: flex;
     cursor: pointer;
+
+    &.details {
+      cursor: default;
+    }
 
     .casePicBox {
       width: 65%;

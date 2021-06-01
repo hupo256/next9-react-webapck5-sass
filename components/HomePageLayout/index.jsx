@@ -64,7 +64,7 @@ export default function BasicLayout(props) {
                   <img
                     className={styles.phoneIcon}
                     src={
-                      'https://img.inbase.in-deco.com/crm_saas/release/20210514/26b37fd6c4814b6ba0f589a8e8551f0b/ic_phone.png'
+                      'https://img.inbase.in-deco.com/crm_saas/release/20210601/987e871413d7464197b5e8035672244c/ic_phone2x.png'
                     }
                   />
                   <span className={styles.phone}>{footerData?.customerService}</span>
