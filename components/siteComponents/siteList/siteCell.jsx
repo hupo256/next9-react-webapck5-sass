@@ -5,7 +5,7 @@ import Steps from './steps'
 import styles from './siteList.module.scss'
 
 export default function SiteCell(props) {
-  const { list } = props
+  const { list, from } = props
 
   return (
     <ul className={styles.listBox}>
@@ -22,7 +22,11 @@ export default function SiteCell(props) {
           dicList,
         } = item
         return (
-          <li key={gongdiUid} onClick={() => Router.push(`/sites/details?gongdiUid=${gongdiUid}`)}>
+          <li
+            key={gongdiUid}
+            className={`${from ? styles[from] : ''}`}
+            onClick={() => Router.push(`/sites/details?gongdiUid=${gongdiUid}`)}
+          >
             <div className={styles.minImgBox}>
               <img src={coverImg} alt="" />
             </div>

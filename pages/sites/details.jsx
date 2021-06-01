@@ -36,7 +36,7 @@ export default function SiteDetail(props) {
           {/* detail */}
           {dicList && (
             <div className={styles.detailCard}>
-              <SiteCell list={[details]} />
+              <SiteCell list={[details]} from="details" />
             </div>
           )}
 
