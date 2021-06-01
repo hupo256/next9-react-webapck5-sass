@@ -19,6 +19,10 @@ const homePage = () => {
     return ajaxinstance.post('api/v1/wechat/track/www/push', params)
   }
 
+  home.trackCount = params => {
+    return ajaxinstance.post('api/v1/wechat/track/www/count', params)
+  }
+
   return home
 }
 
