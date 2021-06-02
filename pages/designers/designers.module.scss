@@ -194,6 +194,7 @@ $borderRadius: 2px;
       border-bottom: 1px dashed $grayColor;
 
       > div:nth-child(2) {
+        width: 70%;
         h3 > p {
           max-width: 100%;
           width: auto;
@@ -203,7 +204,7 @@ $borderRadius: 2px;
           width: 80%;
           display: -webkit-box;
           -webkit-box-orient: vertical;
-          -webkit-line-clamp: 1;
+          -webkit-line-clamp: 2;
           overflow: hidden;
           white-space: normal;
         }
