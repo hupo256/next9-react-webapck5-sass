@@ -41,7 +41,7 @@ export default function FooterComp({ data }) {
               <img src={storeCover} alt="" />
             </div>
             <div className={styles.storeAddress}>
-              <img src="/img/add.png" alt="" style={{ height: '20px' }} />
+              <img src="/img/add.png" alt="" style={{ height: '20px', width: '13px' }} />
               <div>{storeAddress}</div>
             </div>
           </div>
