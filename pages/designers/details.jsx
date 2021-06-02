@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/HomePageLayout'
-import { Tooltip } from 'antd'
 import tools from '@libs/utils'
 import { CaseWrapper } from '@store/cases'
 import designerApi from '@service/designerApi'
 import BreadBar from '@components/breadBar'
 import CaseList from '@components/caseList'
-import TextTip from '@components/textTip'
 import styles from './designers.module.scss'
 
 const { urlParamHash } = tools
@@ -56,7 +54,6 @@ function DesignDetail(props) {
                     <p>{name}</p>
                     <span>{position}</span>
                   </h3>
-                  {/* <TextTip content={details?.styles?.map(dic => dic.name).join(' / ') || '暂无'} /> */}
                   <p>{details?.styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
                   <p>{designConcept}</p>
                 </div>
