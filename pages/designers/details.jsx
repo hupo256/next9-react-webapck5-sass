@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/HomePageLayout'
-import { Tooltip } from 'antd'
 import tools from '@libs/utils'
 import { CaseWrapper } from '@store/cases'
 import designerApi from '@service/designerApi'
 import BreadBar from '@components/breadBar'
 import CaseList from '@components/caseList'
-import TextTip from '@components/textTip'
 import styles from './designers.module.scss'
 
 const { urlParamHash } = tools
@@ -37,12 +35,11 @@ export default function DesignDetail(props) {
   }
 
   return (
-    <CaseWrapper>
-      <BasicLayout headConfig={details}>
-        <div className="grayBg">
-          <div className="conBox">
-            {/* breadBar */}
-            <BreadBar curTit={name} />
+    <BasicLayout headConfig={details} pushType="designer">
+      <div className="grayBg">
+        <div className="conBox">
+          {/* breadBar */}
+          <BreadBar curTit={name} />
 
             {/* detail */}
             <div className={styles.detailBox}>
@@ -64,6 +61,20 @@ export default function DesignDetail(props) {
                   </div>
                   {profile && <p>{profile}</p>}
                 </div>
+<<<<<<< HEAD
+=======
+                <div>
+                  <h3>
+                    <p>{name}</p>
+                    <span>{position}</span>
+                  </h3>
+                  <p>{details?.styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
+                  <p>{designConcept}</p>
+                </div>
+              </div>
+              {profile && <p>{profile}</p>}
+            </div>
+>>>>>>> test
 
                 {caseList?.list?.length > 0 && (
                   <div className={styles.desCases}>

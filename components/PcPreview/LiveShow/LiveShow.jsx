@@ -2,8 +2,6 @@ import { BtnMore } from '../btn'
 import _ from 'lodash'
 import styles from './LiveShow.module.scss'
 
-const CHN_NUM_CHAR = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十']
-
 const CaseProjects = ({ data, domain = '' }) => {
   if (_.isEmpty(data)) return null
   const len = data.length
@@ -11,7 +9,9 @@ const CaseProjects = ({ data, domain = '' }) => {
   const caseStyle = {}
   _.forEach(data, (item, index) => {
     const { bedroom, parlor } = JSON.parse(item.houseType)
-    data[index]['name'] = `${item.buildingName.length > 6 ? item.buildingName.slice(0, 6) + '...' : item.buildingName}`
+    data[index]['name'] = `${
+      item.buildingName.length > 10 ? item.buildingName.slice(0, 10) + '...' : item.buildingName
+    }`
     bedroom
       ? (data[index]['text'] = `${item.buildingArea}m² | ${bedroom}居室 | ${item.renovationCosts}万元`)
       : (data[index]['text'] = `${item.buildingArea}m² | ${item.renovationCosts}万元`)
@@ -38,7 +38,7 @@ const CaseProjects = ({ data, domain = '' }) => {
           <div
             style={caseStyle.caseItem}
             className={styles.clickableImg}
-            onClick={() => (window.location.href = `${domain}/sites/details?gongdiUid=${data[0].uid}`)}
+            onClick={() => data[0].uid && (window.location.href = `${domain}/sites/details?gongdiUid=${data[0].uid}`)}
           >
             <div className={styles.bgText}>
               <p>{data[0].name}</p>
@@ -65,7 +65,7 @@ const CaseProjects = ({ data, domain = '' }) => {
           <div
             style={caseStyle.caseItem}
             className={styles.clickableImg}
-            onClick={() => (window.location.href = `${domain}/sites/details?gongdiUid=${data[0].uid}`)}
+            onClick={() => data[0].uid && (window.location.href = `${domain}/sites/details?gongdiUid=${data[0].uid}`)}
           >
             <div className={styles.bgText}>
               <p>{data[0].name}</p>
@@ -76,7 +76,7 @@ const CaseProjects = ({ data, domain = '' }) => {
           <div
             style={caseStyle.caseItem}
             className={styles.clickableImg}
-            onClick={() => (window.location.href = `${domain}/sites/details?gongdiUid=${data[1].uid}`)}
+            onClick={() => data[0].uid && (window.location.href = `${domain}/sites/details?gongdiUid=${data[1].uid}`)}
           >
             <div className={styles.bgText}>
               <p>{data[1].name}</p>
@@ -119,7 +119,7 @@ const CaseProjects = ({ data, domain = '' }) => {
           <div
             style={caseStyle.left}
             className={styles.clickableImg}
-            onClick={() => (window.location.href = `${domain}/sites/details?gongdiUid=${data[0].uid}`)}
+            onClick={() => data[0].uid && (window.location.href = `${domain}/sites/details?gongdiUid=${data[0].uid}`)}
           >
             <div className={styles.bgText}>
               <p>{data[0].name}</p>
@@ -131,7 +131,7 @@ const CaseProjects = ({ data, domain = '' }) => {
             <div
               style={caseStyle.caseItem}
               className={styles.clickableImg}
-              onClick={() => (window.location.href = `${domain}/sites/details?gongdiUid=${data[1].uid}`)}
+              onClick={() => data[0].uid && (window.location.href = `${domain}/sites/details?gongdiUid=${data[1].uid}`)}
             >
               <div className={styles.bgText}>
                 <p>{data[1].name}</p>
@@ -142,7 +142,7 @@ const CaseProjects = ({ data, domain = '' }) => {
             <div
               style={caseStyle.caseItem}
               className={styles.clickableImg}
-              onClick={() => (window.location.href = `${domain}/sites/details?gongdiUid=${data[2].uid}`)}
+              onClick={() => data[0].uid && (window.location.href = `${domain}/sites/details?gongdiUid=${data[2].uid}`)}
             >
               <div className={styles.bgText}>
                 <p>{data[2].name}</p>

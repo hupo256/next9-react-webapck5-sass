@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BasicLayout from '@components/HomePageLayout'
-import { Pagination, Tooltip } from 'antd'
+import { Pagination } from 'antd'
 import Router from 'next/router'
 import tools from '@libs/utils'
 import designerApi from '@service/designerApi'
@@ -39,7 +39,7 @@ export default function Site(props) {
   }
 
   return (
-    <BasicLayout headConfig={{ title: '找设计师' }}>
+    <BasicLayout headConfig={{ title: '找设计师' }} pushType="designer">
       <div className="grayBg">
         <div className="conBox">
           {/* breadBar */}
@@ -65,13 +65,12 @@ export default function Site(props) {
                             <TextTip content={name} />
                             <span>{position}</span>
                           </h3>
-                          <TextTip content={styles?.map(dic => dic.name).join(' / ') || '暂无'} />
+                          {/* <TextTip content={styles?.map(dic => dic.name).join(' / ') || '暂无'} /> */}
+                          <p>{styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
                           <TextTip content={designConcept} />
                         </div>
                       </div>
-                      <Tooltip title={profile}>
-                        <p>{profile}</p>
-                      </Tooltip>
+                      <p>{profile}</p>
                     </div>
 
                     <div className={desStyles.caseInfo}>
@@ -84,12 +83,7 @@ export default function Site(props) {
                             />
                             <div className={desStyles.imgCove}>
                               <p>
-                                {buildingName && (
-                                  <b>
-                                    {`${buildingName}`}
-                                    {/* <s>{`${buildingName}`}</s> */}
-                                  </b>
-                                )}
+                                {buildingName && <b>{`${buildingName}`}</b>}
                                 {acreage && <span>{`${acreage}m² | `}</span>}
                                 <RoomType {...item} />
                                 {!!bedroom ? ` | ` : ''}
@@ -109,16 +103,16 @@ export default function Site(props) {
             <NoData tips="设计师" />
           )}
 
-          <div className={desStyles.pageBox}>
-            {desData?.recordTotal && (
+          {!!desData?.recordTotal && (
+            <div className={desStyles.pageBox}>
               <Pagination
                 hideOnSinglePage={true}
                 onChange={pageChange}
                 defaultCurrent={1}
                 total={desData.recordTotal}
               />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </BasicLayout>

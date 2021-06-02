@@ -1,9 +1,6 @@
-const path = require('path')
-
 module.exports = {
   pageExtensions: ['jsx', 'js'],
   // trailingSlash: true,
-  // sassOptions: { includePaths: [path.join(__dirname, 'styles')] },
   future: { webpack5: true },
   webpack: (config, options) => {
     const { ModuleFederationPlugin } = options.webpack.container
@@ -11,9 +8,11 @@ module.exports = {
       new ModuleFederationPlugin({
         name: 'mktNext',
         filename: 'remoteEntry.js',
+        // host  ===>  import(name/exposes[name])
         exposes: {
           './noData': './components/noData',
         },
+        // remote
         remotes: {
           fdTest: 'fdTest@http://localhost:3004/remoteEntry.js',
           sample: 'sample@http://localhost:8081/remoteEntry.js',

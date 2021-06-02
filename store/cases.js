@@ -7,6 +7,7 @@ export function CaseWrapper({ children }) {
   const [loading, setloading] = useState(false) // 加载与否
   const [searchTags, setsearchTags] = useState([]) // 筛选项们
   const [dataList, setdataList] = useState(null) // 所要展示的数据集
+  const [curPage, setcurPage] = useState(1) // 初始化页数
   const [searchPara, setsearchPara] = useState({
     bedRooms: '',
     acreages: '',
@@ -28,6 +29,8 @@ export function CaseWrapper({ children }) {
 
   function touchDataList(config = {}) {
     if (loading) return
+    const num = config?.pageNum || 1
+    setcurPage(num)
     setloading(true)
     const apiTool = config?.from === 'sites' ? siteApi.sitePageList : caseApi.queryCaseListForWeb
     const param = {
@@ -36,6 +39,7 @@ export function CaseWrapper({ children }) {
       pageSize: 10,
     }
     delete config.from
+
     apiTool({ ...param, ...config }).then(res => {
       // console.log(res)
       if (!res?.data) return
@@ -52,6 +56,7 @@ export function CaseWrapper({ children }) {
     touchSearchTags,
     searchPara,
     setsearchPara,
+    curPage,
   }
 
   return <ctx.Provider value={sharedState}>{children}</ctx.Provider>

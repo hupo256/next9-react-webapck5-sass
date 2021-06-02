@@ -33,7 +33,7 @@ export default function Article(props) {
       const theUid = urlParamHash().uid || uid
       settabs(data)
       setcurId(theUid)
-      touchList({ articleDicUid: uid })
+      touchList({ articleDicUid: theUid })
     })
   }
 
@@ -63,7 +63,7 @@ export default function Article(props) {
   }
 
   return (
-    <BasicLayout headConfig={{ title: '装修攻略' }}>
+    <BasicLayout headConfig={{ title: '装修攻略' }} pushType="article">
       <div className={styles.conBox}>
         <SayHi />
         <ShowTex />
@@ -77,7 +77,10 @@ export default function Article(props) {
               const { uid, name } = tab
               return (
                 <li key={uid} className={`${curId === uid ? styles.on : ''}`} onClick={() => codeChange(uid)}>
-                  <span>{name}</span>
+                  <span>
+                    <b>{name}</b>
+                  </span>
+                  {/* <span>{name}</span> */}
                 </li>
               )
             })}

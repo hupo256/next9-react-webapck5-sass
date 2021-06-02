@@ -5,8 +5,17 @@ import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import homePageService from '@service/pcPreview' //admin特需
 import axios from 'axios'
+import ExpiredPage from '@components/500/500.jsx'
+
+const { getFooter } = homePageService
 
 import { AppWrapper } from '@store/index'
+
+const EXPIRED_MAP = {
+  loading: 'loading',
+  expired: 'expired',
+  notExpired: 'notExpired',
+}
 
 function MyApp({ Component, pageProps }) {
   const [footerData, setFooterData] = useState({
@@ -16,9 +25,19 @@ function MyApp({ Component, pageProps }) {
     icon: '',
   })
 
+  const [expired, setExpired] = useState(EXPIRED_MAP['loading'])
+
   useEffect(() => {
     ;(async () => {
-      const res = await homePageService.getFooter()
+      const res = await getFooter()
+
+      if (res.code === 210008) {
+        setExpired(EXPIRED_MAP['expired'])
+        return
+      } else {
+        setExpired(EXPIRED_MAP['notExpired'])
+      }
+
       const data = _.get(res, 'data', {})
       setFooterData(data)
 
@@ -44,19 +63,24 @@ function MyApp({ Component, pageProps }) {
 
   if (_.isEmpty(footerData)) return null
 
-  return (
-    <>
-      <Head>
-        <title>{footerData.title || '首页'}</title>
-        <meta name="keywords" content={footerData.keywords && JSON.parse(footerData.keywords).join(',')} />
-        <meta name="description" content={footerData.description} />
-        <link rel="icon" type="image/png" href={footerData.icon} />
-      </Head>
-      <AppWrapper>
-        <Component {...pageProps} />
-      </AppWrapper>
-    </>
-  )
+  if (expired === 'loading') return null
+  if (expired === 'expired') return <ExpiredPage />
+  if (expired === 'notExpired')
+    return (
+      <>
+        <Head>
+          <title>{footerData.title || '首页'}</title>
+          <meta name="keywords" content={footerData.keywords && JSON.parse(footerData.keywords).join(',')} />
+          <meta name="description" content={footerData.description} />
+          <link rel="icon" type="image/png" href={footerData.icon} />
+        </Head>
+        <AppWrapper>
+          <Component {...pageProps} />
+        </AppWrapper>
+      </>
+    )
+
+  return null
 }
 
 export default MyApp

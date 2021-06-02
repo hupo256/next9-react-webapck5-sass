@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import tools from '@libs/utils'
 import { Pagination } from 'antd'
@@ -13,7 +13,7 @@ const caseLen = 3 // 众多图片中需要显示前几张
 
 export default function CaseList(props) {
   const { liData } = props
-  const { touchDataList, dataList } = useCaseContext()
+  const { touchDataList, dataList, curPage } = useCaseContext()
   const theData = liData || dataList
 
   useEffect(() => {
@@ -73,14 +73,13 @@ export default function CaseList(props) {
       )}
 
       <div className={styles.pageBox}>
-        {(theData?.recordTotal || theData?.total) && (
-          <Pagination
-            hideOnSinglePage={true}
-            onChange={pageChange}
-            defaultCurrent={1}
-            total={theData.recordTotal || theData.total}
-          />
-        )}
+        <Pagination
+          current={curPage}
+          hideOnSinglePage={true}
+          onChange={pageChange}
+          defaultCurrent={1}
+          total={theData?.recordTotal || theData?.total}
+        />
       </div>
     </>
   )

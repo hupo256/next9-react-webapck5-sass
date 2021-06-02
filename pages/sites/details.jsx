@@ -27,7 +27,7 @@ export default function SiteDetail(props) {
   }
 
   return (
-    <BasicLayout headConfig={details}>
+    <BasicLayout headConfig={details} pushType="site">
       <div className="grayBg">
         <div className="conBox">
           {/* breadBar */}
@@ -36,7 +36,7 @@ export default function SiteDetail(props) {
           {/* detail */}
           {dicList && (
             <div className={styles.detailCard}>
-              <SiteCell list={[details]} />
+              <SiteCell list={[details]} from="details" />
             </div>
           )}
 

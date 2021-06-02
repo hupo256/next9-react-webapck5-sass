@@ -5,13 +5,14 @@
 }
 
 .banner {
-  height: 460px;
+  height: 560px;
   color: #fff;
   line-height: 160px;
   text-align: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  margin-top: 58px;
 }
 
 .mainWrapper {
@@ -25,7 +26,7 @@
 .chapterSection {
   text-align: center;
   background: url(/img/points/bg_title.png) no-repeat top center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 .chapterSection .title {
   font-size: 30px;
@@ -57,8 +58,7 @@
 }
 
 .chapterWrapper {
-  padding-top: 48px;
-  padding-bottom: 38px;
+  padding-top: 80px;
   width: 1110px;
 }
 
@@ -97,8 +97,13 @@
 }
 
 .editableWrapper {
-  position: relative;
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 9;
 }
 .editHeader,
 .editFooter {
@@ -159,5 +164,8 @@
     font-weight: bold;
     color: #3e3e3e;
     margin-left: 6px;
+  }
+  .phoneIcon {
+    width: 14px;
   }
 }

@@ -10,6 +10,7 @@ import DesignerContent from './DesignerContent/DesignerContent.jsx'
 import Articles from './Articles/Articles.jsx'
 import LiveShow from './LiveShow/LiveShow.jsx'
 import FooterComp from './FooterComp/FooterComp.jsx'
+import Regisiter from './Regisiter/Regisiter.jsx'
 
 import { typeMap, paramMap } from '@libs/constants.js'
 
@@ -21,11 +22,10 @@ const { getMenuList, getFooter, getPublishedData } = homePageService
 
 const { Content } = Layout
 
-const ChapterLayout = ({ children, title, description }) => (
+const ChapterLayout = ({ children, title, moreStyles }) => (
   <div className={styles.chapterWrapper}>
-    <div className={styles.chapterSection}>
+    <div className={styles.chapterSection} style={moreStyles}>
       <h2 className={styles.title}>{title}</h2>
-      <p className={styles.description}>{description}</p>
     </div>
     {children}
   </div>
@@ -36,6 +36,7 @@ const Home = () => {
   const [footerData, setFooterData] = useState([])
   const [publishedData, setPublishedData] = useState([])
   const [totopShow, settotopShow] = useState(false)
+  const [regisiterFromVisiable, setRegisiterFromVisiable] = useState(true) //marketing 独有
 
   useEffect(() => {
     ;(async () => {
@@ -44,7 +45,28 @@ const Home = () => {
     })()
     ;(async () => {
       const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
-      setPublishedData(_.get(res, 'data.templateJson.jsonData'), [])
+      const rawCollection = _.get(res, 'data.templateJson.jsonData', [])
+      if (rawCollection) {
+        const filtered = {
+          banner: _.find(rawCollection, {
+            flag: 'banner',
+          })?.list,
+          highlights: _.find(rawCollection, {
+            flag: 'highlights',
+          })?.list,
+          case: _.find(rawCollection, {
+            flag: 'case',
+          })?.list,
+          site: _.find(rawCollection, {
+            flag: 'site',
+          })?.list,
+          design: _.find(rawCollection, { flag: 'design' })?.list,
+          article: _.find(rawCollection, {
+            flag: 'article',
+          })?.list,
+        }
+        setPublishedData(filtered)
+      }
     })()
     ;(async () => {
       const res = await getFooter()
@@ -76,7 +98,6 @@ const Home = () => {
               <div className={styles.companyHeaderStyle}>
                 <img
                   src={footerData.logo}
-                  alt={footerData.companyName}
                   className={styles.logoStyle}
                   onClick={() => (window.location.href = '/')}
                   style={{ cursor: 'pointer' }}
@@ -92,12 +113,14 @@ const Home = () => {
             }
           />
         </div>
-
         <Carousel autoplay>
-          {_.map(_.get(publishedData, '0.list', null), (item, index) => (
+          {_.map(publishedData['banner'], (item, index) => (
             <div
               key={`banner-${index}`}
               onClick={() => {
+                if (!item.uid) {
+                  return
+                }
                 if (item.type === 'games') {
                   message.warning('PC端不允许跳转到小游戏')
                   return
@@ -116,34 +139,39 @@ const Home = () => {
             </div>
           ))}
         </Carousel>
-
         <Content className={styles.mainWrapper}>
-          <ChapterLayout title={'产品特点'} description={'颠覆传统家装企业'}>
-            <KeyPoints pointsList={_.get(publishedData, '1.list')} />
-          </ChapterLayout>
-
-          <ChapterLayout title={'装修案例'} description={'定制全套装修方案'}>
-            <CaseProjects data={_.get(publishedData, '2.list')} />
-          </ChapterLayout>
-
-          <div className={styles.designerSectionWiderBackground}>
-            <ChapterLayout title={'参观工地'} description={'全程透明 追踪可查'}>
-              <LiveShow data={_.get(publishedData, '3.list')} />
+          {_.isEmpty(publishedData['highlights']) || (
+            <ChapterLayout title={'产品特点'}>
+              <KeyPoints pointsList={publishedData['highlights']} />
             </ChapterLayout>
-          </div>
-
-          <ChapterLayout title={'首席设计师'} description={'定制全套装修方案'}>
-            <DesignerContent data={_.get(publishedData, '4.list')} />
-          </ChapterLayout>
-
-          <div className={styles.designerSectionWiderBackground}>
-            <ChapterLayout title={'装修攻略'} description={'一分钟了解家装'}>
-              <Articles data={_.slice(_.get(publishedData, '5.list'), 0, 3)} />
+          )}
+          {_.isEmpty(publishedData['case']) || (
+            <ChapterLayout title={'装修案例'}>
+              <CaseProjects data={publishedData['case']} />
             </ChapterLayout>
-          </div>
+          )}
+          {_.isEmpty(publishedData['site']) || (
+            <div className={styles.designerSectionWiderBackground}>
+              <ChapterLayout title={'参观工地'}>
+                <LiveShow data={publishedData['site']} />
+              </ChapterLayout>
+            </div>
+          )}
+          {_.isEmpty(publishedData['design']) || (
+            <ChapterLayout title={'首席设计师'} moreStyles={{ marginBottom: '10px' }}>
+              <DesignerContent data={publishedData['design']} />
+            </ChapterLayout>
+          )}
+          {_.isEmpty(publishedData['article']) || (
+            <div className={styles.designerSectionWiderBackground}>
+              <ChapterLayout title={'装修攻略'}>
+                <Articles data={_.slice(publishedData['article'], 0, 3)} />
+              </ChapterLayout>
+            </div>
+          )}
         </Content>
-
         <FooterComp data={footerData} />
+        {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} />}
       </Layout>
 
       <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
