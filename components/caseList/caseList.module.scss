@@ -20,7 +20,7 @@
     cursor: pointer;
 
     .casePicBox {
-      // width: 65%;
+      width: 60.9%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -53,6 +53,7 @@
       ul {
         display: flex;
         align-content: center;
+        height: 135px;
 
         li {
           border: none;
