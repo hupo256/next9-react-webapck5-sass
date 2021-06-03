@@ -19,6 +19,10 @@ const breadData = {
     url: '/articles',
     name: '装修攻略',
   },
+  material: {
+    url: '/material',
+    name: '材料',
+  }
 }
 export default function BreadBar(props) {
   const [levalTwo, setlevalTwo] = useState('')
