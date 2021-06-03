@@ -22,6 +22,10 @@ const breadData = {
   material: {
     url: '/material',
     name: '材料',
+  },
+  renovation: {
+    url: '/renovation',
+    name: '装修',
   }
 }
 export default function BreadBar(props) {

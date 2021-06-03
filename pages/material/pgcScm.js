@@ -175,7 +175,7 @@ class PgcScm extends Component {
     }
 
     seeMaterialInfo = (ids, event) => {
-        const newBlank = `${window.location.origin}/info/${ids.pgcId}/pgc`;
+        const newBlank = `${window.location.origin}/material/common/materialInfo/${ids.pgcId}/pgc`;
         window.open(newBlank, '_blank');
     }
 

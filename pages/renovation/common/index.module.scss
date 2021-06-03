@@ -1,0 +1,72 @@
+.trimInfo_main {
+    width: 100%;
+    margin: 0px;
+    min-height: 913px;
+    background: #F6F6F6;
+    display: flex;
+    justify-content: center;
+    .trimInfo_context {
+        width: 1100px;
+        margin-top: 20px;
+        position: relative;
+        .trimInfo_mbx {
+            width: 1100px;
+            display: flex;
+            margin-bottom: 45px;
+            span {
+                height: 17px;
+                font-size: 12px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: #B5B5B5;
+                line-height: 17px;
+            }
+        }
+        .trimInfo_info {
+            width: 1100px;
+            height: 112px;
+            font-size: 16px;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: #666666;
+            line-height: 28px;
+            display: flex;
+            justify-content: center;
+            img {
+                width: 821px;
+            }
+            .trimInfo_wz {
+                width: 821px;
+                .trimInfo_title {
+                    height: 37px;
+                    font-size: 26px;
+                    font-family: PingFangSC-Medium, PingFang SC;
+                    font-weight: 500;
+                    color: #1D1D1D;
+                    line-height: 37px;
+                    margin-bottom: 23px;
+                    display: flex;
+                    justify-content: center;
+                }
+                .trimInfo_time {
+                    height: 17px;
+                    font-size: 12px;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    font-weight: 400;
+                    color: #CACACA;
+                    line-height: 17px;
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 35px;
+                }
+            }
+        }
+    }
+    .linkSpan {
+        cursor: pointer;
+    }
+}
+
+.trimInfo_main {
+    background: #FFFFFF !important;
+}
