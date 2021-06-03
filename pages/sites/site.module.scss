@@ -1,0 +1,13 @@
+$borderRadius: 2px;
+
+.detailCard {
+  background: #fff;
+  padding: 20px;
+  border-radius: $borderRadius;
+
+  ul {
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

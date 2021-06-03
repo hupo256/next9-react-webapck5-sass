@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@service/*": ["service/*"],
+      "@store/*": ["store/*"],
+      "@components/*": ["components/*"],
+      "@libs/*": ["libs/*"]
+    },
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["dist", "node_modules"]
+}
