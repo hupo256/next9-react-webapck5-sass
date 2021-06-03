@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import styles from './Menu.module.scss'
 import { useState, useEffect } from 'react'
+import { message } from 'antd'
 
 const MAX_CHUNK_SIZE = 25
 const MIN_CHUNK_SIZE = 20
@@ -125,8 +126,12 @@ const MenuListComp = ({ menuList }) => {
     setCurrent(null)
   }, [menuList])
 
-  const clickMenuItem = ({ linkUrl, uid }) => {
+  const clickMenuItem = ({ linkUrl, uid, linkKey }) => {
     if (!uid) return
+    if (linkKey === 'games') {
+      message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')
+      return
+    }
     window.location.href = linkUrl
   }
 
