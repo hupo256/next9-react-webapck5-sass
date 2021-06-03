@@ -55,7 +55,6 @@ export default function SearchBar(props) {
       {labels?.map(item => {
         const { label, tagKey } = item
         const tagArr = searchTags?.[tagKey]
-        console.log(tagKey, tagArr)
         if (!tagArr || tagArr?.length === 0) return null
         return (
           <li key={label}>
