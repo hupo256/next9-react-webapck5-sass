@@ -5,8 +5,24 @@ import config from '../config'
 import tools from '@libs/utils'
 
 const { getStorage } = tools
-const { host } = config
+let { host, env } = config
 const loadingList = []
+
+// 修改baseURL
+const getHost = req => {
+  if(req.url.indexOf('moyang') >= 0){
+    if(env === 'DEV'){
+      return '//dev-api.in-spire.cn/'
+    }
+    if(env === 'TEST'){
+      return '//test-api.in-spire.cn/'
+    }
+    if(env === 'PROD'){
+      return '//dev-api.in-spire.cn/'
+    }
+  }
+  return req.baseURL;
+}
 
 // 实例化 ajax请求对象
 const ajaxinstance = axios.create({
@@ -21,6 +37,7 @@ ajaxinstance.interceptors.request.use(
   request => {
     const token = getStorage('token')
     const { params = {} } = request
+    request.baseURL = getHost(request)
     if (!params.noloading && loadingList.length < 1) {
       message.loading('加载中...', 20)
       loadingList.push(1)

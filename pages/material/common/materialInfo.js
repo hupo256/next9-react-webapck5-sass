@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-// import { history } from 'umi';
 import copy from 'copy-to-clipboard';
-// import request from '@/utils/request';
-// import InSwiper from '@/components/Swiper/swiperMaterial';
 import ShopInfo from './shopInfo';
-// import { connect } from 'umi';
 import { message, Tooltip } from 'antd';
-// import { getStorageItem } from '@/utils/storage';
 import { HeartOutlined } from '@ant-design/icons';
-// import Collect from '@/components/Collect';
-// import HeartImg from '@/assets/ic_collect_sel@2x.png';
-// import NoHeartImg from '@/assets/ic_collect@2x.png';
+import materialApi from '@service/materialApi'
 import styles from './styles/materialInfo.module.scss';
 
 class MaterialInfo extends Component {
@@ -23,7 +16,7 @@ class MaterialInfo extends Component {
         ],
         uid: '',
         infoObj: {}, // 接口返回
-        type: 'pgc',
+        type: 'ugc',
         recommendList: [],
         supplierList: [],
         collectFlag: false,
@@ -33,6 +26,11 @@ class MaterialInfo extends Component {
     }
     downUrl = '';
     componentDidMount () {
+        const uid = location.href.split('?')[1].split('=')[1];
+
+        materialApi.materialProductDetail({type: 0, uid}).then(res => {
+            console.log(res, 'qubo');
+        })
         // 根据来源判断接口调用
         // const path = history.location.pathname.substr(1).split('/');
         // const search = history.location.search;      
@@ -44,9 +42,8 @@ class MaterialInfo extends Component {
         // }); 
     }
     getData = (type, uid) => {
-        let params = type === 'pgc' ? '/api/v1/moyang/pgc/commodity/get' : '/api/v1/moyang/ugc/commodity/get';
-        const { urlType } = this.state;
-        // let noRealUid = type === 'pgc' ? '45e2ef77340842789d78a40fe1f86a8e' : 'f909b70ed6e74ba992799238978ebbd4';
+        let params = '/api/v1/moyang/ugc/commodity/get';
+        let noRealUid = type === 'pgc' ? '45e2ef77340842789d78a40fe1f86a8e' : 'f909b70ed6e74ba992799238978ebbd4';
         // request(params, { //   /api/v1/moyang/ugc/commodity/get
         //     method: 'POST',
         //     data: {
@@ -90,6 +87,7 @@ class MaterialInfo extends Component {
     applyStuff = () => {
         // const tokenInspire = getStorageItem('token_inspire');
         const { infoObj, type } = this.state;
+        console.log(infoObj, 'qubo');
         this.previewFun();
         if (!tokenInspire) {
             this.props.dispatch({ type: 'login/save', payload: { isloginModalShow: true } });

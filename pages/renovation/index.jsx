@@ -181,19 +181,12 @@ export default function Site(props) {
 								/>
 							</div>
 							<div className={styles.scmpage_list}>
-								{
-									keywordType === 1 ? <PgcScm
-										keywordType={state.keywordType}
-										keyword={state.keyword}
-										commodityCategoryCode={state.commodityCategoryCode}
-										subCommodityCategoryCode={state.subCommodityCategoryCode}
-									/> : <UgcScm
-										shopId={state.shopId}
-										keywordType={state.keywordType}
-										commodityCategoryCode={state.commodityCategoryCode}
-										subCommodityCategoryCode={state.subCommodityCategoryCode}
-									/>
-								}
+								<UgcScm
+									shopId={state.shopId}
+									keywordType={state.keywordType}
+									commodityCategoryCode={state.commodityCategoryCode}
+									subCommodityCategoryCode={state.subCommodityCategoryCode}
+								/>
 							</div>
 						</div>
 					</div >

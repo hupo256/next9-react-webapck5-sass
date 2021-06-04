@@ -1,50 +1,51 @@
 import React, { Component, useState } from 'react';
 import { Pagination, message } from 'antd';
 // import { connect, history } from 'umi';
-// import { getStorageItem } from '@/utils/storage';
+import tools from '../../libs/utils';
 // import Collect from '@/components/Collect';
-// import Result from '@/components/Result';
+import Result from './common/Result';
 // import { downFileImg } from '@/utils/upload';
 import styles from './components.module.scss';
 
 function createScmCols ({ key, defKey, item, index, collectKey,
     commodityCategoryCode, handleMouseover, handleoMouseout,
     seeMaterialInfo, setCollectVis, pageIndex, shopId, query }) {
+    const { getStorage } = tools;
 
     const handleSesMaterialInfo = function (parms, event) {
         event.stopPropagation();
-        const tokenInspire = getStorageItem('token_inspire');
-        if (!tokenInspire) {
-            // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-            return;
-        }
+        const tokenInspire = getStorage('token_inspire');
+        // if (!tokenInspire) {
+        //     // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
+        //     return;
+        // }
         seeMaterialInfo(parms);
     };
 
     const handleCollect = function (parms, event) {
         event.stopPropagation();
-        const tokenInspire = getStorageItem('token_inspire');
-        if (!tokenInspire) {
-            // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-        } else {
-            setCollectVis(parms.commodityCode);
-        }
+        const tokenInspire = getStorage('token_inspire');
+        // if (!tokenInspire) {
+        //     // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
+        //     return;
+        // }
+        setCollectVis(parms.commodityCode);
     };
 
     const handleApply = function (parms, event) {
         event.stopPropagation();
-        const tokenInspire = getStorageItem('token_inspire');
-        if (!tokenInspire) {
-            // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-            return;
-        }
-        const userinfo = JSON.parse(getStorageItem('userInfo'));
+        const tokenInspire = getStorage('token_inspire');
+        // if (!tokenInspire) {
+        //     // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
+        //     return;
+        // }
+        const userinfo = JSON.parse(getStorage('userInfo'));
         const data = Object.assign({}, {
             applySource: 'TSC042',
             customerName: userinfo.mobile || userinfo.nickName,
             phoneNumber: userinfo.mobile,
             shopId,
-            ugcCommodityId: parms.pgcId
+            ugcCommodityId: parms.ugcId
         });
         // dispatch({ type: 'scm/ugcApply', payload: data });
     };
@@ -90,15 +91,15 @@ function createScmCols ({ key, defKey, item, index, collectKey,
     return (
         <div key={`key_cols` + key} style={index === 0 ? {} : { marginLeft: '20px' }} className={styles.scm_rows} onClick={handleSesMaterialInfo.bind(this, item)} onMouseOver={() => handleMouseover(key)} onMouseOut={() => handleoMouseout(key)}>
             <div className={styles.scm_cols_top}>
-                {/* <img alt="" src={item.displayImage ? item.displayImage[0] : require('@/assets/sp_def.png')} style={{ width: '205px', height: '204px' }}></img> */}
+                <img alt="" src={item.displayImage ? item.displayImage[0] : ''} style={{ width: '205px', height: '204px' }}></img>
             </div>
             {
                 item.isFavorited ? <div className={defKey === key ? styles.scm_heart_red : styles.scm_sc_re_display} onClick={cancelCollection.bind(this, item)}>
-                    {/* <img alt="" src={require('@/assets/ic_collect_sel.png')}></img> */}
+                    <img alt="" src={''}></img>
                 </div> : <React.Fragment>
                     <div className={styles.scm_heart}>
                         <div className={defKey === key ? styles.scm_sc : styles.scm_sc_display} onClick={handleCollect.bind(this, item)}>
-                            {/* <img alt="" src={require('@/assets/ic_collect.png')}></img> */}
+                            <img alt="" src={''}></img>
                         </div>
                         {
                             item.commodityCode === collectKey ? <div onClick={handleCollectClick.bind(this)} onMouseOver={handleCollectMouseover.bind(this, key, collectKey)} onMouseOut={handleoCollectMouseout.bind(this, collectKey)} className={styles.scm_collect}>
@@ -118,12 +119,12 @@ function createScmCols ({ key, defKey, item, index, collectKey,
             <div id={`SCM_` + key} className={defKey === key ? styles.scm_button : styles.scm_button_display} onClick={downFile.bind(this, item)}>
                 {
                     item.mapImage ? <div style={{ width: '102px' }} className={styles.scm_button_def} >
-                        {/* <img alt="" src={require('@/assets/ic_dw.png')} style={{ marginRight: '5px' }}></img> */}
+                        <img alt="" src={''} style={{ marginRight: '5px' }}></img>
                         <span>下载</span>
                     </div> : ""
                 }
                 <div style={item.mapImage ? { width: '102px' } : { width: '204px', display: 'flex', alignItems: "center", justifyContent: 'center' }} className={styles.scm_button_active} onClick={handleApply.bind(this, item)}>
-                    {/* <img alt="" src={require('@/assets/ic_.png')} style={{ marginRight: '5px' }}></img> */}
+                    <img alt="" src={''} style={{ marginRight: '5px' }}></img>
                     <span>申请</span>
                 </div>
             </div>
@@ -184,7 +185,8 @@ class PgcScm extends Component {
     }
 
     seeMaterialInfo = (ids, event) => {
-        const newBlank = `${window.location.origin}/material/common/materialInfo/${ids.pgcId}/ugc`;
+        console.log(ids, 'qubo')
+        const newBlank = `${window.location.origin}/material/common/materialInfo?id=${ids.pgcId}`;
         window.open(newBlank, '_blank');
     }
 
@@ -224,7 +226,7 @@ class PgcScm extends Component {
     }
 
     _curRows = () => {
-        const { pageResultVo } = this.state;
+        const { pageResultVo } = this.props;
         let rowsArrays = [];
         if (pageResultVo === null || pageResultVo.length === 0) {
             return;
@@ -270,7 +272,7 @@ class PgcScm extends Component {
             <div className={styles.scm_main}>
                 {
                     pageResultVo && pageResultVo.length !== 0 ? _rowsArrays : <div className={styles.scm_zwsj}>
-                        {/* <Result /> */}
+                        <Result />
                     </div>
                 }
                 {
