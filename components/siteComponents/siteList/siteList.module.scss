@@ -36,7 +36,7 @@ $fontColor: rgba(51, 51, 48, 1);
       h3 {
         font-size: 22px;
         padding: 0.2em 0;
-        font-weight: 500;
+        font-weight: 600;
         color: $fontColor;
       }
       h5 {
@@ -92,10 +92,12 @@ $fontColor: rgba(51, 51, 48, 1);
         overflow: hidden;
         overflow-x: auto;
         padding-top: 10px;
+        padding-bottom: 12px;
+        margin-bottom: -12px;
 
-        &::-webkit-scrollbar {
-          display: none;
-        }
+        // &::-webkit-scrollbar {
+        //   display: none;
+        // }
 
         .stepBg,
         .stepHight {
@@ -122,7 +124,7 @@ $fontColor: rgba(51, 51, 48, 1);
             text-align: center;
             font-size: 12px;
             display: inline-block;
-            margin-right: 20px;
+            margin-left: 20px;
 
             &::before {
               display: inline-block;

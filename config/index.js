@@ -14,6 +14,10 @@ if (NEXT_PUBLIC_ENV === 'DEV') {
   env = 'DEV'
 }
 
+if (NEXT_PUBLIC_ENV === 'PRE') {
+  host = `//pregw.ingongdi.com/`
+}
+
 if (NEXT_PUBLIC_ENV === 'TEST') {
   host = `//testgw.ingongdi.com/`
   env = 'TEST'

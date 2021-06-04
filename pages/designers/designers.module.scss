@@ -140,7 +140,8 @@ $borderRadius: 2px;
         width: 15em;
       }
       p:nth-child(2) {
-        font-weight: 545;
+        font-weight: 600;
+        padding: .8em 0;
       }
     }
 
@@ -189,24 +190,20 @@ $borderRadius: 2px;
     cursor: default;
 
     .headimg {
+      align-items: flex-start;
       padding-bottom: 30px;
       margin-bottom: 20px;
       border-bottom: 1px dashed $grayColor;
 
       > div:nth-child(2) {
-        width: 70%;
+        // width: 70%;
         h3 > p {
           max-width: 100%;
           width: auto;
         }
         p:nth-child(3) {
           color: #666;
-          width: 80%;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-          overflow: hidden;
-          white-space: normal;
+          width: 76%;
         }
       }
     }
@@ -219,7 +216,7 @@ $borderRadius: 2px;
 
     > p {
       padding-top: 0;
-      width: 85%;
+      width: 80%;
       display: block;
     }
   }

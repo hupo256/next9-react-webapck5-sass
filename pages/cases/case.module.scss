@@ -32,7 +32,7 @@ $borderRadius: 4px;
         display: inline-block;
         vertical-align: top;
 
-        span {
+        >span {
           display: inline-block;
           color: $grayColor;
           font-size: 12px;
@@ -100,7 +100,7 @@ $borderRadius: 4px;
       .tit {
         h4 {
           font-size: 18px;
-          font-weight: 500;
+          font-weight: 600;
           color: #1d1d1d;
           margin-bottom: 0.5em;
         }
