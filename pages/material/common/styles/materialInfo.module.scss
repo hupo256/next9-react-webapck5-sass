@@ -218,14 +218,14 @@
                         }
                     }
                     .materialInfo_btn_upload {
-                        background: #3A3A3A;
+                        background: #ffffff;
+                        border: 1px solid #ff7300;
+                        span{
+                            color: #ff7300;
+                        }
                     }
                     .materialInfo_btn_apply {
                         background: #ff7300;
-                    }
-                    .materialInfo_btn_noApply {
-                        cursor: not-allowed;
-                        background: #de838b;
                     }
                 }
                 .materialInfo_gys_group {
@@ -308,6 +308,11 @@
     .hoverSpan {
         cursor: pointer;
     }
+}
+
+.materialInfo_btn_noApply {
+    cursor: not-allowed;
+    background: #de838b;
 }
 
 .swiper-container {

@@ -100,8 +100,12 @@ const MenuListComp = ({ menuList }) => {
       // 详情页
 
       const res = _.find(menuList, value => {
-        const urlObj = new URL(location.origin + value.linkUrl)
-        const [urlCompare] = urlObj.searchParams.values()
+        let urlObj = null;
+        let urlCompare = [];
+        if(value.linkUrl){
+          urlObj = new URL(location.origin + value.linkUrl)
+          urlCompare = urlObj.searchParams.values()
+        }
 
         return urlCompare === uid
       })

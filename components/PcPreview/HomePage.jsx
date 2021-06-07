@@ -24,8 +24,7 @@ const { Content } = Layout
 
 // 暂时本地添加，迁移后找后端加menu入口
 const menuArr = [
-  {linkKey: 'material', linkUrl: '/material', webViewName: '材料', websiteName: '材料'},
-  {linkKey: 'renovation', linkUrl: '/renovation', webViewName: '装修', websiteName: '装修'}
+  {linkKey: 'material', linkUrl: '/material', webViewName: '材料', websiteName: '材料'}
 ]
 
 const ChapterLayout = ({ children, title, moreStyles }) => (

@@ -2,6 +2,12 @@
     width: 1100px;
     display: flex;
     justify-content: space-between;
+    .scmpage_banner{
+        width: 100%;
+        img{
+            width: 100%;
+        }
+    }
     .shopinfo_left {
         width: 820px;
         background: #FFFFFF;
@@ -9,6 +15,9 @@
         margin-right: 20px;
         padding: 18px;
         .shopinfo_shopname {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
             margin-bottom: 30px;
             img {
                 margin-right: 9px; 
@@ -34,6 +43,13 @@
             }
         }
     }
+    .shopinfo_wngj_side_line{
+        background: #FF7300;
+        margin-right: 10px;
+        border-radius: 2px;
+        width: 3px;
+        height: 22px;
+    }
     .shopinfo_right {
         height: 712px;
         background: #FFFFFF;
@@ -41,6 +57,9 @@
         flex: 1;
         padding: 18px;
         .shopinfo_wngj {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
             margin-bottom: 20px;
             img {
                 margin-right: 10px;

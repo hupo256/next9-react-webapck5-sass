@@ -1,53 +1,26 @@
 import React, { Component, useState } from 'react';
 import { Pagination, message } from 'antd';
-// import { connect, history } from 'umi';
 import tools from '../../libs/utils';
-// import Collect from '@/components/Collect';
 import Result from './common/Result';
-// import { downFileImg } from '@/utils/upload';
 import styles from './components.module.scss';
+import materialApi from '../../service/materialApi';
 
 function createScmCols ({ key, defKey, item, index, collectKey,
     commodityCategoryCode, handleMouseover, handleoMouseout,
-    seeMaterialInfo, setCollectVis, pageIndex, shopId, query }) {
-    const { getStorage } = tools;
-
+    seeMaterialInfo, setCollectVis, pageIndex, shopId, query, showApplyUgc, pageChange }) {
     const handleSesMaterialInfo = function (parms, event) {
         event.stopPropagation();
-        const tokenInspire = getStorage('token_inspire');
-        // if (!tokenInspire) {
-        //     // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-        //     return;
-        // }
         seeMaterialInfo(parms);
     };
 
     const handleCollect = function (parms, event) {
         event.stopPropagation();
-        const tokenInspire = getStorage('token_inspire');
-        // if (!tokenInspire) {
-        //     // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-        //     return;
-        // }
         setCollectVis(parms.commodityCode);
     };
 
-    const handleApply = function (parms, event) {
+    const handleApply = async function (parms, event) {
         event.stopPropagation();
-        const tokenInspire = getStorage('token_inspire');
-        // if (!tokenInspire) {
-        //     // dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-        //     return;
-        // }
-        const userinfo = JSON.parse(getStorage('userInfo'));
-        const data = Object.assign({}, {
-            applySource: 'TSC042',
-            customerName: userinfo.mobile || userinfo.nickName,
-            phoneNumber: userinfo.mobile,
-            shopId,
-            ugcCommodityId: parms.ugcId
-        });
-        // dispatch({ type: 'scm/ugcApply', payload: data });
+        showApplyUgc(parms);
     };
 
     const handleCollectMouseover = (key, collectKey, event) => {
@@ -64,22 +37,6 @@ function createScmCols ({ key, defKey, item, index, collectKey,
         event.stopPropagation();
     };
 
-    const cancelCollection = (parms, event) => {
-        event.stopPropagation();
-        // dispatch({ type: 'userinfo/cancelFavorite', payload: { pgcCommodityId: parms.pgcId } }).then(result => {
-        //     if (result.code === 200) {
-        //         query(pageIndex, commodityCategoryCode);
-        //         message.success('取消收藏成功');
-        //     } else {
-        //         message.error(result.message);
-        //     }
-        // });
-    };
-
-    const queryCollectSearch = () => {
-        query(pageIndex, commodityCategoryCode);
-    };
-
     const downFile = (parms, event) => {
         event.stopPropagation();
         if (!parms.mapImage) {
@@ -93,40 +50,25 @@ function createScmCols ({ key, defKey, item, index, collectKey,
             <div className={styles.scm_cols_top}>
                 <img alt="" src={item.displayImage ? item.displayImage[0] : ''} style={{ width: '205px', height: '204px' }}></img>
             </div>
-            {
-                item.isFavorited ? <div className={defKey === key ? styles.scm_heart_red : styles.scm_sc_re_display} onClick={cancelCollection.bind(this, item)}>
-                    <img alt="" src={''}></img>
-                </div> : <React.Fragment>
-                    <div className={styles.scm_heart}>
-                        <div className={defKey === key ? styles.scm_sc : styles.scm_sc_display} onClick={handleCollect.bind(this, item)}>
-                            <img alt="" src={''}></img>
-                        </div>
-                        {
-                            item.commodityCode === collectKey ? <div onClick={handleCollectClick.bind(this)} onMouseOver={handleCollectMouseover.bind(this, key, collectKey)} onMouseOut={handleoCollectMouseout.bind(this, collectKey)} className={styles.scm_collect}>
-                                <Collect
-                                    shopId={shopId}
-                                    type={'ugc'}
-                                    querySearch={queryCollectSearch}
-                                    commodityType={item.commodityType}
-                                    data={item}
-                                    setCollectVis={setCollectVis}
-                                />
-                            </div> : ""
-                        }
-                    </div>
-                </React.Fragment>
-            }
             <div id={`SCM_` + key} className={defKey === key ? styles.scm_button : styles.scm_button_display} onClick={downFile.bind(this, item)}>
                 {
                     item.mapImage ? <div style={{ width: '102px' }} className={styles.scm_button_def} >
-                        <img alt="" src={''} style={{ marginRight: '5px' }}></img>
+                        <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '5px' }}></img>
                         <span>下载</span>
                     </div> : ""
                 }
-                <div style={item.mapImage ? { width: '102px' } : { width: '204px', display: 'flex', alignItems: "center", justifyContent: 'center' }} className={styles.scm_button_active} onClick={handleApply.bind(this, item)}>
-                    <img alt="" src={''} style={{ marginRight: '5px' }}></img>
-                    <span>申请</span>
-                </div>
+                {
+                    !item.isApply ? (
+                        <div style={item.mapImage ? { width: '102px' } : { width: '204px', display: 'flex', alignItems: "center", justifyContent: 'center' }} className={styles.scm_button_active} onClick={handleApply.bind(this, item)}>
+                            <img alt="" src={'/assets/ic_apply_small@2x.png'} style={{ marginRight: '5px' }}></img>
+                            <span>申请</span>
+                        </div>
+                    ) : (
+                        <div style={{background: 'rgba(0, 0, 0, 0.85)'}}>
+                            <span>已申请</span>
+                        </div>
+                    )
+                }
             </div>
             <div className={styles.scm_cols_bottom}>
                 {item.commodityName}
@@ -147,20 +89,6 @@ class PgcScm extends Component {
         collectKey: '',
         pageResultVo: null,
         commodityCategoryVos: null
-    }
-
-    query = (pageIndex, commodityCategoryCode) => {
-        const { keyword, keywordType } = this.props;
-        // this.props.dispatch({
-        //     type: 'scm/searchScm',
-        //     payload: {
-        //         pageIndex,
-        //         pageSize: 50,
-        //         commodityCategoryCode,
-        //         keyword,
-        //         keywordType
-        //     }
-        // });
     }
 
     handleDefValue = (uid, items) => {
@@ -185,8 +113,8 @@ class PgcScm extends Component {
     }
 
     seeMaterialInfo = (ids, event) => {
-        console.log(ids, 'qubo')
-        const newBlank = `${window.location.origin}/material/common/materialInfo?id=${ids.ugcId}`;
+        const params = tools.urlParamHash();
+        const newBlank = `${window.location.origin}/material/common?id=${ids.ugcId}&type=${params.type}`;
         window.open(newBlank, '_blank');
     }
 
@@ -196,14 +124,13 @@ class PgcScm extends Component {
 
     _colsArrays = (prams) => {
         const { defKey, collectKey, commodityCategoryCode, pageIndex } = this.state;
-        const { shopId } = this.props;
+        const { shopId, showApplyUgc, pageChange } = this.props;
         return createScmCols({
             index: prams.index,
             key: prams.key,
             defKey,
             item: prams.item,
             collectKey,
-            // dispatch,
             pageIndex,
             shopId,
             commodityCategoryCode,
@@ -211,7 +138,9 @@ class PgcScm extends Component {
             handleMouseover: this.handleMouseover,
             handleoMouseout: this.handleoMouseout,
             seeMaterialInfo: this.seeMaterialInfo,
-            setCollectVis: this.setCollectVis
+            setCollectVis: this.setCollectVis,
+            showApplyUgc: showApplyUgc,
+            pageChange
         });
     }
 
@@ -231,8 +160,6 @@ class PgcScm extends Component {
         if (pageResultVo === null || pageResultVo.length === 0) {
             return;
         }
-
-        console.log(pageResultVo)
         const total = pageResultVo['items'].length; // 总数
         const surplus = total % PgcScm.SCM_ROWS_NUM; // 取余
         const rows = Math.floor(total / PgcScm.SCM_ROWS_NUM) + 1; // 行数
@@ -262,8 +189,7 @@ class PgcScm extends Component {
     }
 
     handlePageSize = (page, pageSize) => {
-        const { commodityCategoryCode } = this.state;
-        this.query(page, commodityCategoryCode);
+        this.props.pageChange(page, pageSize);
     }
 
     render () {

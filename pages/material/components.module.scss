@@ -352,20 +352,25 @@
                         flex: 1;
                     }
                     .scm_button_def {
-                        background: #3A3A3A;
+                        background: #ffffff;
                         width: 102px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        border: 1px solid #ff7300;
                         a {
+                            color: #ff7300;
                             display: flex;
                             justify-content: center;
                             align-items: center;
                             height: 102px;
                         }
+                        span{
+                            color: #ff7300;
+                        }
                     }
                     .scm_button_active {
-                        background: #F0081B;
+                        background: #ff7300;
                         width: 102px;
                         display: flex;
                         justify-content: center;
@@ -405,7 +410,7 @@
         margin-top: 20px;
         :global {
             .ant-pagination-item-active {
-                background: #F0081B;
+                background: #ff7300;
             }
             .ant-pagination>li {
                 background: #F6F6F6;
@@ -421,7 +426,7 @@
                 color: #FFFFFF
             }
             .ant-pagination-item-active {
-                background: #F0081B !important;
+                background: #ff7300 !important;
                 border: none !important;
             }
             .ant-pagination.mini>.ant-pagination-item {
@@ -484,7 +489,7 @@
             }
             .material_right:hover {
                 span {
-                    color: #F0081B;
+                    color: #ff7300;
                 }
             }
         }
@@ -614,7 +619,7 @@
             }
             .renovation_right:hover {
                 span {
-                    color: #F0081B;
+                    color: #ff7300;
                 }
             }
         }

@@ -43,6 +43,7 @@ class SwiperMaterial extends Component {
 
     next = () => {
         const { galleryThumbs } = this.state;
+        console.log(galleryThumbs.slideNext, 'qubo')
         galleryThumbs.slideNext();
     }
 

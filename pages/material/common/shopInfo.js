@@ -13,7 +13,7 @@ export default function ShopInfo (props) {
         <div className={styles.shopinfo_main}>
             <div className={styles.shopinfo_left} style={shopContext ? {} : { display: 'none' }}>
                 <div className={styles.shopinfo_shopname}>
-                    <img alt="" src={'/assets/ic_introduce.png'}></img>
+                    <div className={styles.shopinfo_wngj_side_line}> </div>
                     <span>商品介绍</span>
                 </div>
                 <div className={styles.shopinfo_context}>
@@ -22,8 +22,8 @@ export default function ShopInfo (props) {
             </div>
             <div className={styles.shopinfo_right}>
                 <div className={styles.shopinfo_wngj}>
-                    {/* <img alt="" src={require('@/assets/ic_commend.png')}></img> */}
-                    <span>商品推荐</span>
+                    <div className={styles.shopinfo_wngj_side_line}> </div>
+                    <span>为你推荐</span>
                 </div>
                 <div className={styles.shopinfo_sp_list} style={shopContext ? {} : { display: 'flex' }}>
                     { recommendList.length > 0 && recommendList.map((item, index) => {
