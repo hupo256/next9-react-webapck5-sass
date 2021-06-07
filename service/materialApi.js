@@ -39,6 +39,10 @@ const materialCreate = () => {
   material.materialGetSupplier = params => {
     return ajaxinstance.post('api/v1/moyang/shop/get_supplier', params)
   }
+  // 获取品牌详情
+  material.materialBrandGet = params => {
+    return ajaxinstance.post('api/v1/moyang/brand/get', params)
+  }
 
   return material
 }
