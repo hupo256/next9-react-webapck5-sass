@@ -74,7 +74,9 @@ export default function BasicLayout(props) {
           </div>
           <Content className={styles.mainWrapper}>{children}</Content>
           <FooterComp data={footerData} />
-          {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} type={pushType} />}
+          {regisiterFromVisiable && headConfig['title'] !== '页面已停用' && (
+            <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} type={pushType} />
+          )}
         </Layout>
         <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
       </div>
