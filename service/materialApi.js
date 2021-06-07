@@ -24,12 +24,20 @@ const materialCreate = () => {
     return ajaxinstance.post('api/v1/moyang/ugc/commodity/query', params)
   }
   // 材料商品详情
-  material.materialProductDetail  = params => {
+  material.materialProductDetail = params => {
     return ajaxinstance.post('api/v1/moyang/ugc/commodity/get', params)
   }
   // 材料商品推荐列表
-  material.materialrecommend  = params => {
+  material.materialrecommend = params => {
     return ajaxinstance.post('api/v1/moyang/ugc/commodity/recommend', params)
+  }
+  // 申请ugc商品
+  material.materialCommodityApply = params => {
+    return ajaxinstance.post('api/v1/moyang/ugc/commodity/apply', params)
+  }
+  // 获取供应商
+  material.materialGetSupplier = params => {
+    return ajaxinstance.post('api/v1/moyang/shop/get_supplier', params)
   }
 
   return material

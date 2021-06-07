@@ -17,7 +17,7 @@ export default function Site(props) {
 		commodityCategoryCode: '',
 		subCommodityCategoryCode: '',
 		pageIndex: 1,
-		pageSize: 1,
+		pageSize: 10,
 	});
 	const [shopId, setShopId] = useState('');
 	const [source] = useState('4');
@@ -27,6 +27,7 @@ export default function Site(props) {
 	useEffect(() => {
 		// 初始化获取用户信息
 		materialApi.queryShopInfo({shopCode: 'ezhongs-site.ingongdi.com', source}).then(res => {
+			console.log(res, 'qubo');
 			setShopId(res.data.uid);
 		})
 	}, []);

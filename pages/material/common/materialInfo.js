@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import copy from 'copy-to-clipboard';
 import ShopInfo from './shopInfo';
 import { message, Tooltip } from 'antd';
+import BasicLayout from '@components/HomePageLayout'
+import InSwiper from '@components/Swiper';
+import BreadBar from '@components/breadBar'
 import { HeartOutlined } from '@ant-design/icons';
-import HeartImg from '../assets/ic_collect_sel@2x.png';
-import NoHeartImg from '../assets/ic_collect@2x.png';
 import materialApi from '@service/materialApi'
 import styles from './styles/materialInfo.module.scss';
 
@@ -37,11 +38,12 @@ class MaterialInfo extends Component {
                 this.setState({
                     ...this.state,
                     infoObj: res.data,
-                    downUrl: res.data.renderings ? res.data.renderings[0] : this.state.imgList[0],
+                    downUrl: res.data.renderings && res.data.renderings !== null ? res.data.renderings[0] : this.state.imgList[0],
                     collectFlag: res.data.isFavorited,
                     isApply: res.data.isApply
                 }, () => {
                     this.getCommendBrand(type);
+                    this.getSupplier();
                 })
             })
         }); 
@@ -51,53 +53,53 @@ class MaterialInfo extends Component {
         if(urlType === 'preview') { return }
     }
     // 供应商
-    getSupplier = () => {
-        // request('/api/v1/moyang/shop/get_supplier', {
-        //     method: 'POST',
-        //     data: {
-        //         commodityId: this.state.infoObj.pgcId,
-        //         commodityType: this.state.infoObj.commodityType || '1',
-        //         pageIndex: 1,
-        //         pageSize: 4
-        //     }
-        // }).then((res) => {
-        //     if (res.code === 200) {
-        //         this.setState({ supplierList: res.data.items || [] });
-        //     }
-        // });
+    getSupplier = async () => {
+        const { infoObj } = this.state;
+        const params = {
+            commodityId: infoObj.pgcId,
+            commodityType: "1",
+            keyword: "",
+            pageIndex: 0,
+            pageSize: 1
+        }
+        const res = await materialApi.materialGetSupplier(params)
+        this.setState({ supplierList: res.data.items || [] });
     }
 
     // 申请
     applyStuff = () => {
+        const { uid } = this.state;
+        // console.log(this.state, 'qubo');
+        // materialCommodityApply
         // const tokenInspire = getStorageItem('token_inspire');
-        const { infoObj, type } = this.state;
-        console.log(infoObj, 'qubo');
-        this.previewFun();
-        if (!tokenInspire) {
-            this.props.dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-        } else if (type === 'pgc') {
-            this.props.dispatch({ type: 'layouts/save', payload: { applicationMaterials: true } });
-            this.props.dispatch({ type: 'layouts/getSupplier', payload: { pageIndex: 1, pageSize: 20, commodityId: infoObj.pgcId, commodityType: infoObj.commodityType } });
-        } else {
-            let userinfoJson = localStorage.getItem('userInfo');
-            let user = JSON.parse(userinfoJson);
-            // request('/api/v1/moyang/ugc/commodity/apply', {
-            //     method: 'POST',
-            //     data: {
-            //         applySource: 'TSC043',
-            //         commodityType: infoObj.commodityType,
-            //         customerName: user.nickName,
-            //         phoneNumber: user.mobile,
-            //         shopId: infoObj.shopVo.id,
-            //         ugcCommodityId: infoObj.ugcId,
-            //     }
-            // }).then((res) => {
-            //     if(res.code === 200) {
-            //         this.setState({ isApply: true });
-            //         message.success(res.message);
-            //     }
-            // });
-        } 
+        // const { infoObj, type } = this.state;
+        // console.log(infoObj, 'qubo');
+        // this.previewFun();
+        // if (!tokenInspire) {
+        //     this.props.dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
+        // } else if (type === 'pgc') {
+        //     this.props.dispatch({ type: 'layouts/save', payload: { applicationMaterials: true } });
+        //     this.props.dispatch({ type: 'layouts/getSupplier', payload: { pageIndex: 1, pageSize: 20, commodityId: infoObj.pgcId, commodityType: infoObj.commodityType } });
+        // } else {
+        //     let userinfoJson = localStorage.getItem('userInfo');
+        //     let user = JSON.parse(userinfoJson);
+        //     // request('/api/v1/moyang/ugc/commodity/apply', {
+        //     //     method: 'POST',
+        //     //     data: {
+        //     //         applySource: 'TSC043',
+        //     //         commodityType: infoObj.commodityType,
+        //     //         customerName: user.nickName,
+        //     //         phoneNumber: user.mobile,
+        //     //         shopId: infoObj.shopVo.id,
+        //     //         ugcCommodityId: infoObj.ugcId,
+        //     //     }
+        //     // }).then((res) => {
+        //     //     if(res.code === 200) {
+        //     //         this.setState({ isApply: true });
+        //     //         message.success(res.message);
+        //     //     }
+        //     // });
+        // } 
 
     }
     
@@ -162,13 +164,8 @@ class MaterialInfo extends Component {
     }
     changeSupplier = (item) => {
         this.previewFun();
-        // const tokenInspire = getStorageItem('token_inspire');
-        if (!tokenInspire) {
-            this.props.dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-        } else {
-            const newBlank = `${window.location.origin}/shopinfo/${item.shopCode}`;
-            window.open(newBlank, '_blank');
-        }
+        const newBlank = `${window.location.origin}/shopinfo/${item.shopCode}`;
+        window.open(newBlank, '_blank');
     }
     shareUrl = () => {
         this.previewFun();
@@ -179,32 +176,47 @@ class MaterialInfo extends Component {
     getCurrentUrl = (url) => {
         this.downUrl = url;
     }
-    handleCollect = () => {
-        this.previewFun();
-        // const tokenInspire = getStorageItem('token_inspire');
-        const { collectFlag, type, infoObj } = this.state;
-        if (!tokenInspire) {
-            this.props.dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-        } else if(collectFlag) {
-            let params = type === 'pgc' ? {
-                pgcCommodityId: infoObj.pgcId,
-            } : {
-                shopId: infoObj.shopVo.id,
-                ugcCommodityId: infoObj.ugcId,
-            };
-                // 已收藏，点取消
-            // request('/api/v1/moyang/favorite_commodity/cancel', {
-            //     method: 'POST',
-            //     data: params
-            // }).then((res) => {
-            //     if(res.code === 200) {
-            //         message.success('取消收藏');
-            //         this.setState({ collectFlag: false, });
-            //     }
-            // });
-        }else {
+    handleCollect = async () => {
+        const { shopVo, ugcId, type, commodityCode } = this.state.infoObj;
+        console.log(this.state, 'qubo')
+        const params = {
+            applySource: "TSC042",
+            commodityType: "1",
+            customerName: shopVo.name,
+            phoneNumber: "",
+            shopId: shopVo.id,
+            ugcCommodityId: ugcId
+        }
+
+        const res = await materialApi.materialCommodityApply(params);
+        if(res.code === 200){
             this.setState({ visibleCollect: true });
         }
+        // this.previewFun();
+        // const tokenInspire = getStorageItem('token_inspire');
+        // const { collectFlag, type, infoObj } = this.state;
+        // if (!tokenInspire) {
+        //     // this.props.dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
+        // } else if(collectFlag) {
+        //     // let params = type === 'pgc' ? {
+        //     //     pgcCommodityId: infoObj.pgcId,
+        //     // } : {
+        //     //     shopId: infoObj.shopVo.id,
+        //     //     ugcCommodityId: infoObj.ugcId,
+        //     // };
+        //     //     // 已收藏，点取消
+        //     // // request('/api/v1/moyang/favorite_commodity/cancel', {
+        //     // //     method: 'POST',
+        //     // //     data: params
+        //     // // }).then((res) => {
+        //     // //     if(res.code === 200) {
+        //     // //         message.success('取消收藏');
+        //     // //         this.setState({ collectFlag: false, });
+        //     // //     }
+        //     // // });
+        // }else {
+        //     this.setState({ visibleCollect: true });
+        // }
 
     }
     handleSuccess = () => {
@@ -218,107 +230,115 @@ class MaterialInfo extends Component {
         const { infoObj, recommendList, supplierList, type, collectFlag, visibleCollect, isApply } = this.state;
 
         return (
-            <div className={styles.materialInfo_main}>
-                <div className={styles.materialInfo_context}>
-                    <div className={styles.materialInfo_mbx}>
-                        <span>当前位置：</span>
-                        <span>{infoObj.shopVo && infoObj.shopVo.name}&nbsp;{'>'}&nbsp;</span>
-                        <span>{infoObj.commodityName || ''} </span>
-                    </div>
-                    <div className={styles.materialInfo_theard}>
-                        <div className={styles.materialInfo_t_left}>
-                            {/* <InSwiper getCurrentUrl={this.getCurrentUrl} key={new Date().getTime() + ''} imgList={infoObj.renderings ? infoObj.renderings : []} /> */}
-                        </div>
-                        <div className={styles.materialInfo_t_right}>
-                            <div className={styles.materialInfo_theader}>
-                                <div className={styles.materialInfo_theader_title}>
-                                    <span>{infoObj.commodityName || ''}</span>
-                                </div>
-                                <Tooltip
-                                    color={'#fff'} trigger={'click'} placement="leftBottom" 
-                                    overlayStyle={{ }}
-                                    overlayClassName={styles.tooltip_wrap}
-                                    visible={visibleCollect}
-                                    title="1"
-                                    // title={<Collect handleSuccess={this.handleSuccess} closeMask={this.closeMask} commodityType={type} data={infoObj} setCollectVis={() => {}} />}
-                                    >
-                                        
-                                    <div className={styles.materialInfo_theader_icon}>
-                                        <div onClick={this.handleCollect} style={{ cursor: 'pointer' }}>{ collectFlag ? <img style={{ width: '19px', height: '18px' }} src={HeartImg} /> : <img style={{ width: '19px', height: '18px' }} src={NoHeartImg}/>}</div>
-                                        {/* <div onClick={this.handleCollect} style={{ cursor: 'pointer' }}>{ collectFlag ? <img style={{ width: '19px', height: '18px' }} src='' /> : <img style={{ width: '19px', height: '18px' }} src=''/>}</div> */}
-   
+            <BasicLayout headConfigx={{ title: '材料' }} pushType="designer">
+                <div className="grayBg">
+                    <div className="conBox">
+                        <div className={styles.scmpage_body} style={{display: 'block'}}>
+                            <div className={styles.materialInfo_main}>
+                                <div className={styles.materialInfo_context}>
+                                    <div className={styles.materialInfo_mbx}>
+                                        <span>当前位置：</span>
+                                        <span>{infoObj.shopVo && infoObj.shopVo.name}&nbsp;{'>'}&nbsp;</span>
+                                        <span>{infoObj.commodityName || ''} </span>
                                     </div>
-                                </Tooltip>
-                            </div>
-                            <div className={styles.materialInfo_pp}>
-                                <span>品牌：</span>
-                                <span onClick={this.jumpToBrandInfo} className={styles.hoverSpan}>{infoObj.brandVo && infoObj.brandVo.brandName}</span>
-                            </div>
-                            <div className={styles.materialInfo_xs}>
-                                <span>
-                                    {infoObj.description}
-                                </span>
-                            </div>
-                            <div className={styles.materialInfo_fx} onClick={this.shareUrl}>
-                                {/* <img alt="" src={require('@/assets/ic_share.png')}></img> */}
-                                <span>分享</span>
-                            </div>
-                            <div className={styles.materialInfo_jg}>
-                                {/* <span>¥</span>
-                                <span>{infoObj.price}</span> */}
-                            </div>
-                            <div className={styles.materialInfo_btn_group}>
-                                <div onClick={this.downFile} className={styles.materialInfo_btn_upload}>
-                                    <span>下载素材</span>
-                                </div>
-                                { type === 'pgc' ? <div className={styles.materialInfo_btn_apply} onClick={this.applyStuff.bind(this)}>
-                                    <span>申请材料</span>
-                                </div> : (isApply ? <div className={styles.materialInfo_btn_noApply}>
-                                    <span>已申请</span>
-                                </div> : <div className={styles.materialInfo_btn_apply} onClick={this.applyStuff.bind(this)}>
-                                    <span>{infoObj.commodityType === '1' ? (infoObj.materialsButtonValue || '小样申请') : (infoObj.productButtonValue || '商品预约')}</span>
-                                </div> ) }
-                                
-                            </div>
-                            <div style={type === 'pgc' ? { display: 'block' } : { display: 'none' }} className={styles.materialInfo_gys_group}>
-                                <div className={styles.materialInfo_gys_img}>
-                                    {/* <img alt="" src={require('@/assets/ic_store.png')}></img> */}
-                                    <span>商品供应商</span>
-                                </div>
-                                <div className={styles.materialInfo_gys_list}>
-                                    <div className={styles.materialInfo_gys_map}>
-                                        {supplierList.length > 0 && supplierList.map((item, index) => {
-                                            return (
-                                                <div key={index} className={styles.materialInfo_gys_card} onClick={() => this.changeSupplier(item)}>
-                                                    <div className={styles.materialInfo_os_img}>
-                                                        <img
-                                                            alt=""
-                                                            referrerPolicy="no-referrer"
-                                                            src={item.shopLOGO}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.materialInfo_os_right}>
-                                                        <div className={styles.materialInfo_os_right_title}>
-                                                            {item.shopName}
-                                                        </div>
-                                                        <div>
-                                                            关注: {item.followInterestCount}
-                                                        </div>
-                                                    </div>
+                                    <div className={styles.materialInfo_theard}>
+                                        <div className={styles.materialInfo_t_left}>
+                                            <InSwiper getCurrentUrl={this.getCurrentUrl} key={new Date().getTime() + ''} imgList={infoObj.renderings ? infoObj.renderings : []} />
+                                        </div>
+                                        <div className={styles.materialInfo_t_right}>
+                                            <div className={styles.materialInfo_theader}>
+                                                <div className={styles.materialInfo_theader_title}>
+                                                    <span>{infoObj.commodityName || ''}</span>
                                                 </div>
-                                            );
-                                        })}
-                                    </div>
+                                                <Tooltip
+                                                    color={'#fff'} trigger={'click'} placement="leftBottom" 
+                                                    overlayStyle={{ }}
+                                                    overlayClassName={styles.tooltip_wrap}
+                                                    visible={visibleCollect}
+                                                    title="1"
+                                                    // title={<Collect handleSuccess={this.handleSuccess} closeMask={this.closeMask} commodityType={type} data={infoObj} setCollectVis={() => {}} />}
+                                                    >
+                                                        
+                                                    <div className={styles.materialInfo_theader_icon}>
+                                                        <div onClick={this.handleCollect} style={{ cursor: 'pointer' }}>{ collectFlag ? <img style={{ width: '19px', height: '18px' }} src={'/assets/ic_collect_sel@2x.png'} /> : <img style={{ width: '19px', height: '18px' }} src={'/assets/ic_collect@2x.png'}/>}</div>
+                                                        {/* <div onClick={this.handleCollect} style={{ cursor: 'pointer' }}>{ collectFlag ? <img style={{ width: '19px', height: '18px' }} src='' /> : <img style={{ width: '19px', height: '18px' }} src=''/>}</div> */}
+                
+                                                    </div>
+                                                </Tooltip>
+                                            </div>
+                                            <div className={styles.materialInfo_pp}>
+                                                <span>品牌：</span>
+                                                <span onClick={this.jumpToBrandInfo} className={styles.hoverSpan}>{infoObj.brandVo && infoObj.brandVo.brandName}</span>
+                                            </div>
+                                            <div className={styles.materialInfo_xs}>
+                                                <span>
+                                                    {infoObj.description}
+                                                </span>
+                                            </div>
+                                            <div className={styles.materialInfo_fx} onClick={this.shareUrl}>
+                                                {/* <img alt="" src={require('@/assets/ic_share.png')}></img> */}
+                                                <span>分享</span>
+                                            </div>
+                                            <div className={styles.materialInfo_jg}>
+                                                {/* <span>¥</span>
+                                                <span>{infoObj.price}</span> */}
+                                            </div>
+                                            <div className={styles.materialInfo_btn_group}>
+                                                <div onClick={this.downFile} className={styles.materialInfo_btn_upload}>
+                                                    <span>下载素材</span>
+                                                </div>
+                                                { type === 'pgc' ? <div className={styles.materialInfo_btn_apply} onClick={this.applyStuff.bind(this)}>
+                                                    <span>申请材料</span>
+                                                </div> : (isApply ? <div className={styles.materialInfo_btn_noApply}>
+                                                    <span>已申请</span>
+                                                </div> : <div className={styles.materialInfo_btn_apply} onClick={this.applyStuff.bind(this)}>
+                                                    <span>{infoObj.commodityType === '1' ? (infoObj.materialsButtonValue || '小样申请') : (infoObj.productButtonValue || '商品预约')}</span>
+                                                </div> ) }
+                                                
+                                            </div>
+                                            <div style={type === 'pgc' ? { display: 'block' } : { display: 'none' }} className={styles.materialInfo_gys_group}>
+                                                <div className={styles.materialInfo_gys_img}>
+                                                    {/* <img alt="" src={require('@/assets/ic_store.png')}></img> */}
+                                                    <span>商品供应商</span>
+                                                </div>
+                                                <div className={styles.materialInfo_gys_list}>
+                                                    <div className={styles.materialInfo_gys_map}>
+                                                        {supplierList.length > 0 && supplierList.map((item, index) => {
+                                                            return (
+                                                                <div key={index} className={styles.materialInfo_gys_card} onClick={() => this.changeSupplier(item)}>
+                                                                    <div className={styles.materialInfo_os_img}>
+                                                                        <img
+                                                                            alt=""
+                                                                            referrerPolicy="no-referrer"
+                                                                            src={item.shopLOGO}
+                                                                        />
+                                                                    </div>
+                                                                    <div className={styles.materialInfo_os_right}>
+                                                                        <div className={styles.materialInfo_os_right_title}>
+                                                                            {item.shopName}
+                                                                        </div>
+                                                                        <div>
+                                                                            关注: {item.followInterestCount}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={styles.materialInfo_shopinfo}>
+                                        <ShopInfo type={type} dispatch={this.props.dispatch} infoObj={infoObj} recommendList={recommendList} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className={styles.materialInfo_shopinfo}>
-                        <ShopInfo type={type} dispatch={this.props.dispatch} infoObj={infoObj} recommendList={recommendList} />
                     </div>
                 </div>
-            </div>
+            </BasicLayout>
         );
     }
 }

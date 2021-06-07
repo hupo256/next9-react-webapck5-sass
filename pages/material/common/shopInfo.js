@@ -6,19 +6,14 @@ export default function ShopInfo (props) {
     const { shopContext = true, infoObj, recommendList, type, dispatch } = props;
     const defaultImgUrl = 'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPng3c9b5bd3683a93e3c205e750538cc5a7c8ecc40ecff2b28df394fee5e4024667';
     const toInfoPage = (item) => {
-        // const tokenInspire = getStorageItem('token_inspire');
-        if (!tokenInspire) {
-            dispatch({ type: 'login/save', payload: { isloginModalShow: true } });
-        } else {
-            const newBlank = `${window.location.origin}/info/${type === 'pgc' ? item.pgcId : item.ugcId}/${type}`;
-            window.open(newBlank, '_blank');
-        }
+        const newBlank = `${window.location.origin}/material/common/materialInfo?id=${item.ugcId}`;
+        window.open(newBlank, '_blank');
     };
     return (
         <div className={styles.shopinfo_main}>
             <div className={styles.shopinfo_left} style={shopContext ? {} : { display: 'none' }}>
                 <div className={styles.shopinfo_shopname}>
-                    {/* <img alt="" src={require('@/assets/ic_introduce.png')}></img> */}
+                    <img alt="" src={'/assets/ic_introduce.png'}></img>
                     <span>商品介绍</span>
                 </div>
                 <div className={styles.shopinfo_context}>

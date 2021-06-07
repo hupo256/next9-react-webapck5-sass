@@ -1,0 +1,78 @@
+.swiper-main {
+    position: relative;
+    border-radius: 4px;
+}
+
+
+.swiperMaterial-t-img {
+    width: 612px;
+    height: 612px;
+    border-radius: 4px;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.swiper-slide {
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.gallery-top {
+    height: 80%;
+    width: 100%;
+}
+
+.gallery-thumbs {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+.gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.swiperMaterial-l-img {
+    width: 124px;
+    height: 124px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.swiperMaterial-b-img {
+    width: 124px;
+    height: 124px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.swiperMaterial-b-img:hover {
+    border-radius: 2px;
+    border: 2px solid #F0061B;
+}
+
+.swiper-button-next {
+    width: 54px;
+    height: 124px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 32px;
+    right: 0px;
+}
+
+.swiper-button-prev {
+    width: 54px;
+    height: 124px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 32px;
+    left: 0px;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 20px !important;
+}
+
+.swiperMaterial-img_active {
+    border: 2px solid #F0061B;
+}
