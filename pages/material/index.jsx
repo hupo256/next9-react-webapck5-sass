@@ -17,7 +17,7 @@ export default function Site(props) {
 		commodityCategoryCode: '',
 		subCommodityCategoryCode: '',
 		pageIndex: 1,
-		pageSize: 30,
+		pageSize: 1,
 	});
 	const [shopId, setShopId] = useState('');
 	const [source] = useState('4');
@@ -27,7 +27,6 @@ export default function Site(props) {
 	useEffect(() => {
 		// 初始化获取用户信息
 		materialApi.queryShopInfo({shopCode: 'ezhongs-site.ingongdi.com', source}).then(res => {
-			console.log(res, 'qubo')
 			setShopId(res.data.uid);
 		})
 	}, []);
@@ -67,14 +66,14 @@ export default function Site(props) {
 	// 		pageIndex: 1,
 	// 		pageSize: 30
 	// 	});
-	// 	// this.props.dispatch({ type: 'scm/save', payload: { keywordType: -1 } }); // 重新加载材料列表页
+	// 	query();
 	// }
 
-	// const handleKeyword = (e) => {
-	// 	setState({
-	// 		keyword: e.target.value
-	// 	});
-	// }
+	const handleKeyword = (e) => {
+		setState({
+			keyword: e.target.value
+		});
+	}
 
 	// const handleQuery = () => {
 	// 	const { keyword, keywordType } = state;
@@ -105,17 +104,28 @@ export default function Site(props) {
 	// 	}
 	// }
 
-	const query = () => {
-		const { pageIndex, pageSize, commodityCategoryCode } = state;
-		materialApi.queryMaterial({ 
+	const query = async () => {
+		const { pageIndex, pageSize, commodityCategoryCode, commodityType, subCommodityCategoryCode } = state;
+		const queryCommodityCategory = {
+			commodityType,
+			shopId,
+			source: '4'
+		}
+		const queryMaterial = {
+			commodityCategoryCode,
+			subCommodityCategoryCode,
+			commodityType,
+			source,
 			shopId,
 			pageIndex,
 			pageSize,
 			shopType: []
-		 }).then(res => {
-			setCommodityCategoryVos(res.data.commodityCategoryVos);
-			// setPageResultVo(res.data.pageResultVo);
-		 })
+		 }
+		const commodityCategory = await materialApi.queryCommodityCategory(queryCommodityCategory);
+		const commoditys = await materialApi.queryMaterial(queryMaterial);
+		
+		setCommodityCategoryVos(commodityCategory.data);
+		setPageResultVo(commoditys.data);
 	}
 
 	useEffect(() => {

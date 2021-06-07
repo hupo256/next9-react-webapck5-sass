@@ -27,6 +27,10 @@ const materialCreate = () => {
   material.materialProductDetail  = params => {
     return ajaxinstance.post('api/v1/moyang/ugc/commodity/get', params)
   }
+  // 材料商品推荐列表
+  material.materialrecommend  = params => {
+    return ajaxinstance.post('api/v1/moyang/ugc/commodity/recommend', params)
+  }
 
   return material
 }

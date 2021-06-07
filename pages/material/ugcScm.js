@@ -186,7 +186,7 @@ class PgcScm extends Component {
 
     seeMaterialInfo = (ids, event) => {
         console.log(ids, 'qubo')
-        const newBlank = `${window.location.origin}/material/common/materialInfo?id=${ids.pgcId}`;
+        const newBlank = `${window.location.origin}/material/common/materialInfo?id=${ids.ugcId}`;
         window.open(newBlank, '_blank');
     }
 
@@ -231,6 +231,8 @@ class PgcScm extends Component {
         if (pageResultVo === null || pageResultVo.length === 0) {
             return;
         }
+
+        console.log(pageResultVo)
         const total = pageResultVo['items'].length; // 总数
         const surplus = total % PgcScm.SCM_ROWS_NUM; // 取余
         const rows = Math.floor(total / PgcScm.SCM_ROWS_NUM) + 1; // 行数

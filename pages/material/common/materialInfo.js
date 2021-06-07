@@ -3,6 +3,8 @@ import copy from 'copy-to-clipboard';
 import ShopInfo from './shopInfo';
 import { message, Tooltip } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
+import HeartImg from '../assets/ic_collect_sel@2x.png';
+import NoHeartImg from '../assets/ic_collect@2x.png';
 import materialApi from '@service/materialApi'
 import styles from './styles/materialInfo.module.scss';
 
@@ -27,40 +29,22 @@ class MaterialInfo extends Component {
     downUrl = '';
     componentDidMount () {
         const uid = location.href.split('?')[1].split('=')[1];
-
-        materialApi.materialProductDetail({type: 0, uid}).then(res => {
-            console.log(res, 'qubo');
-        })
         // 根据来源判断接口调用
-        // const path = history.location.pathname.substr(1).split('/');
-        // const search = history.location.search;      
-        // const urlType = search ? search.substr(1).split('=')[1]: 'details'; //preview
-        // let uid = path[1];
-        // let type = path.length > 2 ? path[2] : '';
-        // this.setState({ uid, type, urlType }, () => {
-        //     this.getData(type, uid);
-        // }); 
-    }
-    getData = (type, uid) => {
-        let params = '/api/v1/moyang/ugc/commodity/get';
-        let noRealUid = type === 'pgc' ? '45e2ef77340842789d78a40fe1f86a8e' : 'f909b70ed6e74ba992799238978ebbd4';
-        // request(params, { //   /api/v1/moyang/ugc/commodity/get
-        //     method: 'POST',
-        //     data: {
-        //         uid,
-        //         type: urlType === 'preview' ? '1' : '2',
-        //     }
-        // }).then((res) => {
-        //     if (res.code === 200) {
-        //         if(res.data) {
-        //             this.setState({ infoObj: res.data, downUrl: res.data.renderings ? res.data.renderings[0] : this.state.imgList[0],
-        //                 collectFlag: res.data.isFavorited,
-        //                 isApply: res.data.isApply });
-        //             type === 'pgc' && this.getSupplier();
-        //             this.getCommendBrand(type);
-        //         }
-        //     }
-        // });
+        const urlType = 'details'; //preview
+        let type = 'ugc';
+        this.setState({ uid, type, urlType }, () => {
+            materialApi.materialProductDetail({type: 2, uid}).then(res => {
+                this.setState({
+                    ...this.state,
+                    infoObj: res.data,
+                    downUrl: res.data.renderings ? res.data.renderings[0] : this.state.imgList[0],
+                    collectFlag: res.data.isFavorited,
+                    isApply: res.data.isApply
+                }, () => {
+                    this.getCommendBrand(type);
+                })
+            })
+        }); 
     }
     previewFun = () => {
         const { urlType } = this.state;
@@ -163,29 +147,18 @@ class MaterialInfo extends Component {
     }
 
     getCommendBrand = (type) => {
-        let path = type === 'pgc' ? '/api/v1/moyang/pgc/commodity/recommend' : '/api/v1/moyang/ugc/commodity/recommend';
-        let params = type === 'pgc' ? {
-            commodityType: this.state.infoObj.commodityType || '1', //数据接口回来
-            keyword: '',
-            pageIndex: 1,
-            pageSize: 6
-        } : {
+        const params = {
             commodityType: this.state.infoObj.commodityType || '1', //数据接口回来
             keyword: '',
             pageIndex: 1,
             pageSize: 6,
             shopId: this.state.infoObj.shopVo.id,
             source: '2'
-        };
-        // request(path, {
-        //     method: 'POST',
-        //     data: params
-        // }).then((res) => {
-        //     if (res.code === 200) {
-        //         this.setState({ recommendList: res.data || [] });
-        //     }
+        }
 
-        // });
+        materialApi.materialrecommend(params).then(res => {
+            this.setState({ recommendList: res.data || [] });
+        })
     }
     changeSupplier = (item) => {
         this.previewFun();
@@ -248,9 +221,9 @@ class MaterialInfo extends Component {
             <div className={styles.materialInfo_main}>
                 <div className={styles.materialInfo_context}>
                     <div className={styles.materialInfo_mbx}>
-                        {/* <span>当前位置：</span>
+                        <span>当前位置：</span>
                         <span>{infoObj.shopVo && infoObj.shopVo.name}&nbsp;{'>'}&nbsp;</span>
-                        <span>{infoObj.commodityName || ''} </span> */}
+                        <span>{infoObj.commodityName || ''} </span>
                     </div>
                     <div className={styles.materialInfo_theard}>
                         <div className={styles.materialInfo_t_left}>
@@ -271,8 +244,8 @@ class MaterialInfo extends Component {
                                     >
                                         
                                     <div className={styles.materialInfo_theader_icon}>
-                                        {/* <div onClick={this.handleCollect} style={{ cursor: 'pointer' }}>{ collectFlag ? <img style={{ width: '19px', height: '18px' }} src={HeartImg} /> : <img style={{ width: '19px', height: '18px' }} src={NoHeartImg}/>}</div> */}
-                                        <div onClick={this.handleCollect} style={{ cursor: 'pointer' }}>{ collectFlag ? <img style={{ width: '19px', height: '18px' }} src='' /> : <img style={{ width: '19px', height: '18px' }} src=''/>}</div>
+                                        <div onClick={this.handleCollect} style={{ cursor: 'pointer' }}>{ collectFlag ? <img style={{ width: '19px', height: '18px' }} src={HeartImg} /> : <img style={{ width: '19px', height: '18px' }} src={NoHeartImg}/>}</div>
+                                        {/* <div onClick={this.handleCollect} style={{ cursor: 'pointer' }}>{ collectFlag ? <img style={{ width: '19px', height: '18px' }} src='' /> : <img style={{ width: '19px', height: '18px' }} src=''/>}</div> */}
    
                                     </div>
                                 </Tooltip>
