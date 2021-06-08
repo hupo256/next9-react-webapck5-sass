@@ -1,6 +1,7 @@
-$hightColor: rgba(255, 115, 0, 1);
-$grayColor: rgba(229, 229, 229, 1);
-$fontColor: rgba(51, 51, 48, 1);
+$hightColor: #fe6a30;
+$grayColor: #b5b5b5;
+$fontColor: #333330;
+$borderRadius: 2px;
 
 .listBox {
   .minImgBox {
@@ -29,6 +30,7 @@ $fontColor: rgba(51, 51, 48, 1);
 
     .casePicBox {
       width: 65%;
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -88,16 +90,18 @@ $fontColor: rgba(51, 51, 48, 1);
         }
       }
 
-      .setpBox {
+      .stepOut {
         overflow: hidden;
-        overflow-x: auto;
-        padding-top: 10px;
-        padding-bottom: 12px;
-        margin-bottom: -12px;
+      }
 
-        // &::-webkit-scrollbar {
-        //   display: none;
-        // }
+      .setpBox {
+        // overflow: hidden;
+        // overflow-x: auto;
+        padding-top: 20px;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
 
         .stepBg,
         .stepHight {
@@ -123,8 +127,9 @@ $fontColor: rgba(51, 51, 48, 1);
             position: relative;
             text-align: center;
             font-size: 12px;
+            width: 4em;
             display: inline-block;
-            margin-left: 20px;
+            margin: 0 10px;
 
             &::before {
               display: inline-block;
@@ -159,6 +164,29 @@ $fontColor: rgba(51, 51, 48, 1);
               }
             }
           }
+        }
+      }
+
+      .directionBox {
+        position: absolute;
+        right: 0;
+        bottom: 40px;
+        height: 36px;
+        width: 36px;
+        display: flex;
+        justify-content: space-between;
+
+        > p {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          width: 16px;
+          height: 16px;
+          border-radius: $borderRadius;
+          background: $hightColor;
+          color: #fff;
+          text-align: center;
+          cursor: pointer;
         }
       }
     }
