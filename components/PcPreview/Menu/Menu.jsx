@@ -132,7 +132,7 @@ const MenuListComp = ({ menuList }) => {
 
   const clickMenuItem = ({ linkUrl, uid }) => {
     // 本地页面没有uid，等后端接口添加入口后删除即可
-    if(linkUrl === '/material' || linkUrl === '/renovation'){
+    if(linkUrl === '/material?type=1' || linkUrl === '/material?type=2'){
       window.location.href = linkUrl
       return;
     }
