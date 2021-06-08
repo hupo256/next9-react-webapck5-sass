@@ -131,12 +131,6 @@ const MenuListComp = ({ menuList }) => {
   }, [menuList])
 
   const clickMenuItem = ({ linkUrl, uid }) => {
-    // 本地页面没有uid，等后端接口添加入口后删除即可
-    if(linkUrl === '/material?type=1' || linkUrl === '/material?type=2'){
-      window.location.href = linkUrl
-      return;
-    }
-
     if (!uid) return
     // if (linkKey === 'games') {
     //   message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')

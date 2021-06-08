@@ -22,12 +22,6 @@ const { getMenuList, getFooter, getPublishedData } = homePageService
 
 const { Content } = Layout
 
-// 暂时本地添加，迁移后找后端加menu入口
-const menuArr = [
-  {linkKey: 'material', linkUrl: '/material?type=1', webViewName: '看材料', websiteName: '看材料'},
-  {linkKey: 'material', linkUrl: '/material?type=2', webViewName: '看装修', websiteName: '看装修'}
-]
-
 const ChapterLayout = ({ children, title, moreStyles }) => (
   <div className={styles.chapterWrapper}>
     <div className={styles.chapterSection} style={moreStyles}>
@@ -48,7 +42,7 @@ const Home = () => {
     ;(async () => {
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
       // 暂时添加，待添加入口后移除
-      setMenuList([..._.get(res, 'data.list'), ...menuArr])
+      setMenuList(_.get(res, 'data.list'));
     })()
     ;(async () => {
       const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
