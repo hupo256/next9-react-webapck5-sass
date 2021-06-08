@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Input, Modal, Button } from 'antd';
+import { Input, Modal, Button, Carousel } from 'antd';
 import BasicLayout from '@components/HomePageLayout'
 import BreadBar from '@components/breadBar'
 import materialApi from '@service/materialApi'
@@ -170,18 +170,13 @@ export default function Site(props) {
 	return (
 		<BasicLayout headConfigx={{ title: '材料' }} pushType="designer">
 			<div className="grayBg">
-				<div className="swiper-container" style={{display: state.carouselImages.length ? 'block' : 'none'}}>
-					<div className="swiper-wrapper">
-						{
-							state.carouselImages.map((item, inx) => {
-								return <div className="swiper-slide" key={`material_banner_${inx}`}>
-									<img alt="" src={`${item}`} />
-								</div>
-							})
-						}
-					</div>
-					<div className="swiper-pagination"></div>
-				</div>
+				<Carousel autoplay>
+					{_.map(state.carouselImages, (item, index) => (
+						<div key={`banner-${index}`}>
+							<h3 className={styles.banner} style={{ backgroundImage: `url(${item})`, }} ></h3>
+						</div>
+					))}
+					</Carousel>
 				<div className="conBox">
 					<div className={styles.scmpage_body} style={{display: 'block'}}>
 						<div className={styles.scmpage_context}>

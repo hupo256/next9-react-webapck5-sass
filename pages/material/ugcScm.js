@@ -157,7 +157,7 @@ class PgcScm extends Component {
     _curRows = () => {
         const { pageResultVo } = this.props;
         let rowsArrays = [];
-        if (pageResultVo === null || pageResultVo.length === 0) {
+        if (pageResultVo === null || pageResultVo.length === 0 || pageResultVo['items'] === null) {
             return;
         }
         const total = pageResultVo['items'].length; // 总数
