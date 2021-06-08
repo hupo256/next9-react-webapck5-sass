@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "test": "next test",
-    "dev:build": "node ./env.js DEV && next build && next export",
+    "dev:build": "npm cache clean --force && node ./env.js DEV && next build && next export",
     "pre:build": "node ./env.js PRE && next build && next export",
     "test:build": "node ./env.js TEST && next build && next export",
     "prod:build": "node ./env.js PROD && next build && next export",
