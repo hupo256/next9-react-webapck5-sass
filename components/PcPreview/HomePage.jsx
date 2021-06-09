@@ -50,20 +50,20 @@ const Home = () => {
         const filtered = {
           banner: _.find(rawCollection, {
             flag: 'banner',
-          })?.list,
+          }),
           highlights: _.find(rawCollection, {
             flag: 'highlights',
-          })?.list,
+          }),
           case: _.find(rawCollection, {
             flag: 'case',
-          })?.list,
+          }),
           site: _.find(rawCollection, {
             flag: 'site',
-          })?.list,
-          design: _.find(rawCollection, { flag: 'design' })?.list,
+          }),
+          design: _.find(rawCollection, { flag: 'design' }),
           article: _.find(rawCollection, {
             flag: 'article',
-          })?.list,
+          }),
         }
         setPublishedData(filtered)
       }
@@ -114,7 +114,7 @@ const Home = () => {
           />
         </div>
         <Carousel autoplay>
-          {_.map(publishedData['banner'], (item, index) => (
+          {_.map(publishedData['banner']['list'], (item, index) => (
             <div
               key={`banner-${index}`}
               onClick={() => {
@@ -145,31 +145,31 @@ const Home = () => {
         </Carousel>
         <Content className={styles.mainWrapper}>
           {_.isEmpty(publishedData['highlights']) || (
-            <ChapterLayout title={'产品特点'}>
-              <KeyPoints pointsList={publishedData['highlights']} />
+            <ChapterLayout title={publishedData['highlights']['title']}>
+              <KeyPoints pointsList={publishedData['highlights']['list']} />
             </ChapterLayout>
           )}
           {_.isEmpty(publishedData['case']) || (
-            <ChapterLayout title={'装修案例'}>
-              <CaseProjects data={publishedData['case']} />
+            <ChapterLayout title={publishedData['case']['title']}>
+              <CaseProjects data={publishedData['case']['list']} />
             </ChapterLayout>
           )}
           {_.isEmpty(publishedData['site']) || (
             <div className={styles.designerSectionWiderBackground}>
-              <ChapterLayout title={'参观工地'}>
-                <LiveShow data={publishedData['site']} />
+              <ChapterLayout title={publishedData['site']['title']}>
+                <LiveShow data={publishedData['site']['list']} />
               </ChapterLayout>
             </div>
           )}
           {_.isEmpty(publishedData['design']) || (
-            <ChapterLayout title={'首席设计师'} moreStyles={{ marginBottom: '10px' }}>
-              <DesignerContent data={publishedData['design']} />
+            <ChapterLayout title={publishedData['design']['title']} moreStyles={{ marginBottom: '10px' }}>
+              <DesignerContent data={publishedData['design']['list']} />
             </ChapterLayout>
           )}
           {_.isEmpty(publishedData['article']) || (
             <div className={styles.designerSectionWiderBackground}>
-              <ChapterLayout title={'装修攻略'}>
-                <Articles data={_.slice(publishedData['article'], 0, 3)} />
+              <ChapterLayout title={publishedData['article']['title']}>
+                <Articles data={_.slice(publishedData['article']['list'], 0, 3)} />
               </ChapterLayout>
             </div>
           )}
