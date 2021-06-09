@@ -145,7 +145,7 @@ const Home = () => {
         </Carousel>
         <Content className={styles.mainWrapper}>
           {_.isEmpty(publishedData['highlights']) || (
-            <ChapterLayout title={publishedData['highlights']['title']}>
+            <ChapterLayout title={'产品特点'}>
               <KeyPoints pointsList={publishedData['highlights']['list']} />
             </ChapterLayout>
           )}
