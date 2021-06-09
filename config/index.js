@@ -28,6 +28,16 @@ if (NEXT_PUBLIC_ENV === 'PROD') {
   env = 'PROD'
 }
 
+if (NEXT_PUBLIC_ENV === 'TEST1') {
+  host = `//test1gw.ingongdi.com/`
+  env = 'TEST1'
+}
+
+if (NEXT_PUBLIC_ENV === 'PROD1') {
+  host = '//pre1gw.ingongdi.com/'
+  env = 'PROD1'
+}
+
 console.log('host = ', host)
 
 export default { host, env }

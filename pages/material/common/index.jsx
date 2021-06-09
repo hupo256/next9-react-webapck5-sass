@@ -54,16 +54,18 @@ class MaterialInfo extends Component {
         let type = 'ugc';
         this.setState({ ...this.state, uid, type, commodityType, urlType }, () => {
             materialApi.materialProductDetail({type: 2, uid}).then(res => {
-                this.setState({
-                    ...this.state,
-                    infoObj: res.data,
-                    downUrl: res.data.renderings !== null && res.data.renderings ? res.data.renderings[0] : this.state.imgList[0],
-                    collectFlag: res.data.isFavorited,
-                    isApply: res.data.isApply
-                }, () => {
-                    this.getCommendBrand(type);
-                    this.getSupplier();
-                })
+                if(res.data !== null){
+                    this.setState({
+                        ...this.state,
+                        infoObj: res.data,
+                        downUrl: res.data.renderings !== null && res.data.renderings ? res.data.renderings[0] : this.state.imgList[0],
+                        collectFlag: res.data.isFavorited,
+                        isApply: res.data.isApply
+                    }, () => {
+                        this.getCommendBrand(type);
+                        this.getSupplier();
+                    })   
+                }
             })
         }); 
     }

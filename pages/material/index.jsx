@@ -111,7 +111,7 @@ export default function Site(props) {
 		}
 		const commodityCategory = await materialApi.queryCommodityCategory(queryCommodityCategory);
 		const commoditys = await materialApi.queryMaterial(queryMaterial);
-		
+
 		setCommodityCategoryVos(commodityCategory.data);
 		setPageResultVo(commoditys.data);
 	}

@@ -18,13 +18,13 @@ const getHost = req => {
       return '//test-api.in-spire.cn/'
     }
     if(env === 'PROD'){
-      return '//dev-api.in-spire.cn/'
+      return '//pre-api.in-spire.cn/'
     }
     if(env === 'TEST1'){
-      return '//test1gw.ingongdi.com/'
+      return '//test1-api.in-spire.cn/'
     }
     if(env === 'PROD1'){
-      return '//pre1gw.ingongdi.com/'
+      return '//pre1-api.in-spire.cn/'
     }
   }
   return req.baseURL;
