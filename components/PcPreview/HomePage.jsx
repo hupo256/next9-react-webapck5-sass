@@ -125,6 +125,10 @@ const Home = () => {
                   message.warning('PC端不允许跳转到小游戏')
                   return
                 }
+                if (item.type === 'special') {
+                  window.location.href = `/img/PublicLibraryPc/special.html#/?uid=${item.uid}`
+                  return
+                }
                 window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`
               }}
             >

@@ -22,6 +22,10 @@ const KeyPoints = ({ pointsList, domain = '' }) => {
               message.warning('PC端不允许跳转到小游戏')
               return
             }
+            if (feature.type === 'special') {
+              window.location.href = `/img/PublicLibraryPc/special.html#/?uid=${feature.uid}`
+              return
+            }
             window.location.href = `${domain}/${typeMap[feature.type]}/details?${paramMap[feature.type]}=${feature.uid}`
           }}
           style={{ cursor: isHide(feature) ? 'default' : 'pointer' }}
