@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Input, Modal, Button, Carousel } from 'antd'
 import BasicLayout from '@components/HomePageLayout'
-import BreadBar from '@components/breadBar'
 import materialApi from '@service/materialApi'
 import Types from './types'
 import UgcScm from './ugcScm'
@@ -50,8 +49,7 @@ export default function Site(props) {
   useEffect(() => {
     // 初始化获取用户信息
     materialApi.queryShopInfo({ shopCode: 'ezhongs-site.ingongdi.com', source }).then(res => {
-      const params = tools.urlParamHash()
-      const commodityType = params.type
+      const commodityType = props.type ? props.type : state.commodityType;
       setState({
         ...state,
         ...res.data,
