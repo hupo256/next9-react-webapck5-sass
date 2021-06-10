@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Input, Modal, Button, Carousel } from 'antd'
+import { Input, Modal, Button, Carousel, message } from 'antd'
 import BasicLayout from '@components/HomePageLayout'
 import materialApi from '@service/materialApi'
 import Types from './types'
