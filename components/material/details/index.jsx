@@ -213,7 +213,7 @@ class MaterialInfo extends Component {
     }
 
     render () {
-        const { infoObj, recommendList, commodityAddress, type, applyVisible, isApply } = this.state;
+        const { infoObj, recommendList, type, applyVisible, isApply } = this.state;
 
         return (
             <BasicLayout headConfig={{ title: '详情' }} pushType="designer">
@@ -278,8 +278,8 @@ class MaterialInfo extends Component {
                                                     </div>)
                                                 }
                                                 {
-                                                    commodityAddress ? (
-                                                        <div onClick={() => { window.open(commodityAddress, '_blank') }} className={styles.materialInfo_btn_noApply}>
+                                                    infoObj.commodityAddress ? (
+                                                        <div onClick={() => { window.open(infoObj.commodityAddress, '_blank') }} className={styles.materialInfo_btn_noApply}>
                                                             <span>查看更多</span>
                                                         </div>
                                                     ) : null
