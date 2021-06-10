@@ -48,7 +48,7 @@ export default function Site(props) {
 
   useEffect(() => {
     // 初始化获取用户信息
-    materialApi.queryShopInfo({ shopCode: 'ezhongs-site.ingongdi.com', source }).then(res => {
+    materialApi.queryShopInfo({ shopCode: 'test1-site.ingongdi.com', source }).then(res => {
       const commodityType = props.type ? props.type : state.commodityType;
       setState({
         ...state,

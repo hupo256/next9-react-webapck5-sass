@@ -21,7 +21,7 @@ const getHost = req => {
       return '//pre-api.in-spire.cn/'
     }
     if(env === 'TEST1'){
-      return '//test1-api.in-spire.cn/'
+      return '//test-api.in-spire.cn/'
     }
     if(env === 'PROD1'){
       return '//pre1-api.in-spire.cn/'
