@@ -4,8 +4,6 @@ import BasicLayout from '@components/HomePageLayout'
 import materialApi from '@service/materialApi'
 import Types from './types'
 import UgcScm from './ugcScm'
-import Swiper from 'swiper'
-import tools from '../../libs/utils'
 import styles from './index.module.scss'
 
 const InputStyle = {
@@ -65,18 +63,16 @@ export default function Site(props) {
 
   useEffect(() => {
     query()
-  }, [state.pageIndex, state.pageSize])
+  }, [state.pageIndex, state.pageSize, state.commodityCategoryCode, state.subCommodityCategoryCode])
 
   const handleMaxLi = (key, item) => {
     setState({
       ...state,
       maxLiKey: key,
-      commodityCategoryCode: key === -1 ? '' : item.categoryCode,
+      commodityCategoryCode: key < 0 ? '' : item.categoryCode,
       subCommodityCategoryCode: '',
       minLiKey: -1,
     })
-
-    query()
   }
 
   const handleMinLi = (key, item) => {
@@ -156,10 +152,11 @@ export default function Site(props) {
   return (
     <BasicLayout headConfig={{ title: '材料' }} pushType="material">
       <div className="grayBg">
-        <Carousel autoplay>
+        <Carousel autoplay style={{height: '100%'}}>
           {_.map(state.carouselImages, (item, index) => (
-            <div key={`banner-${index}`}>
-              <h3 className={styles.banner} style={{ backgroundImage: `url(${item})` }}></h3>
+            <div className={`banner-${index}`} key={`banner-${index}`} style={{height: '100%'}}>
+              <img src={item} alt="" style={{width: '100%', height: '560px'}} />
+              {/* <h3 className={styles.banner} style={{ backgroundImage: `url(${item})`, height: '100%' }}></h3> */}
             </div>
           ))}
         </Carousel>

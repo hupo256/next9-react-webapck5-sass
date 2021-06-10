@@ -74,7 +74,6 @@ export default function BasicLayout(props) {
           </div>
           <Content className={styles.mainWrapper}>{children}</Content>
           <FooterComp data={footerData} />
-          {console.log(headConfig)}
           {regisiterFromVisiable && headConfig['title'] !== '页面已停用' && (
             <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} type={pushType} />
           )}
