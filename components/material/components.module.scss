@@ -433,6 +433,11 @@
                 height: 22px;
                 width: 22px;
                 border-radius: 2px;
+                font-size: 12px;
+            }
+            .ant-pagination.mini>.ant-pagination-item a{
+                padding: 0 !important;
+                margin: 0 !important;
             }
         }
     }
