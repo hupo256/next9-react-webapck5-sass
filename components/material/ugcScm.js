@@ -8,6 +8,7 @@ import materialApi from '../../service/materialApi';
 function createScmCols ({ key, defKey, item, index, collectKey,
     commodityCategoryCode, handleMouseover, handleoMouseout,
     seeMaterialInfo, setCollectVis, pageIndex, shopId, query, showApplyUgc, pageChange }) {
+    let downUrl = '';
     const handleSesMaterialInfo = function (parms, event) {
         event.stopPropagation();
         seeMaterialInfo(parms);
@@ -35,6 +36,37 @@ function createScmCols ({ key, defKey, item, index, collectKey,
 
     const handleCollectClick = (event) => {
         event.stopPropagation();
+    };
+
+    const getImageDataURL = (image) => {
+        // 创建画布
+        const canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        const ctx = canvas.getContext('2d');
+        // 以图片为背景剪裁画布
+        ctx.drawImage(image, 0, 0, image.width, image.height);
+        // 获取图片后缀名
+        const extension = image.src.substring(image.src.lastIndexOf('.') + 1).toLowerCase();
+        // 某些图片 url 可能没有后缀名，默认是 png
+        return canvas.toDataURL('image/' + extension, 1);
+    }
+
+    const downFileImg = (url) => {
+        const tag = document.createElement('a');
+        // 此属性的值就是**时图片的名称，注意，名称中不能有半角点，否则**时后缀名会错误
+        tag.setAttribute('download', new Date().getTime() + '' || 'photo');
+        const image = new Image();
+        // 设置 image 的 url, 添加时间戳，防止浏览器缓存图片
+        image.src = url + '?time=' + new Date().getTime();
+        //重要，设置 crossOrigin 属性，否则图片跨域会报错
+        image.setAttribute('crossOrigin', 'Anonymous');
+        // 图片未加载完成时操作会报错
+        image.onload = () => {
+            tag.href = getImageDataURL(image);
+            tag.click();
+            message.success('下载成功');
+        };
     };
 
     const downFile = (parms, event) => {
