@@ -87,7 +87,6 @@ class MaterialInfo extends Component {
         const res = await materialApi.materialGetSupplier(params)
         this.setState({ supplierList: res.data.items || [] });
     }
-
     // 申请
     applyStuff = async () => {
         const { commodityType, shopVo, ugcId } = this.state.infoObj;
@@ -114,8 +113,7 @@ class MaterialInfo extends Component {
                 message.success('申请成功')
             })
         }
-    }
-    
+    } 
     closeMask = () => {
         this.setState({
             visibleCollect: false,

@@ -17,7 +17,13 @@ export default function ShopInfo (props) {
                     <span>商品介绍</span>
                 </div>
                 <div className={styles.shopinfo_context}>
-                    <img alt="" src={infoObj.mapImage || "https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngf172ceb0a19056de618bbe4850733d89a2d38d69f0e0268a820b1e5249567a09"}></img>
+                    {
+                        infoObj.displayImage && infoObj.displayImage.length ? 
+                        (infoObj.displayImage.map((url, index) => {
+                            return <img key={`displayImageUrl-${index}`} alt="" src={url}></img>
+                        })) :
+                        (<img alt="" src={"https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngf172ceb0a19056de618bbe4850733d89a2d38d69f0e0268a820b1e5249567a09"}></img>)
+                    }
                 </div>
             </div>
             <div className={styles.shopinfo_right}>
