@@ -195,7 +195,7 @@ class MaterialInfo extends Component {
     }
 
     render () {
-        const { infoObj, recommendList, supplierList, type, applyVisible, isApply } = this.state;
+        const { infoObj, recommendList, commodityAddress, type, applyVisible, isApply } = this.state;
 
         return (
             <BasicLayout headConfig={{ title: '详情' }} pushType="designer">
@@ -250,10 +250,14 @@ class MaterialInfo extends Component {
                                                 )
                                             }
                                             <div className={styles.materialInfo_btn_group}>
-                                                <div onClick={this.downFile} className={styles.materialInfo_btn_upload}>
-                                                    <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '10px', width: '18px', height: '18px' }}></img>
-                                                    <span>下载素材</span>
-                                                </div>
+                                                {
+                                                    this.state.commodityType === '1' ? (
+                                                        <div onClick={this.downFile} className={styles.materialInfo_btn_upload}>
+                                                            <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '10px', width: '18px', height: '18px' }}></img>
+                                                            <span>下载素材</span>
+                                                        </div>
+                                                    ) : null
+                                                }
                                                 {
                                                     (isApply ? <div className={styles.materialInfo_btn_noApply}>
                                                         <span>已申请</span>
@@ -263,7 +267,13 @@ class MaterialInfo extends Component {
                                                         <span>{infoObj.commodityType === '1' ? (infoObj.materialsButtonValue || '小样申请') : (infoObj.productButtonValue || '商品预约')}</span>
                                                     </div>)
                                                 }
-                                                
+                                                {
+                                                    commodityAddress ? (
+                                                        <div onClick={() => { window.open(commodityAddress, '_blank') }} className={styles.materialInfo_btn_noApply}>
+                                                            <span>查看更多</span>
+                                                        </div>
+                                                    ) : null
+                                                }
                                             </div>
                                         </div>
                                     </div>
