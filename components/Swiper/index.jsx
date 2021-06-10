@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Swiper from 'swiper';
-
 class SwiperMaterial extends Component {
-
     state = {
         galleryThumbs: null,
         curImg: null,
@@ -28,13 +26,11 @@ class SwiperMaterial extends Component {
         const { imgList } = this.props;
         if ( imgList.length > 0 ) {
             this.props.getCurrentUrl(imgList[0]);
-            this.setState({
-                curImg: imgList[0],
-            });
         }
         this.setState({
             galleryThumbs,
-            defKey: '0'
+            defKey: '0',
+            curImg: imgList[0]
         });
     }
     componentDidUpdate() {

@@ -54,8 +54,8 @@ export default function Site(props) {
         commodityType,
       })
       setShopId(res.data.uid)
-      queryCategory(res.data.uid)
-      query(res.data.uid)
+      queryCategory(res.data.uid, props.type)
+      query(res.data.uid, props.type)
     })
   }, [])
 
@@ -81,10 +81,10 @@ export default function Site(props) {
     })
   }
 
-  const queryCategory = async shopIds => {
+  const queryCategory = async (shopIds, commodityTypes) => {
     const { commodityType } = state
     const queryCommodityCategory = {
-      commodityType,
+      commodityType: commodityTypes ? commodityTypes : commodityType,
       shopId: shopIds ? shopIds : shopId,
       source: '4',
     }
@@ -92,13 +92,13 @@ export default function Site(props) {
     setCommodityCategoryVos(commodityCategory.data)
   }
 
-  const query = async shopIds => {
+  const query = async (shopIds, commodityTypes) => {
     const { pageIndex, pageSize, commodityCategoryCode, commodityType, subCommodityCategoryCode } = state
 
     const queryMaterial = {
       commodityCategoryCode,
       subCommodityCategoryCode,
-      commodityType,
+      commodityType: commodityTypes ? commodityTypes : commodityType,
       source,
       shopId: shopIds ? shopIds : shopId,
       pageIndex,
