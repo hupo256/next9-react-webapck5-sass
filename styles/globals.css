@@ -47,7 +47,7 @@ li {
 .conBox {
   width: 1110px;
   margin: 0 auto;
-  padding-bottom: 2em;
+  padding-bottom: 54px;
 }
 .ant-pagination-item-active,
 .ant-pagination-item:focus-visible,
