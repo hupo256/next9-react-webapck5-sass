@@ -24,7 +24,7 @@ const breadData = {
     name: '找设计师',
   },
   articles: {
-    url: '/articles',
+    url: '/articles?uid=',
     name: '装修攻略',
   },
   material: {
