@@ -220,31 +220,35 @@ class MaterialInfo extends Component {
                                                     <span>{infoObj.commodityName || ''}</span>
                                                 </div>
                                             </div>
-                                            <div className={styles.materialInfo_pp}>
-                                                <span>品牌：</span>
-                                                <span onClick={this.jumpToBrandInfo} className={styles.hoverSpan}>{infoObj.brandVo && infoObj.brandVo.brandName}</span>
-                                            </div>
-                                            <div className={styles.materialInfo_xs}>
-                                                <span>
-                                                    {infoObj.description}
-                                                </span>
-                                            </div>
+                                            {
+                                                !infoObj.brandVo || !infoObj.brandVo.brandName ? null : (
+                                                    <div className={styles.materialInfo_pp}>
+                                                        <span>品牌：</span>
+                                                        <span onClick={this.jumpToBrandInfo} className={styles.hoverSpan}>{infoObj.brandVo && infoObj.brandVo.brandName}</span>
+                                                    </div>
+                                                )
+                                            }
+                                            {
+                                                !infoObj.description ? null : (
+                                                    <div className={styles.materialInfo_xs}>
+                                                        <span>
+                                                            {infoObj.description}
+                                                        </span>
+                                                    </div>
+                                                )
+                                            }
                                             <div className={styles.materialInfo_fx} onClick={this.shareUrl}>
                                                 <img alt="" src='/assets/ic_share.png'></img>
                                                 <span>分享</span>
                                             </div>
-                                            {/* {
+                                            {
                                                 !infoObj.price ? null : (
                                                     <div className={styles.materialInfo_jg}>
                                                         <span>¥</span>
                                                         <span>{infoObj.price}</span>
                                                     </div>
                                                 )
-                                            } */}
-                                            <div className={styles.materialInfo_jg}>
-                                                <span>¥</span>
-                                                <span>{infoObj.price}</span>
-                                            </div>
+                                            }
                                             <div className={styles.materialInfo_btn_group}>
                                                 <div onClick={this.downFile} className={styles.materialInfo_btn_upload}>
                                                     <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '10px', width: '18px', height: '18px' }}></img>
