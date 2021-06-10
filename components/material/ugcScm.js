@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Pagination, message } from 'antd';
 import tools from '../../libs/utils';
-import Result from './common/Result';
+import Result from './details/Result';
 import styles from './components.module.scss';
 import materialApi from '../../service/materialApi';
 

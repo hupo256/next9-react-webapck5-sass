@@ -1,2 +1,2 @@
-import DetalsPage from '@components/material/common'
+import DetalsPage from '@components/material/details'
 export default DetalsPage

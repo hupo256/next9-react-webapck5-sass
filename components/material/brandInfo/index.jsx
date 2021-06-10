@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { message } from 'antd';
 import BasicLayout from '@components/HomePageLayout'
-import tools from '../../../../libs/utils';
+import tools from '../../../libs/utils';
 import materialApi from '@service/materialApi'
 
 import styles from './brandInfo.module.scss';
@@ -26,7 +26,7 @@ export default function BrandInfo (props) {
     }, []);
     const { brandName, brandLOGO, videoIntroduction, imageIntroductions, brandProfile } = data;
     return (
-        <BasicLayout headConfigx={{ title: '材料' }} pushType="designer">
+        <BasicLayout headConfig={{ title: '品牌详情' }} pushType="designer">
             <div className="grayBg">
                 <div className="conBox"></div>
                 <div className={styles.brandInfo_main}>
