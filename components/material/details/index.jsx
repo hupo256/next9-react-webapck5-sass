@@ -145,7 +145,7 @@ class MaterialInfo extends Component {
         const infoObj = this.state.infoObj || {};
         const brandVo = infoObj.brandVo || {};
         const uid = brandVo.uid;
-        window.location.href = `${window.location.origin}/brandInfo?id=${uid}`;
+        window.location.href = `${window.location.origin}/material/brandInfo?id=${uid}`;
     }
     getImageDataURL = (image) => {
         // 创建画布
