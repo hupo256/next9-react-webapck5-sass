@@ -114,7 +114,7 @@ class PgcScm extends Component {
 
     seeMaterialInfo = (ids, event) => {
         const params = tools.urlParamHash();
-        const newBlank = `${window.location.origin}/material/common?id=${ids.ugcId}&type=${this.props.type}`;
+        const newBlank = `${window.location.origin}/material/details?id=${ids.ugcId}&type=${this.props.type}`;
         window.open(newBlank, '_blank');
     }
 
