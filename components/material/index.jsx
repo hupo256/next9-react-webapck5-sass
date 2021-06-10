@@ -112,6 +112,21 @@ export default function Site(props) {
   const applyUgc = async e => {
     const name = NameInput.current.state.value
     const phone = PhoneInput.current.state.value
+    const length = name ? name.split('').length : 0;
+    const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
+	        regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+    if(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(phone)){ 
+      message.error('请输入正确的手机号码');
+      return false;
+    }
+    if(length < 2 || length > 10){
+      message.error('请输入大于2个字或少于10个字的名字');
+      return false;
+    }
+    if(regEn.test(name) || regCn.test(name)) {
+      message.error('不允许输入特殊字符');
+      return false;
+    }
     const params = {
       applySource: 2,
       commodityType: state.commodityType,
