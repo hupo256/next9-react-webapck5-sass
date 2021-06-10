@@ -197,7 +197,7 @@ class MaterialInfo extends Component {
         const { infoObj, recommendList, supplierList, type, applyVisible, isApply } = this.state;
 
         return (
-            <BasicLayout headConfigx={{ title: '材料' }} pushType="designer">
+            <BasicLayout headConfig={{ title: '详情' }} pushType="designer">
                 <div className="grayBg">
                     <div className="conBox">
                         <div className={styles.scmpage_body} style={{display: 'block'}}>

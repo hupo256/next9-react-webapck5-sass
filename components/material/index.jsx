@@ -56,7 +56,6 @@ export default function Site(props) {
         commodityType,
       })
       setShopId(res.data.uid)
-      initSwiper()
     })
   }, [])
 
@@ -152,16 +151,6 @@ export default function Site(props) {
     })
   }
 
-  const initSwiper = () => {
-    new Swiper('.swiper-container', {
-      // autoplay: true,//可选选项，自动滑动
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    })
-  }
-
   useEffect(() => {}, [commodityCategoryVos])
 
   return (
@@ -189,6 +178,7 @@ export default function Site(props) {
               </div>
               <div className={styles.scmpage_list}>
                 <UgcScm
+                  type={state.commodityType}
                   pageResultVo={pageResultVo}
                   shopId={state.shopId}
                   keywordType={state.keywordType}
