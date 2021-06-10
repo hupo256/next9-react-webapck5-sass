@@ -8,6 +8,7 @@ import materialApi from '@service/materialApi'
 import styles from './styles/materialInfo.module.scss';
 import Modal from 'antd/lib/modal/Modal';
 import tools from '../../../libs/utils';
+import BreadBar from '@components/breadBar'
 
 const InputStyle = {
 	width: '100%',
@@ -200,6 +201,7 @@ class MaterialInfo extends Component {
             <BasicLayout headConfig={{ title: '详情' }} pushType="designer">
                 <div className="grayBg">
                     <div className="conBox">
+                        <BreadBar />
                         <div className={styles.scmpage_body} style={{display: 'block'}}>
                             <div className={styles.materialInfo_main}>
                                 <div className={styles.materialInfo_context}>
