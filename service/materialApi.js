@@ -31,6 +31,10 @@ const materialCreate = () => {
   material.materialrecommend = params => {
     return ajaxinstance.post('api/v1/moyang/ugc/commodity/recommend', params)
   }
+  // 验证商品是否申请过
+  material.materialCommodityApplyCheck = params => {
+    return ajaxinstance.post('/api/v1/moyang/ugc/commodity/apply/check', params)
+  }
   // 申请ugc商品
   material.materialCommodityApply = params => {
     return ajaxinstance.post('api/v1/moyang/ugc/commodity/apply', params)

@@ -114,22 +114,30 @@ export default function Site(props) {
     const phone = PhoneInput.current.state.value
     const params = {
       applySource: 2,
-      commodityType: '1',
+      commodityType: state.commodityType,
       customerName: name,
       phoneNumber: phone,
       shopId: state.uid,
       ugcCommodityId: state.ugcId,
     }
-
-    const res = await materialApi.materialCommodityApply(params)
-    if (res.data) {
+    const result = materialApi.materialCommodityApplyCheck(params);
+    if(!result){
+      message.error('您已经申请过了，请勿重复申请');
       setApplyVisible(false)
       PhoneInput.current.state.value = ''
       NameInput.current.state.value = ''
-      query()
-      message.success('申请成功')
+      return ;
     }else{
-      message.error('申请失败')
+      const res = await materialApi.materialCommodityApply(params)
+      if (res.data) {
+        setApplyVisible(false)
+        PhoneInput.current.state.value = ''
+        NameInput.current.state.value = ''
+        query()
+        message.success('申请成功')
+      }else{
+        message.error('申请失败')
+      }
     }
   }
 

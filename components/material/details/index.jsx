@@ -259,14 +259,6 @@ class MaterialInfo extends Component {
                                                 <img alt="" src='/assets/ic_share.png'></img>
                                                 <span>分享</span>
                                             </div>
-                                            {
-                                                !infoObj.price ? null : (
-                                                    <div className={styles.materialInfo_jg}>
-                                                        <span>¥</span>
-                                                        <span>{infoObj.price}</span>
-                                                    </div>
-                                                )
-                                            }
                                             <div className={styles.materialInfo_btn_group}>
                                                 {
                                                     this.state.commodityType === '1' ? (
