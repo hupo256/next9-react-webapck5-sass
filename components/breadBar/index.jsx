@@ -4,6 +4,14 @@ import styles from './breadBar.module.scss'
 
 const breadData = {
   cases: {
+    url: '/material/',
+    name: '看材料',
+  },
+  cases: {
+    url: '/trim/',
+    name: '看装修',
+  },
+  cases: {
     url: '/cases',
     name: '装修案例',
   },

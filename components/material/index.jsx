@@ -128,6 +128,8 @@ export default function Site(props) {
       NameInput.current.state.value = ''
       query()
       message.success('申请成功')
+    }else{
+      message.error('申请失败')
     }
   }
 

@@ -24,6 +24,12 @@ const findParent = (menuList, url) => {
   if (/articles/.test(url)) {
     return _.find(menuList, { linkUrl: '/articles?uid=' })
   }
+  if (/material/.test(url)) {
+    return _.find(menuList, { linkUrl: '/material/' })
+  }
+  if (/trim/.test(url)) {
+    return _.find(menuList, { linkUrl: '/trim/' })
+  }
   return null
 }
 

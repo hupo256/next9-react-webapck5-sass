@@ -6,7 +6,7 @@ export default function ShopInfo (props) {
     const { shopContext = true, infoObj, recommendList, type, dispatch } = props;
     const defaultImgUrl = 'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPng3c9b5bd3683a93e3c205e750538cc5a7c8ecc40ecff2b28df394fee5e4024667';
     const toInfoPage = (item) => {
-        const newBlank = `${window.location.origin}/material/details/materialInfo?id=${item.ugcId}`;
+        const newBlank = `${window.location.origin}/material/details?id=${item.ugcId}&type=${props.type}`;
         window.open(newBlank, '_blank');
     };
     return (
