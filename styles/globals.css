@@ -63,6 +63,9 @@ li {
 }
 
 /* 定制carousel */
+.ant-carousel .slick-dots{
+  z-index: 9;
+}
 .ant-carousel .slick-dots li {
   background: #ffffff;
   opacity: 0.5;
