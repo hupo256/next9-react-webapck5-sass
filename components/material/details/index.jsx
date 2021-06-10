@@ -61,14 +61,34 @@ class MaterialInfo extends Component {
                         infoObj: res.data,
                         downUrl: res.data.renderings !== null && res.data.renderings ? res.data.renderings[0] : this.state.imgList[0],
                         collectFlag: res.data.isFavorited,
-                        isApply: res.data.isApply
+                        isApply: res.data.isApply,
+                        videoIntroduction: res.data.videoIntroduction
                     }, () => {
+                        this.getImgList();
                         this.getCommendBrand(type);
                         this.getSupplier();
                     })   
                 }
             })
         }); 
+    }
+    getImgList = () => {
+        const renderings = [...this.state.infoObj.renderings];
+        const video = this.state.infoObj.videoIntroduction;
+        if(video){
+            renderings.unshift({
+                type: 'video',
+                video
+            });
+        }
+
+        this.setState({
+            ...this.state,
+            infoObj: {
+                ...this.state.infoObj,
+                renderings
+            }
+        })
     }
     previewFun = () => {
         const { urlType } = this.state;

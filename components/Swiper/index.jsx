@@ -28,9 +28,13 @@ class SwiperMaterial extends Component {
             this.props.getCurrentUrl(imgList[0]);
         }
         this.setState({
+            ...this.state,
             galleryThumbs,
             defKey: '0',
             curImg: imgList[0]
+        }, () => {
+            const list = imgList ? imgList : this.state.imgList;
+            this.getImg(list[this.state.defKey], this.state.defKey);
         });
     }
     componentDidUpdate() {
@@ -38,48 +42,104 @@ class SwiperMaterial extends Component {
     }
 
     next = () => {
-        const { galleryThumbs } = this.state;
-        galleryThumbs.slideNext();
+        let { defKey, imgList } = this.state;
+        const list = this.props.imgList ? this.props.imgList : imgList;
+
+        if(parseInt(defKey) >= list.length - 1){
+            this.showOrHideBtn();
+            return;
+        }else{
+            defKey = parseInt(defKey) + 1;
+            this.getImg(list[defKey], defKey);
+        }
     }
 
     prev = () => {
-        const { galleryThumbs } = this.state;
-        galleryThumbs.slidePrev();
+        let { defKey, imgList } = this.state;
+        const list = this.props.imgList ? this.props.imgList : imgList;
+
+        if(parseInt(defKey) <= 0){
+            this.showOrHideBtn();
+            return;
+        }else{
+            defKey = parseInt(defKey) - 1;
+            this.getImg(list[defKey], defKey);
+        }
+    }
+
+    showOrHideBtn = () => {
+        const { imgList, defKey } = this.state;
+        const list = this.props.imgList ? this.props.imgList : imgList;
+        if(parseInt(defKey) === list.length - 1){
+            this.refs.nextBtn.style.display = 'none';
+            this.refs.prevBtn.style.display = 'flex';
+        }else if(parseInt(defKey) === 0){
+            this.refs.prevBtn.style.display = 'none';
+            this.refs.nextBtn.style.display = 'flex';
+        }else{
+            this.refs.nextBtn.style.display = 'flex';
+            this.refs.prevBtn.style.display = 'flex';
+        }
     }
 
     getImg = (img, ids) => {
         const defKey = this.state.defKey;
-        this.props.getCurrentUrl(img);
+        if(ids === 0 && typeof(img) !== 'string'){
+            this.props.getCurrentUrl(img.video);
+        }else{
+            this.props.getCurrentUrl(img);
+        }
         if (defKey) {
             const idsStyle = document.getElementById('ID_TOP_IMG_' + defKey);
             idsStyle.style.border = 'none';
         }
+
         this.setState({
+            ...this.state,
             curImg: img,
             defKey: ids + ''
         }, function () {
             const idsStyle = document.getElementById('ID_TOP_IMG_' + ids);
             idsStyle.style.border = '2px solid #F0061B';
+            this.showOrHideBtn();
         });
     }
 
     render () {
         const { imgList } = this.props;
-        const { curImg } = this.state;
+        const { curImg, defKey } = this.state;
 
         return (
             <div className="swiper-main">
-                <div className="swiper-slide swiperMaterial-t-img" style={{ backgroundImage: `url(${curImg})` }}></div>
+                {
+                    defKey == 0 ? 
+                    typeof(imgList[0]) === 'string' ? 
+                    <div className="swiper-slide swiperMaterial-t-img" style={{ backgroundImage: `url(${curImg})` }}></div> : 
+                    <div className="swiper-slide swiperMaterial-t-img">
+                        {
+                            curImg !== null ? <video src={curImg.video} style={{width: '100%', height: '100%'}} controls></video> : null
+                        }
+                    </div> : 
+                    <div className="swiper-slide swiperMaterial-t-img" style={{ backgroundImage: `url(${curImg})` }}></div>    
+                }
                 <div className="swiper-container gallery-thumbs">
                     <div className="swiper-wrapper">
                         {imgList.length > 0 && imgList.map((item, index) => {
-                            return(
-                                <div key={index} id={'ID_TOP_IMG_'+ index} className={'swiper-slide swiperMaterial-b-img'} onClick={this.getImg.bind(this, item, index)} style={{ backgroundImage: `url(${item})` }}></div>
-                            );
+                            if(typeof(item) !== 'string'){
+                                return (
+                                    <div key={index} id={'ID_TOP_IMG_'+ index} className={'swiper-slide swiperMaterial-b-img'} onClick={this.getImg.bind(this, item, index)}>
+                                        <video src={item.video} style={{width: '100%', height: '100%'}}></video>
+                                    </div>
+                                )
+                            }else{
+                                return(
+                                    <div key={index} id={'ID_TOP_IMG_'+ index} className={'swiper-slide swiperMaterial-b-img'} onClick={this.getImg.bind(this, item, index)} style={{ backgroundImage: `url(${item})` }}></div>
+                                );
+                            }
                         })}
                     </div>
-                    <div className="swiper-button-next swiper-button-white" onClick={this.next}></div>
-                    <div className="swiper-button-prev swiper-button-white" onClick={this.prev}></div>
+                    <div className="swiper-button-next swiper-button-white" ref="nextBtn" onClick={this.next}></div>
+                    <div className="swiper-button-prev swiper-button-white" ref="prevBtn" onClick={this.prev}></div>
                 </div>
             </div>
         );
