@@ -54,12 +54,10 @@ export default function Site(props) {
         commodityType,
       })
       setShopId(res.data.uid)
+      queryCategory(res.data.uid)
+      query(res.data.uid)
     })
   }, [])
-
-  useEffect(() => {
-    query()
-  }, [shopId])
 
   useEffect(() => {
     query()
@@ -81,31 +79,33 @@ export default function Site(props) {
       minLiKey: key,
       subCommodityCategoryCode: key === -1 ? '' : item.categoryCode,
     })
-
-    query()
   }
 
-  const query = async () => {
-    const { pageIndex, pageSize, commodityCategoryCode, commodityType, subCommodityCategoryCode } = state
+  const queryCategory = async shopIds => {
+    const { commodityType } = state
     const queryCommodityCategory = {
       commodityType,
-      shopId,
+      shopId: shopIds ? shopIds : shopId,
       source: '4',
     }
+    const commodityCategory = await materialApi.queryCommodityCategory(queryCommodityCategory)
+    setCommodityCategoryVos(commodityCategory.data)
+  }
+
+  const query = async shopIds => {
+    const { pageIndex, pageSize, commodityCategoryCode, commodityType, subCommodityCategoryCode } = state
+
     const queryMaterial = {
       commodityCategoryCode,
       subCommodityCategoryCode,
       commodityType,
       source,
-      shopId,
+      shopId: shopIds ? shopIds : shopId,
       pageIndex,
       pageSize,
       shopType: [],
     }
-    const commodityCategory = await materialApi.queryCommodityCategory(queryCommodityCategory)
     const commoditys = await materialApi.queryMaterial(queryMaterial)
-
-    setCommodityCategoryVos(commodityCategory.data)
     setPageResultVo(commoditys.data)
   }
 
@@ -146,8 +146,6 @@ export default function Site(props) {
       pageSize,
     })
   }
-
-  useEffect(() => {}, [commodityCategoryVos])
 
   return (
     <BasicLayout headConfig={{ title: '材料' }} pushType="material">
