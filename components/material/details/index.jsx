@@ -34,6 +34,7 @@ class MaterialInfo extends Component {
             'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngba2fcecc7343ffc18727e70f159cf9245029ae85010b09cd30d88245d30c87f8'
         ],
         uid: '',
+        ugcId: '',
         infoObj: {}, // 接口返回
         type: 'ugc',
         recommendList: [],
@@ -107,32 +108,32 @@ class MaterialInfo extends Component {
         this.setState({ supplierList: res.data.items || [] });
     }
     // 申请
-    applyStuff = async () => {
-        const { commodityType, shopVo, ugcId } = this.state.infoObj;
-        const customerName = this.refs.NameInput.state.value
-        const phoneNumber = this.refs.PhoneInput.state.value
-        const params = {
-            applySource: "TSC042",
-            commodityType,
-            customerName,
-            phoneNumber,
-            shopId: shopVo.id,
-            ugcCommodityId: ugcId
-        }
+    // applyStuff = async () => {
+    //     const { commodityType, shopVo, ugcId } = this.state.infoObj;
+    //     const customerName = this.refs.NameInput.state.value
+    //     const phoneNumber = this.refs.PhoneInput.state.value
+    //     const params = {
+    //         applySource: "TSC042",
+    //         commodityType,
+    //         customerName,
+    //         phoneNumber,
+    //         shopId: shopVo.id,
+    //         ugcCommodityId: ugcId
+    //     }
 
-        const res = await materialApi.materialCommodityApply(params);
-        if(res.data){
-            this.setState({
-                ...this.state,
-                isApply: true,
-                applyVisible: false
-            }, () => {
-                this.refs.NameInput.state.value = '';
-                this.refs.PhoneInput.state.value = '';
-                message.success('申请成功')
-            })
-        }
-    } 
+    //     const res = await materialApi.materialCommodityApply(params);
+    //     if(res.data){
+    //         this.setState({
+    //             ...this.state,
+    //             isApply: true,
+    //             applyVisible: false
+    //         }, () => {
+    //             this.refs.NameInput.state.value = '';
+    //             this.refs.PhoneInput.state.value = '';
+    //             message.success('申请成功')
+    //         })
+    //     }
+    // } 
     closeMask = () => {
         this.setState({
             visibleCollect: false,
@@ -209,6 +210,78 @@ class MaterialInfo extends Component {
             collectFlag: true,
             visibleCollect: false,
         });
+    }
+
+    applyStuff = async e => {
+        const name = this.refs.NameInput.state.value
+        const phone = this.refs.PhoneInput.state.value
+        const length = name ? name.split('').length : 0;
+        const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
+                regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+        if(!phone){
+            message.error('请输入正确的手机号码');
+            return false;
+        }
+        if(!(/^1[3456789]\d{9}$/.test(phone))){ 
+            message.error('请输入正确的手机号码');
+            return false;
+        }
+        if(!name){
+            message.error('请输入您的称呼');
+            return false;
+        }
+        if(length < 2 || length > 10){
+            message.error('请输入大于2个字或少于10个字的名字');
+            return false;
+        }
+        if(regEn.test(name) || regCn.test(name)) {
+            message.error('不允许输入特殊字符');
+            return false;
+        }
+        const params = {
+            applySource: 2,
+            commodityType: this.state.infoObj.commodityType,
+            customerName: name,
+            phoneNumber: phone,
+            shopId: this.state.infoObj.uid,
+            ugcCommodityId: this.state.infoObj.ugcId,
+        }
+        const result = materialApi.materialCommodityApplyCheck(params);
+        if(result){
+            message.error('您已经申请过了，请勿重复申请');
+            return ;
+        }else{
+            const res = await materialApi.materialCommodityApply(params)
+            if (res.data) {
+                this.setState({
+                    ...this.state,
+                    isApply: true,
+                    applyVisible: false
+                })
+                this.refs.PhoneInput.state.value = ''
+                this.refs.NameInput.state.value = ''
+                message.success('申请成功')
+            }else{
+                message.error('申请失败')
+            }
+        }
+    }
+  
+    onCloseApply = () => {
+      PhoneInput.current.state.value = ''
+      NameInput.current.state.value = ''
+      this.setState({
+          ...this.state,
+          applyVisible: false
+      })
+    }
+  
+    applyVisibleShow = item => {
+      this.setState({
+        ...this.state,
+        ugcId: item.ugcId,
+        applyVisible: true
+      })
     }
 
     render () {

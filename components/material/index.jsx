@@ -144,11 +144,8 @@ export default function Site(props) {
       ugcCommodityId: state.ugcId,
     }
     const result = materialApi.materialCommodityApplyCheck(params);
-    if(!result){
+    if(result){
       message.error('您已经申请过了，请勿重复申请');
-      setApplyVisible(false)
-      PhoneInput.current.state.value = ''
-      NameInput.current.state.value = ''
       return ;
     }else{
       const res = await materialApi.materialCommodityApply(params)
