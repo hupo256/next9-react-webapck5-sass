@@ -72,7 +72,7 @@ function createScmCols ({ key, defKey, item, index, handleMouseover, handleoMous
             </div>
             <div id={`SCM_` + key} className={defKey === key ? styles.scm_button : styles.scm_button_display} onClick={downFile.bind(this, item)}>
                 {
-                    item.mapImage ? <div style={{ width: '102px' }} className={styles.scm_button_def} >
+                    item.displayImage ? <div style={{ width: '102px' }} className={styles.scm_button_def} >
                         <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '5px' }}></img>
                         <span>下载</span>
                     </div> : ""
