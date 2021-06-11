@@ -118,7 +118,7 @@ class MaterialInfo extends Component {
         const infoObj = this.state.infoObj || {};
         const brandVo = infoObj.brandVo || {};
         const uid = brandVo.uid;
-        const url = `${window.location.origin}/material/details/brandInfo?id=${uid}`;
+        const url = `${window.location.origin}/material/brandInfo?id=${uid}`;
         window.open(url);
     }
     getImageDataURL = (image) => {
