@@ -287,7 +287,11 @@ class MaterialInfo extends Component {
 
     jumpCommodityAddress = () => {
         const { infoObj } = this.state;
-        window.open(infoObj.commodityAddress)
+        if(infoObj.commodityAddress.indexOf('http:') < 0 && infoObj.commodityAddress.indexOf('https:') < 0){
+            window.open(`${window.location.protocol}//${infoObj.commodityAddress}`);
+        } else {
+            window.open(infoObj.commodityAddress);
+        }
     }
 
     render () {
