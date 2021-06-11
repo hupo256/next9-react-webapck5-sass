@@ -70,6 +70,7 @@ export default function Site(props) {
       commodityCategoryCode: key < 0 ? '' : item.categoryCode,
       subCommodityCategoryCode: '',
       minLiKey: -1,
+      pageIndex: 1
     })
   }
 
@@ -78,6 +79,7 @@ export default function Site(props) {
       ...state,
       minLiKey: key,
       subCommodityCategoryCode: key === -1 ? '' : item.categoryCode,
+      pageIndex: 1
     })
   }
 
