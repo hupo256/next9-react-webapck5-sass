@@ -213,7 +213,7 @@ class MaterialInfo extends Component {
             return false;
         }
         const params = {
-            applySource: 2,
+            applySource: 'TSC042',
             commodityType: this.state.infoObj.commodityType,
             customerName: name,
             phoneNumber: phone,

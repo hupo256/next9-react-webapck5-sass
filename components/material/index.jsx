@@ -136,7 +136,7 @@ export default function Site(props) {
       return false;
     }
     const params = {
-      applySource: 2,
+      applySource: 'TSC042',
       commodityType: state.commodityType,
       customerName: name,
       phoneNumber: phone,
