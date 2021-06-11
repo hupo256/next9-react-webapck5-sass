@@ -244,15 +244,6 @@ class MaterialInfo extends Component {
                                                     </div>
                                                 )
                                             }
-                                            {
-                                                !infoObj.description ? null : (
-                                                    <div className={styles.materialInfo_xs}>
-                                                        <span>
-                                                            {infoObj.description}
-                                                        </span>
-                                                    </div>
-                                                )
-                                            }
                                             <div className={styles.materialInfo_fx} onClick={this.shareUrl}>
                                                 <img alt="" src='/assets/ic_share.png'></img>
                                                 <span>分享</span>

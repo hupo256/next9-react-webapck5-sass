@@ -18,6 +18,15 @@ export default function ShopInfo (props) {
                 </div>
                 <div className={styles.shopinfo_context}>
                     {
+                        !infoObj.description ? null : (
+                            <div className={styles.materialInfo_xs}>
+                                <span>
+                                    {infoObj.description}
+                                </span>
+                            </div>
+                        )
+                    }
+                    {
                         infoObj.displayImage && infoObj.displayImage.length ? 
                         (infoObj.displayImage.map((url, index) => {
                             return <img key={`displayImageUrl-${index}`} alt="" src={url}></img>
