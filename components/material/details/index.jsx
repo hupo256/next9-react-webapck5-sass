@@ -247,6 +247,7 @@ class MaterialInfo extends Component {
             ugcCommodityId: this.state.infoObj.ugcId,
         }
         const result = await materialApi.materialCommodityApplyCheck(params);
+
         if(result.data){
             message.error('您已经申请过了，请勿重复申请');
             return ;
@@ -282,6 +283,11 @@ class MaterialInfo extends Component {
         ugcId: item.ugcId,
         applyVisible: true
       })
+    }
+
+    jumpCommodityAddress = () => {
+        const { infoObj } = this.state;
+        window.open(infoObj.commodityAddress)
     }
 
     render () {
@@ -341,7 +347,7 @@ class MaterialInfo extends Component {
                                                 }
                                                 {
                                                     infoObj.commodityAddress ? (
-                                                        <div onClick={() => { window.open(infoObj.commodityAddress, '_blank') }} className={styles.materialInfo_btn_noApply}>
+                                                        <div onClick={this.jumpCommodityAddress} className={styles.materialInfo_btn_noApply}>
                                                             <span>查看更多</span>
                                                         </div>
                                                     ) : null
