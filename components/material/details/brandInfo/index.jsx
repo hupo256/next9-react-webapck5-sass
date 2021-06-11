@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { message } from 'antd';
 import BasicLayout from '@components/HomePageLayout'
-import tools from '../../../libs/utils';
+import tools from '../../../../libs/utils';
 import materialApi from '@service/materialApi'
 
 import styles from './brandInfo.module.scss';
