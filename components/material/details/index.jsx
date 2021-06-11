@@ -142,7 +142,7 @@ class MaterialInfo extends Component {
         tag.setAttribute('download', new Date().getTime() + '' || 'photo');
         const image = new Image();
         // 设置 image 的 url, 添加时间戳，防止浏览器缓存图片
-        image.src = this.downUrl + '?time=' + new Date().getTime();
+        image.src = this.state.infoObj.mapImage + '?time=' + new Date().getTime();
         //重要，设置 crossOrigin 属性，否则图片跨域会报错
         image.setAttribute('crossOrigin', 'Anonymous');
         // 图片未加载完成时操作会报错
@@ -307,7 +307,7 @@ class MaterialInfo extends Component {
                                             </div>
                                             <div className={styles.materialInfo_btn_group}>
                                                 {
-                                                    this.state.commodityType === '1' ? (
+                                                    this.state.commodityType === '1' && this.state.infoObj.mapImage ? (
                                                         <div onClick={this.downFile} className={styles.materialInfo_btn_upload}>
                                                             <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '10px', width: '18px', height: '18px' }}></img>
                                                             <span>下载素材</span>
