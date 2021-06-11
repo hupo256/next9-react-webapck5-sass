@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import styles from './index.module.scss';
 
 class InputSearch extends Component {
-    state = {}
+    state = {
+        show: true
+    }
 
     handleMaxLi = (key, type) => {
         this.props.handleMaxLi(key, type);
@@ -11,6 +13,23 @@ class InputSearch extends Component {
     handleMinLi = (key, type) => {
         this.props.handleMinLi(key, type);
     };
+
+    componentWillReceiveProps(nextProps) {
+        let show = true;
+        const { shopSettingVo, commodityType } = nextProps;
+        if(!shopSettingVo)
+            return;
+        if(commodityType === '1'){
+            show = shopSettingVo.materialGrading == 1 ? false : true;
+        }else{
+            show = shopSettingVo.productGrading == 1 ? false : true;
+        }
+
+        this.setState({
+            ...this.state,
+            show
+        })
+    }
 
     render () {
         const { commodityCategoryVos, commodityCategoryCode, maxLiKey, minLiKey } = this.props;
@@ -30,7 +49,7 @@ class InputSearch extends Component {
                         }
                     </ul>
                 </div>
-                <div className={styles.scmpage_min}>
+                <div className={styles.scmpage_min} style={{display: this.state.show ? 'flex' : 'none'}}>
                     <div className={styles.scmpage_xl_dl}>小类</div>
                     <ul className={styles.scmpage_xl_ul} style={{ width: '1028px' }}>
                         <li className={minLiKey === -1 ? styles.scmpage_ul_xl_def : ""} onClick={this.handleMinLi.bind(this, -1, '')}>全部</li>

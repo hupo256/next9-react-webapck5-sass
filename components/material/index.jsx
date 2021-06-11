@@ -196,6 +196,8 @@ export default function Site(props) {
             <div className={styles.scmpage_context}>
               <div className={styles.scmpage_type}>
                 <Types
+                  shopSettingVo={state.shopSettingVo}
+                  commodityType={state.commodityType}
                   commodityCategoryVos={commodityCategoryVos}
                   commodityCategoryCode={state.commodityCategoryCode}
                   maxLiKey={state.maxLiKey}
