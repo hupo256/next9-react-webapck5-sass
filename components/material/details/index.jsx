@@ -107,33 +107,6 @@ class MaterialInfo extends Component {
         const res = await materialApi.materialGetSupplier(params)
         this.setState({ supplierList: res.data.items || [] });
     }
-    // 申请
-    // applyStuff = async () => {
-    //     const { commodityType, shopVo, ugcId } = this.state.infoObj;
-    //     const customerName = this.refs.NameInput.state.value
-    //     const phoneNumber = this.refs.PhoneInput.state.value
-    //     const params = {
-    //         applySource: "TSC042",
-    //         commodityType,
-    //         customerName,
-    //         phoneNumber,
-    //         shopId: shopVo.id,
-    //         ugcCommodityId: ugcId
-    //     }
-
-    //     const res = await materialApi.materialCommodityApply(params);
-    //     if(res.data){
-    //         this.setState({
-    //             ...this.state,
-    //             isApply: true,
-    //             applyVisible: false
-    //         }, () => {
-    //             this.refs.NameInput.state.value = '';
-    //             this.refs.PhoneInput.state.value = '';
-    //             message.success('申请成功')
-    //         })
-    //     }
-    // } 
     closeMask = () => {
         this.setState({
             visibleCollect: false,
@@ -145,7 +118,8 @@ class MaterialInfo extends Component {
         const infoObj = this.state.infoObj || {};
         const brandVo = infoObj.brandVo || {};
         const uid = brandVo.uid;
-        window.location.href = `${window.location.origin}/material/brandInfo?id=${uid}`;
+        const url = `${window.location.origin}/material/brandInfo?id=${uid}`;
+        window.open(url);
     }
     getImageDataURL = (image) => {
         // 创建画布
