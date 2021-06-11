@@ -164,6 +164,12 @@ export default function Site(props) {
     }
   }
 
+  const onCloseApply = () => {
+    PhoneInput.current.state.value = ''
+    NameInput.current.state.value = ''
+    setApplyVisible(false)
+  }
+
   const applyVisibleShow = item => {
     setState({
       ...state,
@@ -227,7 +233,7 @@ export default function Site(props) {
                   visible={applyVisible}
                   width={289}
                   onCancel={() => {
-                    setApplyVisible(false)
+                    onCloseApply()
                   }}
                   footer={
                     <div>
