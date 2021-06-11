@@ -38,6 +38,11 @@ if (NEXT_PUBLIC_ENV === 'PROD1') {
   env = 'PROD1'
 }
 
+if (NEXT_PUBLIC_ENV === 'UAT') {
+  host = '//api.yimuyiyang.com/'
+  env = 'UAT'
+}
+
 console.log('host = ', host)
 
 export default { host, env }

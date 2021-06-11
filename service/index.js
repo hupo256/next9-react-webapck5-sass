@@ -26,6 +26,9 @@ const getHost = req => {
     if(env === 'PROD1'){
       return '//pre1-api.in-spire.cn/'
     }
+    if(env === 'UAT'){
+      return '//api.yimuyiyang.com/'
+    }
   }
   return req.baseURL;
 }
