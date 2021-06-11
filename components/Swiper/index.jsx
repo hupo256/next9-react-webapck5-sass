@@ -72,6 +72,11 @@ class SwiperMaterial extends Component {
     showOrHideBtn = () => {
         const { imgList, defKey } = this.state;
         const list = this.props.imgList ? this.props.imgList : imgList;
+        if(list.length == 1){
+            this.refs.nextBtn.style.display = 'none';
+            this.refs.prevBtn.style.display = 'none';
+            return;
+        }
         if(parseInt(defKey) === list.length - 1){
             this.refs.nextBtn.style.display = 'none';
             this.refs.prevBtn.style.display = 'flex';
