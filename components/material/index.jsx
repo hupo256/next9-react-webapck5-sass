@@ -119,7 +119,7 @@ export default function Site(props) {
       message.error('请输入正确的手机号码');
       return false;
     }
-    if(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(phone)){ 
+    if(!(/^1[3456789]\d{9}$/.test(phone))){ 
       message.error('请输入正确的手机号码');
       return false;
     }
