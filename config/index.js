@@ -39,7 +39,7 @@ if (NEXT_PUBLIC_ENV === 'PROD1') {
 }
 
 if (NEXT_PUBLIC_ENV === 'UAT') {
-  host = '//api.yimuyiyang.com/'
+  host = '//mygw.ingongdi.com/'
   env = 'UAT'
 }
 
