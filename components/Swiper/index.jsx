@@ -42,9 +42,10 @@ class SwiperMaterial extends Component {
     }
 
     next = () => {
-        let { defKey, imgList } = this.state;
+        let { defKey, imgList, galleryThumbs } = this.state;
         const list = this.props.imgList ? this.props.imgList : imgList;
 
+        galleryThumbs.slideNext();
         if(parseInt(defKey) >= list.length - 1){
             this.showOrHideBtn();
             return;
@@ -55,9 +56,10 @@ class SwiperMaterial extends Component {
     }
 
     prev = () => {
-        let { defKey, imgList } = this.state;
+        let { defKey, imgList, galleryThumbs } = this.state;
         const list = this.props.imgList ? this.props.imgList : imgList;
 
+        galleryThumbs.slidePrev();
         if(parseInt(defKey) <= 0){
             this.showOrHideBtn();
             return;

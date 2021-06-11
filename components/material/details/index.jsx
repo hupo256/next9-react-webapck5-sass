@@ -337,7 +337,6 @@ class MaterialInfo extends Component {
                                         </div>
                                     </div>
                                     <div className={styles.materialInfo_shopinfo}>
-                                        {console.log(this.props, infoObj, recommendList)}
                                         <ShopInfo type={type} infoObj={infoObj} recommendList={recommendList} type={this.state.commodityType} />
                                     </div>
                                 </div>
