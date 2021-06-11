@@ -31,11 +31,6 @@ export default function BrandInfo (props) {
                 <div className="conBox"></div>
                 <div className={styles.brandInfo_main}>
                     <div className={styles.brandInfo_context}>
-                        <div className={styles.brandInfo_mbx}>
-                            <span>当前位置：</span>
-                            <span>品牌&nbsp;{'>'}&nbsp;</span>
-                            <span>品牌信息 </span>
-                        </div>
                         <div className={styles.brandInfo_bodys}>
                             <div className={styles.brandInfo_b_table}>
                                 <div className={styles.brandInfo_b_logo}>
