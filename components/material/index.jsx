@@ -243,7 +243,7 @@ export default function Site(props) {
                   }
                 >
                   <div style={{ ...InputStyle, marginBottom: '12px' }}>
-                    <Input type="number" placeholder="请输入联系电话" ref={PhoneInput} />
+                    <Input placeholder="请输入联系电话" ref={PhoneInput} />
                   </div>
                   <div style={InputStyle}>
                     <Input placeholder="请输入您的称呼" ref={NameInput} />
