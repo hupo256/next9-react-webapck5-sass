@@ -22,7 +22,13 @@ const findParent = (menuList, url) => {
     return _.find(menuList, { linkUrl: '/designers' })
   }
   if (/articles/.test(url)) {
-    return _.find(menuList, { linkUrl: '/articles?uid=' })
+    return _.find(menuList, { linkKey: 'articleGroup' })
+  }
+  if (/material/.test(url)) {
+    return _.find(menuList, { linkUrl: '/material/' })
+  }
+  if (/trim/.test(url)) {
+    return _.find(menuList, { linkUrl: '/trim/' })
   }
   return null
 }
@@ -100,8 +106,12 @@ const MenuListComp = ({ menuList }) => {
       // 详情页
 
       const res = _.find(menuList, value => {
-        const urlObj = new URL(location.origin + value.linkUrl)
-        const [urlCompare] = urlObj.searchParams.values()
+        let urlObj = null;
+        let urlCompare = [];
+        if(value.linkUrl){
+          urlObj = new URL(location.origin + value.linkUrl)
+          urlCompare = urlObj.searchParams.values()
+        }
 
         return urlCompare === uid
       })
@@ -126,12 +136,12 @@ const MenuListComp = ({ menuList }) => {
     setCurrent(null)
   }, [menuList])
 
-  const clickMenuItem = ({ linkUrl, uid, linkKey }) => {
+  const clickMenuItem = ({ linkUrl, uid }) => {
     if (!uid) return
-    if (linkKey === 'games') {
-      message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')
-      return
-    }
+    // if (linkKey === 'games') {
+    //   message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')
+    //   return
+    // }
     window.location.href = linkUrl
   }
 

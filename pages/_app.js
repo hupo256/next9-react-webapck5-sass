@@ -1,5 +1,7 @@
 import 'antd/dist/antd.css'
 import '../styles/globals.css'
+import '../components/Swiper/swiper-bundle.min.css'
+import '../components/Swiper/index.css'
 import _ from 'lodash'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
