@@ -127,7 +127,9 @@ class SwiperMaterial extends Component {
                             curImg !== null ? <video src={curImg.video} style={{width: '100%', height: '100%'}} controls></video> : null
                         }
                     </div> : 
-                    <div className="swiper-slide swiperMaterial-t-img" style={{ backgroundImage: `url(${curImg})` }}></div>    
+                    <div className="swiper-slide swiperMaterial-t-img">
+                        <img src={curImg} alt="" title="" style={{width: '100%', height: '100%'}} />
+                    </div>    
                 }
                 <div className="swiper-container gallery-thumbs">
                     <div className="swiper-wrapper">
@@ -139,8 +141,11 @@ class SwiperMaterial extends Component {
                                     </div>
                                 )
                             }else{
+                                console.log(item, 'qubo')
                                 return(
-                                    <div key={index} id={'ID_TOP_IMG_'+ index} className={'swiper-slide swiperMaterial-b-img'} onClick={this.getImg.bind(this, item, index)} style={{ backgroundImage: `url(${item})` }}></div>
+                                    <div key={index} id={'ID_TOP_IMG_'+ index} className={'swiper-slide swiperMaterial-b-img'} onClick={this.getImg.bind(this, item, index)}>
+                                        <img src={item} alt="" title="" style={{width: '100%', height: '100%'}} />
+                                    </div>
                                 );
                             }
                         })}

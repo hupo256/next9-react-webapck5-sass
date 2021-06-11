@@ -290,6 +290,9 @@ class MaterialInfo extends Component {
                                     </div>
                                     <div className={styles.materialInfo_theard}>
                                         <div className={styles.materialInfo_t_left}>
+                                            {
+                                                // console.log(infoObj.renderings, 'qubo')
+                                            }
                                             <InSwiper getCurrentUrl={this.getCurrentUrl} key={new Date().getTime() + ''} imgList={infoObj.renderings !== null && infoObj.renderings ? infoObj.renderings : this.state.imgList} />
                                         </div>
                                         <div className={styles.materialInfo_t_right}>
