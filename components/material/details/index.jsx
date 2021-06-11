@@ -118,7 +118,9 @@ class MaterialInfo extends Component {
         const infoObj = this.state.infoObj || {};
         const brandVo = infoObj.brandVo || {};
         const uid = brandVo.uid;
-        const url = `${window.location.origin}/material/brandInfo?id=${uid}`;
+        const params = tools.urlParamHash();
+        const commodityType = params.type;
+        const url = `${window.location.origin}/${commodityType === '1' ? 'material' : 'trim'}/brandInfo?id=${uid}`;
         window.open(url);
     }
     getImageDataURL = (image) => {

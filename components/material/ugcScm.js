@@ -133,7 +133,8 @@ class PgcScm extends Component {
     }
 
     seeMaterialInfo = (ids, event) => {
-        const newBlank = `${window.location.origin}/material/details?id=${ids.ugcId}&type=${this.props.commodityType}`;
+
+        const newBlank = `${window.location.origin}/${this.props.commodityType === '1' ? 'material' : 'trim'}/details?id=${ids.ugcId}&type=${this.props.commodityType}`;
         window.open(newBlank, '_blank');
     }
 

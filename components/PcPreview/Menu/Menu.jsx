@@ -25,10 +25,10 @@ const findParent = (menuList, url) => {
     return _.find(menuList, { linkKey: 'articleGroup' })
   }
   if (/material/.test(url)) {
-    return _.find(menuList, { linkUrl: '/material/' })
+    return _.find(menuList, { linkKey: 'material' })
   }
   if (/trim/.test(url)) {
-    return _.find(menuList, { linkUrl: '/trim/' })
+    return _.find(menuList, { linkKey: 'decorate' })
   }
   return null
 }
