@@ -3,39 +3,27 @@ import { Pagination, message } from 'antd';
 import tools from '../../libs/utils';
 import Result from './details/Result';
 import styles from './components.module.scss';
-import materialApi from '../../service/materialApi';
 
-function createScmCols ({ key, defKey, item, index, collectKey,
-    commodityCategoryCode, handleMouseover, handleoMouseout,
-    seeMaterialInfo, setCollectVis, pageIndex, shopId, query, showApplyUgc, pageChange }) {
-    let downUrl = '';
+function createScmCols ({ key, defKey, item, index, handleMouseover, handleoMouseout, seeMaterialInfo, shopSettingVo, commodityType, showApplyUgc }) {
+    let spanStyle = {
+        width: '',
+        fontSize: ''
+    }
+    if(commodityType === '1' && shopSettingVo.materialButtonName){
+        spanStyle.width = 'auto';
+        spanStyle.fontSize = '12px';
+    }else if(commodityType === '2' && shopSettingVo.productButtonName){
+        spanStyle.width = 'auto';
+        spanStyle.fontSize = '12px';
+    }
     const handleSesMaterialInfo = function (parms, event) {
         event.stopPropagation();
         seeMaterialInfo(parms);
     };
 
-    const handleCollect = function (parms, event) {
-        event.stopPropagation();
-        setCollectVis(parms.commodityCode);
-    };
-
     const handleApply = async function (parms, event) {
         event.stopPropagation();
         showApplyUgc(parms);
-    };
-
-    const handleCollectMouseover = (key, collectKey, event) => {
-        event.stopPropagation();
-        handleMouseover(key);
-        setCollectVis(collectKey);
-    };
-
-    const handleoCollectMouseout = (collectKey, event) => {
-        event.stopPropagation();
-    };
-
-    const handleCollectClick = (event) => {
-        event.stopPropagation();
     };
 
     const getImageDataURL = (image) => {
@@ -93,7 +81,7 @@ function createScmCols ({ key, defKey, item, index, collectKey,
                     !item.isApply ? (
                         <div style={item.mapImage ? { width: '102px' } : { width: '204px', display: 'flex', alignItems: "center", justifyContent: 'center' }} className={styles.scm_button_active} onClick={handleApply.bind(this, item)}>
                             <img alt="" src={'/assets/ic_apply_small@2x.png'} style={{ marginRight: '5px' }}></img>
-                            <span>申请</span>
+                            <span style={spanStyle}>{commodityType === '1' ? shopSettingVo.materialButtonName ? shopSettingVo.materialButtonName : '申请' : shopSettingVo.productButtonName ? shopSettingVo.productButtonName : '申请'}</span>
                         </div>
                     ) : (
                         <div style={{background: 'rgba(0, 0, 0, 0.85)'}}>
@@ -156,7 +144,7 @@ class PgcScm extends Component {
 
     _colsArrays = (prams) => {
         const { defKey, collectKey, commodityCategoryCode, pageIndex } = this.state;
-        const { shopId, showApplyUgc, pageChange } = this.props;
+        const { shopId, showApplyUgc, pageChange, shopSettingVo, commodityType } = this.props;
         return createScmCols({
             index: prams.index,
             key: prams.key,
@@ -167,6 +155,8 @@ class PgcScm extends Component {
             shopId,
             commodityCategoryCode,
             query: this.query,
+            shopSettingVo,
+            commodityType,
             handleMouseover: this.handleMouseover,
             handleoMouseout: this.handleoMouseout,
             seeMaterialInfo: this.seeMaterialInfo,

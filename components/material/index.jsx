@@ -115,8 +115,16 @@ export default function Site(props) {
     const length = name ? name.split('').length : 0;
     const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
 	        regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+    if(!phone){
+      message.error('请输入正确的手机号码');
+      return false;
+    }
     if(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(phone)){ 
       message.error('请输入正确的手机号码');
+      return false;
+    }
+    if(!name){
+      message.error('请输入您的称呼');
       return false;
     }
     if(length < 2 || length > 10){
@@ -198,12 +206,13 @@ export default function Site(props) {
               </div>
               <div className={styles.scmpage_list}>
                 <UgcScm
-                  type={state.commodityType}
+                  commodityType={state.commodityType}
                   pageResultVo={pageResultVo}
                   shopId={state.shopId}
                   keywordType={state.keywordType}
                   commodityCategoryCode={state.commodityCategoryCode}
                   subCommodityCategoryCode={state.subCommodityCategoryCode}
+                  shopSettingVo={state.shopSettingVo}
                   showApplyUgc={item => {
                     applyVisibleShow(item)
                   }}
@@ -227,7 +236,7 @@ export default function Site(props) {
                   }
                 >
                   <div style={{ ...InputStyle, marginBottom: '12px' }}>
-                    <Input placeholder="请输入联系电话" ref={PhoneInput} />
+                    <Input type="number" placeholder="请输入联系电话" ref={PhoneInput} />
                   </div>
                   <div style={InputStyle}>
                     <Input placeholder="请输入您的称呼" ref={NameInput} />
