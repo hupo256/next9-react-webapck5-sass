@@ -318,20 +318,20 @@ class MaterialInfo extends Component {
                                                     ) : null
                                                 }
                                                 {
-                                                    (isApply ? <div className={styles.materialInfo_btn_noApply}>
-                                                        <span>已申请</span>
-                                                    </div> : 
-                                                    <div className={styles.materialInfo_btn_apply} onClick={() => { this.setState({...this.state, applyVisible: true}) }}>
-                                                        <img style={{width: '18px', height: '18px', marginRight: '10px'}} src="/assets/ic_apply_small@2x.png" alt="" />
-                                                        <span>{infoObj.commodityType === '1' ? (infoObj.materialsButtonValue || '小样申请') : (infoObj.productButtonValue || '商品预约')}</span>
-                                                    </div>)
-                                                }
-                                                {
                                                     infoObj.commodityAddress ? (
                                                         <div onClick={this.jumpCommodityAddress} className={styles.materialInfo_btn_noApply}>
                                                             <span>查看更多</span>
                                                         </div>
                                                     ) : null
+                                                }
+                                                {
+                                                    (isApply ? <div className={styles.materialInfo_btn_noApply}>
+                                                        <span>已申请</span>
+                                                    </div> : 
+                                                    <div className={styles.materialInfo_btn_apply} onClick={() => { this.setState({...this.state, applyVisible: true}) }} style={{marginLeft: infoObj.commodityAddress ? '0' : '10px'}}>
+                                                        <img style={{width: '18px', height: '18px', marginRight: '10px'}} src="/assets/ic_apply_small@2x.png" alt="" />
+                                                        <span>{infoObj.commodityType === '1' ? (infoObj.materialsButtonValue || '小样申请') : (infoObj.productButtonValue || '商品预约')}</span>
+                                                    </div>)
                                                 }
                                             </div>
                                         </div>
