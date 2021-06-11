@@ -152,7 +152,10 @@ class MaterialInfo extends Component {
         };
     }
     getCommendBrand = (type) => {
+        const urlKeys = tools.urlParamHash();
+        const commodityId = urlKeys.id;
         const params = {
+            commodityId,
             commodityType: this.state.infoObj.commodityType || '1', //数据接口回来
             keyword: '',
             pageIndex: 1,
@@ -334,7 +337,8 @@ class MaterialInfo extends Component {
                                         </div>
                                     </div>
                                     <div className={styles.materialInfo_shopinfo}>
-                                        <ShopInfo type={type} dispatch={this.props.dispatch} infoObj={infoObj} recommendList={recommendList} type={this.state.commodityType} />
+                                        {console.log(this.props, infoObj, recommendList)}
+                                        <ShopInfo type={type} infoObj={infoObj} recommendList={recommendList} type={this.state.commodityType} />
                                     </div>
                                 </div>
                             </div>
