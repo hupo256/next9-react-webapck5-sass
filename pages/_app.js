@@ -57,6 +57,8 @@ function MyApp({ Component, pageProps }) {
               const res = await axios.get(src)
               eval(res.data)
             } catch (e) {}
+          } else {
+            eval(elem.text)
           }
         })
       }
