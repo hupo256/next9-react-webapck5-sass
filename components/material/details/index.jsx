@@ -246,8 +246,8 @@ class MaterialInfo extends Component {
             shopId: this.state.infoObj.uid,
             ugcCommodityId: this.state.infoObj.ugcId,
         }
-        const result = materialApi.materialCommodityApplyCheck(params);
-        if(result){
+        const result = await materialApi.materialCommodityApplyCheck(params);
+        if(result.data){
             message.error('您已经申请过了，请勿重复申请');
             return ;
         }else{
@@ -260,9 +260,9 @@ class MaterialInfo extends Component {
                 })
                 this.refs.PhoneInput.state.value = ''
                 this.refs.NameInput.state.value = ''
-                message.success('申请成功')
+                message.success('申请成功', 3)
             }else{
-                message.error('申请失败')
+                message.error('申请失败', 3)
             }
         }
     }

@@ -143,8 +143,8 @@ export default function Site(props) {
       shopId: state.uid,
       ugcCommodityId: state.ugcId,
     }
-    const result = materialApi.materialCommodityApplyCheck(params);
-    if(result){
+    const result = await materialApi.materialCommodityApplyCheck(params);
+    if(result.data){
       message.error('您已经申请过了，请勿重复申请');
       return ;
     }else{
@@ -154,9 +154,9 @@ export default function Site(props) {
         PhoneInput.current.state.value = ''
         NameInput.current.state.value = ''
         query()
-        message.success('申请成功')
+        message.success('申请成功', 3)
       }else{
-        message.error('申请失败')
+        message.error('申请失败', 3)
       }
     }
   }
