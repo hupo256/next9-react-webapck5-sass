@@ -4,7 +4,7 @@ import styles from './breadBar.module.scss'
 
 const breadData = {
   cases: {
-    url: '/material/',
+    url: '/material',
     name: '看材料',
   },
   cases: {
@@ -27,10 +27,6 @@ const breadData = {
     url: '/articles?uid=',
     name: '装修攻略',
   },
-  material: {
-    url: '/material',
-    name: '材料',
-  }
 }
 export default function BreadBar(props) {
   const [levalTwo, setlevalTwo] = useState('')
