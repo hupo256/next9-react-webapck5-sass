@@ -141,7 +141,6 @@ class SwiperMaterial extends Component {
                                     </div>
                                 )
                             }else{
-                                console.log(item, 'qubo')
                                 return(
                                     <div key={index} id={'ID_TOP_IMG_'+ index} className={'swiper-slide swiperMaterial-b-img'} onClick={this.getImg.bind(this, item, index)}>
                                         <img src={item} alt="" title="" style={{width: '100%', height: '100%'}} />
