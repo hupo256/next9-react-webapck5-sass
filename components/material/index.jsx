@@ -260,7 +260,7 @@ export default function Site(props) {
               </div>
             </div>
           </div>   
-        ) : <NoData tips="文章" />
+        ) : <NoData tips="数据" />
       }
     </BasicLayout>
   )
