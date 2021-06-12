@@ -161,7 +161,7 @@ export default function Site(props) {
         PhoneInput.current.state.value = ''
         NameInput.current.state.value = ''
         state.commodityType === 
-        message.success(`${str}}成功`, 3)
+        message.success(`${str}成功`, 3)
       }else{
         message.success(`${str}}失败`, 3)
       }
