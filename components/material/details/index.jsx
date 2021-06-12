@@ -248,12 +248,13 @@ class MaterialInfo extends Component {
     }
   
     onCloseApply = () => {
-      PhoneInput.current.state.value = ''
-      NameInput.current.state.value = ''
-      this.setState({
-          ...this.state,
-          applyVisible: false
-      })
+        this.refs.PhoneInput.state.value = ''
+        this.refs.NameInput.state.value = ''
+        
+        this.setState({
+            ...this.state,
+            applyVisible: false
+        })
     }
   
     applyVisibleShow = item => {
@@ -354,7 +355,7 @@ class MaterialInfo extends Component {
                     title="申请人信息"
                     visible={applyVisible}
                     width={289}
-                    onCancel={() => { this.setState({...this.state, applyVisible: false}) }}
+                    onCancel={this.onCloseApply}
                     footer={
                         <div>
                             <Button danger={true} style={ButtonStyle} onClick={this.applyStuff.bind(this)}>申请</Button>
