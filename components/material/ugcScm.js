@@ -85,7 +85,7 @@ function createScmCols ({ key, defKey, item, index, handleMouseover, handleoMous
                         </div>
                     ) : (
                         <div style={item.mapImage ? { width: '102px', background: 'rgba(0, 0, 0, 0.85)' } : { width: '205px', display: 'flex', alignItems: "center", justifyContent: 'center', background: 'rgba(0, 0, 0, 0.85)' }} className={styles.scm_button_active}>
-                            <span>已申请</span>
+                            <span>已{commodityType === '1' ? '申请' : '预约'}</span>
                         </div>
                     )
                 }

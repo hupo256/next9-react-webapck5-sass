@@ -331,7 +331,7 @@ class MaterialInfo extends Component {
                                                 }
                                                 {
                                                     (isApply ? <div className={styles.materialInfo_btn_noApply}>
-                                                        <span>已申请</span>
+                                                        <span>已{this.state.commodityType === '1' ? '申请' : '预约'}</span>
                                                     </div> : 
                                                     <div className={styles.materialInfo_btn_apply} onClick={() => { this.setState({...this.state, applyVisible: true}) }} style={{marginLeft: infoObj.commodityAddress ? '0' : '10px'}}>
                                                         <img style={{width: '18px', height: '18px', marginRight: '10px'}} src="/assets/ic_apply_small@2x.png" alt="" />
