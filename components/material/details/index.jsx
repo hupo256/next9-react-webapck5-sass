@@ -318,7 +318,8 @@ class MaterialInfo extends Component {
                                             <div className={styles.materialInfo_btn_group}>
                                                 {
                                                     infoObj.commodityAddress ? (
-                                                        <div onClick={this.jumpCommodityAddress} className={styles.materialInfo_btn_noApply}>
+                                                        <div onClick={this.jumpCommodityAddress} className={styles.materialInfo_btn_more}>
+                                                            <img alt="" src={'/assets/ic_more@2xnew.png'} style={{ marginRight: '10px', width: '18px', height: '18px' }}></img>
                                                             <span>查看更多</span>
                                                         </div>
                                                     ) : null
