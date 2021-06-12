@@ -197,6 +197,7 @@ class MaterialInfo extends Component {
         const length = name ? name.split('').length : 0;
         const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
                 regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+        const str = this.state.commodityType === '1' ? '申请' : '预约';
         if(!phone){
             message.error('请输入正确的手机号码');
             return false;
@@ -228,7 +229,7 @@ class MaterialInfo extends Component {
         const result = await materialApi.materialCommodityApplyCheck(params);
 
         if(result.data){
-            message.error('您已经申请过了，请勿重复申请');
+            message.error(`您已经${str}过了，请勿重复${str}`);
             return ;
         }else{
             const res = await materialApi.materialCommodityApply(params)
@@ -240,9 +241,9 @@ class MaterialInfo extends Component {
                 })
                 this.refs.PhoneInput.state.value = ''
                 this.refs.NameInput.state.value = ''
-                message.success('申请成功', 3)
+                message.success(`${str}成功`, 3)
             }else{
-                message.error('申请失败', 3)
+                message.error(`${str}失败`, 3)
             }
         }
     }
@@ -352,13 +353,15 @@ class MaterialInfo extends Component {
                 </div>
                 <div className="apply_pgc">
                     <Modal
-                    title="申请人信息"
+                    title={`${this.state.commodityType === '1' ? '申请' : '预约'}人信息`}
                     visible={applyVisible}
                     width={289}
                     onCancel={this.onCloseApply}
                     footer={
                         <div>
-                            <Button danger={true} style={ButtonStyle} onClick={this.applyStuff.bind(this)}>申请</Button>
+                            <Button danger={true} style={ButtonStyle} onClick={this.applyStuff.bind(this)}>
+                                {this.state.commodityType === '1' ? '申请' : '预约'}
+                            </Button>
                         </div>
                     }
                     >

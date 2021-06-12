@@ -81,7 +81,9 @@ function createScmCols ({ key, defKey, item, index, handleMouseover, handleoMous
                     !item.isApply ? (
                         <div style={item.mapImage ? { width: '102px' } : { width: '205px', display: 'flex', alignItems: "center", justifyContent: 'center' }} className={styles.scm_button_active} onClick={handleApply.bind(this, item)}>
                             <img alt="" src={'/assets/ic_apply_small@2x.png'} style={{ marginRight: '5px' }}></img>
-                            <span>申请</span>
+                            <span style={{width: 'auto'}}>
+                                {commodityType === '1' ? '申请' : item.productButtonValue}
+                            </span>
                         </div>
                     ) : (
                         <div style={item.mapImage ? { width: '102px', background: 'rgba(0, 0, 0, 0.85)' } : { width: '205px', display: 'flex', alignItems: "center", justifyContent: 'center', background: 'rgba(0, 0, 0, 0.85)' }} className={styles.scm_button_active}>
