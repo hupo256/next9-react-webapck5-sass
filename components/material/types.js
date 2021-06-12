@@ -37,7 +37,7 @@ class InputSearch extends Component {
         return (
             <>
                 <div className={styles.scmpage_max}>
-                    <div className={styles.scmpage_dl}>大类</div>
+                    <div className={styles.scmpage_dl}>一级分类</div>
                     <ul className={styles.scmpage_ul} style={{ width: '1028px' }}>
                         <li className={maxLiKey === -1 ? styles.scmpage_ul_def : ""} onClick={this.handleMaxLi.bind(this, -1, '')}>全部</li>
                         {
@@ -50,7 +50,7 @@ class InputSearch extends Component {
                     </ul>
                 </div>
                 <div className={styles.scmpage_min} style={{display: this.state.show ? 'flex' : 'none'}}>
-                    <div className={styles.scmpage_xl_dl}>小类</div>
+                    <div className={styles.scmpage_xl_dl}>二级分类</div>
                     <ul className={styles.scmpage_xl_ul} style={{ width: '1028px' }}>
                         <li className={minLiKey === -1 ? styles.scmpage_ul_xl_def : ""} onClick={this.handleMinLi.bind(this, -1, '')}>全部</li>
                         {
