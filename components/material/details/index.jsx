@@ -317,6 +317,13 @@ class MaterialInfo extends Component {
                                             </div>
                                             <div className={styles.materialInfo_btn_group}>
                                                 {
+                                                    infoObj.commodityAddress ? (
+                                                        <div onClick={this.jumpCommodityAddress} className={styles.materialInfo_btn_noApply}>
+                                                            <span>查看更多</span>
+                                                        </div>
+                                                    ) : null
+                                                }
+                                                {
                                                     this.state.commodityType === '1' && this.state.infoObj.mapImage ? (
                                                         <div onClick={this.downFile} className={styles.materialInfo_btn_upload}>
                                                             <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '10px', width: '18px', height: '18px' }}></img>
@@ -325,17 +332,15 @@ class MaterialInfo extends Component {
                                                     ) : null
                                                 }
                                                 {
-                                                    infoObj.commodityAddress ? (
-                                                        <div onClick={this.jumpCommodityAddress} className={styles.materialInfo_btn_noApply}>
-                                                            <span>查看更多</span>
-                                                        </div>
-                                                    ) : null
-                                                }
-                                                {
                                                     (isApply ? <div className={styles.materialInfo_btn_noApply}>
                                                         <span>已{this.state.commodityType === '1' ? '申请' : '预约'}</span>
                                                     </div> : 
-                                                    <div className={styles.materialInfo_btn_apply} onClick={() => { this.setState({...this.state, applyVisible: true}) }} style={{marginLeft: infoObj.commodityAddress ? '0' : '10px'}}>
+                                                    <div
+                                                    className={styles.materialInfo_btn_apply}
+                                                    onClick={() => { this.setState({...this.state, applyVisible: true}) }}
+                                                    style={{
+                                                        width: this.state.infoObj.mapImage && infoObj.commodityAddress ? '100%' : '180px'
+                                                    }}>
                                                         <img style={{width: '18px', height: '18px', marginRight: '10px'}} src="/assets/ic_apply_small@2x.png" alt="" />
                                                         <span>{infoObj.commodityType === '1' ? (infoObj.materialsButtonValue || '小样申请') : (infoObj.productButtonValue || '商品预约')}</span>
                                                     </div>)

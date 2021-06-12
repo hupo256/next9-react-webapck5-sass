@@ -197,6 +197,10 @@
                         line-height: 20px;
                     }
                 }
+                .materialInfo_btns_group{
+                    display: flex;
+                    flex-wrap: wrap;
+                }
                 .materialInfo_btn_group {
                     display: flex;
                     flex-wrap: wrap;
@@ -215,7 +219,6 @@
                         border-radius: 4px;
                         text-align: center;
                         cursor: pointer;
-                        margin: 0 10px;
                         margin-bottom: 10px;
                         span {
                             width: 64px;
@@ -236,7 +239,6 @@
                     }
                     .materialInfo_btn_apply {
                         background: #ff7300;
-                        flex: 1;
                     }
                 }
                 .materialInfo_gys_group {
