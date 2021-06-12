@@ -118,7 +118,9 @@ class MaterialInfo extends Component {
         const infoObj = this.state.infoObj || {};
         const brandVo = infoObj.brandVo || {};
         const uid = brandVo.uid;
-        const url = `${window.location.origin}/material/brandInfo?id=${uid}`;
+        const params = tools.urlParamHash();
+        const commodityType = params.type;
+        const url = `${window.location.origin}/${commodityType === '1' ? 'material' : 'trim'}/brandInfo?id=${uid}`;
         window.open(url);
     }
     getImageDataURL = (image) => {
@@ -152,7 +154,10 @@ class MaterialInfo extends Component {
         };
     }
     getCommendBrand = (type) => {
+        const urlKeys = tools.urlParamHash();
+        const commodityId = urlKeys.id;
         const params = {
+            commodityId,
             commodityType: this.state.infoObj.commodityType || '1', //数据接口回来
             keyword: '',
             pageIndex: 1,
@@ -213,7 +218,7 @@ class MaterialInfo extends Component {
             return false;
         }
         const params = {
-            applySource: 2,
+            applySource: 'TSC000',
             commodityType: this.state.infoObj.commodityType,
             customerName: name,
             phoneNumber: phone,
@@ -243,12 +248,13 @@ class MaterialInfo extends Component {
     }
   
     onCloseApply = () => {
-      PhoneInput.current.state.value = ''
-      NameInput.current.state.value = ''
-      this.setState({
-          ...this.state,
-          applyVisible: false
-      })
+        this.refs.PhoneInput.state.value = ''
+        this.refs.NameInput.state.value = ''
+        
+        this.setState({
+            ...this.state,
+            applyVisible: false
+        })
     }
   
     applyVisibleShow = item => {
@@ -285,6 +291,9 @@ class MaterialInfo extends Component {
                                     </div>
                                     <div className={styles.materialInfo_theard}>
                                         <div className={styles.materialInfo_t_left}>
+                                            {
+                                                // console.log(infoObj.renderings, 'qubo')
+                                            }
                                             <InSwiper getCurrentUrl={this.getCurrentUrl} key={new Date().getTime() + ''} imgList={infoObj.renderings !== null && infoObj.renderings ? infoObj.renderings : this.state.imgList} />
                                         </div>
                                         <div className={styles.materialInfo_t_right}>
@@ -315,26 +324,26 @@ class MaterialInfo extends Component {
                                                     ) : null
                                                 }
                                                 {
-                                                    (isApply ? <div className={styles.materialInfo_btn_noApply}>
-                                                        <span>已申请</span>
-                                                    </div> : 
-                                                    <div className={styles.materialInfo_btn_apply} onClick={() => { this.setState({...this.state, applyVisible: true}) }}>
-                                                        <img style={{width: '18px', height: '18px', marginRight: '10px'}} src="/assets/ic_apply_small@2x.png" alt="" />
-                                                        <span>{infoObj.commodityType === '1' ? (infoObj.materialsButtonValue || '小样申请') : (infoObj.productButtonValue || '商品预约')}</span>
-                                                    </div>)
-                                                }
-                                                {
                                                     infoObj.commodityAddress ? (
                                                         <div onClick={this.jumpCommodityAddress} className={styles.materialInfo_btn_noApply}>
                                                             <span>查看更多</span>
                                                         </div>
                                                     ) : null
                                                 }
+                                                {
+                                                    (isApply ? <div className={styles.materialInfo_btn_noApply}>
+                                                        <span>已{this.state.commodityType === '1' ? '申请' : '预约'}</span>
+                                                    </div> : 
+                                                    <div className={styles.materialInfo_btn_apply} onClick={() => { this.setState({...this.state, applyVisible: true}) }} style={{marginLeft: infoObj.commodityAddress ? '0' : '10px'}}>
+                                                        <img style={{width: '18px', height: '18px', marginRight: '10px'}} src="/assets/ic_apply_small@2x.png" alt="" />
+                                                        <span>{infoObj.commodityType === '1' ? (infoObj.materialsButtonValue || '小样申请') : (infoObj.productButtonValue || '商品预约')}</span>
+                                                    </div>)
+                                                }
                                             </div>
                                         </div>
                                     </div>
                                     <div className={styles.materialInfo_shopinfo}>
-                                        <ShopInfo type={type} dispatch={this.props.dispatch} infoObj={infoObj} recommendList={recommendList} type={this.state.commodityType} />
+                                        <ShopInfo type={type} infoObj={infoObj} recommendList={recommendList} type={this.state.commodityType} />
                                     </div>
                                 </div>
                             </div>
@@ -346,7 +355,7 @@ class MaterialInfo extends Component {
                     title="申请人信息"
                     visible={applyVisible}
                     width={289}
-                    onCancel={() => { this.setState({...this.state, applyVisible: false}) }}
+                    onCancel={this.onCloseApply}
                     footer={
                         <div>
                             <Button danger={true} style={ButtonStyle} onClick={this.applyStuff.bind(this)}>申请</Button>

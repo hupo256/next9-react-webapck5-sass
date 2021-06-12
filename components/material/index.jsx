@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Input, Modal, Button, Carousel, message } from 'antd'
 import BasicLayout from '@components/HomePageLayout'
 import materialApi from '@service/materialApi'
+import NoData from '@components/noData'
 import Types from './types'
 import UgcScm from './ugcScm'
 import styles from './index.module.scss'
@@ -52,6 +53,9 @@ export default function Site(props) {
         ...state,
         ...res.data,
         commodityType,
+        shopClassification: res.data.shopClassification.map(item => {
+          return (parseInt(item) + 1).toString();
+        })
       })
       setShopId(res.data.uid)
       queryCategory(res.data.uid, props.type)
@@ -70,6 +74,7 @@ export default function Site(props) {
       commodityCategoryCode: key < 0 ? '' : item.categoryCode,
       subCommodityCategoryCode: '',
       minLiKey: -1,
+      pageIndex: 1
     })
   }
 
@@ -78,6 +83,7 @@ export default function Site(props) {
       ...state,
       minLiKey: key,
       subCommodityCategoryCode: key === -1 ? '' : item.categoryCode,
+      pageIndex: 1
     })
   }
 
@@ -115,28 +121,29 @@ export default function Site(props) {
     const length = name ? name.split('').length : 0;
     const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
 	        regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+    const str = state.commodityType === '1' ? '申请' : '预约';
     if(!phone){
-      message.error('请输入正确的手机号码');
+      message.error('请输入正确的手机号码', 3);
       return false;
     }
     if(!(/^1[3456789]\d{9}$/.test(phone))){ 
-      message.error('请输入正确的手机号码');
+      message.error('请输入正确的手机号码', 3);
       return false;
     }
     if(!name){
-      message.error('请输入您的称呼');
+      message.error('请输入您的称呼', 3);
       return false;
     }
     if(length < 2 || length > 10){
-      message.error('请输入大于2个字或少于10个字的名字');
+      message.error('请输入大于2个字或少于10个字的名字', 3);
       return false;
     }
     if(regEn.test(name) || regCn.test(name)) {
-      message.error('不允许输入特殊字符');
+      message.error('不允许输入特殊字符', 3);
       return false;
     }
     const params = {
-      applySource: 2,
+      applySource: 'TSC000',
       commodityType: state.commodityType,
       customerName: name,
       phoneNumber: phone,
@@ -145,7 +152,7 @@ export default function Site(props) {
     }
     const result = await materialApi.materialCommodityApplyCheck(params);
     if(result.data){
-      message.error('您已经申请过了，请勿重复申请');
+      message.error(`您已经${str}过了，请勿重复${str}`, 3);
       return ;
     }else{
       const res = await materialApi.materialCommodityApply(params)
@@ -153,10 +160,10 @@ export default function Site(props) {
         setApplyVisible(false)
         PhoneInput.current.state.value = ''
         NameInput.current.state.value = ''
-        query()
-        message.success('申请成功', 3)
+        state.commodityType === 
+        message.success(`${str}}成功`, 3)
       }else{
-        message.error('申请失败', 3)
+        message.success(`${str}}失败`, 3)
       }
     }
   }
@@ -184,74 +191,78 @@ export default function Site(props) {
   }
 
   return (
-    <BasicLayout headConfig={{ title: '材料' }} pushType="material">
-      <div className="grayBg">
-        <Carousel autoplay style={{height: '100%'}}>
-          {_.map(state.carouselImages, (item, index) => (
-            <div className={`banner-${index}`} key={`banner-${index}`} style={{height: '100%'}}>
-              <img src={item} alt="" style={{width: '100%', height: '560px'}} />
-              {/* <h3 className={styles.banner} style={{ backgroundImage: `url(${item})`, height: '100%' }}></h3> */}
-            </div>
-          ))}
-        </Carousel>
-        <div className="conBox">
-          <div className={styles.scmpage_body} style={{ display: 'block' }}>
-            <div className={styles.scmpage_context}>
-              <div className={styles.scmpage_type}>
-                <Types
-                  shopSettingVo={state.shopSettingVo}
-                  commodityType={state.commodityType}
-                  commodityCategoryVos={commodityCategoryVos}
-                  commodityCategoryCode={state.commodityCategoryCode}
-                  maxLiKey={state.maxLiKey}
-                  minLiKey={state.minLiKey}
-                  handleMaxLi={handleMaxLi}
-                  handleMinLi={handleMinLi}
-                />
-              </div>
-              <div className={styles.scmpage_list}>
-                <UgcScm
-                  commodityType={state.commodityType}
-                  pageResultVo={pageResultVo}
-                  shopId={state.shopId}
-                  keywordType={state.keywordType}
-                  commodityCategoryCode={state.commodityCategoryCode}
-                  subCommodityCategoryCode={state.subCommodityCategoryCode}
-                  shopSettingVo={state.shopSettingVo}
-                  showApplyUgc={item => {
-                    applyVisibleShow(item)
-                  }}
-                  pageChange={pageChange}
-                />
-              </div>
-              <div className="apply_pgc">
-                <Modal
-                  title="申请人信息"
-                  visible={applyVisible}
-                  width={289}
-                  onCancel={() => {
-                    onCloseApply()
-                  }}
-                  footer={
-                    <div>
-                      <Button danger={true} style={ButtonStyle} onClick={applyUgc}>
-                        申请
-                      </Button>
-                    </div>
-                  }
-                >
-                  <div style={{ ...InputStyle, marginBottom: '12px' }}>
-                    <Input type="number" placeholder="请输入联系电话" ref={PhoneInput} />
+    <BasicLayout headConfig={{ title: state.commodityType === '1' ? '看材料' : '看装修' }} pushType="material">
+      {
+        state.shopClassification && state.shopClassification.indexOf(state.commodityType) >= 0 ? (
+          <div className="grayBg">
+            <Carousel autoplay style={{height: '100%'}}>
+              {_.map(state.carouselImages, (item, index) => (
+                <div className={`banner-${index}`} key={`banner-${index}`} style={{height: '100%'}}>
+                  <img src={item} alt="" style={{width: '100%', height: '560px'}} />
+                  {/* <h3 className={styles.banner} style={{ backgroundImage: `url(${item})`, height: '100%' }}></h3> */}
+                </div>
+              ))}
+            </Carousel>
+            <div className="conBox">
+              <div className={styles.scmpage_body} style={{ display: 'block' }}>
+                <div className={styles.scmpage_context}>
+                  <div className={styles.scmpage_type}>
+                    <Types
+                      shopSettingVo={state.shopSettingVo}
+                      commodityType={state.commodityType}
+                      commodityCategoryVos={commodityCategoryVos}
+                      commodityCategoryCode={state.commodityCategoryCode}
+                      maxLiKey={state.maxLiKey}
+                      minLiKey={state.minLiKey}
+                      handleMaxLi={handleMaxLi}
+                      handleMinLi={handleMinLi}
+                    />
                   </div>
-                  <div style={InputStyle}>
-                    <Input placeholder="请输入您的称呼" ref={NameInput} />
+                  <div className={styles.scmpage_list}>
+                    <UgcScm
+                      commodityType={state.commodityType}
+                      pageResultVo={pageResultVo}
+                      shopId={state.shopId}
+                      keywordType={state.keywordType}
+                      commodityCategoryCode={state.commodityCategoryCode}
+                      subCommodityCategoryCode={state.subCommodityCategoryCode}
+                      shopSettingVo={state.shopSettingVo}
+                      showApplyUgc={item => {
+                        applyVisibleShow(item)
+                      }}
+                      pageChange={pageChange}
+                    />
                   </div>
-                </Modal>
+                  <div className="apply_pgc">
+                    <Modal
+                      title={`${state.commodityType === '1' ? '申请' : '预约'}人信息`}
+                      visible={applyVisible}
+                      width={289}
+                      onCancel={() => {
+                        onCloseApply()
+                      }}
+                      footer={
+                        <div>
+                          <Button danger={true} style={ButtonStyle} onClick={applyUgc}>
+                            {state.commodityType === '1' ? '申请' : '预约'}
+                          </Button>
+                        </div>
+                      }
+                    >
+                      <div style={{ ...InputStyle, marginBottom: '12px' }}>
+                        <Input placeholder="请输入联系电话" ref={PhoneInput} />
+                      </div>
+                      <div style={InputStyle}>
+                        <Input placeholder="请输入您的称呼" ref={NameInput} />
+                      </div>
+                    </Modal>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div>   
+        ) : <NoData tips="数据" />
+      }
     </BasicLayout>
   )
 }

@@ -72,20 +72,20 @@ function createScmCols ({ key, defKey, item, index, handleMouseover, handleoMous
             </div>
             <div id={`SCM_` + key} className={defKey === key ? styles.scm_button : styles.scm_button_display} onClick={downFile.bind(this, item)}>
                 {
-                    item.mapImage ? <div style={{ width: '102px' }} className={styles.scm_button_def} >
+                    item.mapImage ? <div style={{ width: '102px', background: '#fff' }} className={styles.scm_button_active}>
                         <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '5px' }}></img>
-                        <span>下载</span>
+                        <span style={{color: '#ff7300'}}>下载</span>
                     </div> : ""
                 }
                 {
                     !item.isApply ? (
-                        <div style={item.mapImage ? { width: '102px' } : { width: '204px', display: 'flex', alignItems: "center", justifyContent: 'center' }} className={styles.scm_button_active} onClick={handleApply.bind(this, item)}>
+                        <div style={item.mapImage ? { width: '102px' } : { width: '205px', display: 'flex', alignItems: "center", justifyContent: 'center' }} className={styles.scm_button_active} onClick={handleApply.bind(this, item)}>
                             <img alt="" src={'/assets/ic_apply_small@2x.png'} style={{ marginRight: '5px' }}></img>
-                            <span style={spanStyle}>{commodityType === '1' ? shopSettingVo.materialButtonName ? shopSettingVo.materialButtonName : '申请' : shopSettingVo.productButtonName ? shopSettingVo.productButtonName : '申请'}</span>
+                            <span>申请</span>
                         </div>
                     ) : (
-                        <div style={{background: 'rgba(0, 0, 0, 0.85)'}}>
-                            <span>已申请</span>
+                        <div style={item.mapImage ? { width: '102px', background: 'rgba(0, 0, 0, 0.85)' } : { width: '205px', display: 'flex', alignItems: "center", justifyContent: 'center', background: 'rgba(0, 0, 0, 0.85)' }} className={styles.scm_button_active}>
+                            <span>已{commodityType === '1' ? '申请' : '预约'}</span>
                         </div>
                     )
                 }
@@ -133,7 +133,8 @@ class PgcScm extends Component {
     }
 
     seeMaterialInfo = (ids, event) => {
-        const newBlank = `${window.location.origin}/material/details?id=${ids.ugcId}&type=${this.props.commodityType}`;
+
+        const newBlank = `${window.location.origin}/${this.props.commodityType === '1' ? 'material' : 'trim'}/details?id=${ids.ugcId}&type=${this.props.commodityType}`;
         window.open(newBlank, '_blank');
     }
 
