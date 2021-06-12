@@ -121,6 +121,7 @@ export default function Site(props) {
     const length = name ? name.split('').length : 0;
     const regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
 	        regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+    const str = state.commodityType === '1' ? '申请' : '预约';
     if(!phone){
       message.error('请输入正确的手机号码', 3);
       return false;
@@ -151,7 +152,7 @@ export default function Site(props) {
     }
     const result = await materialApi.materialCommodityApplyCheck(params);
     if(result.data){
-      message.error('您已经申请过了，请勿重复申请', 3);
+      message.error(`您已经${str}过了，请勿重复${str}`, 3);
       return ;
     }else{
       const res = await materialApi.materialCommodityApply(params)
@@ -159,9 +160,10 @@ export default function Site(props) {
         setApplyVisible(false)
         PhoneInput.current.state.value = ''
         NameInput.current.state.value = ''
-        message.success('申请成功', 3)
+        state.commodityType === 
+        message.success(`${str}}成功`, 3)
       }else{
-        message.error('申请失败', 3)
+        message.success(`${str}}失败`, 3)
       }
     }
   }
@@ -233,7 +235,7 @@ export default function Site(props) {
                   </div>
                   <div className="apply_pgc">
                     <Modal
-                      title="申请人信息"
+                      title={`${state.commodityType === '1' ? '申请' : '预约'}人信息`}
                       visible={applyVisible}
                       width={289}
                       onCancel={() => {
@@ -242,7 +244,7 @@ export default function Site(props) {
                       footer={
                         <div>
                           <Button danger={true} style={ButtonStyle} onClick={applyUgc}>
-                            申请
+                            {state.commodityType === '1' ? '申请' : '预约'}
                           </Button>
                         </div>
                       }
