@@ -189,8 +189,7 @@ export default function Site(props) {
   }
 
   return (
-    <BasicLayout headConfig={{ title: '材料' }} pushType="material">
-      {console.log(state.shopClassification, state.commodityType)}
+    <BasicLayout headConfig={{ title: state.commodityType === '1' ? '看材料' : '看装修' }} pushType="material">
       {
         state.shopClassification && state.shopClassification.indexOf(state.commodityType) >= 0 ? (
           <div className="grayBg">
