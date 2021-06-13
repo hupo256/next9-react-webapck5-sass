@@ -38,7 +38,7 @@ export default function ShopInfo (props) {
             <div className={styles.shopinfo_right}>
                 <div className={styles.shopinfo_wngj}>
                     <div className={styles.shopinfo_wngj_side_line}> </div>
-                    <span>为你推荐</span>
+                    <span>为您推荐</span>
                 </div>
                 <div className={styles.shopinfo_sp_list} style={shopContext ? {} : { display: 'flex' }}>
                     { recommendList.length > 0 && recommendList.map((item, index) => {
