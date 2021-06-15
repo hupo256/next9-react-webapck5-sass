@@ -104,7 +104,6 @@ export default function Site(props) {
 
   const query = async (shopIds, commodityTypes) => {
     const { pageIndex, pageSize, commodityCategoryCode, commodityType, subCommodityCategoryCode } = state
-    console.log(shopId, 'qubo')
 
     const queryMaterial = {
       commodityCategoryCode,
