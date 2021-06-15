@@ -3,12 +3,12 @@ import Link from 'next/link'
 import styles from './breadBar.module.scss'
 
 const breadData = {
-  cases: {
+  material: {
     url: '/material',
     name: '看材料',
   },
-  cases: {
-    url: '/trim/',
+  trim: {
+    url: '/trim',
     name: '看装修',
   },
   cases: {
