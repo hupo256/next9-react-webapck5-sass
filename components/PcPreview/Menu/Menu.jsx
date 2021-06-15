@@ -139,8 +139,9 @@ const MenuListComp = ({ menuList }) => {
   const clickMenuItem = ({ linkUrl, linkKey, uid }) => {
     if (!uid) return
     if (linkKey === 'games') {
+      message.destroy()
       message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')
-      return
+      return  
     }
     window.location.href = linkUrl
   }
