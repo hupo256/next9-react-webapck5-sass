@@ -48,7 +48,8 @@ export default function Site(props) {
 
   useEffect(() => {
     // 初始化获取用户信息
-    const shopCode = window.location.host === 'localhost:3000' ? 'test1-site.ingongdi.com' : window.location.host
+    const url = window.location.origin.split('://')[1];
+    const shopCode = window.location.host === 'localhost:3000' ? 'test1-site.ingongdi.com' : url;
     materialApi.queryShopInfo({ shopCode, source }).then(res => {
       const commodityType = props.type ? props.type : state.commodityType;
       setState({
