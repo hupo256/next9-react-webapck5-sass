@@ -55,6 +55,7 @@ export default function Site(props) {
       setState({
         ...state,
         ...res.data,
+        shopId: res.data.uid,
         commodityType,
         shopClassification: res.data.shopClassification.map(item => {
           return (parseInt(item) + 1).toString();
@@ -103,6 +104,7 @@ export default function Site(props) {
 
   const query = async (shopIds, commodityTypes) => {
     const { pageIndex, pageSize, commodityCategoryCode, commodityType, subCommodityCategoryCode } = state
+    console.log(shopId, 'qubo')
 
     const queryMaterial = {
       commodityCategoryCode,
