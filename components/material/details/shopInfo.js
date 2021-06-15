@@ -26,13 +26,19 @@ export default function ShopInfo (props) {
                             </div>
                         )
                     }
-                    {
-                        infoObj.displayImage && infoObj.displayImage.length ? 
-                        (infoObj.displayImage.map((url, index) => {
-                            return <img key={`displayImageUrl-${index}`} alt="" src={url}></img>
-                        })) :
-                        (<img alt="" src={"https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngf172ceb0a19056de618bbe4850733d89a2d38d69f0e0268a820b1e5249567a09"}></img>)
-                    }
+                    <div style={{
+                        width: '100%',
+                        overflowY: 'scroll',
+                        overflowX: 'hidden'
+                    }}>
+                        {
+                            infoObj.displayImage && infoObj.displayImage.length ? 
+                            (infoObj.displayImage.map((url, index) => {
+                                return <img key={`displayImageUrl-${index}`} alt="" src={url}></img>
+                            })) :
+                            (<img alt="" src={"https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngf172ceb0a19056de618bbe4850733d89a2d38d69f0e0268a820b1e5249567a09"}></img>)
+                        }
+                    </div>
                 </div>
             </div>
             <div className={styles.shopinfo_right}>
