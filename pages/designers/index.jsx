@@ -39,7 +39,7 @@ export default function Site(props) {
   }
 
   return (
-    <BasicLayout headConfigx={{ title: '找设计师' }} pushType="designer">
+    <BasicLayout headConfig={{ title: '找设计师' }} pushType="designer">
       <div className="grayBg">
         <div className="conBox">
           {/* breadBar */}
