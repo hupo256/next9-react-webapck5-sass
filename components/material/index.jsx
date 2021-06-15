@@ -3,6 +3,7 @@ import { Input, Modal, Button, Carousel, message } from 'antd'
 import BasicLayout from '@components/HomePageLayout'
 import materialApi from '@service/materialApi'
 import NoData from '@components/noData'
+import ExpiredPage from '@components/500/500.jsx'
 import Types from './types'
 import UgcScm from './ugcScm'
 import styles from './index.module.scss'
@@ -49,6 +50,7 @@ export default function Site(props) {
     // 初始化获取用户信息
     materialApi.queryShopInfo({ shopCode: 'test1-site.ingongdi.com', source }).then(res => {
       const commodityType = props.type ? props.type : state.commodityType;
+      console.log(res)
       setState({
         ...state,
         ...res.data,
@@ -193,7 +195,7 @@ export default function Site(props) {
   return (
     <BasicLayout headConfig={{ title: state.commodityType === '1' ? '看材料' : '看装修' }} pushType="material">
       {
-        state.shopClassification && state.shopClassification.indexOf(state.commodityType) >= 0 ? (
+        state.serviceStatus == 1 && state.shopClassification && state.shopClassification.indexOf(state.commodityType) >= 0 ? (
           <div className="grayBg">
             <Carousel autoplay style={{height: '100%'}}>
               {_.map(state.carouselImages, (item, index) => (
@@ -261,7 +263,7 @@ export default function Site(props) {
               </div>
             </div>
           </div>   
-        ) : <NoData tips="数据" />
+        ) : state.serviceStatus == 0 ? <ExpiredPage /> : <NoData tips="数据" />
       }
     </BasicLayout>
   )
