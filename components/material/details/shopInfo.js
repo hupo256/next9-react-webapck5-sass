@@ -34,7 +34,7 @@ export default function ShopInfo (props) {
                         {
                             infoObj.displayImage && infoObj.displayImage.length ? 
                             (infoObj.displayImage.map((url, index) => {
-                                return <img key={`displayImageUrl-${index}`} alt="" src={url}></img>
+                                return <img style={{marginBottom: '5px'}} key={`displayImageUrl-${index}`} alt="" src={url}></img>
                             })) :
                             (<img alt="" src={"https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngf172ceb0a19056de618bbe4850733d89a2d38d69f0e0268a820b1e5249567a09"}></img>)
                         }
