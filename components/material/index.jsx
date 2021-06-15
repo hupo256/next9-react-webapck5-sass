@@ -104,13 +104,17 @@ export default function Site(props) {
 
   const query = async (shopIds, commodityTypes) => {
     const { pageIndex, pageSize, commodityCategoryCode, commodityType, subCommodityCategoryCode } = state
+    const uid = shopIds ? shopIds : shopId;
+    if(!uid){
+      return;
+    }
 
     const queryMaterial = {
       commodityCategoryCode,
       subCommodityCategoryCode,
       commodityType: commodityTypes ? commodityTypes : commodityType,
       source,
-      shopId: shopIds ? shopIds : shopId,
+      shopId: uid,
       pageIndex,
       pageSize,
       shopType: [],
