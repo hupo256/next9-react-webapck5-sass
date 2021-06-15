@@ -136,12 +136,12 @@ const MenuListComp = ({ menuList }) => {
     setCurrent(null)
   }, [menuList])
 
-  const clickMenuItem = ({ linkUrl, uid }) => {
+  const clickMenuItem = ({ linkUrl, linkKey, uid }) => {
     if (!uid) return
-    // if (linkKey === 'games') {
-    //   message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')
-    //   return
-    // }
+    if (linkKey === 'games') {
+      message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')
+      return
+    }
     window.location.href = linkUrl
   }
 
