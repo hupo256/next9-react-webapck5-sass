@@ -26,11 +26,7 @@ export default function ShopInfo (props) {
                             </div>
                         )
                     }
-                    <div style={{
-                        width: '100%',
-                        overflowY: 'scroll',
-                        overflowX: 'hidden'
-                    }}>
+                    <div>
                         {
                             infoObj.displayImage && infoObj.displayImage.length ? 
                             (infoObj.displayImage.map((url, index) => {
