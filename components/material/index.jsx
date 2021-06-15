@@ -50,7 +50,6 @@ export default function Site(props) {
     // 初始化获取用户信息
     materialApi.queryShopInfo({ shopCode: 'test1-site.ingongdi.com', source }).then(res => {
       const commodityType = props.type ? props.type : state.commodityType;
-      console.log(res)
       setState({
         ...state,
         ...res.data,
@@ -263,7 +262,7 @@ export default function Site(props) {
               </div>
             </div>
           </div>   
-        ) : state.serviceStatus == 0 ? <ExpiredPage /> : <NoData tips="数据" />
+        ) : <NoData tips="数据" />
       }
     </BasicLayout>
   )
