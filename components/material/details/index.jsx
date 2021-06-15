@@ -161,13 +161,23 @@ class MaterialInfo extends Component {
             commodityType: this.state.infoObj.commodityType || '1', //数据接口回来
             keyword: '',
             pageIndex: 1,
-            pageSize: 6,
+            pageSize: 7,
             shopId: this.state.infoObj.shopVo.id,
             source: '2'
         }
 
         materialApi.materialrecommend(params).then(res => {
-            this.setState({ recommendList: res.data || [] });
+            let recommendList = [];
+            if(res.data.length <= 5){
+                recommendList = res.data
+            }else{
+                res.data.forEach((item, inx) => {
+                    if(inx < 6)
+                        recommendList.push(item)
+                });
+            }
+            
+            this.setState({ recommendList });
         })
     }
     changeSupplier = (item) => {
