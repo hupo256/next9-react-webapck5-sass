@@ -26,19 +26,25 @@ export default function ShopInfo (props) {
                             </div>
                         )
                     }
-                    {
-                        infoObj.displayImage && infoObj.displayImage.length ? 
-                        (infoObj.displayImage.map((url, index) => {
-                            return <img key={`displayImageUrl-${index}`} alt="" src={url}></img>
-                        })) :
-                        (<img alt="" src={"https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngf172ceb0a19056de618bbe4850733d89a2d38d69f0e0268a820b1e5249567a09"}></img>)
-                    }
+                    <div style={{
+                        width: '100%',
+                        overflowY: 'scroll',
+                        overflowX: 'hidden'
+                    }}>
+                        {
+                            infoObj.displayImage && infoObj.displayImage.length ? 
+                            (infoObj.displayImage.map((url, index) => {
+                                return <img key={`displayImageUrl-${index}`} alt="" src={url}></img>
+                            })) :
+                            (<img alt="" src={"https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngf172ceb0a19056de618bbe4850733d89a2d38d69f0e0268a820b1e5249567a09"}></img>)
+                        }
+                    </div>
                 </div>
             </div>
             <div className={styles.shopinfo_right}>
                 <div className={styles.shopinfo_wngj}>
                     <div className={styles.shopinfo_wngj_side_line}> </div>
-                    <span>为你推荐</span>
+                    <span>为您推荐</span>
                 </div>
                 <div className={styles.shopinfo_sp_list} style={shopContext ? {} : { display: 'flex' }}>
                     { recommendList.length > 0 && recommendList.map((item, index) => {
