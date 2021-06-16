@@ -109,9 +109,9 @@ const MenuListComp = ({ menuList }) => {
       // 详情页
 
       const res = _.find(menuList, value => {
-        let urlObj = null;
-        let urlCompare = [];
-        if(value.linkUrl){
+        let urlObj = null
+        let urlCompare = []
+        if (value.linkUrl) {
           urlObj = new URL(location.origin + value.linkUrl)
           urlCompare = urlObj.searchParams.values()
         }
@@ -144,7 +144,7 @@ const MenuListComp = ({ menuList }) => {
     if (linkKey === 'games') {
       message.destroy()
       message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')
-      return  
+      return
     }
     window.location.href = linkUrl
   }
@@ -156,7 +156,7 @@ const MenuListComp = ({ menuList }) => {
         style={
           extraCharCount[chunkIndex] > MIN_CHUNK_SIZE
             ? { justifyContent: 'space-between' }
-            : { justifyContent: 'flex-end', gap: '40px' }
+            : { justifyContent: 'flex-end' }
         }
       >
         {_.map(menuChunkList[chunkIndex], (item, index) => {

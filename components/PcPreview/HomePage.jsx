@@ -42,7 +42,7 @@ const Home = () => {
     ;(async () => {
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
       // 暂时添加，待添加入口后移除
-      setMenuList(_.get(res, 'data.list'));
+      setMenuList(_.get(res, 'data.list'))
     })()
     ;(async () => {
       const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])

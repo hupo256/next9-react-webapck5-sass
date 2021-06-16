@@ -5,11 +5,11 @@
   justify-content: center;
   flex-direction: row;
   align-items: center;
-  gap: 69px;
 
   .textWrapper {
     display: flex;
     flex-direction: column;
+    margin-left: 69px;
   }
 
   .code {
