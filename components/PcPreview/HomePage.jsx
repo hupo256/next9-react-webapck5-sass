@@ -137,7 +137,7 @@ const Home = () => {
               <h3
                 className={styles.banner}
                 style={{
-                  backgroundImage: `url(${_.get(item, 'imgUrl')})`,
+                  backgroundImage: `url(${encodeURI(_.get(item, 'imgUrl'))})`,
                 }}
               >
                 {' '}
