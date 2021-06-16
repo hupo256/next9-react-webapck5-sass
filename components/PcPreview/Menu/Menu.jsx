@@ -137,7 +137,7 @@ const MenuListComp = ({ menuList }) => {
     }
 
     setCurrent(null)
-  }, [menuList])
+  }, [menuList,location.href])
 
   const clickMenuItem = ({ linkUrl, linkKey, uid }) => {
     if (!uid) return
