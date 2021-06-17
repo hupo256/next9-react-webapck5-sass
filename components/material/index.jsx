@@ -204,10 +204,16 @@ export default function Site(props) {
         state.serviceStatus == 1 && state.shopClassification && state.shopClassification.indexOf(state.commodityType) >= 0 ? (
           <div className="grayBg">
             <Carousel autoplay style={{height: '100%'}}>
+            {/* state.carouselImages */}
               {_.map(state.carouselImages, (item, index) => (
                 <div className={`banner-${index}`} key={`banner-${index}`} style={{height: '100%'}}>
                   <div className={`banner-${index}`} key={`banner-${index}`} style={{height: '100%', marginTop: '58px', position: 'relative'}}>
-                    <img src={item} alt="" style={{width: '100%', height: '560px', position: 'absolute', top: '0', left: '50%', transform: 'translateX(-50%)'}} />
+                    <div style={{
+                        background: `url(${item}) no-repeat`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'top center',
+                        height: '560px'
+                    }} />
                   </div>
                 </div>
               ))}
