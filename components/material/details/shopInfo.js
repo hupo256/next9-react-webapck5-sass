@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { getStorageItem } from '@/utils/storage';
+import NoData from '@components/noData/common.jsx'
 import styles from './styles/shopinfo.module.scss';
 
 export default function ShopInfo (props) {
@@ -43,7 +43,7 @@ export default function ShopInfo (props) {
                     <span>为您推荐</span>
                 </div>
                 <div className={styles.shopinfo_sp_list} style={shopContext ? {} : { display: 'flex' }}>
-                    { recommendList.length > 0 && recommendList.map((item, index) => {
+                    { recommendList.length > 0 ? recommendList.map((item, index) => {
                         return(
                             <div key={index} onClick={()=>toInfoPage(item)}>
                                 <div className={styles.shopinfo_sp_cards}>
@@ -57,16 +57,7 @@ export default function ShopInfo (props) {
                             </div>
                         
                         );
-                    }) }
-                    
-                    {/* <div className={styles.shopinfo_sp_cards} style={shopContext ? {} : { marginLeft: '18px' }}>
-                        <div className={styles.shopinfo_sp_img}>
-                            <img alt="" src="https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPngd0f9924206466594d421746f897c7b637920a0c1001ae8706f1378baa1d08758"></img>
-                        </div>
-                        <div className={styles.shopinfo_sp_title}>
-                            <span>意大利新灰地板</span>
-                        </div>
-                    </div> */}
+                    }) : <NoData />}
                 </div>
             </div>
         </div>
