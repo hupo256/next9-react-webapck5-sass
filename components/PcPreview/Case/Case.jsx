@@ -20,6 +20,8 @@ const CaseProjects = ({ data, domain = '' }) => {
     }
   })
 
+  const mgBottom = { marginBottom: '18px' }
+  const mgRight = { marginRight: '18px' }
   const OneImageLayout = () => {
     caseStyle.projectCasesWrapper = {
       display: 'flex',
@@ -49,7 +51,6 @@ const CaseProjects = ({ data, domain = '' }) => {
   const TwoImageLayout = () => {
     caseStyle.projectCasesWrapper = {
       display: 'flex',
-      gap: '18px',
     }
     caseStyle.caseItem = {
       flex: 1,
@@ -59,7 +60,7 @@ const CaseProjects = ({ data, domain = '' }) => {
     return (
       <>
         <div style={caseStyle.projectCasesWrapper}>
-          <div style={caseStyle.caseItem} className={styles.clickableImg}>
+          <div style={{ ...caseStyle.caseItem, ...mgRight }} className={styles.clickableImg}>
             <div className={styles.bgText}>
               <p>{data[0].name}</p>
               <p>{data[0].text}</p>
@@ -85,7 +86,7 @@ const CaseProjects = ({ data, domain = '' }) => {
     caseStyle.projectCasesWrapper = {
       display: 'flex',
       alignItems: 'stretch',
-      gap: '18px',
+
       height: '620px',
     }
     caseStyle.left = {
@@ -95,7 +96,7 @@ const CaseProjects = ({ data, domain = '' }) => {
     caseStyle.right = {
       flex: 1,
       display: 'flex',
-      gap: '18px',
+
       flexDirection: 'column',
     }
 
@@ -106,7 +107,7 @@ const CaseProjects = ({ data, domain = '' }) => {
     return (
       <>
         <div style={caseStyle.projectCasesWrapper}>
-          <div style={caseStyle.left} className={styles.clickableImg}>
+          <div style={{ ...caseStyle.left, ...mgRight }} className={styles.clickableImg}>
             <div className={styles.bgText}>
               <p>{data[0].name}</p>
               <p>{data[0].text}</p>
@@ -115,7 +116,7 @@ const CaseProjects = ({ data, domain = '' }) => {
             <div style={caseStyle.image0} className={styles.bgBlur} />
           </div>
           <div style={caseStyle.right}>
-            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+            <div style={{ ...caseStyle.caseItem, ...mgBottom }} className={styles.clickableImg}>
               <div className={styles.bgText}>
                 <p>{data[1].name}</p>
                 <p>{data[1].text}</p>
@@ -141,13 +142,13 @@ const CaseProjects = ({ data, domain = '' }) => {
   const FourImageLayout = () => {
     caseStyle.projectCasesWrapper = {
       display: 'flex',
-      gap: '18px',
+
       flexDirection: 'column',
     }
     caseStyle.caseWrapper = {
       height: '280px',
       display: 'flex',
-      gap: '18px',
+      marginBottom: '18px',
     }
     caseStyle.caseItem = {
       flex: 1,
@@ -157,7 +158,7 @@ const CaseProjects = ({ data, domain = '' }) => {
       <>
         <div style={caseStyle.projectCasesWrapper}>
           <div style={caseStyle.caseWrapper}>
-            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+            <div style={{ ...caseStyle.caseItem, ...mgRight }} className={styles.clickableImg}>
               <div className={styles.bgText}>
                 <p>{data[0].name}</p>
                 <p>{data[0].text}</p>
@@ -175,7 +176,7 @@ const CaseProjects = ({ data, domain = '' }) => {
             </div>
           </div>
           <div style={caseStyle.caseWrapper}>
-            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+            <div style={{ ...caseStyle.caseItem, ...mgRight }} className={styles.clickableImg}>
               <div className={styles.bgText}>
                 <p>{data[2].name}</p>
                 <p>{data[2].text}</p>
@@ -202,7 +203,7 @@ const CaseProjects = ({ data, domain = '' }) => {
     caseStyle.projectCasesWrapper = {
       display: 'flex',
       alignItems: 'stretch',
-      gap: '18px',
+
       height: '620px',
     }
     caseStyle.left = {
@@ -212,7 +213,7 @@ const CaseProjects = ({ data, domain = '' }) => {
     caseStyle.right = {
       flex: 1,
       display: 'flex',
-      gap: '18px',
+
       flexDirection: 'column',
     }
 
@@ -223,7 +224,7 @@ const CaseProjects = ({ data, domain = '' }) => {
     return (
       <>
         <div style={caseStyle.projectCasesWrapper}>
-          <div style={caseStyle.left} className={styles.clickableImg}>
+          <div style={{ ...caseStyle.left, ...mgRight }} className={styles.clickableImg}>
             <div className={styles.bgText}>
               <p>{data[0].name}</p>
               <p>{data[0].text}</p>
@@ -231,8 +232,8 @@ const CaseProjects = ({ data, domain = '' }) => {
             </div>
             <div style={caseStyle.image0} className={styles.bgBlur} />
           </div>
-          <div style={caseStyle.right}>
-            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+          <div style={{ ...caseStyle.right, ...mgRight }}>
+            <div style={{ ...caseStyle.caseItem, ...mgBottom }} className={styles.clickableImg}>
               <div className={styles.bgText}>
                 <p>{data[1].name}</p>
                 <p>{data[1].text}</p>
@@ -250,7 +251,7 @@ const CaseProjects = ({ data, domain = '' }) => {
             </div>
           </div>
           <div style={caseStyle.right}>
-            <div style={caseStyle.caseItem} className={styles.clickableImg}>
+            <div style={{ ...caseStyle.caseItem, ...mgBottom }} className={styles.clickableImg}>
               <div className={styles.bgText}>
                 <p>{data[3].name}</p>
                 <p>{data[3].text}</p>
@@ -272,7 +273,6 @@ const CaseProjects = ({ data, domain = '' }) => {
       </>
     )
   }
-
   switch (len) {
     case 1:
       return <OneImageLayout />

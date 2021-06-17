@@ -41,7 +41,8 @@ const Home = () => {
   useEffect(() => {
     ;(async () => {
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
-      setMenuList(_.get(res, 'data.list', []))
+      // 暂时添加，待添加入口后移除
+      setMenuList(_.get(res, 'data.list'))
     })()
     ;(async () => {
       const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
@@ -50,20 +51,20 @@ const Home = () => {
         const filtered = {
           banner: _.find(rawCollection, {
             flag: 'banner',
-          })?.list,
+          }),
           highlights: _.find(rawCollection, {
             flag: 'highlights',
-          })?.list,
+          }),
           case: _.find(rawCollection, {
             flag: 'case',
-          })?.list,
+          }),
           site: _.find(rawCollection, {
             flag: 'site',
-          })?.list,
-          design: _.find(rawCollection, { flag: 'design' })?.list,
+          }),
+          design: _.find(rawCollection, { flag: 'design' }),
           article: _.find(rawCollection, {
             flag: 'article',
-          })?.list,
+          }),
         }
         setPublishedData(filtered)
       }
@@ -114,7 +115,7 @@ const Home = () => {
           />
         </div>
         <Carousel autoplay>
-          {_.map(publishedData['banner'], (item, index) => (
+          {_.map(publishedData['banner']['list'], (item, index) => (
             <div
               key={`banner-${index}`}
               onClick={() => {
@@ -122,7 +123,12 @@ const Home = () => {
                   return
                 }
                 if (item.type === 'games') {
+                  message.destroy()
                   message.warning('PC端不允许跳转到小游戏')
+                  return
+                }
+                if (item.type === 'special') {
+                  window.location.href = `/img/PublicLibraryPc/special.html#/?uid=${item.uid}`
                   return
                 }
                 window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`
@@ -131,7 +137,7 @@ const Home = () => {
               <h3
                 className={styles.banner}
                 style={{
-                  backgroundImage: `url(${_.get(item, 'imgUrl')})`,
+                  backgroundImage: `url('${item?.imgUrl}')`,
                 }}
               >
                 {' '}
@@ -140,32 +146,32 @@ const Home = () => {
           ))}
         </Carousel>
         <Content className={styles.mainWrapper}>
-          {_.isEmpty(publishedData['highlights']) || (
+          {_.isEmpty(publishedData['highlights']['list']) || (
             <ChapterLayout title={'产品特点'}>
-              <KeyPoints pointsList={publishedData['highlights']} />
+              <KeyPoints pointsList={publishedData['highlights']['list']} />
             </ChapterLayout>
           )}
-          {_.isEmpty(publishedData['case']) || (
-            <ChapterLayout title={'装修案例'}>
-              <CaseProjects data={publishedData['case']} />
+          {_.isEmpty(publishedData['case']['list']) || (
+            <ChapterLayout title={publishedData['case']['title']}>
+              <CaseProjects data={publishedData['case']['list']} />
             </ChapterLayout>
           )}
-          {_.isEmpty(publishedData['site']) || (
-            <div className={styles.designerSectionWiderBackground}>
-              <ChapterLayout title={'参观工地'}>
-                <LiveShow data={publishedData['site']} />
+          {_.isEmpty(publishedData['site']['list']) || (
+            <div className={styles.liveShowSectionWiderBackground}>
+              <ChapterLayout title={publishedData['site']['title']}>
+                <LiveShow data={publishedData['site']['list']} />
               </ChapterLayout>
             </div>
           )}
-          {_.isEmpty(publishedData['design']) || (
-            <ChapterLayout title={'首席设计师'} moreStyles={{ marginBottom: '10px' }}>
-              <DesignerContent data={publishedData['design']} />
+          {_.isEmpty(publishedData['design']['list']) || (
+            <ChapterLayout title={publishedData['design']['title']} moreStyles={{ marginBottom: '10px' }}>
+              <DesignerContent data={publishedData['design']['list']} />
             </ChapterLayout>
           )}
-          {_.isEmpty(publishedData['article']) || (
+          {_.isEmpty(publishedData['article']['list']) || (
             <div className={styles.designerSectionWiderBackground}>
-              <ChapterLayout title={'装修攻略'}>
-                <Articles data={_.slice(publishedData['article'], 0, 3)} />
+              <ChapterLayout title={publishedData['article']['title']}>
+                <Articles data={_.slice(publishedData['article']['list'], 0, 3)} />
               </ChapterLayout>
             </div>
           )}

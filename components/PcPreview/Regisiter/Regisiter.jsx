@@ -4,6 +4,8 @@ import { Button, Input, message } from 'antd'
 import service from '@service/pcPreview'
 import { pushMsgMap } from '@libs/constants.js'
 
+const phoneRegex = /^1([3|4|5|6|7|8|9|])(\d{1})(([0-9\*]){4})(\d{4})$/ // 手机号码
+
 const Regisiter = ({ setRegisiterFromVisiable, type = 'home' }) => {
   const [name, setName] = useState(null)
   const [phone, setPhone] = useState(null)
@@ -19,6 +21,11 @@ const Regisiter = ({ setRegisiterFromVisiable, type = 'home' }) => {
   const handleSubmit = async e => {
     if (!phone) {
       message.warning('手机号为必填，请填写后提交哦！')
+      return
+    }
+
+    if (!phoneRegex.test(phone)) {
+      message.warning('手机号输入有误，请重试！')
       return
     }
 

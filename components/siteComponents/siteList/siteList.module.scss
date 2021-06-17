@@ -1,6 +1,7 @@
-$hightColor: rgba(255, 115, 0, 1);
-$grayColor: rgba(229, 229, 229, 1);
-$fontColor: rgba(51, 51, 48, 1);
+$hightColor: #fe6a30;
+$grayColor: #b5b5b5;
+$fontColor: #333330;
+$borderRadius: 2px;
 
 .listBox {
   .minImgBox {
@@ -29,6 +30,7 @@ $fontColor: rgba(51, 51, 48, 1);
 
     .casePicBox {
       width: 65%;
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -42,12 +44,12 @@ $fontColor: rgba(51, 51, 48, 1);
       h5 {
         font-size: 14px;
         color: rgba(102, 102, 102, 1);
-        padding-left: 24px;
-        background: url(http://img.inbase.in-deco.com/crm-saas/img/home-preview/ic_local.png) no-repeat 0 10%;
+        padding:20px 0 20px 24px;
+        background: url(http://img.inbase.in-deco.com/crm-saas/img/home-preview/ic_local.png) no-repeat 0 45%;
       }
 
       > p {
-        margin-bottom: 2.5em;
+        // margin-bottom: 1.5em;
         span {
           display: inline-block;
           font-size: 14px;
@@ -88,16 +90,24 @@ $fontColor: rgba(51, 51, 48, 1);
         }
       }
 
-      .setpBox {
+      .stepOut {
         overflow: hidden;
-        overflow-x: auto;
-        padding-top: 10px;
-        padding-bottom: 12px;
-        margin-bottom: -12px;
+        padding-top: 45px;
+        position: relative;
 
-        // &::-webkit-scrollbar {
-        //   display: none;
-        // }
+        &:hover{
+          .directionBox{
+            opacity: 1;
+          }
+        }
+      }
+
+      .setpBox {
+        transition: all .4s ease;
+        
+        &::-webkit-scrollbar {
+          display: none;
+        }
 
         .stepBg,
         .stepHight {
@@ -123,8 +133,9 @@ $fontColor: rgba(51, 51, 48, 1);
             position: relative;
             text-align: center;
             font-size: 12px;
+            width: 4em;
             display: inline-block;
-            margin-left: 20px;
+            margin: 0 10px;
 
             &::before {
               display: inline-block;
@@ -158,6 +169,36 @@ $fontColor: rgba(51, 51, 48, 1);
                 box-shadow: 0px 4px 8px 0px rgba(255, 115, 0, 0.5);
               }
             }
+          }
+        }
+      }
+
+      .directionBox {
+        transition: all .2s ease ;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: 5px;
+        height: 16px;
+        width: 36px;
+        display: flex;
+        justify-content: space-between;
+
+        > a {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          width: 16px;
+          height: 16px;
+          border-radius: $borderRadius;
+          background: $hightColor;
+          color: #fff;
+          text-align: center;
+          cursor: pointer;
+
+          &[disabled]{
+            background: #dcdcdc;
+            cursor: not-allowed;
           }
         }
       }

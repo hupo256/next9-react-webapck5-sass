@@ -1,0 +1,21 @@
+.result_main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    flex-flow: column;
+    align-items: center;
+    margin-bottom: 30px;
+    img {
+       height: 40px;
+       width: 60px; 
+       margin-bottom: 5px;
+    }
+    span {
+        font-size: 14px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #6C6C6C;
+        line-height: 20px;
+    }
+}

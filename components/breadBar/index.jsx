@@ -3,6 +3,14 @@ import Link from 'next/link'
 import styles from './breadBar.module.scss'
 
 const breadData = {
+  material: {
+    url: '/material',
+    name: '看材料',
+  },
+  trim: {
+    url: '/trim',
+    name: '看装修',
+  },
   cases: {
     url: '/cases',
     name: '装修案例',
@@ -16,7 +24,7 @@ const breadData = {
     name: '找设计师',
   },
   articles: {
-    url: '/articles',
+    url: '/articles?uid=',
     name: '装修攻略',
   },
 }

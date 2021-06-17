@@ -11,18 +11,29 @@ const isCurrentMenu = (item, current) => {
   return item.uid === current.uid
 }
 
-const findParent = (menuList, url) => {
-  if (/cases/.test(url)) {
+const findParent = (menuList, { pathname, search }) => {
+  if (/cases/.test(pathname)) {
     return _.find(menuList, { linkUrl: '/cases' })
   }
-  if (/sites/.test(url)) {
+  if (/sites/.test(pathname)) {
     return _.find(menuList, { linkUrl: '/sites' })
   }
-  if (/designers/.test(url)) {
+  if (/designers/.test(pathname)) {
     return _.find(menuList, { linkUrl: '/designers' })
   }
-  if (/articles/.test(url)) {
-    return _.find(menuList, { linkUrl: '/articles?uid=' })
+
+  if (/articles/.test(pathname)) {
+    if (search === '?uid=') {
+      return _.find(menuList, { linkKey: 'articleList' })
+    }
+
+    return _.find(menuList, { linkKey: 'articleGroup' })
+  }
+  if (/material/.test(pathname)) {
+    return _.find(menuList, { linkKey: 'material' })
+  }
+  if (/trim/.test(pathname)) {
+    return _.find(menuList, { linkKey: 'decorate' })
   }
   return null
 }
@@ -96,19 +107,16 @@ const MenuListComp = ({ menuList }) => {
     const url = new URL(location.href)
     const [uid] = url.searchParams.values()
 
-    if (uid) {
+    if (uid && /details/.test(url.pathname)) {
       // 详情页
-
       const res = _.find(menuList, value => {
-        const urlObj = new URL(location.origin + value.linkUrl)
-        const [urlCompare] = urlObj.searchParams.values()
-
-        return urlCompare === uid
+        const pattern = new RegExp(`${uid}`)
+        return pattern.test(value.linkUrl)
       })
 
       if (!res) {
         // 去除当前状态
-        const parentMenu = findParent(menuList, location.href)
+        const parentMenu = findParent(menuList, url)
         setCurrent(parentMenu)
         return
       }
@@ -117,18 +125,19 @@ const MenuListComp = ({ menuList }) => {
       return
     }
 
-    const res = findParent(menuList, location.href)
+    const res = findParent(menuList, url)
     if (res) {
       setCurrent(res)
       return
     }
 
     setCurrent(null)
-  }, [menuList])
+  }, [menuList, location.href])
 
-  const clickMenuItem = ({ linkUrl, uid, linkKey }) => {
+  const clickMenuItem = ({ linkUrl, linkKey, uid }) => {
     if (!uid) return
     if (linkKey === 'games') {
+      message.destroy()
       message.warning('网站端暂不支持打开小游戏，请在小程序中打开！')
       return
     }
@@ -142,7 +151,7 @@ const MenuListComp = ({ menuList }) => {
         style={
           extraCharCount[chunkIndex] > MIN_CHUNK_SIZE
             ? { justifyContent: 'space-between' }
-            : { justifyContent: 'flex-end', gap: '40px' }
+            : { justifyContent: 'flex-end' }
         }
       >
         {_.map(menuChunkList[chunkIndex], (item, index) => {
