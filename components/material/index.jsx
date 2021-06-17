@@ -206,8 +206,9 @@ export default function Site(props) {
             <Carousel autoplay style={{height: '100%'}}>
               {_.map(state.carouselImages, (item, index) => (
                 <div className={`banner-${index}`} key={`banner-${index}`} style={{height: '100%'}}>
-                  <img src={item} alt="" style={{width: '100%', height: '560px'}} />
-                  {/* <h3 className={styles.banner} style={{ backgroundImage: `url(${item})`, height: '100%' }}></h3> */}
+                  <div className={`banner-${index}`} key={`banner-${index}`} style={{height: '100%', marginTop: '58px', position: 'relative'}}>
+                    <img src={item} alt="" style={{width: '100%', height: '560px', position: 'absolute', top: '0', left: '50%', transform: 'translateX(-50%)'}} />
+                  </div>
                 </div>
               ))}
             </Carousel>

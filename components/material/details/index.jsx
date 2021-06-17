@@ -334,7 +334,7 @@ class MaterialInfo extends Component {
                                                 {
                                                     this.state.commodityType === '1' && this.state.infoObj.mapImage ? (
                                                         <div onClick={this.downFile} className={styles.materialInfo_btn_upload}>
-                                                            <img alt="" src={'/assets/ic_download_small@2x.png'} style={{ marginRight: '10px', width: '18px', height: '18px' }}></img>
+                                                            <img alt="" src={'/assets/ic_download_big@2x.png'} style={{ marginRight: '10px', width: '18px', height: '18px' }}></img>
                                                             <span>下载素材</span>
                                                         </div>
                                                     ) : null

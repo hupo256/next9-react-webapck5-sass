@@ -40,8 +40,8 @@
 }
 
 .swiperMaterial-b-img {
-    width: 124px;
-    height: 124px;
+    width: 124px !important;
+    height: 124px !important;
     border-radius: 2px;
     cursor: pointer;
 }
