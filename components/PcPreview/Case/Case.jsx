@@ -11,9 +11,15 @@ const CaseProjects = ({ data, domain = '' }) => {
   _.forEach(data, (item, index) => {
     data[index]['name'] = `${item.title.length > 10 ? item.title.slice(0, 10) + '...' : item.title}`
 
-    item.bedroom
-      ? (data[index]['text'] = `${item.acreage}m² | ${item.bedroom}居室 | ${item.decorationCost}万元`)
-      : (data[index]['text'] = `${item.acreage}m² | ${item.decorationCost}万元`)
+    data[index]['text'] = `${item.acreage}m²`
+
+    if (item.bedroom) {
+      data[index]['text'] += ` | ${item.bedroom}居室`
+    }
+
+    if (item.decorationCost) {
+      data[index]['text'] += ` | ${item.decorationCost}万元`
+    }
 
     caseStyle[`image${index}`] = {
       backgroundImage: `url(${item.coverPicUrl})`,
