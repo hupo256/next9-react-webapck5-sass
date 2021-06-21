@@ -250,6 +250,11 @@
                     height: 204px;
                     box-shadow: 0px 2px 6px 0px rgba(122, 122, 122, 0.1);
                     border-radius: 4px 4px 0px 0px;
+                    div{
+                        width: 204px;
+                        height: 204px;
+                        background-position: center center;
+                    }
                 }
                 .scm_cols_bottom {
                     width: 205px;
@@ -344,7 +349,7 @@
                     position: absolute;
                     display: flex;
                     cursor: pointer; // bottom: 48px; 
-                    animation: goTop 1.5s forwards; // transition: all 1.5s linear;
+                    animation: goTop .3s forwards; // transition: all 1.5s linear;
                     overflow: hidden;
                     line-height: 34px;
                     text-align: center;

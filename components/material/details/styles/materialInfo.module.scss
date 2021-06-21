@@ -154,12 +154,12 @@
                         height: 14px;
                     }
                     span {
+                        color: #999999;
                         width: 28px;
                         height: 20px;
                         font-size: 14px;
                         font-family: PingFangSC-Regular, PingFang SC;
                         font-weight: 400;
-                        color: #000000;
                         line-height: 20px;
                         margin-left: 8px;
                     }
@@ -215,6 +215,9 @@
                         }
                     }
                     .materialInfo_btn_upload {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                         background: #ffffff;
                         border: 1px solid #ff7300;
                         span{

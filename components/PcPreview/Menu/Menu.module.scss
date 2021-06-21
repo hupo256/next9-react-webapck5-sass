@@ -33,8 +33,17 @@
 
 .menuRoot {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.menuRootMin {
+  display: flex;
   justify-content: flex-end;
   width: 100%;
+  .menuItemWrapper:not(:last-of-type){
+    margin-right: 40px;
+  }
+
 }
 .menuRoot a {
   line-height: 58px;

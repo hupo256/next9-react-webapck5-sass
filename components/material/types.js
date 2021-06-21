@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Divider } from 'antd';
 import styles from './index.module.scss';
 
 class InputSearch extends Component {
@@ -49,6 +50,7 @@ class InputSearch extends Component {
                         }
                     </ul>
                 </div>
+                <Divider dashed={true} />
                 <div className={styles.scmpage_min} style={{display: this.state.show ? 'flex' : 'none'}}>
                     <div className={styles.scmpage_xl_dl}>二级分类</div>
                     <ul className={styles.scmpage_xl_ul} style={{ width: '1028px' }}>

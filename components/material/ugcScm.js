@@ -68,7 +68,13 @@ function createScmCols ({ key, defKey, item, index, handleMouseover, handleoMous
     return (
         <div key={`key_cols` + key} style={index === 0 ? {} : { marginLeft: '20px' }} className={styles.scm_rows} onClick={handleSesMaterialInfo.bind(this, item)} onMouseOver={() => handleMouseover(key)} onMouseOut={() => handleoMouseout(key)}>
             <div className={styles.scm_cols_top}>
-                <img alt="" src={item.displayImage ? item.displayImage[0] : ''} style={{ width: '205px', height: '204px' }}></img>
+                {
+                    item.displayImage ? <div style={{
+                        background: `url(${item.displayImage ? item.displayImage[0] : ''}) no-repeat`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center'
+                    }} /> : null
+                }
             </div>
             <div id={`SCM_` + key} className={defKey === key ? styles.scm_button : styles.scm_button_display} onClick={downFile.bind(this, item)}>
                 {
