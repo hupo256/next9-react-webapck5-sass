@@ -40,12 +40,23 @@ const Home = () => {
 
   useEffect(() => {
     ;(async () => {
+      const channelsCache = sessionStorage.getItem('channels')
+      if (channelsCache) {
+        setMenuList(JSON.parse(channelsCache))
+        return
+      }
+
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
+      sessionStorage.setItem('channels', JSON.stringify(_.get(res, 'data.list')))
       // 暂时添加，待添加入口后移除
       setMenuList(_.get(res, 'data.list'))
     })()
     ;(async () => {
-      const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
+      const res = await getPublishedData([
+        { key: 'article', pageNum: 1, pageSize: 4 },
+        { key: 'case', pageNum: 1, pageSize: 5 },
+        { key: 'site', pageNum: 1, pageSize: 3 },
+      ])
       const rawCollection = _.get(res, 'data.templateJson.jsonData', [])
       if (rawCollection) {
         const filtered = {
@@ -70,7 +81,13 @@ const Home = () => {
       }
     })()
     ;(async () => {
+      const footerCache = sessionStorage.getItem('footerCache')
+      if (footerCache) {
+        setFooterData(JSON.parse(footerCache))
+        return
+      }
       const res = await getFooter()
+      sessionStorage.setItem('footerCache', JSON.stringify(_.get(res, 'data')))
       setFooterData(_.get(res, 'data', []))
     })()
   }, [])
@@ -88,7 +105,7 @@ const Home = () => {
     settotopShow(scrollTop > clientHeight / 3)
   }
 
-  if (_.isEmpty(menuList) || _.isEmpty(publishedData) || _.isEmpty(footerData)) return null
+  // if (_.isEmpty(menuList) || _.isEmpty(publishedData) || _.isEmpty(footerData)) return null
 
   return (
     <div className={styles.container}>
@@ -114,69 +131,73 @@ const Home = () => {
             }
           />
         </div>
-        <Carousel autoplay>
-          {_.map(publishedData['banner']['list'], (item, index) => (
-            <div
-              key={`banner-${index}`}
-              onClick={() => {
-                if (!item.uid) {
-                  return
-                }
-                if (item.type === 'games') {
-                  message.destroy()
-                  message.warning('PC端不允许跳转到小游戏')
-                  return
-                }
-                if (item.type === 'special') {
-                  window.location.href = `/img/PublicLibraryPc/special.html#/?uid=${item.uid}`
-                  return
-                }
-                window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`
-              }}
-            >
-              <h3
-                className={styles.banner}
-                style={{
-                  backgroundImage: `url('${item?.imgUrl}')`,
+        {publishedData['banner'] && (
+          <Carousel autoplay>
+            {_.map(publishedData['banner']['list'], (item, index) => (
+              <div
+                key={`banner-${index}`}
+                onClick={() => {
+                  if (!item.uid) {
+                    return
+                  }
+                  if (item.type === 'games') {
+                    message.destroy()
+                    message.warning('PC端不允许跳转到小游戏')
+                    return
+                  }
+                  if (item.type === 'special') {
+                    window.location.href = `/img/PublicLibraryPc/special.html#/?uid=${item.uid}`
+                    return
+                  }
+                  window.location.href = `/${typeMap[item.type]}/details?${paramMap[item.type]}=${item.uid}`
                 }}
               >
-                {' '}
-              </h3>
-            </div>
-          ))}
-        </Carousel>
-        <Content className={styles.mainWrapper}>
-          {_.isEmpty(publishedData['highlights']['list']) || (
-            <ChapterLayout title={'产品特点'}>
-              <KeyPoints pointsList={publishedData['highlights']['list']} />
-            </ChapterLayout>
-          )}
-          {_.isEmpty(publishedData['case']['list']) || (
-            <ChapterLayout title={publishedData['case']['title']}>
-              <CaseProjects data={publishedData['case']['list']} />
-            </ChapterLayout>
-          )}
-          {_.isEmpty(publishedData['site']['list']) || (
-            <div className={styles.liveShowSectionWiderBackground}>
-              <ChapterLayout title={publishedData['site']['title']}>
-                <LiveShow data={publishedData['site']['list']} />
+                <h3
+                  className={styles.banner}
+                  style={{
+                    backgroundImage: `url('${item?.imgUrl}')`,
+                  }}
+                >
+                  {' '}
+                </h3>
+              </div>
+            ))}
+          </Carousel>
+        )}
+        {_.isEmpty(publishedData) || (
+          <Content className={styles.mainWrapper}>
+            {_.isEmpty(publishedData['highlights']['list']) || (
+              <ChapterLayout title={'产品特点'}>
+                <KeyPoints pointsList={publishedData['highlights']['list']} />
               </ChapterLayout>
-            </div>
-          )}
-          {_.isEmpty(publishedData['design']['list']) || (
-            <ChapterLayout title={publishedData['design']['title']} moreStyles={{ marginBottom: '10px' }}>
-              <DesignerContent data={publishedData['design']['list']} />
-            </ChapterLayout>
-          )}
-          {_.isEmpty(publishedData['article']['list']) || (
-            <div className={styles.designerSectionWiderBackground}>
-              <ChapterLayout title={publishedData['article']['title']}>
-                <Articles data={_.slice(publishedData['article']['list'], 0, 3)} />
+            )}
+            {_.isEmpty(publishedData['case']['list']) || (
+              <ChapterLayout title={publishedData['case']['title']}>
+                <CaseProjects data={publishedData['case']['list']} />
               </ChapterLayout>
-            </div>
-          )}
-        </Content>
-        <FooterComp data={footerData} />
+            )}
+            {_.isEmpty(publishedData['site']['list']) || (
+              <div className={styles.liveShowSectionWiderBackground}>
+                <ChapterLayout title={publishedData['site']['title']}>
+                  <LiveShow data={publishedData['site']['list']} />
+                </ChapterLayout>
+              </div>
+            )}
+            {_.isEmpty(publishedData['design']['list']) || (
+              <ChapterLayout title={publishedData['design']['title']} moreStyles={{ marginBottom: '10px' }}>
+                <DesignerContent data={publishedData['design']['list']} />
+              </ChapterLayout>
+            )}
+            {_.isEmpty(publishedData['article']['list']) || (
+              <div className={styles.designerSectionWiderBackground}>
+                <ChapterLayout title={publishedData['article']['title']}>
+                  <Articles data={_.slice(publishedData['article']['list'], 0, 3)} />
+                </ChapterLayout>
+              </div>
+            )}
+          </Content>
+        )}
+        {_.isEmpty(publishedData) || _.isEmpty(footerData) || <FooterComp data={footerData} />}
         {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} />}
       </Layout>
 

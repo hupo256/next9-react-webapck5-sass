@@ -27,11 +27,22 @@ export default function BasicLayout(props) {
   }, [])
 
   async function touchBasicInfor() {
-    const [menu, companyInfor] = await Promise.all([
-      getMenuList({ keyword: '', pageNum: 1, pageSize: 18 }),
-      companyinfoView(),
-    ])
-    setMenuList(menu?.data?.list)
+    const channelsCache = sessionStorage.getItem('channels')
+    if (channelsCache) {
+      setMenuList(JSON.parse(channelsCache))
+    } else {
+      const menu = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
+      sessionStorage.setItem('channels', JSON.stringify(menu?.data?.list))
+      setMenuList(menu?.data?.list)
+    }
+
+    const footerCache = sessionStorage.getItem('footerCache')
+    if (footerCache) {
+      setFooterData(JSON.parse(footerCache))
+      return
+    }
+    const companyInfor = await companyinfoView()
+    sessionStorage.setItem('footerCache', JSON.stringify(companyInfor.data))
     setFooterData(companyInfor?.data)
   }
 
