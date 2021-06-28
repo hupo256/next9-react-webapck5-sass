@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from './breadBar.module.scss'
+import { useAppContext } from '../../store/index'
 
 const breadData = {
   material: {
@@ -31,6 +32,7 @@ const breadData = {
 export default function BreadBar(props) {
   const [levalTwo, setlevalTwo] = useState('')
   const [levalTex, setlevalTex] = useState('')
+  const { headless } = useAppContext()
 
   useEffect(() => {
     touchRoute()
@@ -45,6 +47,8 @@ export default function BreadBar(props) {
     len > 2 && arr[2].includes('details') && setlevalTwo(arr[1])
     setlevalTex(breadData?.[arr[1]]?.name)
   }
+
+  if (headless) return null
 
   return (
     <div className={styles.breadBox}>

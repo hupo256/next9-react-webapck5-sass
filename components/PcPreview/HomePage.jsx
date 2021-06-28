@@ -33,7 +33,7 @@ const ChapterLayout = ({ children, title, moreStyles }) => (
 )
 
 const Home = () => {
-  const { menuFetched, setMenuFetched } = useAppContext()
+  const { menuFetched, setMenuFetched, headless } = useAppContext()
   const [menuList, setMenuList] = useState([])
   const [footerData, setFooterData] = useState([])
   const [publishedData, setPublishedData] = useState([])
@@ -103,27 +103,29 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <Layout className={styles.mainLayout}>
-        <div className={styles.editableWrapper}>
-          <HeaderLayout
-            left={
-              <div className={styles.companyHeaderStyle}>
-                <img
-                  src={footerData.logo}
-                  className={styles.logoStyle}
-                  onClick={() => (window.location.href = '/')}
-                  style={{ cursor: 'pointer' }}
-                />
-              </div>
-            }
-            middle={<MenuList menuList={menuList} />}
-            right={
-              <div className={styles.contactHeader}>
-                <img className={styles.phoneIcon} src={'/img/ic_phone_slices/ic_phone.png'} />
-                <span className={styles.phone}>{footerData.customerService}</span>
-              </div>
-            }
-          />
-        </div>
+        {headless || (
+          <div className={styles.editableWrapper}>
+            <HeaderLayout
+              left={
+                <div className={styles.companyHeaderStyle}>
+                  <img
+                    src={footerData.logo}
+                    className={styles.logoStyle}
+                    onClick={() => (window.location.href = '/')}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
+              }
+              middle={<MenuList menuList={menuList} />}
+              right={
+                <div className={styles.contactHeader}>
+                  <img className={styles.phoneIcon} src={'/img/ic_phone_slices/ic_phone.png'} />
+                  <span className={styles.phone}>{footerData.customerService}</span>
+                </div>
+              }
+            />
+          </div>
+        )}
         <Carousel autoplay>
           {_.map(publishedData?.banner?.list, (item, index) => (
             <div
@@ -186,7 +188,7 @@ const Home = () => {
             </div>
           )}
         </Content>
-        <FooterComp data={footerData} />
+        {headless || <FooterComp data={footerData} />}
         {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} />}
       </Layout>
 

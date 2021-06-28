@@ -17,7 +17,7 @@ export default function BasicLayout(props) {
   const [footerData, setFooterData] = useState([])
   const [totopShow, settotopShow] = useState(false)
   const [regisiterFromVisiable, setRegisiterFromVisiable] = useState(true) //marketing 独有
-  const { setMenuFetched } = useAppContext()
+  const { setMenuFetched, headless } = useAppContext()
 
   useEffect(() => {
     touchBasicInfor()
@@ -42,6 +42,10 @@ export default function BasicLayout(props) {
     const clientHeight = document.documentElement.clientHeight //可视区域高度
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop //滚动条滚动高度
     settotopShow(scrollTop > clientHeight / 3)
+  }
+
+  if (headless) {
+    return <>{children}</>
   }
 
   return (
@@ -75,7 +79,9 @@ export default function BasicLayout(props) {
               }
             />
           </div>
-          <Content className={styles.mainWrapper}>{children}</Content>
+          <Content className={styles.mainWrapper} style={headless || { marginTop: '58px' }}>
+            {children}
+          </Content>
           <FooterComp data={footerData} />
           {regisiterFromVisiable && headConfig['title'] !== '页面已停用' && (
             <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} type={pushType} />
