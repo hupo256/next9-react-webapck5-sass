@@ -7,6 +7,7 @@ import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
 import NoData from '@components/noData'
 import styles from './articles.module.scss'
+import { useAppContext } from '@store/index'
 
 const { urlParamHash, baseImgUrl } = tools
 
@@ -14,10 +15,12 @@ export default function Site(props) {
   const [curId, setcurId] = useState('')
   const [tabs, settabs] = useState([])
   const [artsData, setartsData] = useState(null)
+  const { menuFetched } = useAppContext()
 
   useEffect(() => {
+    if (!menuFetched) return
     touchArticleDic()
-  }, [])
+  }, [menuFetched])
 
   function touchArticleDic() {
     articleApi.queryArticleDic().then(res => {

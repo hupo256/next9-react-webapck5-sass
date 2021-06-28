@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import styles from './Home.module.scss'
+import { useAppContext } from '../../store'
 import _ from 'lodash'
 import CaseProjects from './Case/Case.jsx'
 import MenuList from './Menu/Menu.jsx'
@@ -32,6 +33,7 @@ const ChapterLayout = ({ children, title, moreStyles }) => (
 )
 
 const Home = () => {
+  const { menuFetched, setMenuFetched } = useAppContext()
   const [menuList, setMenuList] = useState([])
   const [footerData, setFooterData] = useState([])
   const [publishedData, setPublishedData] = useState([])
@@ -41,10 +43,14 @@ const Home = () => {
   useEffect(() => {
     ;(async () => {
       const res = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
-      // 暂时添加，待添加入口后移除
       setMenuList(_.get(res, 'data.list'))
+      setMenuFetched(true)
     })()
+  }, [])
+
+  useEffect(() => {
     ;(async () => {
+      if (!menuFetched) return
       const res = await getPublishedData([{ key: 'article', pageNum: 1, pageSize: 4 }])
       const rawCollection = _.get(res, 'data.templateJson.jsonData', [])
       if (rawCollection) {
@@ -69,11 +75,15 @@ const Home = () => {
         setPublishedData(filtered)
       }
     })()
+  }, [menuFetched])
+
+  useEffect(() => {
     ;(async () => {
-      const res = await getFooter()
-      setFooterData(_.get(res, 'data', []))
+      if (!menuFetched) return
+      const res = sessionStorage.getItem('footerCache')
+      setFooterData(_.get(JSON.parse(res), 'data', []))
     })()
-  }, [])
+  }, [menuFetched])
 
   useEffect(() => {
     document.addEventListener('scroll', conScroll)
@@ -88,7 +98,7 @@ const Home = () => {
     settotopShow(scrollTop > clientHeight / 3)
   }
 
-  if (_.isEmpty(menuList) || _.isEmpty(publishedData) || _.isEmpty(footerData)) return null
+  // if (_.isEmpty(menuList) || _.isEmpty(publishedData) || _.isEmpty(footerData)) return null
 
   return (
     <div className={styles.container}>
@@ -115,7 +125,7 @@ const Home = () => {
           />
         </div>
         <Carousel autoplay>
-          {_.map(publishedData['banner']['list'], (item, index) => (
+          {_.map(publishedData?.banner?.list, (item, index) => (
             <div
               key={`banner-${index}`}
               onClick={() => {
@@ -146,29 +156,29 @@ const Home = () => {
           ))}
         </Carousel>
         <Content className={styles.mainWrapper}>
-          {_.isEmpty(publishedData['highlights']['list']) || (
+          {_.isEmpty(publishedData?.highlights?.list) || (
             <ChapterLayout title={'产品特点'}>
               <KeyPoints pointsList={publishedData['highlights']['list']} />
             </ChapterLayout>
           )}
-          {_.isEmpty(publishedData['case']['list']) || (
+          {_.isEmpty(publishedData?.case?.list) || (
             <ChapterLayout title={publishedData['case']['title']}>
               <CaseProjects data={publishedData['case']['list']} />
             </ChapterLayout>
           )}
-          {_.isEmpty(publishedData['site']['list']) || (
+          {_.isEmpty(publishedData?.site?.list) || (
             <div className={styles.liveShowSectionWiderBackground}>
               <ChapterLayout title={publishedData['site']['title']}>
                 <LiveShow data={publishedData['site']['list']} />
               </ChapterLayout>
             </div>
           )}
-          {_.isEmpty(publishedData['design']['list']) || (
+          {_.isEmpty(publishedData?.design?.list) || (
             <ChapterLayout title={publishedData['design']['title']} moreStyles={{ marginBottom: '10px' }}>
               <DesignerContent data={publishedData['design']['list']} />
             </ChapterLayout>
           )}
-          {_.isEmpty(publishedData['article']['list']) || (
+          {_.isEmpty(publishedData?.article?.list) || (
             <div className={styles.designerSectionWiderBackground}>
               <ChapterLayout title={publishedData['article']['title']}>
                 <Articles data={_.slice(publishedData['article']['list'], 0, 3)} />

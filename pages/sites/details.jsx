@@ -6,16 +6,18 @@ import BreadBar from '@components/breadBar'
 import SiteCell from '@components/siteComponents/siteList/siteCell'
 import DiaryList from '@components/siteComponents/diaryList'
 import styles from './site.module.scss'
+import { useAppContext } from '@store/index'
 
 const { urlParamHash } = tools
 
 export default function SiteDetail(props) {
   const [details, setdetails] = useState({})
   const { gongdiTitle, dicList } = details
+  const { menuFetched } = useAppContext()
 
   useEffect(() => {
-    touchDetails()
-  }, [])
+    menuFetched && touchDetails()
+  }, [menuFetched])
 
   function touchDetails() {
     const { gongdiUid = '' } = urlParamHash()

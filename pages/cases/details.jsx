@@ -6,6 +6,7 @@ import BreadBar from '@components/breadBar'
 import RoomType from '@components/roomType'
 import TextTip from '@components/textTip'
 import styles from './case.module.scss'
+import { useAppContext } from '@store/index'
 
 const { urlParamHash } = tools
 
@@ -24,10 +25,11 @@ export default function CaseDetail(props) {
     workingTime,
     bedroom,
   } = details
+  const { menuFetched } = useAppContext()
 
   useEffect(() => {
-    touchDetails()
-  }, [])
+    menuFetched && touchDetails()
+  }, [menuFetched])
 
   function touchDetails() {
     const { uid = '' } = urlParamHash()

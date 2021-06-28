@@ -10,27 +10,27 @@ const loadingList = []
 
 // 修改baseURL
 const getHost = req => {
-  if(req.url.indexOf('moyang') >= 0){
-    if(env === 'DEV'){
+  if (req.url.indexOf('moyang') >= 0) {
+    if (env === 'DEV') {
       return '//dev-api.in-spire.cn/'
     }
-    if(env === 'TEST'){
+    if (env === 'TEST') {
       return '//test-api.in-spire.cn/'
     }
-    if(env === 'PROD'){
+    if (env === 'PROD') {
       return '//api.in-spire.cn/'
     }
-    if(env === 'TEST1'){
+    if (env === 'TEST1') {
       return '//test-api.in-spire.cn/'
     }
-    if(env === 'PROD1'){
+    if (env === 'PROD1') {
       return '//pre1-api.in-spire.cn/'
     }
-    if(env === 'UAT'){
+    if (env === 'UAT') {
       return '//api.yimuyiyang.com/'
     }
   }
-  return req.baseURL;
+  return req.baseURL
 }
 
 // 实例化 ajax请求对象
@@ -48,7 +48,7 @@ ajaxinstance.interceptors.request.use(
     const { params = {} } = request
     request.baseURL = getHost(request)
     if (!params.noloading && loadingList.length < 1) {
-      message.loading('加载中...', 20)
+      // message.loading('加载中...', 20)
       loadingList.push(1)
     }
     token && (request.headers['Token'] = token)

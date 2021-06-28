@@ -32,6 +32,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     ;(async () => {
       const res = await getFooter()
+      sessionStorage.setItem('footerCache', JSON.stringify(res))
 
       if (res.code === 210008) {
         setExpired(EXPIRED_MAP['expired'])

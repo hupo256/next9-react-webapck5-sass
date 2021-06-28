@@ -9,15 +9,17 @@ import NoData from '@components/noData'
 import RoomType from '@components/roomType'
 import TextTip from '@components/textTip'
 import desStyles from './designers.module.scss'
+import { useAppContext } from '@store/index'
 
 const { baseImgUrl } = tools
 
 export default function Site(props) {
   const [desData, setdesData] = useState(null)
+  const { menuFetched } = useAppContext()
 
   useEffect(() => {
-    touchList()
-  }, [])
+    menuFetched && touchList()
+  }, [menuFetched])
 
   function touchList(config = {}) {
     const param = {
