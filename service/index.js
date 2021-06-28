@@ -6,30 +6,31 @@ import tools from '@libs/utils'
 
 const { getStorage } = tools
 let { host, env } = config
+const loadingList = []
 
 // 修改baseURL
 const getHost = req => {
-  if (req.url.indexOf('moyang') >= 0) {
-    if (env === 'DEV') {
+  if(req.url.indexOf('moyang') >= 0){
+    if(env === 'DEV'){
       return '//dev-api.in-spire.cn/'
     }
-    if (env === 'TEST') {
+    if(env === 'TEST'){
       return '//test-api.in-spire.cn/'
     }
-    if (env === 'PROD') {
+    if(env === 'PROD'){
       return '//api.in-spire.cn/'
     }
-    if (env === 'TEST1') {
+    if(env === 'TEST1'){
       return '//test-api.in-spire.cn/'
     }
-    if (env === 'PROD1') {
+    if(env === 'PROD1'){
       return '//pre1-api.in-spire.cn/'
     }
-    if (env === 'UAT') {
+    if(env === 'UAT'){
       return '//api.yimuyiyang.com/'
     }
   }
-  return req.baseURL
+  return req.baseURL;
 }
 
 // 实例化 ajax请求对象
@@ -44,13 +45,18 @@ const ajaxinstance = axios.create({
 ajaxinstance.interceptors.request.use(
   request => {
     const token = getStorage('token')
+    const { params = {} } = request
     request.baseURL = getHost(request)
+    if (!params.noloading && loadingList.length < 1) {
+      message.loading('加载中...', 20)
+      loadingList.push(1)
+    }
     token && (request.headers['Token'] = token)
     return request
   },
   error => {
-    // message.destroy()
-    // message.error(error)
+    message.destroy()
+    message.error(error)
   },
 )
 
@@ -60,10 +66,10 @@ ajaxinstance.interceptors.response.use(
     // console.log(response)
     const { config, data } = response
     const { code } = data
-    // if (loadingList.length > 0) {
-    //   message.destroy()
-    //   loadingList.shift()
-    // }
+    if (loadingList.length > 0) {
+      message.destroy()
+      loadingList.shift()
+    }
     // 跳到首页
     if (code === 2001) return Router.push('/')
     if (code === 190002) return Router.push('/404')
