@@ -28,7 +28,7 @@ export default function CaseDetail(props) {
 
   return (
     <BasicLayout headConfig={details} pushType="article">
-      <div className={styles.conBox}>
+      <div className="conBox">
         {/* breadBar */}
         <BreadBar curTit={details?.articleTitle} />
 

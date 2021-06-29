@@ -3,20 +3,6 @@ $fontColor: #1d1d1d;
 $grayFont: #666666;
 $grayColor: #b5b5b5;
 
-.conBox {
-  width: 1110px;
-  margin: 1em auto;
-  color: $fontColor;
-
-  p {
-    margin: 0;
-  }
-}
-
-.breadBox {
-  padding: 1em 0;
-}
-
 .tabBox {
   padding: 1em 0 0;
   display: flex;
