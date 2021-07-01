@@ -19,7 +19,12 @@ const KeyPoints = ({ pointsList, domain = '' }) => {
               return
             }
             if (feature.type === 'games') {
+              message.destroy()
               message.warning('PC端不允许跳转到小游戏')
+              return
+            }
+            if (feature.type === 'special') {
+              window.location.href = `/img/PublicLibraryPc/special.html#/?uid=${feature.uid}`
               return
             }
             window.location.href = `${domain}/${typeMap[feature.type]}/details?${paramMap[feature.type]}=${feature.uid}`

@@ -7,6 +7,7 @@ import FooterComp from '@components/PcPreview/FooterComp/FooterComp.jsx'
 import basicApi from '@service/basicApi'
 import styles from './HomePageLayout.module.scss'
 import Regisiter from '../PcPreview/Regisiter/Regisiter.jsx'
+import { useAppContext } from '../../store'
 const { Content } = Layout
 const { getMenuList, companyinfoView } = basicApi
 
@@ -16,6 +17,7 @@ export default function BasicLayout(props) {
   const [footerData, setFooterData] = useState([])
   const [totopShow, settotopShow] = useState(false)
   const [regisiterFromVisiable, setRegisiterFromVisiable] = useState(true) //marketing 独有
+  const { setMenuFetched, headless } = useAppContext()
 
   useEffect(() => {
     touchBasicInfor()
@@ -27,18 +29,23 @@ export default function BasicLayout(props) {
   }, [])
 
   async function touchBasicInfor() {
-    const [menu, companyInfor] = await Promise.all([
-      getMenuList({ keyword: '', pageNum: 1, pageSize: 18 }),
-      companyinfoView(),
-    ])
+    const menu = await getMenuList({ keyword: '', pageNum: 1, pageSize: 18 })
+    setMenuFetched(true)
+
+    const companyInfo = sessionStorage.getItem('footerCache')
+
     setMenuList(menu?.data?.list)
-    setFooterData(companyInfor?.data)
+    setFooterData(JSON.parse(companyInfo)?.data)
   }
 
   function conScroll() {
     const clientHeight = document.documentElement.clientHeight //可视区域高度
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop //滚动条滚动高度
     settotopShow(scrollTop > clientHeight / 3)
+  }
+
+  if (headless) {
+    return <>{children}</>
   }
 
   return (
@@ -72,9 +79,13 @@ export default function BasicLayout(props) {
               }
             />
           </div>
-          <Content className={styles.mainWrapper}>{children}</Content>
+          <Content className={styles.mainWrapper} style={headless || { marginTop: '58px' }}>
+            {children}
+          </Content>
           <FooterComp data={footerData} />
-          {regisiterFromVisiable && <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} type={pushType} />}
+          {regisiterFromVisiable && headConfig['title'] !== '页面已停用' && (
+            <Regisiter setRegisiterFromVisiable={setRegisiterFromVisiable} type={pushType} />
+          )}
         </Layout>
         <div className={`${styles.scrollToTop} ${totopShow ? styles.show : ''}`} onClick={() => scrollTo(0, 0)} />
       </div>

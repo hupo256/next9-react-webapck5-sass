@@ -1,0 +1,23 @@
+.swiperShopBanner-main {
+    width: 1100px;
+    .ant-carousel .slick-dots-bottom {
+        background: transparent !important;
+    }
+    .ant-carousel .slick-dots li {
+        width: 6px;
+        height: 6px;
+        background: #DDDDDD;
+        border-radius: 2px;
+    }
+    .ant-carousel .slick-dots li.slick-active {
+        width: 6px;
+        height: 6px;
+        border-radius: 2px;
+    }
+    .ant-carousel .slick-dots li button {
+        width: 6px;
+        height: 6px;
+        background: #F0061B;
+        border-radius: 2px;
+    }
+}

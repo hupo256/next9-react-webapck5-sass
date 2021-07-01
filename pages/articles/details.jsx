@@ -4,16 +4,18 @@ import tools from '@libs/utils'
 import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
 import styles from './articles.module.scss'
+import { useAppContext } from '../../store'
 
 const { urlParamHash } = tools
 
 export default function CaseDetail(props) {
   const [details, setdetails] = useState({})
   const { articleTitle, articleCoverImg, creatorName, createTime, articleContent } = details
-
+  const { menuFetched } = useAppContext()
   useEffect(() => {
+    if (!menuFetched) return
     touchDetail()
-  }, [])
+  }, [menuFetched])
 
   function touchDetail() {
     const { articleUid = '4bce9f89f4734729afcd26d5c2022158' } = urlParamHash()
@@ -26,7 +28,7 @@ export default function CaseDetail(props) {
 
   return (
     <BasicLayout headConfig={details} pushType="article">
-      <div className={styles.conBox}>
+      <div className="conBox">
         {/* breadBar */}
         <BreadBar curTit={details?.articleTitle} />
 

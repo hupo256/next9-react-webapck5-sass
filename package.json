@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:build": "NODE_ENV=DEV yarn export",
-    "test:build": "NODE_ENV=TEST yarn export",
-    "prod:build": "NODE_ENV=PROD yarn export",
+    "test": "next test",
+    "dev:build": "node ./env.js DEV && next build && next export",
+    "pre:build": "node ./env.js PRE && next build && next export",
+    "test:build": "node ./env.js TEST && next build && next export",
+    "prod:build": "node ./env.js PROD && next build && next export",
+    "test1:build": "node ./env.js TEST1 && next build && next export",
+    "prod1:build": "node ./env.js PROD1 && next build && next export",
+    "uat:build": "node ./env.js UAT && next build && next export",
     "start": "next start",
     "build": "next build",
     "export": "next build && next export",
@@ -18,7 +23,7 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "@module-federation/nextjs-mf": "^0.3.1",
+    "@ant-design/icons": "^4.6.2",
     "antd": "^4.15.3",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
@@ -28,6 +33,7 @@
     "react-dom": "17.0.2",
     "react-loadable": "^5.4.0",
     "react-viewer": "^3.2.2",
-    "sass": "^1.32.13"
+    "sass": "^1.32.13",
+    "swiper": "^6.6.2"
   }
 }

@@ -61,20 +61,6 @@ export default function DesignDetail(props) {
                   </div>
                   {profile && <p>{profile}</p>}
                 </div>
-<<<<<<< HEAD
-=======
-                <div>
-                  <h3>
-                    <p>{name}</p>
-                    <span>{position}</span>
-                  </h3>
-                  <p>{details?.styles?.map(dic => dic.name).join(' / ') || '暂无'}</p>
-                  <p>{designConcept}</p>
-                </div>
-              </div>
-              {profile && <p>{profile}</p>}
-            </div>
->>>>>>> test
 
                 {caseList?.list?.length > 0 && (
                   <div className={styles.desCases}>

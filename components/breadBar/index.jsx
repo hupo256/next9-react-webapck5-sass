@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from './breadBar.module.scss'
+import { useAppContext } from '../../store/index'
 
 const breadData = {
+  material: {
+    url: '/material',
+    name: '看材料',
+  },
+  trim: {
+    url: '/trim',
+    name: '看装修',
+  },
   cases: {
     url: '/cases',
     name: '装修案例',
@@ -16,13 +25,14 @@ const breadData = {
     name: '找设计师',
   },
   articles: {
-    url: '/articles',
+    url: '/articles?uid=',
     name: '装修攻略',
   },
 }
 export default function BreadBar(props) {
   const [levalTwo, setlevalTwo] = useState('')
   const [levalTex, setlevalTex] = useState('')
+  const { headless } = useAppContext()
 
   useEffect(() => {
     touchRoute()
@@ -37,6 +47,8 @@ export default function BreadBar(props) {
     len > 2 && arr[2].includes('details') && setlevalTwo(arr[1])
     setlevalTex(breadData?.[arr[1]]?.name)
   }
+
+  if (headless) return null
 
   return (
     <div className={styles.breadBox}>

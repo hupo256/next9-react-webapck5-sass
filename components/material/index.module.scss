@@ -1,0 +1,169 @@
+$hightColor: #ff7300;
+$fontColor: #1d1d1d;
+$grayFont: #666666;
+$grayColor: #b5b5b5;
+
+.conBox {
+  width: 1110px;
+  margin: 1em auto;
+  color: $fontColor;
+
+  p {
+    margin: 0;
+  }
+}
+
+.breadBox {
+  padding: 1em 0;
+}
+
+.scmpage_body {
+    width: 100%;
+    margin: 0px;
+    min-height: 913px;
+    background: #F6F6F6;
+    display: flex;
+    justify-content: center;
+    .scmpage_context {
+        width: 1100px;
+        .scmpage_query {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 727px;
+            height: 46px;
+            background: #FFFFFF;
+            border-radius: 4px;
+            border: 1px solid #F1F1F1;
+            position: relative;
+            display: flex;
+            .scmpage_select {
+                width: 80px;
+                height: 46px;
+                :global {
+                    .ant-select {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .ant-select-selection-item {
+                        font-size: 14px;
+                        font-family: PingFangSC-Regular, PingFang SC;
+                        font-weight: 400;
+                        color: #6C6C6C;
+                        line-height: 20px;
+                    }
+                    .ant-select:not(.ant-select-customize-input)>.ant-select-selector {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+            .scmpage_search,
+            .scmpage_input,
+            .scmpage_select {
+                height: 46px;
+                width: 620px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .scmpage_img {
+                position: absolute;
+                right: 0px;
+                width: 27px;
+                cursor: pointer;
+            }
+            :global {
+                .ant-select-selection-item {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+        .scmpage_type {
+            width: 1100px; // height: 120px;
+            background: #FFFFFF;
+            border-radius: 4px;
+            padding: 26px 20px;
+            align-items: center;
+            margin-top: 52px;
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+            border-radius: 2px;
+            .scmpage_max {
+                display: flex;
+                margin-bottom: 15px;
+                .scmpage_dl {
+                    width: 58px;
+                    height: 22px;
+                    font-size: 14px;
+                    font-family: PingFangSC-Medium, PingFang SC;
+                    font-weight: 500;
+                    color: #2B2F3A;
+                    line-height: 20px;
+                    display: flex;
+                    align-items: center;
+                }
+                .scmpage_ul {
+                    .scmpage_ul_def {
+                        color: #FFFFFF !important;
+                        background: #ff7300;
+                    }
+                    li {
+                        cursor: pointer;
+                        margin-left: 22px;
+                        height: 22px;
+                        font-size: 14px;
+                        font-family: PingFangSC-Regular, PingFang SC;
+                        font-weight: 400;
+                        color: #6C6C6C;
+                        line-height: 20px;
+                        border-radius: 2px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 8px;
+                        float: left;
+                        margin-bottom: 4px;
+                    }
+                }
+            }
+            .scmpage_min {
+                display: flex;
+                .scmpage_xl_dl {
+                    width: 58px;
+                    font-size: 14px;
+                    font-family: PingFangSC-Medium, PingFang SC;
+                    font-weight: 500;
+                    color: #2B2F3A;
+                    line-height: 20px;
+                    display: flex;
+                    margin-top: 5px;
+                }
+                .scmpage_xl_ul {
+                    .scmpage_ul_xl_def {
+                        color: #FFFFFF !important;
+                        background: #ff7300;
+                    }
+                    li {
+                        cursor: pointer;
+                        margin-left: 22px;
+                        height: 22px;
+                        font-size: 14px;
+                        font-family: PingFangSC-Regular, PingFang SC;
+                        font-weight: 400;
+                        color: #6C6C6C;
+                        line-height: 20px;
+                        border-radius: 2px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        float: left;
+                        padding: 8px;
+                        margin-top: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

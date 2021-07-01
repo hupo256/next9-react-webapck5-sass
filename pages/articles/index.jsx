@@ -7,6 +7,7 @@ import articleApi from '@service/articleApi'
 import BreadBar from '@components/breadBar'
 import NoData from '@components/noData'
 import styles from './articles.module.scss'
+import { useAppContext } from '@store/index'
 
 import dynamic from 'next/dynamic'
 const SayHi = dynamic(import('fdTest/sayHi'), { ssr: false })
@@ -19,10 +20,12 @@ export default function Article(props) {
   const [curId, setcurId] = useState('')
   const [tabs, settabs] = useState([])
   const [artsData, setartsData] = useState(null)
+  const { menuFetched } = useAppContext()
 
   useEffect(() => {
+    if (!menuFetched) return
     touchArticleDic()
-  }, [])
+  }, [menuFetched])
 
   function touchArticleDic() {
     articleApi.queryArticleDic().then(res => {
@@ -64,9 +67,7 @@ export default function Article(props) {
 
   return (
     <BasicLayout headConfig={{ title: '装修攻略' }} pushType="article">
-      <div className={styles.conBox}>
-        <SayHi />
-        <ShowTex />
+      <div className="conBox">
         {/* breadBar */}
         <BreadBar />
 

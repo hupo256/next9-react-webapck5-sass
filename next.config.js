@@ -1,5 +1,6 @@
 module.exports = {
   pageExtensions: ['jsx', 'js'],
+  productionBrowserSourceMaps: true,
   // trailingSlash: true,
   future: { webpack5: true },
   webpack: (config, options) => {
