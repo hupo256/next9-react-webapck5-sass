@@ -9,7 +9,7 @@ import styles from './HomePageLayout.module.scss'
 import Regisiter from '../PcPreview/Regisiter/Regisiter.jsx'
 import { useAppContext } from '../../store'
 const { Content } = Layout
-const { getMenuList, companyinfoView } = basicApi
+const { getMenuList } = basicApi
 
 export default function BasicLayout(props) {
   const { children, headConfig, pushType } = props
