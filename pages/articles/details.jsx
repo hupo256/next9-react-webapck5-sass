@@ -6,6 +6,11 @@ import BreadBar from '@components/breadBar'
 import styles from './articles.module.scss'
 import { useAppContext } from '../../store'
 
+import dynamic from 'next/dynamic'
+// import ShowTex from 'sample/showTex'
+const ShowTex = dynamic(import('sample/showTex'), { ssr: false })
+const VueHead = dynamic(import('sample/vueHead'), { ssr: false })
+
 const { urlParamHash } = tools
 
 export default function CaseDetail(props) {
@@ -31,6 +36,9 @@ export default function CaseDetail(props) {
       <div className="conBox">
         {/* breadBar */}
         <BreadBar curTit={details?.articleTitle} />
+
+        <ShowTex />
+        <VueHead name=" TEST" />
 
         {/* detail */}
         <div className={styles.detailBox}>

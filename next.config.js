@@ -16,6 +16,7 @@ module.exports = {
           // 它只能作为消费者的身份出现
           // 所以，在三层架构中，next.js的项目只能放在business层
           './noData': './components/noData',
+          './pError': './components/404',
         },
         // remote
         remotes: {
